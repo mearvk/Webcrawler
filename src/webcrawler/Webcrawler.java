@@ -33,6 +33,8 @@ public class Webcrawler implements Runnable
         
         //
         
+        webcrawler.registrar.register(Preinitialization.class);
+        
         webcrawler.registrar.register(ModuleOne.class);
         
         webcrawler.registrar.register(ModuleTwo.class);
