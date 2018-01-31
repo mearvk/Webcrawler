@@ -33,19 +33,19 @@ public class Initializer
         
         ArrayList<String> websites = new ArrayList();
         
-        websites.add("https://washingtonpost.com");
+        //websites.add("https://washingtonpost.com");
         
-        websites.add("https://google.com");
+        //websites.add("https://google.com");
         
-        websites.add("https://microsoft.com");
+        //websites.add("https://microsoft.com");
         
-        websites.add("https://mozilla.com");
+        //websites.add("https://mozilla.com");
         
-        websites.add("https://oracle.com");
+        //websites.add("https://oracle.com");
         
-        websites.add("https://ebay.com");
+        //websites.add("https://ebay.com");
         
-        websites.add("https://adobe.com");
+        //websites.add("https://adobe.com");
         
         //
         

@@ -114,11 +114,7 @@ public class Preinitialization implements Runnable
     }    
     
     public ArrayList<String> doparseHTMLlinks(WebcrawlerParam param)
-    {
-        ///<div\s+id="LiveArea">[\S\s]*?<\/div>/gi
-            
-        //<div\\s+class=\"twoColumn\">[\\S\\s]*?<\\/div>
-        
+    {        
         ArrayList<String> links = new ArrayList<String>();
         
         //

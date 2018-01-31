@@ -7,7 +7,9 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -121,7 +123,7 @@ class ModuleOne implements Runnable
             }
             catch(Exception e)
             {
-                e.printStackTrace();
+                //e.printStackTrace();
             }           
         }
     }
@@ -192,7 +194,7 @@ class ModuleOne implements Runnable
 
             retval = retval.replace("..", ".");
 
-            System.out.println("UNQUALIFIED URL LOOKS LIKE "+retval);            
+            //System.out.println("UNQUALIFIED URL LOOKS LIKE "+retval);            
         }
         else //full path in HREF link
         {                  
@@ -204,7 +206,7 @@ class ModuleOne implements Runnable
 
             retval = retval.replace("..", ".");
 
-            System.out.println("UNQUALIFIED URL LOOKS LIKE "+retval);
+            //System.out.println("UNQUALIFIED URL LOOKS LIKE "+retval);
         }
         
         return retval;
@@ -320,7 +322,7 @@ class ModuleOne implements Runnable
                 
                 //
                 
-                System.out.println("HREF: "+recursiveparam.href);
+                //System.out.println("HREF: "+recursiveparam.href);
                 
                 //
                                 
@@ -336,9 +338,7 @@ class ModuleOne implements Runnable
             }
             catch(Exception e)
             {
-                //e.printStackTrace();
-                
-                //errors.add(e.getMessage());
+                e.printStackTrace();
             }
         }
 
@@ -348,17 +348,47 @@ class ModuleOne implements Runnable
     
     public String dopersist(WebcrawlerParam param) throws Exception
     {
-        System.out.println("TRYING TO PERSIST : /home/oem/Desktop/Webpages/storage/"+param.unqualifiedURL+"/index.html");
+        Date date = new Date();
+        
+        Integer month = date.getMonth()+1;
+        
+        Integer day = date.getDate();
+        
+        Integer year = date.getYear();  
+        
+        //
+        
+        DecimalFormat monthformat = new DecimalFormat("##");
+        
+        DecimalFormat yearformat = new DecimalFormat("##");
+        
+        DecimalFormat dayformat = new DecimalFormat("##");
+        
+        //
+        
+        String smonth = monthformat.format(month);
+        
+        String syear = "20"+yearformat.format(year).substring(1);
+        
+        String sday = dayformat.format(day);
+        
+        //                
+        
+        String fileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/index.html";
+        
+        //
+        
+        System.out.println("TRYING TO PERSIST : "+fileref);
     
         try
         {
-            File dir = new File("/home/oem/Desktop/Webpages/storage/"+param.unqualifiedURL);
+            File dir = new File(fileref);
             
             if(!dir.exists())dir.mkdirs();
             
             //
             
-            File file = new File("/home/oem/Desktop/Webpages/storage/"+param.unqualifiedURL+"/index.html");
+            File file = new File(fileref);
             
             if(file.exists()) file.delete();
             
