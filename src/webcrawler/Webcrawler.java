@@ -134,7 +134,7 @@ class ModuleOne implements Runnable
         
         //
                        
-        Matcher matcher = Pattern.compile("<a.*?>(?:.*?)</a>").matcher(param.siteHTML); //parse <a href=""></a> matches for now..
+        Matcher matcher = Pattern.compile("<a\\s+.*?>(?:.*?)</a>").matcher(param.siteHTML); //parse <a href=""></a> matches for now..
         
         //
         
@@ -156,13 +156,17 @@ class ModuleOne implements Runnable
         
         //
                        
-        Matcher matcher = Pattern.compile("<a\\s+(?:[^>]*?\\s+)?href=([\"'])(.*?)\\1").matcher(param.siteHTML); //parse <a href=""></a> matches for now..
+        Matcher matcher = Pattern.compile("<a\\s+(?:[^>]*?\\s+)?href=\"([^\"]*)\"").matcher(param.siteHTML); //parse <a href=""></a> matches for now..
         
         //
         
         while(matcher.find())
         {
-            href = matcher.group();
+            String match = matcher.group();
+            
+            if(match.startsWith("<a")) continue; //glitch in regex fix
+            
+            href = match;
         }
             
         //
@@ -306,13 +310,13 @@ class ModuleOne implements Runnable
             try
             {                               
                 
-                DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+                //DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                         
-                Document document = builder.parse(new InputSource(new StringReader(anchor)));
+                //Document document = builder.parse(new InputSource(new StringReader(anchor)));
                 
                 //
                 
-                recursiveparam.href = document.getDocumentElement().getAttribute("href");
+                recursiveparam.href = this.doparsehref(param);
                 
                 //
                 
@@ -339,6 +343,8 @@ class ModuleOne implements Runnable
             catch(Exception e)
             {
                 e.printStackTrace();
+                
+                //System.err.println("Error with anchor tag: "+anchor);
             }
         }
 
