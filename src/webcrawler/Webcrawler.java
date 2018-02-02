@@ -343,7 +343,7 @@ class ModuleOne implements Runnable
             }
             catch(Exception e)
             {
-                e.printStackTrace();
+                //e.printStackTrace();
                 
                 //System.err.println("Error with anchor tag: "+anchor);
             }
@@ -383,9 +383,9 @@ class ModuleOne implements Runnable
         
         String fileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/index.html";
         
-        String imagefileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/images";
+        String imagefileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/images/";
         
-        String javascriptfileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/javascript";
+        String javascriptfileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/javascript/";
         
         //
         
@@ -401,19 +401,19 @@ class ModuleOne implements Runnable
             
             File file = new File(fileref);
             
-            if(file.exists()) file.delete();
+            if(file.exists()) file.delete(); //write duplicate workaround (file.txt becomes file_0001.text etc)
             
             //
             
             File imagedir = new File(imagefileref);
             
-            if(imagedir.exists()) imagedir.mkdirs();            
-            
+            if(!imagedir.exists()) imagedir.mkdirs();   
+                       
             //
             
             File javascriptdir = new File(javascriptfileref);
             
-            if(javascriptdir.exists()) javascriptdir.mkdirs();
+            if(!javascriptdir.exists()) javascriptdir.mkdirs();
 
             //
                         
@@ -423,7 +423,7 @@ class ModuleOne implements Runnable
             {
                 for(int i=0; i<param.siteImages.size(); i++)
                 {
-                    this.persistimage(param, this.parsescriptforsrcvalue(param.siteImages.get(i)), imagefileref);
+                    this.persistimage(param, this.parseimageforsrcvalue(param.siteImages.get(i)), imagefileref);
                 }
             }
             
@@ -516,11 +516,11 @@ class ModuleOne implements Runnable
         
         //
         
-        param.siteImages = anchorlist;
+        param.siteScripts = anchorlist;
         
         //
         
-        System.err.println("Site "+param.baseURL+" had "+param.siteImages.size()+" scipts tag(s).");
+        System.err.println("Site "+param.baseURL+" had "+param.siteScripts.size()+" scipts tag(s).");
         
         //
         
@@ -541,7 +541,7 @@ class ModuleOne implements Runnable
             
             //if(match.startsWith("src")) continue;
             
-            System.err.println("img src tag has value: "+match);           
+            //System.err.println("img src tag has value: "+match);           
         }
         
         //
@@ -565,7 +565,7 @@ class ModuleOne implements Runnable
             
             //if(match.startsWith("src")) continue;
             
-            System.err.println("script src tag has value: "+match);           
+            //System.err.println("script src tag has value: "+match);           
         }
         
         //
@@ -576,9 +576,7 @@ class ModuleOne implements Runnable
     }    
     
     public void persistimage(WebcrawlerParam param, String inputURL, String outputURL) throws Exception 
-    {        
-        //                
-        
+    {                
         if(inputURL.startsWith("//") || inputURL.startsWith("/") || inputURL.startsWith("./"))
         {
             //move to absolute case for simplification
@@ -615,15 +613,14 @@ class ModuleOne implements Runnable
         //System.out.println("FULL URL: "+inputURL);
         
         //System.out.println("FILENAME TO PERSIST: "+filename);
-
-        
+       
         //
         
         URL url = new URL(inputURL);
         
 	InputStream is = url.openStream();
         
-	OutputStream os = new FileOutputStream(outputURL+filename);
+	OutputStream os = new FileOutputStream(outputURL+"/"+filename);
 
 	byte[] b = new byte[1024*1024*50]; //file size up to 50 MB
 		
@@ -648,9 +645,7 @@ class ModuleOne implements Runnable
     }  
     
     public void persistfile(WebcrawlerParam param, String inputURL, String outputURL) throws Exception 
-    {
-        
-        
+    {                
         if(inputURL.startsWith("//") || inputURL.startsWith("/") || inputURL.startsWith("./"))
         {
             //move to absolute case for simplification
@@ -694,7 +689,7 @@ class ModuleOne implements Runnable
         
 	InputStream is = url.openStream();
         
-	OutputStream os = new FileOutputStream(outputURL+filename);
+	OutputStream os = new FileOutputStream(outputURL+"/"+filename);
 
 	byte[] b = new byte[1024*1024*50]; //file size up to 50 MB
 		
