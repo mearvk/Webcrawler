@@ -2,9 +2,11 @@ package webcrawler;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -14,10 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
 
 public class Webcrawler implements Runnable
 {
@@ -32,7 +30,7 @@ public class Webcrawler implements Runnable
     public static void main(String[] args)
     {
         Webcrawler webcrawler = new Webcrawler();
-        
+                
         //
         
         webcrawler.registrar.register(Preinitialization.class);
@@ -108,6 +106,10 @@ class ModuleOne implements Runnable
             
             try                
             {            
+                //String test = "<script ssrc=\"test\" src=\"test\">";
+                
+                //System.out.println("SRC VALUE = "+this.parseimageforsrcvalue(test));
+                
                 param.baseURL = websiteURL;
                 
                 param.href = websiteURL;
@@ -116,10 +118,7 @@ class ModuleOne implements Runnable
 
                 param.siteAnchors = this.doparseanchors(param);
 
-                param.recurseMessage = this.dorecurse(param);
-
-                //param.persistMessage = this.dopersist(param);
-            
+                param.recurseMessage = this.dorecurse(param);            
             }
             catch(Exception e)
             {
@@ -224,6 +223,10 @@ class ModuleOne implements Runnable
         
         //
 
+        System.out.println("ModuleOne::dorequest sees for href the following value: "+param.href);
+        
+        //
+        
         url = new URL(param.href);            
 
         
@@ -237,7 +240,7 @@ class ModuleOne implements Runnable
             
         connection.setRequestMethod("GET");
             
-        connection.setReadTimeout(1000);
+        connection.setReadTimeout(10000);
             
         connection.setRequestProperty("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36");
                     
@@ -289,10 +292,13 @@ class ModuleOne implements Runnable
                                            
         //
             
-        if(anchors==null) return null;
-        
-        if(anchors.size()==0) return null;
-        
+        if(anchors==null || anchors.isEmpty())
+        {
+            System.out.println("Wouldn't ya believe it?  Site "+param.baseURL+" had no links of any kind!");
+            
+            return null;
+        }
+               
         //
         
         
@@ -308,12 +314,7 @@ class ModuleOne implements Runnable
             if(anchor==null) continue;
                 
             try
-            {                               
-                
-                //DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-                        
-                //Document document = builder.parse(new InputSource(new StringReader(anchor)));
-                
+            {                                                               
                 //
                 
                 recursiveparam.href = this.doparsehref(param);
@@ -382,6 +383,10 @@ class ModuleOne implements Runnable
         
         String fileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/index.html";
         
+        String imagefileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/images";
+        
+        String javascriptfileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/javascript";
+        
         //
         
         System.out.println("TRYING TO PERSIST : "+fileref);
@@ -398,6 +403,42 @@ class ModuleOne implements Runnable
             
             if(file.exists()) file.delete();
             
+            //
+            
+            File imagedir = new File(imagefileref);
+            
+            if(imagedir.exists()) imagedir.mkdirs();            
+            
+            //
+            
+            File javascriptdir = new File(javascriptfileref);
+            
+            if(javascriptdir.exists()) javascriptdir.mkdirs();
+
+            //
+                        
+            this.parsesiteimages(param);
+            
+            if(param.siteImages!=null)
+            {
+                for(int i=0; i<param.siteImages.size(); i++)
+                {
+                    this.persistimage(param, this.parsescriptforsrcvalue(param.siteImages.get(i)), imagefileref);
+                }
+            }
+            
+            //
+            
+            this.parsesitescripts(param);
+                       
+            if(param.siteScripts!=null)
+            {
+                for(int i=0; i<param.siteScripts.size(); i++)
+                {
+                    this.persistfile(param, this.parsescriptforsrcvalue(param.siteScripts.get(i)), javascriptfileref);
+                }        
+            }
+
             //
             
             FileWriter writer = new FileWriter(file);
@@ -421,6 +462,261 @@ class ModuleOne implements Runnable
         
         return "success";
     }
+    
+    public ArrayList<String> parsesiteimages(WebcrawlerParam param)
+    {
+        ArrayList<String> anchorlist = new ArrayList();
+        
+        //
+                       
+        Matcher matcher = Pattern.compile("<img\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.siteHTML); //parse <img src=""></img> matches for now..
+        
+        //
+        
+        while(matcher.find())
+        {
+            String match = matcher.group();
+            
+            //if(match.startsWith("<img")) continue;
+            
+            anchorlist.add(match);
+        }
+        
+        //
+        
+        param.siteImages = anchorlist;
+        
+        //
+        
+        System.err.println("Site "+param.baseURL+" had "+param.siteImages.size()+" image tag(s).");
+        
+        //
+        
+        return anchorlist;        
+    } 
+    
+    public ArrayList<String> parsesitescripts(WebcrawlerParam param)
+    {
+        ArrayList<String> anchorlist = new ArrayList();
+        
+        //
+                       
+        Matcher matcher = Pattern.compile("<script\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.siteHTML); //parse <script src=""></script> matches for now..
+        
+        //
+        
+        while(matcher.find())
+        {
+            String match = matcher.group();
+            
+            //if(match.startsWith("<img")) continue;
+            
+            anchorlist.add(match);
+        }
+        
+        //
+        
+        param.siteImages = anchorlist;
+        
+        //
+        
+        System.err.println("Site "+param.baseURL+" had "+param.siteImages.size()+" scipts tag(s).");
+        
+        //
+        
+        return anchorlist;        
+    }    
+    
+    public String parseimageforsrcvalue(String imagetag)
+    {
+        Matcher matcher = Pattern.compile("(\\bsrc=\"(.*?)\")").matcher(imagetag); //parse <img src=""></img> matches for now..
+        
+        //
+        
+        String match=null;
+        
+        while(matcher.find())
+        {
+            match = matcher.group();
+            
+            //if(match.startsWith("src")) continue;
+            
+            System.err.println("img src tag has value: "+match);           
+        }
+        
+        //
+        
+        match = match.replace("src=\"", "").replace("\"", "");                
+        
+        return match;       
+    }  
+    
+    public String parsescriptforsrcvalue(String scripttag)
+    {                                       
+        Matcher matcher = Pattern.compile("(\\bsrc=\"(.*?)\")").matcher(scripttag); //parse <img src=""></img> matches for now..
+        
+        //
+        
+        String match=null;
+        
+        while(matcher.find())
+        {
+            match = matcher.group();
+            
+            //if(match.startsWith("src")) continue;
+            
+            System.err.println("script src tag has value: "+match);           
+        }
+        
+        //
+        
+        match = match.replace("src=\"", "").replace("\"", "");                
+        
+        return match;     
+    }    
+    
+    public void persistimage(WebcrawlerParam param, String inputURL, String outputURL) throws Exception 
+    {        
+        //                
+        
+        if(inputURL.startsWith("//") || inputURL.startsWith("/") || inputURL.startsWith("./"))
+        {
+            //move to absolute case for simplification
+            
+            if(inputURL.startsWith("//"))
+            {
+                inputURL = "https:"+inputURL;
+            }
+            
+            if(inputURL.startsWith("/"))
+            {
+                inputURL = param.baseURL + inputURL;
+            }
+            
+            if(inputURL.startsWith("./"))
+            {
+                inputURL = param.baseURL + inputURL;
+            }                        
+        }
+        else if(inputURL.startsWith("http"))
+        {
+            //do nothing should be absolute URL
+        }
+        else if(inputURL.charAt(0)!='/')
+        {
+            inputURL = param.baseURL + "/" + inputURL;
+        }
+        else throw new Exception("Neither relative nor absolute URL found for file: "+inputURL);
+                
+        //
+        
+        String filename = inputURL.substring(inputURL.lastIndexOf("/")+1);
+        
+        //System.out.println("FULL URL: "+inputURL);
+        
+        //System.out.println("FILENAME TO PERSIST: "+filename);
+
+        
+        //
+        
+        URL url = new URL(inputURL);
+        
+	InputStream is = url.openStream();
+        
+	OutputStream os = new FileOutputStream(outputURL+filename);
+
+	byte[] b = new byte[1024*1024*50]; //file size up to 50 MB
+		
+        int length;
+
+	while ((length = is.read(b)) != -1) 
+        {
+            os.write(b, 0, length);
+	}
+
+	is.close();
+        
+	os.close();
+        
+        //
+        
+        b = null;
+        
+        //
+        
+        System.gc();
+    }  
+    
+    public void persistfile(WebcrawlerParam param, String inputURL, String outputURL) throws Exception 
+    {
+        
+        
+        if(inputURL.startsWith("//") || inputURL.startsWith("/") || inputURL.startsWith("./"))
+        {
+            //move to absolute case for simplification
+            
+            if(inputURL.startsWith("//"))
+            {
+                inputURL = "https:"+inputURL;
+            }
+            
+            if(inputURL.startsWith("/"))
+            {
+                inputURL = param.baseURL + inputURL;
+            }
+            
+            if(inputURL.startsWith("./"))
+            {
+                inputURL = param.baseURL + inputURL;
+            }                       
+        }
+        else if(inputURL.startsWith("http"))
+        {
+            //do nothing should be absolute URL
+        }
+        else if(inputURL.charAt(0)!='/')
+        {
+            inputURL = param.baseURL + "/" + inputURL;
+        }
+        else throw new Exception("Neither relative nor absolute URL found for file: "+inputURL);
+        
+        //
+        
+        String filename = inputURL.substring(inputURL.lastIndexOf("/")+1);
+        
+        //System.out.println("FULL URL: "+inputURL);
+        
+        //System.out.println("FILENAME TO PERSIST: "+filename);
+
+        //
+        
+        URL url = new URL(inputURL);
+        
+	InputStream is = url.openStream();
+        
+	OutputStream os = new FileOutputStream(outputURL+filename);
+
+	byte[] b = new byte[1024*1024*50]; //file size up to 50 MB
+		
+        int length;
+
+	while ((length = is.read(b)) != -1) 
+        {
+            os.write(b, 0, length);
+	}
+
+	is.close();
+        
+	os.close();
+        
+        //
+        
+        b = null;
+        
+        //
+        
+        System.gc();
+    }     
 }
 
 class ModuleTwo implements Runnable
@@ -436,6 +732,10 @@ class WebcrawlerParam
     public String siteHTML;
             
     public ArrayList<String> siteAnchors;
+    
+    public ArrayList<String> siteImages;
+    
+    public ArrayList<String> siteScripts;
     
     public String href;
            
