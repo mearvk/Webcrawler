@@ -25,6 +25,8 @@ public class Webcrawler implements Runnable
     
     public static Map<String, Object> values = new HashMap();
     
+    public static Map<String, String> visitedlinks = new HashMap();
+    
     //
     
     public static void main(String[] args)
@@ -163,7 +165,7 @@ class ModuleOne implements Runnable
         {
             String match = matcher.group();
             
-            if(match.startsWith("<a")) continue; //glitch in regex fix
+            //if(match.startsWith("<a")) continue; //glitch in regex fix
             
             href = match;
         }
@@ -190,29 +192,102 @@ class ModuleOne implements Runnable
         if(param.href.startsWith("/")) //relative path
         {
             retval = param.baseURL+System.getProperty("file.separator")+param.href;
+            
+            /*retval = retval.replace(":", ".colon.");*/ retval = retval.replace("https", "");           
 
-            retval = retval.replace(":", ".colon.");
+            /*retval = retval.replace(":", ".colon.");*/ retval = retval.replace(":", "");
 
-            retval = retval.replace("//", ".fsfs.");
+            /*retval = retval.replace("//", ".fsfs.");*/ retval = retval.replace("//", "");
 
-            retval = retval.replace("..", ".");
+            /*retval = retval.replace("..", ".");*/ retval = retval.replace("..", "");
 
             //System.out.println("UNQUALIFIED URL LOOKS LIKE "+retval);            
         }
         else //full path in HREF link
         {                  
             retval = param.href;
+            
+            /*retval = retval.replace(":", ".colon.");*/ retval = retval.replace("https", "");                       
 
-            retval = retval.replace(":", ".colon.");
+            /*retval = retval.replace(":", ".colon.");*/ retval = retval.replace(":", "");
 
-            retval = retval.replace("//", ".fsfs.");
+            /*retval = retval.replace("//", ".fsfs.");*/ retval = retval.replace("//", "");
 
-            retval = retval.replace("..", ".");
+            /*retval = retval.replace("..", ".");*/ retval = retval.replace("..", "");
 
             //System.out.println("UNQUALIFIED URL LOOKS LIKE "+retval);
         }
         
         return retval;
+    }
+    
+    public String dodeterminefullpathforhttpreference(WebcrawlerParam param, String inputURL) throws Exception
+    {
+        if(inputURL==null || inputURL.isEmpty()) throw new Exception();
+        
+        //
+        
+        String href = null;
+        
+        //
+                       
+        Matcher matcher = Pattern.compile("<a\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(inputURL); //parse <img src=""></img> matches for now..
+        
+        //
+        
+        while(matcher.find())
+        {
+            String match = matcher.group();
+            
+            //if(match.startsWith("<img")) continue;
+            
+            href = match;
+        }
+        
+        //
+        
+        //param.siteImages = href;
+        
+        //
+        
+        //System.err.println("Anchor  "+inputURL+" had href value: "+href);
+        
+        //
+        
+        //return href;        
+        
+        //
+        
+        if(inputURL.startsWith("//") || inputURL.startsWith("/") || inputURL.startsWith("./"))
+        {
+            //move to absolute case for simplification
+            
+            if(inputURL.startsWith("//"))
+            {
+                inputURL = "https:"+inputURL;
+            }
+            
+            if(inputURL.startsWith("/"))
+            {
+                inputURL = param.baseURL + inputURL;
+            }
+            
+            if(inputURL.startsWith("./"))
+            {
+                inputURL = param.baseURL + inputURL;
+            }                       
+        }
+        else if(inputURL.startsWith("http"))
+        {
+            //do nothing should be absolute URL
+        }
+        else if(!inputURL.isEmpty() && inputURL.charAt(0)!='/')
+        {
+            inputURL = param.baseURL + "/" + inputURL;
+        }
+        else throw new Exception("Neither relative nor absolute URL found for file: \""+inputURL+"\"");  
+        
+        return inputURL;
     }
     
     public String dorequest(WebcrawlerParam param) throws Exception
@@ -223,7 +298,7 @@ class ModuleOne implements Runnable
         
         //
 
-        System.out.println("ModuleOne::dorequest sees for href the following value: "+param.href);
+        //System.out.println("ModuleOne::dorequest sees for href the following value: "+param.href);
         
         //
         
@@ -277,7 +352,7 @@ class ModuleOne implements Runnable
 
         //
         
-        this.dopersist(param);
+        this.dopersist(param);        
         
         //
             
@@ -299,8 +374,7 @@ class ModuleOne implements Runnable
             return null;
         }
                
-        //
-        
+        //        
         
         for(int i=0; i<anchors.size(); i++)
         {
@@ -311,13 +385,19 @@ class ModuleOne implements Runnable
             //System.out.println("ANCHOR: "+anchor);
 
             
-            if(anchor==null) continue;
+            if(anchor==null || anchor.isEmpty()) continue;
                 
             try
             {                                                               
                 //
                 
-                recursiveparam.href = this.doparsehref(param);
+                recursiveparam.baseURL = param.baseURL;
+                
+                recursiveparam.href = this.parseanchorforhrefvalue(anchor);
+                
+                if(recursiveparam.href==null || recursiveparam.href.isEmpty()) continue;
+                
+                recursiveparam.href = this.dodeterminefullpathforhttpreference(param, recursiveparam.href);
                 
                 //
                 
@@ -327,23 +407,36 @@ class ModuleOne implements Runnable
                 
                 //
                 
-                //System.out.println("HREF: "+recursiveparam.href);
+                //System.out.println("ModuleOne:dorecurse has href value: "+recursiveparam.href);
+                
+                //System.out.println("ModuleOne:dorecurse has baseURL value: "+recursiveparam.baseURL);
+
+                
+                //
+                
+                if(Webcrawler.visitedlinks.get(param.href)==null || Webcrawler.visitedlinks.get(param.href).isEmpty())
+                {                
+                    Webcrawler.visitedlinks.put(param.href, "visited");
+                }                
+                else continue;
                 
                 //
                                 
                 recursiveparam.baseURL = param.baseURL;
                 
-                recursiveparam.anchor = anchor;                                
-                               
-                recursiveparam.siteHTML = this.dorequest(recursiveparam);                             
-                
+                recursiveparam.anchor = anchor;                
+
                 //
+                               
+                recursiveparam.siteHTML = this.dorequest(recursiveparam);           
                 
-                this.dorecurse(recursiveparam);
+                recursiveparam.siteAnchors = this.doparseanchors(recursiveparam);
+                
+                recursiveparam.recurseMessage = this.dorecurse(recursiveparam);
             }
             catch(Exception e)
             {
-                //e.printStackTrace();
+                e.printStackTrace();
                 
                 //System.err.println("Error with anchor tag: "+anchor);
             }
@@ -389,7 +482,17 @@ class ModuleOne implements Runnable
         
         //
         
-        System.out.println("TRYING TO PERSIST : "+fileref);
+        //System.out.println("TRYING TO PERSIST : "+fileref);
+        
+        System.out.println("-- -- -- -- --");
+        
+        System.out.println("ModuleOne:dopersist has href value: "+param.href);
+                
+        System.out.println("ModuleOne:dopersist has baseURL value: "+param.baseURL);       
+        
+        System.out.println("ModuleOne:dopersist has unqualified value: "+param.unqualifiedURL); 
+        
+        System.out.println("-- -- -- -- --");
     
         try
         {
@@ -423,7 +526,14 @@ class ModuleOne implements Runnable
             {
                 for(int i=0; i<param.siteImages.size(); i++)
                 {
-                    this.persistimage(param, this.parseimageforsrcvalue(param.siteImages.get(i)), imagefileref);
+                    try
+                    {
+                        this.persistimage(param, this.parseimageforsrcvalue(param.siteImages.get(i)), imagefileref);
+                    }
+                    catch(Exception e)
+                    {
+                        //
+                    }
                 }
             }
             
@@ -435,7 +545,14 @@ class ModuleOne implements Runnable
             {
                 for(int i=0; i<param.siteScripts.size(); i++)
                 {
-                    this.persistfile(param, this.parsescriptforsrcvalue(param.siteScripts.get(i)), javascriptfileref);
+                    try
+                    {
+                        this.persistfile(param, this.parsescriptforsrcvalue(param.siteScripts.get(i)), javascriptfileref);
+                    }
+                    catch(Exception e)
+                    {
+//                      //
+                    }
                 }        
             }
 
@@ -488,7 +605,7 @@ class ModuleOne implements Runnable
         
         //
         
-        System.err.println("Site "+param.baseURL+" had "+param.siteImages.size()+" image tag(s).");
+        //System.err.println("Site "+param.baseURL+" had "+param.siteImages.size()+" image tag(s).");
         
         //
         
@@ -520,7 +637,7 @@ class ModuleOne implements Runnable
         
         //
         
-        System.err.println("Site "+param.baseURL+" had "+param.siteScripts.size()+" scipts tag(s).");
+        //System.err.println("Site "+param.baseURL+" had "+param.siteScripts.size()+" scripts tag(s).");
         
         //
         
@@ -546,10 +663,38 @@ class ModuleOne implements Runnable
         
         //
         
+        if(match==null) return null;
+        
         match = match.replace("src=\"", "").replace("\"", "");                
         
         return match;       
     }  
+    
+    public String parseanchorforhrefvalue(String hreftag)
+    {
+        Matcher matcher = Pattern.compile("(\\bhref=\"(.*?)\")").matcher(hreftag); //parse <img src=""></img> matches for now..
+        
+        //
+        
+        String match=null;
+        
+        while(matcher.find())
+        {
+            match = matcher.group();
+            
+            //if(match.startsWith("src")) continue;
+            
+            //System.err.println("img src tag has value: "+match);           
+        }
+        
+        //
+        
+        if(match==null) return null;
+        
+        match = match.replace("href=\"", "").replace("\"", "");                
+        
+        return match;       
+    }    
     
     public String parsescriptforsrcvalue(String scripttag)
     {                                       
@@ -569,6 +714,8 @@ class ModuleOne implements Runnable
         }
         
         //
+        
+        if(match==null) return null;
         
         match = match.replace("src=\"", "").replace("\"", "");                
         
@@ -600,11 +747,11 @@ class ModuleOne implements Runnable
         {
             //do nothing should be absolute URL
         }
-        else if(inputURL.charAt(0)!='/')
+        else if(!inputURL.isEmpty() && inputURL.charAt(0)!='/')
         {
             inputURL = param.baseURL + "/" + inputURL;
         }
-        else throw new Exception("Neither relative nor absolute URL found for file: "+inputURL);
+        else throw new Exception("Neither relative nor absolute URL found for file: \""+inputURL+"\"");
                 
         //
         
@@ -615,29 +762,45 @@ class ModuleOne implements Runnable
         //System.out.println("FILENAME TO PERSIST: "+filename);
        
         //
+       
+        InputStream is = null;
         
-        URL url = new URL(inputURL);
+        OutputStream os = null;
         
-	InputStream is = url.openStream();
-        
-	OutputStream os = new FileOutputStream(outputURL+"/"+filename);
-
-	byte[] b = new byte[1024*1024*50]; //file size up to 50 MB
-		
-        int length;
-
-	while ((length = is.read(b)) != -1) 
+        try
         {
-            os.write(b, 0, length);
-	}
+            URL url = new URL(inputURL);
+        
+            is = url.openStream();
+            
+            os = new FileOutputStream(outputURL+"/"+filename);
+                    
+            byte[] b = new byte[1024*1024*50]; //file size up to 50 MB
 
-	is.close();
-        
-	os.close();
-        
-        //
-        
-        b = null;
+            int length;
+
+            while ((length = is.read(b)) != -1) 
+            {
+                os.write(b, 0, length);
+            }
+
+            is.close();
+
+            os.close();
+
+            //
+
+            b = null;        
+            
+            is = null;
+            
+            os = null;
+        }
+        catch(Exception e)
+        {
+            //
+            
+        }        	
         
         //
         
@@ -645,8 +808,12 @@ class ModuleOne implements Runnable
     }  
     
     public void persistfile(WebcrawlerParam param, String inputURL, String outputURL) throws Exception 
-    {                
-        if(inputURL.startsWith("//") || inputURL.startsWith("/") || inputURL.startsWith("./"))
+    {               
+        if(inputURL==null || inputURL.isEmpty())
+        {
+            return;
+        }
+        else if(inputURL.startsWith("//") || inputURL.startsWith("/") || inputURL.startsWith("./"))
         {
             //move to absolute case for simplification
             
@@ -669,11 +836,11 @@ class ModuleOne implements Runnable
         {
             //do nothing should be absolute URL
         }
-        else if(inputURL.charAt(0)!='/')
+        else if(!inputURL.isEmpty() && inputURL.charAt(0)!='/')
         {
             inputURL = param.baseURL + "/" + inputURL;
-        }
-        else throw new Exception("Neither relative nor absolute URL found for file: "+inputURL);
+        }        
+        else throw new Exception("Neither relative nor absolute URL found for file: \""+inputURL+"\"");
         
         //
         
@@ -685,28 +852,41 @@ class ModuleOne implements Runnable
 
         //
         
-        URL url = new URL(inputURL);
-        
-	InputStream is = url.openStream();
-        
-	OutputStream os = new FileOutputStream(outputURL+"/"+filename);
-
-	byte[] b = new byte[1024*1024*50]; //file size up to 50 MB
-		
-        int length;
-
-	while ((length = is.read(b)) != -1) 
+        try
         {
-            os.write(b, 0, length);
-	}
+        
+            URL url = new URL(inputURL);
 
-	is.close();
+            InputStream is = url.openStream();
+
+            OutputStream os = new FileOutputStream(outputURL+"/"+filename);
+
+            byte[] b = new byte[1024*1024*50]; //file size up to 50 MB
+
+            int length;
+
+            while ((length = is.read(b)) != -1) 
+            {
+                os.write(b, 0, length);
+            }
+
+            is.close();
+
+            os.close();
+
+            //
+
+            b = null;
+            
+            is = null;
+            
+            os = null;
         
-	os.close();
-        
-        //
-        
-        b = null;
+        }
+        catch(Exception e)
+        {
+            //
+        }
         
         //
         
