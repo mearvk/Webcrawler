@@ -117,6 +117,15 @@ class ModuleOne implements Runnable
                 
                 if(websiteURL.contains("facebook.com")) continue;
                 
+                if(websiteURL.contains("amazon.com")) continue;
+                
+                if(websiteURL.contains("youtube.com")) continue;
+                
+                if(websiteURL.contains("wikipedia.org")) continue;
+
+                
+
+                //
                 
                 param.baseURL = websiteURL;
                 
@@ -126,7 +135,7 @@ class ModuleOne implements Runnable
 
                 param.siteAnchors = this.doparseanchors(param);
 
-                param.recurseMessage = this.dorecurse(param);            
+                param.recurseMessage = this.dorecurse(param, 0);            
             }
             catch(Exception e)
             {
@@ -378,7 +387,7 @@ class ModuleOne implements Runnable
         return null;
     }
     
-    public String dorecurse(WebcrawlerParam param) throws Exception
+    public String dorecurse(WebcrawlerParam param, Integer depth) throws Exception
     {       
         ArrayList<String> anchors = param.siteAnchors;
         
@@ -461,16 +470,33 @@ class ModuleOne implements Runnable
                 System.out.println("ModuleOne:dorecurse has baseURL value: "+recursiveparam.baseURL);
 
                 //
+                
+                if(depth>=10)
+                {
+                    throw new StackDepthException("Deep stack depth detected; returning.");
+                }
                                
                 recursiveparam.siteHTML = this.dorequest(recursiveparam);           
                 
                 recursiveparam.siteAnchors = this.doparseanchors(recursiveparam);
                 
-                recursiveparam.recurseMessage = this.dorecurse(recursiveparam);
+                recursiveparam.recurseMessage = this.dorecurse(recursiveparam, (1+depth));
             }
             catch(NullPointerException npe)
             {
                 // check there will be an error if 404 returned by dorequest
+            }
+            catch(StackDepthException vdsde)
+            {
+                //
+                
+                System.out.println("-- -- -- -- --");
+                
+                System.out.println(vdsde.getMessage());
+                
+                System.out.println("-- -- -- -- --");
+                
+                return null;
             }
             catch(Exception e)
             {
