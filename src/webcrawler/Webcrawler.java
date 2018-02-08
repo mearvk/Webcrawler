@@ -122,6 +122,9 @@ class ModuleOne implements Runnable
                 if(websiteURL.contains("youtube.com")) continue;
                 
                 if(websiteURL.contains("wikipedia.org")) continue;
+                
+                if(websiteURL.contains("twitter.com")) continue;
+                
 
                 
 
@@ -471,7 +474,7 @@ class ModuleOne implements Runnable
 
                 //
                 
-                if(depth>=10)
+                if(depth>=3)
                 {
                     throw new StackDepthException("Deep stack depth detected; returning.");
                 }
