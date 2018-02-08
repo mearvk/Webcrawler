@@ -2,6 +2,7 @@ package webcrawler;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
@@ -111,6 +112,11 @@ class ModuleOne implements Runnable
                 //String test = "<script ssrc=\"test\" src=\"test\">";
                 
                 //System.out.println("SRC VALUE = "+this.parseimageforsrcvalue(test));
+                
+                if(websiteURL.contains("google.com")) continue;
+                
+                if(websiteURL.contains("facebook.com")) continue;
+                
                 
                 param.baseURL = websiteURL;
                 
@@ -323,40 +329,53 @@ class ModuleOne implements Runnable
         
         if(connection==null) return null;
             
-        int responsecode = connection.getResponseCode();
-            
-        //
-            
-        StringBuilder builder = new StringBuilder();
-            
-        String string=null;
-            
-        //
-            
-        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            
-        while((string=reader.readLine())!=null)
+        try
         {
-            builder.append(string);
-        }
-            
-        //
-            
-        //System.out.println("RETURNING VALUE FOR "+param.href);
-        
-        //
-        
-        param.siteHTML=builder.toString();
-        
-        param.unqualifiedURL = this.dodeterminefullpathforpersist(param);                
+            int responsecode = connection.getResponseCode();
+                        
+            //
 
-        //
-        
-        this.dopersist(param);        
-        
-        //
-            
-        return builder.toString();                        
+            StringBuilder builder = new StringBuilder();
+
+            String string=null;
+
+            //
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+            while((string=reader.readLine())!=null)
+            {
+                builder.append(string);
+            }
+
+            //
+
+            System.out.println("ModuleOne:dopersist working with "+param.href);
+
+            //
+
+            param.siteHTML=builder.toString();
+
+            param.unqualifiedURL = this.dodeterminefullpathforpersist(param);                
+
+            //
+
+            this.dopersist(param);        
+
+            //
+
+            return builder.toString();             
+        }
+        catch(FileNotFoundException fnfe)
+        {
+            System.err.println("Resource "+param.href+" exists as a link but not actually a page reference. HTTP returned 404.");
+        }
+        catch(Exception e)
+        {
+            //
+        }
+                       
+        return null;
     }
     
     public String dorecurse(WebcrawlerParam param) throws Exception
@@ -372,6 +391,15 @@ class ModuleOne implements Runnable
             System.out.println("Wouldn't ya believe it?  Site "+param.baseURL+" had no links of any kind!");
             
             return null;
+        }
+        else
+        {
+            for(int i=0; i<anchors.size(); i++)
+            {
+                String href = this.parseanchorforhrefvalue(anchors.get(i));
+                
+                //System.out.println("Anchor #"+i+" for site "+param.baseURL+" is : "+href);
+            }
         }
                
         //        
@@ -414,9 +442,9 @@ class ModuleOne implements Runnable
                 
                 //
                 
-                if(Webcrawler.visitedlinks.get(param.href)==null || Webcrawler.visitedlinks.get(param.href).isEmpty())
+                if(Webcrawler.visitedlinks.get(recursiveparam.href)==null || Webcrawler.visitedlinks.get(recursiveparam.href).isEmpty())
                 {                
-                    Webcrawler.visitedlinks.put(param.href, "visited");
+                    Webcrawler.visitedlinks.put(recursiveparam.href, "visited");
                 }                
                 else continue;
                 
@@ -427,12 +455,22 @@ class ModuleOne implements Runnable
                 recursiveparam.anchor = anchor;                
 
                 //
+                
+                System.out.println("ModuleOne:dorecurse has href value: "+recursiveparam.href);
+                
+                System.out.println("ModuleOne:dorecurse has baseURL value: "+recursiveparam.baseURL);
+
+                //
                                
                 recursiveparam.siteHTML = this.dorequest(recursiveparam);           
                 
                 recursiveparam.siteAnchors = this.doparseanchors(recursiveparam);
                 
                 recursiveparam.recurseMessage = this.dorecurse(recursiveparam);
+            }
+            catch(NullPointerException npe)
+            {
+                // check there will be an error if 404 returned by dorequest
             }
             catch(Exception e)
             {
