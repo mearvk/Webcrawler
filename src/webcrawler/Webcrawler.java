@@ -116,26 +116,7 @@ class ModuleOne implements Runnable
             //
             
             try                
-            {            
-                //String test = "<script ssrc=\"test\" src=\"test\">";
-                
-                //System.out.println("SRC VALUE = "+this.parseimageforsrcvalue(test));
-                
-                if(websiteURL.contains("google.com")) continue;
-                
-                if(websiteURL.contains("facebook.com")) continue;
-                
-                if(websiteURL.contains("amazon.com")) continue;
-                
-                if(websiteURL.contains("youtube.com")) continue;
-                
-                if(websiteURL.contains("wikipedia.org")) continue;
-                
-                if(websiteURL.contains("twitter.com")) continue;
-                
-
-                
-
+            {                                          
                 //
                 
                 param.baseURL = websiteURL;
@@ -146,7 +127,7 @@ class ModuleOne implements Runnable
 
                 param.siteAnchors = this.doparseanchors(param);
 
-                param.recurseMessage = this.dorecurse(param, 0);            
+                param.recurseMessage = this.dosinglesiterecurse(param, 0);            
             }
             catch(Exception e)
             {
@@ -481,9 +462,9 @@ class ModuleOne implements Runnable
 
                 //
                 
-                System.out.println("ModuleOne:dorecurse has href value: "+recursiveparam.href);
+                System.out.println("ModuleOne:dosinglesiterecurse has href value: "+recursiveparam.href);
                 
-                System.out.println("ModuleOne:dorecurse has baseURL value: "+recursiveparam.baseURL);
+                System.out.println("ModuleOne:dosinglesiterecurse has baseURL value: "+recursiveparam.baseURL);
 
                 //
                 
@@ -496,7 +477,7 @@ class ModuleOne implements Runnable
                 
                 recursiveparam.siteAnchors = this.doparseanchors(recursiveparam);
                 
-                recursiveparam.recurseMessage = this.dorecurse(recursiveparam, (1+depth));
+                recursiveparam.recurseMessage = this.dosinglesiterecurse(recursiveparam, (1+depth));
             }
             catch(NullPointerException npe)
             {
