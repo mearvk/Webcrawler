@@ -391,7 +391,7 @@ class ModuleOne implements Runnable
             
         if(anchors==null || anchors.isEmpty())
         {
-            System.out.println("Wouldn't ya believe it?  Site "+param.baseURL+" had no links of any kind!");
+            System.out.println("Wouldn't ya believe it?  Site "+param.baseURL+" reports no links of any kind.");
             
             return null;
         }
@@ -401,7 +401,7 @@ class ModuleOne implements Runnable
             {
                 String href = this.parseanchorforhrefvalue(anchors.get(i));
                 
-                //System.out.println("Anchor #"+i+" for site "+param.baseURL+" is : "+href);
+                System.out.println("Anchor #"+i+" for site "+param.baseURL+" is : "+href);
             }
         }
                
@@ -417,7 +417,9 @@ class ModuleOne implements Runnable
             
             if(anchor==null || anchor.isEmpty()) continue;
             
-            if( !(anchor.startsWith("https://www."+param.baseURL) || anchor.startsWith("http://wwww."+param.baseURL) || anchor.startsWith("http://"+param.baseURL) || anchor.startsWith("https://"+param.baseURL) || anchor.startsWith(param.baseURL) || anchor.startsWith("/") || anchor.startsWith("./") || anchor.startsWith("//") || anchor.startsWith("..")) ) continue;
+            String href_quickref = this.parseanchorforhrefvalue(anchor);
+            
+            if( !(href_quickref.startsWith("https://www."+param.baseURL) || href_quickref.startsWith("http://wwww."+param.baseURL) || href_quickref.startsWith("http://"+param.baseURL) || href_quickref.startsWith("https://"+param.baseURL) || href_quickref.startsWith(param.baseURL) || href_quickref.startsWith("/") || href_quickref.startsWith("./") || href_quickref.startsWith("//") || href_quickref.startsWith("..") || href_quickref.startsWith("#")) ) continue;
             
             //
                 
