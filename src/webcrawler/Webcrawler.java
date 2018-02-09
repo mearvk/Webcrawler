@@ -417,7 +417,7 @@ class ModuleOne implements Runnable
             
             if(anchor==null || anchor.isEmpty()) continue;
             
-            if( !(anchor.startsWith("http://"+param.baseURL) || anchor.startsWith("https://"+param.baseURL) || anchor.startsWith(param.baseURL) || anchor.startsWith("/") || anchor.startsWith("./") || anchor.startsWith("//") || anchor.startsWith("..")) ) continue;
+            if( !(anchor.startsWith("https://www."+param.baseURL) || anchor.startsWith("http://wwww."+param.baseURL) || anchor.startsWith("http://"+param.baseURL) || anchor.startsWith("https://"+param.baseURL) || anchor.startsWith(param.baseURL) || anchor.startsWith("/") || anchor.startsWith("./") || anchor.startsWith("//") || anchor.startsWith("..")) ) continue;
             
             //
                 
