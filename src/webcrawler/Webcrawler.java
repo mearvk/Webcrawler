@@ -24,9 +24,17 @@ public class Webcrawler implements Runnable
     
     public Initializer initializer = new Initializer();   
     
+    //
+    
     public static Map<String, Object> values = new HashMap();
     
     public static Map<String, String> visitedlinks = new HashMap();
+    
+    //
+    
+    public static final Integer localrecursedepth = 10;
+    
+    public static final Integer globalrecursedepth = 4;
     
     //
     
@@ -390,6 +398,134 @@ class ModuleOne implements Runnable
         return null;
     }
     
+    public String dosinglesiterecurse(WebcrawlerParam param, Integer depth)
+    {
+        //
+        
+        ArrayList<String> anchors = param.siteAnchors;
+        
+        ArrayList<String> errors = null;
+                                           
+        //
+            
+        if(anchors==null || anchors.isEmpty())
+        {
+            System.out.println("Wouldn't ya believe it?  Site "+param.baseURL+" had no links of any kind!");
+            
+            return null;
+        }
+        else
+        {
+            for(int i=0; i<anchors.size(); i++)
+            {
+                String href = this.parseanchorforhrefvalue(anchors.get(i));
+                
+                //System.out.println("Anchor #"+i+" for site "+param.baseURL+" is : "+href);
+            }
+        }
+               
+        //        
+        
+        for(int i=0; i<anchors.size(); i++)
+        {
+            WebcrawlerParam recursiveparam = new WebcrawlerParam();
+            
+            String anchor = anchors.get(i);
+                    
+            //
+            
+            if(anchor==null || anchor.isEmpty()) continue;
+            
+            if( !(anchor.startsWith("http://"+param.baseURL) || anchor.startsWith("https://"+param.baseURL) || anchor.startsWith(param.baseURL) || anchor.startsWith("/") || anchor.startsWith("./") || anchor.startsWith("//") || anchor.startsWith("..")) ) continue;
+            
+            //
+                
+            try
+            {                                                               
+                //
+                
+                recursiveparam.baseURL = param.baseURL;
+                
+                recursiveparam.href = this.parseanchorforhrefvalue(anchor);
+                
+                if(recursiveparam.href==null || recursiveparam.href.isEmpty()) continue;
+                
+                recursiveparam.href = this.dodeterminefullpathforhttpreference(param, recursiveparam.href);
+                
+                //
+                
+                if(recursiveparam.href==null) continue;
+                
+                if(!recursiveparam.href.contains("http")) continue;                                        
+                
+                //
+                
+                //System.out.println("ModuleOne:dorecurse has href value: "+recursiveparam.href);
+                
+                //System.out.println("ModuleOne:dorecurse has baseURL value: "+recursiveparam.baseURL);
+
+                
+                //
+                
+                if(Webcrawler.visitedlinks.get(recursiveparam.href)==null || Webcrawler.visitedlinks.get(recursiveparam.href).isEmpty())
+                {                
+                    Webcrawler.visitedlinks.put(recursiveparam.href, "visited");
+                }                
+                else continue;
+                
+                //
+                                
+                recursiveparam.baseURL = param.baseURL;
+                
+                recursiveparam.anchor = anchor;                
+
+                //
+                
+                System.out.println("ModuleOne:dorecurse has href value: "+recursiveparam.href);
+                
+                System.out.println("ModuleOne:dorecurse has baseURL value: "+recursiveparam.baseURL);
+
+                //
+                
+                if(depth>=Webcrawler.localrecursedepth)
+                {
+                    throw new StackDepthException("Local stack depth exceeded; returning.");
+                }
+                               
+                recursiveparam.siteHTML = this.dorequest(recursiveparam);           
+                
+                recursiveparam.siteAnchors = this.doparseanchors(recursiveparam);
+                
+                recursiveparam.recurseMessage = this.dorecurse(recursiveparam, (1+depth));
+            }
+            catch(NullPointerException npe)
+            {
+                // check there will be an error if 404 returned by dorequest
+            }
+            catch(StackDepthException vdsde)
+            {
+                //
+                
+                System.out.println("-- -- -- -- --");
+                
+                System.out.println(vdsde.getMessage());
+                
+                System.out.println("-- -- -- -- --");
+                
+                return null;
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+                
+                //System.err.println("Error with anchor tag: "+anchor);
+            }
+        }
+
+            
+        return "success";                
+    }
+    
     public String dorecurse(WebcrawlerParam param, Integer depth) throws Exception
     {       
         ArrayList<String> anchors = param.siteAnchors;
@@ -474,9 +610,9 @@ class ModuleOne implements Runnable
 
                 //
                 
-                if(depth>=3)
+                if(depth>=Webcrawler.globalrecursedepth)
                 {
-                    throw new StackDepthException("Deep stack depth detected; returning.");
+                    throw new StackDepthException("Global stack depth exceeded; returning.");
                 }
                                
                 recursiveparam.siteHTML = this.dorequest(recursiveparam);           
