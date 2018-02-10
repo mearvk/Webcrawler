@@ -7,20 +7,11 @@ package webcrawler;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 
 /**
  *
@@ -46,6 +37,88 @@ public class Preinitialization implements Runnable
         {
             e.printStackTrace();
         }
+        
+        //
+        
+        Initializer initializer = null;
+        
+        initializer = (Initializer)Webcrawler.values.get("initializer");
+        
+        //
+        
+        ArrayList<String> websites;
+        
+        websites = (ArrayList<String>)initializer.variables.get("websites");
+        
+        //
+        
+        websites.add("https://en.wikipedia.org/wiki/Computer_science");
+        
+        websites.add("https://en.wikipedia.org/wiki/Mathematics");
+        
+        websites.add("https://en.wikipedia.org/wiki/Logic");
+
+        websites.add("https://en.wikipedia.org/wiki/Constitution");
+
+        websites.add("https://en.wikipedia.org/wiki/Church");
+        
+        websites.add("https://en.wikipedia.org/wiki/Xenu");
+        
+        websites.add("https://en.wikipedia.org/wiki/Religion");
+
+        websites.add("https://en.wikipedia.org/wiki/Spirituality");
+
+        websites.add("https://en.wikipedia.org/wiki/Philosophy");
+
+        websites.add("https://en.wikipedia.org/wiki/Network_analysis_(electrical_circuits)");
+
+        websites.add("https://en.wikipedia.org/wiki/Calculus");
+        
+        websites.add("https://en.wikipedia.org/wiki/Trigonometry");
+        
+        websites.add("https://en.wikipedia.org/wiki/Psychology");
+
+        websites.add("https://en.wikipedia.org/wiki/Psychiatry");
+        
+        websites.add("https://en.wikipedia.org/wiki/Pharmacology");
+
+        websites.add("https://en.wikipedia.org/wiki/Algebra");
+        
+        websites.add("https://en.wikipedia.org/wiki/Linear_algebra");
+        
+        websites.add("https://en.wikipedia.org/wiki/Science");
+        
+        websites.add("https://en.wikipedia.org/wiki/Chemistry");        
+        
+        websites.add("https://en.wikipedia.org/wiki/Intelligence_quotient");
+        
+        websites.add("https://en.wikipedia.org/wiki/President_of_the_United_States");
+
+        websites.add("https://en.wikipedia.org/wiki/Vice_President_of_the_United_States");
+        
+        websites.add("https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population");
+
+        websites.add("https://en.wikipedia.org/wiki/Wikipedia");
+
+        websites.add("https://en.wikipedia.org/wiki/Pope");
+
+        websites.add("https://en.wikipedia.org/wiki/Pope_Francis");
+                
+        websites.add("https://en.wikipedia.org/wiki/L._Ron_Hubbard");
+
+        websites.add("https://en.wikipedia.org/wiki/Truth");
+        
+        websites.add("https://en.wikipedia.org/wiki/Java_(programming_language)");        
+               
+        websites.add("https://en.wikipedia.org/wiki/C_(programming_language)");
+        
+        websites.add("https://en.wikipedia.org/wiki/C%2B%2B");
+        
+        websites.add("https://en.wikipedia.org/wiki/Music");
+        
+        //
+        
+        
     }
     
     public String dorequest(WebcrawlerParam param) throws Exception

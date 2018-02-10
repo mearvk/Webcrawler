@@ -1334,7 +1334,7 @@ class ModuleTwo implements Runnable
 {    
     public void run()
     {
-        //rewrite links to face inward
+        //rewrite links to face inward for local reference
     }
 }
 
