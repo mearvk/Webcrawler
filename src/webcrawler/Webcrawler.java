@@ -375,6 +375,10 @@ class ModuleOne implements Runnable
         {
             //
         }
+        finally
+        {
+            System.gc();
+        }
                        
         return null;        
     }
@@ -456,6 +460,10 @@ class ModuleOne implements Runnable
         catch(Exception e)
         {
             //
+        }
+        finally
+        {
+            System.gc();
         }
                        
         return null;
@@ -587,6 +595,11 @@ class ModuleOne implements Runnable
             }
         }
 
+        //
+        
+        System.gc();
+        
+        //
             
         return "success";                
     }
@@ -710,6 +723,11 @@ class ModuleOne implements Runnable
             }
         }
 
+        //
+        
+        System.gc();
+        
+        //
             
         return "success";
     }
@@ -873,6 +891,10 @@ class ModuleOne implements Runnable
             
             
             return e.getMessage();
+        }
+        finally
+        {
+            System.gc();
         }
         
         return "success";
