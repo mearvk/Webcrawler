@@ -1334,7 +1334,15 @@ class ModuleTwo implements Runnable
 {    
     public void run()
     {
-        //
+        //rewrite links to face inward
+    }
+}
+
+class ModuleThree implements Runnable
+{    
+    public void run()
+    {
+        //compress files, delete redundant files
     }
 }
 
