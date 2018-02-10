@@ -882,7 +882,7 @@ class ModuleOne implements Runnable
     {
         ArrayList<String> anchorlist = new ArrayList();
         
-        WebcrawlerParam originalparam = param;
+        String originalsiteHTML = new StringBuffer(param.siteHTML).toString();
         
         //
                        
@@ -958,6 +958,8 @@ class ModuleOne implements Runnable
         //
         
         param.siteStyleSheets = anchorlist;
+        
+        param.siteHTML = originalsiteHTML;
         
         //
         
