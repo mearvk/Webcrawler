@@ -32,7 +32,7 @@ public class Webcrawler implements Runnable
     
     //
     
-    public static final Integer localrecursedepth = 10;
+    public static final Integer localrecursedepth = 8;
     
     public static final Integer globalrecursedepth = 4;
     
@@ -295,6 +295,88 @@ class ModuleOne implements Runnable
         else throw new Exception("Neither relative nor absolute URL found for file: \""+inputURL+"\"");  
         
         return inputURL;
+    }
+    
+    public String dosimplerequest(WebcrawlerParam param) throws Exception
+    {
+        URL url=null;
+        
+        HttpURLConnection connection=null;
+        
+        //
+
+        //System.out.println("ModuleOne::dorequest sees for href the following value: "+param.href);
+        
+        //
+        
+        url = new URL(param.href);            
+
+        
+        //
+        
+        if(url==null) return null;
+            
+        //
+            
+        connection = (HttpURLConnection)url.openConnection();
+            
+        connection.setRequestMethod("GET");
+            
+        connection.setReadTimeout(10000);
+            
+        connection.setRequestProperty("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36");
+                    
+        //
+        
+        if(connection==null) return null;
+            
+        try
+        {
+            int responsecode = connection.getResponseCode();
+                        
+            //
+
+            StringBuilder builder = new StringBuilder();
+
+            String string=null;
+
+            //
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+            while((string=reader.readLine())!=null)
+            {
+                builder.append(string);
+            }
+
+            //
+
+            //System.out.println("ModuleOne:dopersist working with "+param.href);
+
+            //
+
+            param.siteHTML=builder.toString();
+
+            //param.unqualifiedURL = this.dodeterminefullpathforpersist(param);                
+
+            //
+
+            //this.dopersist(param);        
+
+            //
+
+            return builder.toString();             
+        }
+        catch(FileNotFoundException fnfe)
+        {
+            System.err.println("Resource "+param.href+" exists as a link but not actually a page reference. HTTP returned 404.");
+        }
+        catch(Exception e)
+        {
+            //
+        }
+                       
+        return null;        
     }
     
     public String dorequest(WebcrawlerParam param) throws Exception
@@ -709,6 +791,14 @@ class ModuleOne implements Runnable
 
             //
                         
+            //
+            
+            File cssdir = new File(cssfileref);
+            
+            if(!cssdir.exists()) cssdir.mkdirs();
+
+            //
+            
             this.parsesiteimages(param);
             
             if(param.siteImages!=null)
@@ -802,10 +892,64 @@ class ModuleOne implements Runnable
         {
             String match = matcher.group();
             
-            //if(match.startsWith("<img")) continue;
+            //;
             
             anchorlist.add(match);
+        }      
+        
+        //
+        
+        for(int i=0; i<anchorlist.size(); i++)
+        {
+            String anchor = anchorlist.get(i);
+            
+            String href = null;
+            
+            //
+            
+            href = this.parselinkforhrefvalue(anchor);
+            
+            if(href.endsWith(".css")) 
+            {
+                continue;
+            }
+            
+            try
+            {
+                this.dorequest(param);
+                
+                matcher = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(param.siteHTML); //parse <img src=""></img> matches for now..
+
+                //
+
+                while(matcher.find())
+                {
+                    String match = matcher.group();
+
+                    //
+
+                    anchorlist.add(match);
+                }                   
+            }
+            catch(Exception e)
+            {
+                //
+            }                                
         }
+        
+        //
+        
+        for(int i=0; i<anchorlist.size(); i++)
+        {
+            String anchor = anchorlist.get(i);
+            
+            //
+            
+            if(!anchor.endsWith(".css"))
+            {
+                anchorlist.remove(i);
+            }
+        }        
         
         //
         
@@ -813,7 +957,7 @@ class ModuleOne implements Runnable
         
         //
         
-        //System.err.println("Site "+param.baseURL+" had "+param.siteImages.size()+" image tag(s).");
+        //System.err.println("Site "+param.baseURL+" had "+param.siteStyleSheets.size()+" css link(s).");
         
         //
         
