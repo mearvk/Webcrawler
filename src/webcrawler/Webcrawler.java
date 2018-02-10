@@ -882,6 +882,8 @@ class ModuleOne implements Runnable
     {
         ArrayList<String> anchorlist = new ArrayList();
         
+        WebcrawlerParam originalparam = param;
+        
         //
                        
         Matcher matcher = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(param.siteHTML); //parse <img src=""></img> matches for now..
@@ -943,9 +945,11 @@ class ModuleOne implements Runnable
         {
             String anchor = anchorlist.get(i);
             
+            String href = this.parselinkforhrefvalue(anchor);
+            
             //
             
-            if(!anchor.endsWith(".css"))
+            if( !href.endsWith(".css") )
             {
                 anchorlist.remove(i);
             }
