@@ -666,6 +666,9 @@ class ModuleOne implements Runnable
         
         String javascriptfileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/javascript/";
         
+        String cssfileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/css/";
+        
+        
         //
         
         //System.out.println("TRYING TO PERSIST : "+fileref);
@@ -725,6 +728,25 @@ class ModuleOne implements Runnable
             
             //
             
+           this.parsesitecss(param);
+            
+            if(param.siteStyleSheets!=null)
+            {
+                for(int i=0; i<param.siteStyleSheets.size(); i++)
+                {
+                    try
+                    {
+                        this.persistfile(param, this.parselinkforhrefvalue(param.siteStyleSheets.get(i)), cssfileref);
+                    }
+                    catch(Exception e)
+                    {
+                        //
+                    }
+                }
+            }
+
+            //            
+            
             this.parsesitescripts(param);
                        
             if(param.siteScripts!=null)
@@ -765,6 +787,38 @@ class ModuleOne implements Runnable
         
         return "success";
     }
+    
+    public ArrayList<String> parsesitecss(WebcrawlerParam param)
+    {
+        ArrayList<String> anchorlist = new ArrayList();
+        
+        //
+                       
+        Matcher matcher = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(param.siteHTML); //parse <img src=""></img> matches for now..
+        
+        //
+        
+        while(matcher.find())
+        {
+            String match = matcher.group();
+            
+            //if(match.startsWith("<img")) continue;
+            
+            anchorlist.add(match);
+        }
+        
+        //
+        
+        param.siteStyleSheets = anchorlist;
+        
+        //
+        
+        //System.err.println("Site "+param.baseURL+" had "+param.siteImages.size()+" image tag(s).");
+        
+        //
+        
+        return anchorlist;        
+    }     
     
     public ArrayList<String> parsesiteimages(WebcrawlerParam param)
     {
@@ -828,7 +882,33 @@ class ModuleOne implements Runnable
         //
         
         return anchorlist;        
-    }    
+    }   
+    
+    public String parselinkforhrefvalue(String linktag)
+    {
+        Matcher matcher = Pattern.compile("(\\href=\"(.*?)\")").matcher(linktag); //parse <img src=""></img> matches for now..
+        
+        //
+        
+        String match=null;
+        
+        while(matcher.find())
+        {
+            match = matcher.group();
+            
+            //if(match.startsWith("src")) continue;
+            
+            //System.err.println("img src tag has value: "+match);           
+        }
+        
+        //
+        
+        if(match==null) return null;
+        
+        match = match.replace("href=\"", "").replace("\"", "");                
+        
+        return match;       
+    }  
     
     public String parseimageforsrcvalue(String imagetag)
     {
@@ -1091,6 +1171,8 @@ class ModuleTwo implements Runnable
 class WebcrawlerParam
 {
     public String siteHTML;
+    
+    public ArrayList<String> siteStyleSheets;
             
     public ArrayList<String> siteAnchors;
     
