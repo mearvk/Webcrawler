@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -28,13 +29,15 @@ public class Webcrawler implements Runnable
     
     public static Map<String, Object> values = new HashMap();
     
-    public static Map<String, String> visitedlinks = new HashMap();
+    public static Map<String, String> visitedsitelinks = new HashMap();
+    
+    public static Map<String, String> visitedresourcelinks = new HashMap();
     
     //
     
-    public static final Integer localrecursedepth = 8;
+    public static final Integer LOCAL_RECURSE_DEPTH = 8;
     
-    public static final Integer globalrecursedepth = 4;
+    public static final Integer GLOBAL_RECURSE_DEPTH = 4;
     
     //
     
@@ -109,14 +112,20 @@ class ModuleOne implements Runnable
     {        
         ArrayList<String> websites = (ArrayList<String>)((Initializer)Webcrawler.values.get("initializer")).variables.get("websites");
         
-        for(String websiteURL : websites)
+        for(int i=0; i<websites.size(); i++)
         {
             WebcrawlerParam param = new WebcrawlerParam();
             
             //
             
+            //System.out.println("Iteration "+i+" for site "+param.baseURL);
+            
+            //
+            
             try                
-            {                                          
+            {     
+                String websiteURL = websites.get(i);
+                
                 //
                 
                 param.baseURL = websiteURL;
@@ -127,11 +136,13 @@ class ModuleOne implements Runnable
 
                 param.siteAnchors = this.doparseanchors(param);
 
-                param.recurseMessage = this.dosinglesiterecurse(param, 0);            
+                param.recurseMessage = this.dosinglesiterecurse(param, 0); 
+                
+                
             }
             catch(Exception e)
             {
-                //e.printStackTrace();
+                System.out.println(e.getMessage());
             }           
         }
     }
@@ -139,6 +150,10 @@ class ModuleOne implements Runnable
     public ArrayList<String> doparseanchors(WebcrawlerParam param) throws Exception
     {
         ArrayList<String> anchorlist = new ArrayList();
+        
+        //
+        
+        if(param==null || param.siteHTML==null) throw new Exception("Site HTML was not ready for site: "+param.baseURL);
         
         //
                        
@@ -150,6 +165,13 @@ class ModuleOne implements Runnable
         {
             anchorlist.add(matcher.group());
         }
+        
+        //
+        
+        //for(int i=0; i<anchorlist.size(); i++)
+        //{
+        //    System.out.println("Site "+param.baseURL+" link #"+i+" is: "+anchorlist.get(i));
+        //}
         
         //
         
@@ -416,13 +438,19 @@ class ModuleOne implements Runnable
         
         if(connection==null) return null;
             
+        //
+        
+        StringBuilder builder = null;
+        
+        // 
+        
         try
         {
             int responsecode = connection.getResponseCode();
                         
             //
 
-            StringBuilder builder = new StringBuilder();
+            builder = new StringBuilder();
 
             String string=null;
 
@@ -451,7 +479,11 @@ class ModuleOne implements Runnable
 
             //
 
-            return builder.toString();             
+            //return builder.toString();             
+        }
+        catch(ConnectException ce)
+        {
+            System.err.println("Resource \""+param.href+"\" could not be connected to; HTTP call fails.");
         }
         catch(FileNotFoundException fnfe)
         {
@@ -459,14 +491,16 @@ class ModuleOne implements Runnable
         }
         catch(Exception e)
         {
-            //
+            //e.printStackTrace();
         }
         finally
-        {
-            System.gc();
+        {            
+            System.gc();            
         }
                        
-        return null;
+        if(builder==null) throw new Exception("Unable to retrieve HTML for site: "+param.baseURL);
+        
+        return builder.toString();  
     }
     
     public String dosinglesiterecurse(WebcrawlerParam param, Integer depth)
@@ -540,9 +574,11 @@ class ModuleOne implements Runnable
                 
                 //
                 
-                if(Webcrawler.visitedlinks.get(recursiveparam.href)==null || Webcrawler.visitedlinks.get(recursiveparam.href).isEmpty())
+                if(Webcrawler.visitedsitelinks.get(recursiveparam.href)==null || Webcrawler.visitedsitelinks.get(recursiveparam.href).isEmpty())
                 {                
-                    Webcrawler.visitedlinks.put(recursiveparam.href, "visited");
+                    Webcrawler.visitedsitelinks.put(recursiveparam.href, "visited");
+                    
+                    System.out.println("Local recursion has visited "+Webcrawler.visitedsitelinks.size()+" sites.");
                 }                
                 else continue;
                 
@@ -560,7 +596,7 @@ class ModuleOne implements Runnable
 
                 //
                 
-                if(depth>=Webcrawler.localrecursedepth)
+                if(depth>=Webcrawler.LOCAL_RECURSE_DEPTH)
                 {
                     throw new StackDepthException("Local stack depth exceeded; returning.");
                 }
@@ -668,9 +704,12 @@ class ModuleOne implements Runnable
                 
                 //
                 
-                if(Webcrawler.visitedlinks.get(recursiveparam.href)==null || Webcrawler.visitedlinks.get(recursiveparam.href).isEmpty())
+                if(Webcrawler.visitedsitelinks.get(recursiveparam.href)==null || Webcrawler.visitedsitelinks.get(recursiveparam.href).isEmpty())
                 {                
-                    Webcrawler.visitedlinks.put(recursiveparam.href, "visited");
+                    Webcrawler.visitedsitelinks.put(recursiveparam.href, "visited");
+                    
+                    System.out.println("Global recursion has visited "+Webcrawler.visitedsitelinks.size()+" sites.");
+                    
                 }                
                 else continue;
                 
@@ -688,7 +727,7 @@ class ModuleOne implements Runnable
 
                 //
                 
-                if(depth>=Webcrawler.globalrecursedepth)
+                if(depth>=Webcrawler.GLOBAL_RECURSE_DEPTH)
                 {
                     throw new StackDepthException("Global stack depth exceeded; returning.");
                 }
@@ -884,10 +923,6 @@ class ModuleOne implements Runnable
         }
         catch(Exception e)
         {
-            
-            e.printStackTrace();
-            
-            
             return e.getMessage();
         }
         finally
@@ -900,7 +935,7 @@ class ModuleOne implements Runnable
     
     public ArrayList<String> parsesitecss(WebcrawlerParam param)
     {
-        ArrayList<String> anchorlist = new ArrayList();
+        ArrayList<String> linklist = new ArrayList();
         
         String originalsiteHTML = new StringBuffer(param.siteHTML).toString();
         
@@ -916,54 +951,102 @@ class ModuleOne implements Runnable
             
             //;
             
-            anchorlist.add(match);
+            linklist.add(match);
         }      
         
         //
         
-        for(int i=0; i<anchorlist.size(); i++)
+
+        
+        //
+        
+        WebcrawlerParam recursiveparam = null;
+        
+        //
+        
+        for(int i=0; i<linklist.size(); i++)
         {
-            String anchor = anchorlist.get(i);
+            String anchor = linklist.get(i);
             
             String href = null;
             
             //
             
-            href = this.parselinkforhrefvalue(anchor);
+            recursiveparam = new WebcrawlerParam();
             
-            if(href.endsWith(".css")) 
+            recursiveparam.href = this.parselinkforhrefvalue(anchor);            
+            
+            if(recursiveparam.href.startsWith("/") || recursiveparam.href.startsWith("./"))
             {
-                continue;
+                recursiveparam.href = param.baseURL + recursiveparam.href;
             }
             
-            try
+            if(recursiveparam.href.endsWith("/"))
             {
-                this.dorequest(param);
+                recursiveparam.href = recursiveparam.href.substring(0,recursiveparam.href.length()-1);
+            }
+            
+            if(param.baseURL.endsWith("/")) 
+            {
+                param.baseURL = param.baseURL.substring(0,param.baseURL.length()-1);
+            }
+            
+            if( !(recursiveparam.href.trim().equals(param.baseURL.trim()) || recursiveparam.href.replace("www.","").trim().equals(param.baseURL.replace("www.","").trim())) && (Webcrawler.visitedresourcelinks.get(recursiveparam.href)==null || Webcrawler.visitedresourcelinks.size()==0) )
+            {
+                System.out.println("ModuleOne:parsesitecss has will newly check for <link> tags at the following URL: "+recursiveparam.href);
                 
-                matcher = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(param.siteHTML); //parse <img src=""></img> matches for now..
-
-                //
-
-                while(matcher.find())
+                Webcrawler.visitedresourcelinks.put(recursiveparam.href, "visited");
+            }
+            else 
+            {
+                System.out.println("ModuleOne:parsesitecss has already checked for <link> tags the following URL: "+recursiveparam.href);
+                
+                continue;
+            } // prevent infinite looping
+            
+            if(recursiveparam.href!=null && recursiveparam.href.trim().endsWith(".css")) 
+            {
+                continue; //not a nested <link< element; cont
+            }
+            else
+            {            
+                try
                 {
-                    String match = matcher.group();
+                    this.dosimplerequest(recursiveparam);
 
                     //
 
-                    anchorlist.add(match);
-                }                   
+                    if(recursiveparam.siteHTML==null) continue;
+
+                    //
+
+                    matcher = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(recursiveparam.siteHTML); //parse <img src=""></img> matches for now..
+
+                    while(matcher.find())
+                    {
+                        String match = matcher.group();
+
+                        //
+
+                        linklist.add(match);
+                    }                   
+                }
+                catch(Exception e)
+                {
+                    System.err.println(e.getMessage());
+                }   
             }
-            catch(Exception e)
-            {
-                //
-            }                                
         }
         
         //
         
-        for(int i=0; i<anchorlist.size(); i++)
+        System.out.println("Site "+recursiveparam.href+" had "+linklist.size()+" links.");
+        
+        //
+        
+        for(int i=0; i<linklist.size(); i++)
         {
-            String anchor = anchorlist.get(i);
+            String anchor = linklist.get(i);
             
             String href = this.parselinkforhrefvalue(anchor);
             
@@ -971,13 +1054,33 @@ class ModuleOne implements Runnable
             
             if( !href.endsWith(".css") )
             {
-                anchorlist.remove(i);
+                linklist.remove(i);
             }
         }        
         
         //
         
-        param.siteStyleSheets = anchorlist;
+        if(linklist.size()==0)
+        {
+            System.out.println("-- -- -- -- --");
+
+            System.out.println("Site "+param.baseURL+" had no resource links for CSS related content.");
+
+            System.out.println("-- -- -- -- --");            
+        }
+        
+        for(int i=0; i<linklist.size(); i++)
+        {
+            System.out.println("-- -- -- -- --");
+
+            System.out.println("Site "+param.baseURL+" resource link #"+i+" is: "+linklist.get(i));
+
+            System.out.println("-- -- -- -- --");
+        }          
+        
+        //
+        
+        param.siteStyleSheets = linklist;
         
         param.siteHTML = originalsiteHTML;
         
@@ -987,7 +1090,7 @@ class ModuleOne implements Runnable
         
         //
         
-        return anchorlist;        
+        return linklist;        
     }     
     
     public ArrayList<String> parsesiteimages(WebcrawlerParam param)
@@ -1056,7 +1159,7 @@ class ModuleOne implements Runnable
     
     public String parselinkforhrefvalue(String linktag)
     {
-        Matcher matcher = Pattern.compile("(\\href=\"(.*?)\")").matcher(linktag); //parse <img src=""></img> matches for now..
+        Matcher matcher = Pattern.compile("(href=\"(.*?)\")").matcher(linktag); //parse <img src=""></img> matches for now..
         
         //
         
