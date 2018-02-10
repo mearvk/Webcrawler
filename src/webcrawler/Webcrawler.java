@@ -437,7 +437,7 @@ class ModuleOne implements Runnable
 
             //
 
-            System.out.println("ModuleOne:dopersist working with "+param.href);
+            System.out.println("ModuleOne:dorequest working with "+param.href);
 
             //
 
@@ -807,8 +807,6 @@ class ModuleOne implements Runnable
             
             if(!javascriptdir.exists()) javascriptdir.mkdirs();
 
-            //
-                        
             //
             
             File cssdir = new File(cssfileref);
