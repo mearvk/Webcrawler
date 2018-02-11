@@ -36,7 +36,7 @@ public class Webcrawler implements Runnable
     
     //
     
-    public static final Integer LOCAL_RECURSE_DEPTH = 8;
+    public static final Integer LOCAL_RECURSE_DEPTH = 4;
     
     public static final Integer GLOBAL_RECURSE_DEPTH = 4;
     
@@ -112,14 +112,10 @@ class ModuleOne implements Runnable
     public void run()
     {        
         ArrayList<String> websites = (ArrayList<String>)((Initializer)Webcrawler.values.get("initializer")).variables.get("websites");
-        
+                      
         for(int i=0; i<websites.size(); i++)
         {
             WebcrawlerParam param = new WebcrawlerParam();
-            
-            //
-            
-            //System.out.println("Iteration "+i+" for site "+param.baseURL);
             
             //
             
@@ -139,12 +135,12 @@ class ModuleOne implements Runnable
 
                 param.recurseMessage = this.dosinglesiterecurse(param, 0); 
                 
-                
+                //                              
             }
             catch(Exception e)
             {
                 System.out.println(e.getMessage());
-            }           
+            }    
         }
     }
     
@@ -169,20 +165,11 @@ class ModuleOne implements Runnable
         
         //
         
-        //for(int i=0; i<anchorlist.size(); i++)
-        //{
-        //    System.out.println("Site "+param.baseURL+" link #"+i+" is: "+anchorlist.get(i));
-        //}
-        
-        //
-        
         return anchorlist;
     }
         
     public String doparsehref(WebcrawlerParam param) 
-    {
-        //<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1
-     
+    {     
         String href = null;
         
         //
@@ -194,9 +181,7 @@ class ModuleOne implements Runnable
         while(matcher.find())
         {
             String match = matcher.group();
-            
-            //if(match.startsWith("<a")) continue; //glitch in regex fix
-            
+                       
             href = match;
         }
             
@@ -223,29 +208,25 @@ class ModuleOne implements Runnable
         {
             retval = param.baseURL+System.getProperty("file.separator")+param.href;
             
-            /*retval = retval.replace(":", ".colon.");*/ retval = retval.replace("https", "");           
+            retval = retval.replace("https", "");           
 
-            /*retval = retval.replace(":", ".colon.");*/ retval = retval.replace(":", "");
+            retval = retval.replace(":", "");
 
-            /*retval = retval.replace("//", ".fsfs.");*/ retval = retval.replace("//", "");
+            retval = retval.replace("//", "");
 
-            /*retval = retval.replace("..", ".");*/ retval = retval.replace("..", "");
-
-            //System.out.println("UNQUALIFIED URL LOOKS LIKE "+retval);            
+            retval = retval.replace("..", "");
         }
         else //full path in HREF link
         {                  
             retval = param.href;
             
-            /*retval = retval.replace(":", ".colon.");*/ retval = retval.replace("https", "");                       
+            retval = retval.replace("https", "");                       
 
-            /*retval = retval.replace(":", ".colon.");*/ retval = retval.replace(":", "");
+            retval = retval.replace(":", "");
 
-            /*retval = retval.replace("//", ".fsfs.");*/ retval = retval.replace("//", "");
+            retval = retval.replace("//", "");
 
-            /*retval = retval.replace("..", ".");*/ retval = retval.replace("..", "");
-
-            //System.out.println("UNQUALIFIED URL LOOKS LIKE "+retval);
+            retval = retval.replace("..", "");
         }
         
         return retval;
@@ -268,23 +249,9 @@ class ModuleOne implements Runnable
         while(matcher.find())
         {
             String match = matcher.group();
-            
-            //if(match.startsWith("<img")) continue;
-            
+                        
             href = match;
-        }
-        
-        //
-        
-        //param.siteImages = href;
-        
-        //
-        
-        //System.err.println("Anchor  "+inputURL+" had href value: "+href);
-        
-        //
-        
-        //return href;        
+        }              
         
         //
         
@@ -327,13 +294,8 @@ class ModuleOne implements Runnable
         HttpURLConnection connection=null;
         
         //
-
-        //System.out.println("ModuleOne::dorequest sees for href the following value: "+param.href);
-        
-        //
         
         url = new URL(param.href);            
-
         
         //
         
@@ -352,14 +314,16 @@ class ModuleOne implements Runnable
         //
         
         if(connection==null) return null;
+        
+        //
             
+        StringBuilder builder = new StringBuilder();
+        
         try
         {
             int responsecode = connection.getResponseCode();
                         
-            //
-
-            StringBuilder builder = new StringBuilder();
+            //           
 
             String string=null;
 
@@ -371,28 +335,14 @@ class ModuleOne implements Runnable
             {
                 builder.append(string);
             }
-
-            //
-
-            //System.out.println("ModuleOne:dopersist working with "+param.href);
-
+            
             //
 
             param.siteHTML=builder.toString();
-
-            //param.unqualifiedURL = this.dodeterminefullpathforpersist(param);                
-
-            //
-
-            //this.dopersist(param);        
-
-            //
-
-            return builder.toString();             
         }
         catch(FileNotFoundException fnfe)
         {
-            System.err.println("Resource "+param.href+" exists as a link but not actually a page reference. HTTP returned 404.");
+            //404 returned
         }
         catch(Exception e)
         {
@@ -402,8 +352,10 @@ class ModuleOne implements Runnable
         {
             System.gc();
         }
-                       
-        return null;        
+
+        if(builder==null) return null; 
+        
+        return builder.toString();       
     }
     
     public String dorequest(WebcrawlerParam param) throws Exception
@@ -411,10 +363,6 @@ class ModuleOne implements Runnable
         URL url=null;
         
         HttpURLConnection connection=null;
-        
-        //
-
-        //System.out.println("ModuleOne::dorequest sees for href the following value: "+param.href);
         
         //
         
@@ -441,7 +389,7 @@ class ModuleOne implements Runnable
             
         //
         
-        StringBuilder builder = null;
+        StringBuilder builder = new StringBuilder();;
         
         // 
         
@@ -450,9 +398,7 @@ class ModuleOne implements Runnable
             int responsecode = connection.getResponseCode();
                         
             //
-
-            builder = new StringBuilder();
-
+            
             String string=null;
 
             //
@@ -466,17 +412,13 @@ class ModuleOne implements Runnable
 
             //
 
-            System.out.println("ModuleOne:dorequest working with "+param.href);
-
-            //
-
             param.siteHTML=builder.toString();
 
             param.unqualifiedURL = this.dodeterminefullpathforpersist(param);                
 
             //
 
-            this.dopersist(param);        
+            this.dopersistwithpersistence(param);        
 
             //
 
@@ -492,7 +434,7 @@ class ModuleOne implements Runnable
         }
         catch(Exception e)
         {
-            //e.printStackTrace();
+            //
         }
         finally
         {            
@@ -516,18 +458,9 @@ class ModuleOne implements Runnable
             
         if(anchors==null || anchors.isEmpty())
         {
-            System.out.println("Wouldn't ya believe it?  Site "+param.baseURL+" reports no links of any kind.");
+            System.out.println("Site "+param.baseURL+" reports no <a> links of any kind.");
             
             return null;
-        }
-        else
-        {
-            for(int i=0; i<anchors.size(); i++)
-            {
-                String href = this.parseanchorforhrefvalue(anchors.get(i));
-                
-                System.out.println("Anchor #"+i+" for site "+param.baseURL+" is : "+href);
-            }
         }
                
         //        
@@ -568,13 +501,6 @@ class ModuleOne implements Runnable
                 
                 //
                 
-                //System.out.println("ModuleOne:dorecurse has href value: "+recursiveparam.href);
-                
-                //System.out.println("ModuleOne:dorecurse has baseURL value: "+recursiveparam.baseURL);
-
-                
-                //
-                
                 if(Webcrawler.visitedsitelinks.get(recursiveparam.href)==null || Webcrawler.visitedsitelinks.get(recursiveparam.href).isEmpty())
                 {                
                     Webcrawler.visitedsitelinks.put(recursiveparam.href, "visited");
@@ -610,7 +536,7 @@ class ModuleOne implements Runnable
             }
             catch(NullPointerException npe)
             {
-                // check there will be an error if 404 returned by dorequest
+                //
             }
             catch(StackDepthException vdsde)
             {
@@ -626,9 +552,7 @@ class ModuleOne implements Runnable
             }
             catch(Exception e)
             {
-                e.printStackTrace();
-                
-                //System.err.println("Error with linktag tag: "+linktag);
+                e.printStackTrace();                
             }
         }
 
@@ -659,9 +583,7 @@ class ModuleOne implements Runnable
         {
             for(int i=0; i<anchors.size(); i++)
             {
-                String href = this.parseanchorforhrefvalue(anchors.get(i));
-                
-                //System.out.println("Anchor #"+i+" for site "+param.baseURL+" is : "+href);
+                String href = this.parseanchorforhrefvalue(anchors.get(i));                
             }
         }
                
@@ -672,10 +594,7 @@ class ModuleOne implements Runnable
             WebcrawlerParam recursiveparam = new WebcrawlerParam();
             
             String anchor = anchors.get(i);
-                    
-            //System.out.println("ANCHOR: "+linktag);
-
-            
+                              
             if(anchor==null || anchor.isEmpty()) continue;
                 
             try
@@ -695,14 +614,7 @@ class ModuleOne implements Runnable
                 if(recursiveparam.href==null) continue;
                 
                 if(!recursiveparam.href.contains("http")) continue;                                        
-                
-                //
-                
-                //System.out.println("ModuleOne:dorecurse has href value: "+recursiveparam.href);
-                
-                //System.out.println("ModuleOne:dorecurse has baseURL value: "+recursiveparam.baseURL);
-
-                
+                              
                 //
                 
                 if(Webcrawler.visitedsitelinks.get(recursiveparam.href)==null || Webcrawler.visitedsitelinks.get(recursiveparam.href).isEmpty())
@@ -758,8 +670,6 @@ class ModuleOne implements Runnable
             catch(Exception e)
             {
                 e.printStackTrace();
-                
-                //System.err.println("Error with linktag tag: "+linktag);
             }
         }
 
@@ -772,7 +682,7 @@ class ModuleOne implements Runnable
         return "success";
     }
     
-    public String dopersist(WebcrawlerParam param) throws Exception
+    public String dopersistwithpersistence(WebcrawlerParam param) throws Exception
     {
         Date date = new Date();
         
@@ -810,9 +720,7 @@ class ModuleOne implements Runnable
         
         
         //
-        
-        //System.out.println("TRYING TO PERSIST : "+fileref);
-        
+               
         System.out.println("-- -- -- -- --");
         
         System.out.println("ModuleOne:dopersist has href value: "+param.href);
@@ -833,7 +741,7 @@ class ModuleOne implements Runnable
             
             File file = new File(fileref);
             
-            if(file.exists()) file.delete(); //write duplicate workaround (file.txt becomes file_0001.text etc)
+            if(file.exists()) file.delete(); //no dupes 
             
             //
             
@@ -905,7 +813,7 @@ class ModuleOne implements Runnable
                     }
                     catch(Exception e)
                     {
-//                      //
+                        //
                     }
                 }        
             }
@@ -942,7 +850,7 @@ class ModuleOne implements Runnable
         
         //
                        
-        Matcher matcher = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(param.siteHTML); //parse <img src=""></img> matches for now..
+        Matcher matcher = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(param.siteHTML); 
         
         //
         
@@ -954,10 +862,6 @@ class ModuleOne implements Runnable
             
             linklist.add(match);
         }      
-        
-        //
-        
-
         
         //
         
@@ -996,15 +900,13 @@ class ModuleOne implements Runnable
             
             if( !(recursiveparam.href.trim().equals(param.baseURL.trim()) || recursiveparam.href.replace("www.","").trim().equals(param.baseURL.replace("www.","").trim())) && (Webcrawler.visitedresourcelinks.get(recursiveparam.href)==null || Webcrawler.visitedresourcelinks.size()==0) )
             {
-                System.out.println("ModuleOne:parsesitecss has will newly check for <link> tags at the following URL: "+recursiveparam.href);
+                //
                 
                 Webcrawler.visitedresourcelinks.put(recursiveparam.href, "visited");
             }
             else 
             {
-                // prevent infinite looping
-                
-                System.out.println("ModuleOne:parsesitecss has already checked for <link> tags the following URL: "+recursiveparam.href);
+                //no infinite looping
                 
                 continue;
             } 
@@ -1013,9 +915,9 @@ class ModuleOne implements Runnable
             
             if(recursiveparam.href!=null && recursiveparam.href.trim().endsWith(".css")) 
             {
-                continue; //not a nested <link< element; cont
+                continue; //
             }
-            else
+            else //nested <link> references we care for here
             {            
                 try
                 {
@@ -1047,12 +949,12 @@ class ModuleOne implements Runnable
         
         //
         
-        System.out.println("Site "+recursiveparam.href+" had "+linklist.size()+" links.");
-        
-        //
-        
         linklist = new ArrayList(new HashSet(linklist));
 
+        //
+        
+        System.out.println("Site "+param.href+", at two levels of recursion, had "+linklist.size()+" link tags.");
+         
         //
         
         for(int i=0; i<linklist.size(); i++)
@@ -1065,45 +967,17 @@ class ModuleOne implements Runnable
             
             if( !href_quickref.trim().endsWith(".css") )
             {
-                System.out.println("Removed "+linklist.remove(i)+" as non CSS token.");
+                linklist.remove(i);
             }
         }        
-                       
-        //
-        
-        //linklist = new ArrayList(new HashSet(linklist));
-        
-        //        
-        
-        if(linklist.size()==0)
-        {
-            System.out.println("-- -- -- -- --");
-
-            System.out.println("Site "+param.baseURL+" had no resource links for CSS related content.");
-
-            System.out.println("-- -- -- -- --");            
-        }
-        
-        System.out.println("-- -- -- -- --");
-        
-        for(int i=0; i<linklist.size(); i++)
-        {            
-            System.out.println("Site "+param.baseURL+" resource link #"+i+" is: "+linklist.get(i));
-        }          
-        
-        System.out.println("-- -- -- -- --");
-        
+                               
         //
         
         param.siteStyleSheets = linklist;
         
         param.siteHTML = originalsiteHTML;
         
-        //
-        
-        //System.err.println("Site "+param.baseURL+" had "+param.siteStyleSheets.size()+" css link(s).");
-        
-        //
+        //        
         
         return linklist;        
     }     
@@ -1114,15 +988,13 @@ class ModuleOne implements Runnable
         
         //
                        
-        Matcher matcher = Pattern.compile("<img\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.siteHTML); //parse <img src=""></img> matches for now..
+        Matcher matcher = Pattern.compile("<img\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.siteHTML); 
         
         //
         
         while(matcher.find())
         {
-            String match = matcher.group();
-            
-            //if(match.startsWith("<img")) continue;
+            String match = matcher.group();           
             
             anchorlist.add(match);
         }
@@ -1130,10 +1002,6 @@ class ModuleOne implements Runnable
         //
         
         param.siteImages = anchorlist;
-        
-        //
-        
-        //System.err.println("Site "+param.baseURL+" had "+param.siteImages.size()+" image tag(s).");
         
         //
         
@@ -1146,16 +1014,14 @@ class ModuleOne implements Runnable
         
         //
                        
-        Matcher matcher = Pattern.compile("<script\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.siteHTML); //parse <script src=""></script> matches for now..
+        Matcher matcher = Pattern.compile("<script\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.siteHTML); 
         
         //
         
         while(matcher.find())
         {
             String match = matcher.group();
-            
-            //if(match.startsWith("<img")) continue;
-            
+                       
             anchorlist.add(match);
         }
         
@@ -1165,16 +1031,12 @@ class ModuleOne implements Runnable
         
         //
         
-        //System.err.println("Site "+param.baseURL+" had "+param.siteScripts.size()+" scripts tag(s).");
-        
-        //
-        
         return anchorlist;        
     }   
     
     public String parselinkforhrefvalue(String linktag)
     {
-        Matcher matcher = Pattern.compile("(href=\"(.*?)\")").matcher(linktag); //parse <img src=""></img> matches for now..
+        Matcher matcher = Pattern.compile("(href=\"(.*?)\")").matcher(linktag); //parse <link src=""></link> matches for now..
         
         //
         
@@ -1182,11 +1044,7 @@ class ModuleOne implements Runnable
         
         while(matcher.find())
         {
-            match = matcher.group();
-            
-            //if(match.startsWith("src")) continue;
-            
-            //System.err.println("img src tag has value: "+match);           
+            match = matcher.group();        
         }
         
         //
@@ -1208,11 +1066,7 @@ class ModuleOne implements Runnable
         
         while(matcher.find())
         {
-            match = matcher.group();
-            
-            //if(match.startsWith("src")) continue;
-            
-            //System.err.println("img src tag has value: "+match);           
+            match = matcher.group();     
         }
         
         //
@@ -1234,11 +1088,7 @@ class ModuleOne implements Runnable
         
         while(matcher.find())
         {
-            match = matcher.group();
-            
-            //if(match.startsWith("src")) continue;
-            
-            //System.err.println("img src tag has value: "+match);           
+            match = matcher.group();          
         }
         
         //
@@ -1260,11 +1110,7 @@ class ModuleOne implements Runnable
         
         while(matcher.find())
         {
-            match = matcher.group();
-            
-            //if(match.startsWith("src")) continue;
-            
-            //System.err.println("script src tag has value: "+match);           
+            match = matcher.group();       
         }
         
         //
@@ -1310,10 +1156,6 @@ class ModuleOne implements Runnable
         //
         
         String filename = inputURL.substring(inputURL.lastIndexOf("/")+1);
-        
-        //System.out.println("FULL URL: "+inputURL);
-        
-        //System.out.println("FILENAME TO PERSIST: "+filename);
        
         //
        
@@ -1352,8 +1194,7 @@ class ModuleOne implements Runnable
         }
         catch(Exception e)
         {
-            //
-            
+            //            
         }        	
         
         //
@@ -1388,7 +1229,7 @@ class ModuleOne implements Runnable
         }
         else if(inputURL.startsWith("http"))
         {
-            //do nothing should be absolute URL
+            //
         }
         else if(!inputURL.isEmpty() && inputURL.charAt(0)!='/')
         {
@@ -1399,10 +1240,6 @@ class ModuleOne implements Runnable
         //
         
         String filename = inputURL.substring(inputURL.lastIndexOf("/")+1);
-        
-        //System.out.println("FULL URL: "+inputURL);
-        
-        //System.out.println("FILENAME TO PERSIST: "+filename);
 
         //
         
@@ -1448,19 +1285,29 @@ class ModuleOne implements Runnable
     }     
 }
 
+/**
+ * Rewrite links for local, offline browsing.
+ * 
+ * @author Max Rupplin
+ */
 class ModuleTwo implements Runnable
 {    
     public void run()
     {
-        //rewrite links to face inward for local reference
+        //todo
     }
 }
 
+/**
+ * Compress files, delete redundant files
+ * 
+ * @author Max Rupplin
+ */
 class ModuleThree implements Runnable
 {    
     public void run()
     {
-        //compress files, delete redundant files
+        //todo
     }
 }
 
