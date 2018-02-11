@@ -575,7 +575,7 @@ class ModuleOne implements Runnable
             
         if(anchors==null || anchors.isEmpty())
         {
-            System.out.println("Wouldn't ya believe it?  Site "+param.baseURL+" had no links of any kind!");
+            System.out.println("Site "+param.baseURL+" had no links of any kind!");
             
             return null;
         }
