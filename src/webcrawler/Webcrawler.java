@@ -15,6 +15,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -319,7 +320,7 @@ class ModuleOne implements Runnable
         return inputURL;
     }
     
-    public String dosimplerequest(WebcrawlerParam param) throws Exception
+    public String dorequestwithnopersistence(WebcrawlerParam param) throws Exception
     {
         URL url=null;
         
@@ -344,7 +345,7 @@ class ModuleOne implements Runnable
             
         connection.setRequestMethod("GET");
             
-        connection.setReadTimeout(10000);
+        connection.setReadTimeout(2000);
             
         connection.setRequestProperty("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36");
                     
@@ -627,7 +628,7 @@ class ModuleOne implements Runnable
             {
                 e.printStackTrace();
                 
-                //System.err.println("Error with anchor tag: "+anchor);
+                //System.err.println("Error with linktag tag: "+linktag);
             }
         }
 
@@ -672,7 +673,7 @@ class ModuleOne implements Runnable
             
             String anchor = anchors.get(i);
                     
-            //System.out.println("ANCHOR: "+anchor);
+            //System.out.println("ANCHOR: "+linktag);
 
             
             if(anchor==null || anchor.isEmpty()) continue;
@@ -758,7 +759,7 @@ class ModuleOne implements Runnable
             {
                 e.printStackTrace();
                 
-                //System.err.println("Error with anchor tag: "+anchor);
+                //System.err.println("Error with linktag tag: "+linktag);
             }
         }
 
@@ -966,7 +967,7 @@ class ModuleOne implements Runnable
         
         for(int i=0; i<linklist.size(); i++)
         {
-            String anchor = linklist.get(i);
+            String linktag = linklist.get(i);
             
             String href = null;
             
@@ -974,7 +975,9 @@ class ModuleOne implements Runnable
             
             recursiveparam = new WebcrawlerParam();
             
-            recursiveparam.href = this.parselinkforhrefvalue(anchor);            
+            recursiveparam.href = this.parselinkforhrefvalue(linktag);            
+            
+            //
             
             if(recursiveparam.href.startsWith("/") || recursiveparam.href.startsWith("./"))
             {
@@ -999,10 +1002,14 @@ class ModuleOne implements Runnable
             }
             else 
             {
+                // prevent infinite looping
+                
                 System.out.println("ModuleOne:parsesitecss has already checked for <link> tags the following URL: "+recursiveparam.href);
                 
                 continue;
-            } // prevent infinite looping
+            } 
+            
+            //
             
             if(recursiveparam.href!=null && recursiveparam.href.trim().endsWith(".css")) 
             {
@@ -1012,7 +1019,7 @@ class ModuleOne implements Runnable
             {            
                 try
                 {
-                    this.dosimplerequest(recursiveparam);
+                    this.dorequestwithnopersistence(recursiveparam);
 
                     //
 
@@ -1044,21 +1051,29 @@ class ModuleOne implements Runnable
         
         //
         
+        linklist = new ArrayList(new HashSet(linklist));
+
+        //
+        
         for(int i=0; i<linklist.size(); i++)
         {
-            String anchor = linklist.get(i);
+            String linktag = linklist.get(i);
             
-            String href = this.parselinkforhrefvalue(anchor);
+            String href_quickref = this.parselinkforhrefvalue(linktag);
             
             //
             
-            if( !href.endsWith(".css") )
+            if( !href_quickref.trim().endsWith(".css") )
             {
-                linklist.remove(i);
+                System.out.println("Removed "+linklist.remove(i)+" as non CSS token.");
             }
         }        
-        
+                       
         //
+        
+        //linklist = new ArrayList(new HashSet(linklist));
+        
+        //        
         
         if(linklist.size()==0)
         {
@@ -1069,14 +1084,14 @@ class ModuleOne implements Runnable
             System.out.println("-- -- -- -- --");            
         }
         
+        System.out.println("-- -- -- -- --");
+        
         for(int i=0; i<linklist.size(); i++)
-        {
-            System.out.println("-- -- -- -- --");
-
+        {            
             System.out.println("Site "+param.baseURL+" resource link #"+i+" is: "+linklist.get(i));
-
-            System.out.println("-- -- -- -- --");
         }          
+        
+        System.out.println("-- -- -- -- --");
         
         //
         
