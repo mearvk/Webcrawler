@@ -19,7 +19,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.regex.Matcher;
@@ -47,7 +46,7 @@ public class Webcrawler implements Runnable
     
     //
     
-    public static final String BASEDIR = "/home/oem/Desktop/Webpages/storage";
+    public static final String BASEDIR = "C:\\Users\\mearv\\OneDrive\\Desktop\\Output";
             
     //
     
@@ -122,13 +121,20 @@ class ModuleOne implements Runnable
     //pull the website recursively 
     
     WorkerThread wthread_001 = new WorkerThread(this);
+
     WorkerThread wthread_002 = new WorkerThread(this);
+
     WorkerThread wthread_003 = new WorkerThread(this);
+
     WorkerThread wthread_004 = new WorkerThread(this);
+
+    //
    
     public void run()
     {        
         ArrayList<String> websites = (ArrayList<String>)((Initializer)Webcrawler.values.get("initializer")).variables.get("websites");
+
+        //
                       
         for(int i=0; i<websites.size(); i++)
         {
@@ -143,7 +149,7 @@ class ModuleOne implements Runnable
             //
             if(param==null /*|| !param.baseURL.endsWith(".org") || !param.baseURL.endsWith(".com") || !param.baseURL.endsWith(".edu")*/)
             {
-                System.out.println(param.baseURL+"Unsupported or such.");
+                System.out.println(param.baseURL+" is unsupported or such.");
             }
             else if(i%4==0)
             {
@@ -168,9 +174,12 @@ class ModuleOne implements Runnable
         
         //
         
-        wthread_001.start();        
-        wthread_002.start();        
-        wthread_003.start();        
+        wthread_001.start();
+
+        wthread_002.start();
+
+        wthread_003.start();
+
         wthread_004.start();
     }
     
@@ -196,28 +205,6 @@ class ModuleOne implements Runnable
         //
         
         return anchorlist;
-    }
-        
-    public String doparsehref(WebcrawlerParam param) 
-    {     
-        String href = null;
-        
-        //
-                       
-        Matcher matcher = Pattern.compile("<a\\s+(?:[^>]*?\\s+)?href=\"([^\"]*)\"").matcher(param.siteHTML); //parse <a href=""></a> matches for now..
-        
-        //
-        
-        while(matcher.find())
-        {
-            String match = matcher.group();
-                       
-            href = match;
-        }
-            
-        //
-            
-        return href;
     }
     
     public String dodeterminefullpathforpersist(WebcrawlerParam param) throws Exception
@@ -500,7 +487,7 @@ class ModuleOne implements Runnable
 
             //
 
-            this.dopersistwithpersistence(param);        
+            this.dopersist(param);
 
             //
 
@@ -527,7 +514,14 @@ class ModuleOne implements Runnable
         
         return builder.toString();  
     }
-    
+
+    /**
+     * Limit recursion to single HTTP based site, e.g. abc.google.com & google.com & www.google.com based on <a></a> tags
+     *
+     * @param param
+     * @param depth
+     * @return
+     */
     public String dosinglesiterecurse(WebcrawlerParam param, Integer depth)
     {
         //
@@ -697,7 +691,15 @@ class ModuleOne implements Runnable
             
         return "success";                
     }
-    
+
+    /**
+     * Do not limit recursion to single HTTP based site, e.g. abc.google.com & google.com & www.google.com based on <a></a> tags but rather accept and recurse all.
+     *
+     * @param param
+     * @param depth
+     * @return
+     * @throws Exception
+     */
     public String dorecurse(WebcrawlerParam param, Integer depth) throws Exception
     {       
         ArrayList<String> anchors = param.siteAnchors;
@@ -779,7 +781,9 @@ class ModuleOne implements Runnable
                 {
                     throw new StackDepthException("Global stack depth exceeded; returning.");
                 }
-                               
+
+                //
+
                 recursiveparam.siteHTML = this.dorequest(recursiveparam);           
                 
                 recursiveparam.siteAnchors = this.doparseanchors(recursiveparam);
@@ -817,7 +821,7 @@ class ModuleOne implements Runnable
         return "success";
     }
     
-    public String dopersistwithpersistence(WebcrawlerParam param) throws Exception
+    public String dopersist(WebcrawlerParam param) throws Exception
     {
         Date date = new Date();
         
@@ -849,7 +853,7 @@ class ModuleOne implements Runnable
         
         String imagefileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/images/";
         
-        String javascriptfileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/javascript/";
+        String scriptfileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/javascript/";
         
         String cssfileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/css/";
         
@@ -886,9 +890,9 @@ class ModuleOne implements Runnable
                        
             //
             
-            File javascriptdir = new File(javascriptfileref);
+            File scriptdir = new File(scriptfileref);
             
-            if(!javascriptdir.exists()) javascriptdir.mkdirs();
+            if(!scriptdir.exists()) scriptdir.mkdirs();
 
             //
             
@@ -944,7 +948,7 @@ class ModuleOne implements Runnable
                 {
                     try
                     {
-                        this.persistfile(param, this.parsescriptforsrcvalue(param.siteScripts.get(i)), javascriptfileref);
+                        this.persistfile(param, this.parsescriptforsrcvalue(param.siteScripts.get(i)), scriptfileref);
                     }
                     catch(Exception e)
                     {
@@ -1098,13 +1102,21 @@ class ModuleOne implements Runnable
             
             String href_quickref = this.parselinkforhrefvalue(linktag);
             
-            String rel_quickref = this.parselinkforrelvalue(linktag);
+            String rel_quickref = this.parselinkforrelattr(linktag);
             
-            String type_quickref = this.parselinkfortypevalue(linktag);
-            
+            String type_quickref = this.parselinkfortypeattr(linktag);
+
+            //
+
+            if(href_quickref==null) href_quickref = "";
+
+            if(rel_quickref==null) rel_quickref = "";
+
+            if(type_quickref==null) type_quickref = "";
+
             //
             
-            if( !href_quickref.trim().endsWith(".css") )
+            if( ! (href_quickref.trim().endsWith(".css") || rel_quickref.contains("stylesheet") || type_quickref.contains("text/css")) )
             {
                 linklist.remove(i);
             }
@@ -1123,7 +1135,7 @@ class ModuleOne implements Runnable
     
     public ArrayList<String> parsesiteimages(WebcrawlerParam param)
     {
-        ArrayList<String> anchorlist = new ArrayList();
+        ArrayList<String> imagelist = new ArrayList();
         
         //
                        
@@ -1133,35 +1145,35 @@ class ModuleOne implements Runnable
         
         while(matcher.find())
         {
-            String match = matcher.group();           
-            
-            anchorlist.add(match);
+            String match = matcher.group();
+
+            imagelist.add(match);
         }
         
         //
         
-        param.siteImages = anchorlist;
+        param.siteImages = imagelist;
         
         //
         
-        return anchorlist;        
+        return imagelist;
     } 
     
     public ArrayList<String> parsesitescripts(WebcrawlerParam param)
     {
-        ArrayList<String> anchorlist = new ArrayList();
+        ArrayList<String> scriptlist = new ArrayList();
         
         //
                        
-        Matcher matcher_script_tags = Pattern.compile("<script\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.siteHTML); 
+        Matcher matcher = Pattern.compile("<script\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.siteHTML);
         
         //
         
-        while(matcher_script_tags.find())
+        while(matcher.find())
         {
-            String match = matcher_script_tags.group();
+            String match = matcher.group();
                        
-            anchorlist.add(match);
+            scriptlist.add(match);
         }
         
         //
@@ -1175,20 +1187,26 @@ class ModuleOne implements Runnable
             String match = matcher_link_tags.group();
                        
             String href = this.parselinkforhrefvalue(match);
+
+            //
+
+            if(href==null) href = "";
+
+            //
             
             if(href.trim().endsWith(".js") || href.trim().endsWith(".js\"") || href.trim().endsWith(".vbs") || href.trim().endsWith(".vbs\""))
             {            
-                anchorlist.add(match);
+                scriptlist.add(match);
             }
         }        
         
         //
         
-        param.siteScripts = anchorlist;
+        param.siteScripts = scriptlist;
         
         //
         
-        return anchorlist;        
+        return scriptlist;
     }   
     
     public String parselinkforhrefvalue(String linktag)
@@ -1235,7 +1253,7 @@ class ModuleOne implements Runnable
         return match;       
     }    
     
-    public String parselinkforrelvalue(String imagetag)
+    public String parselinkforrelattr(String imagetag)
     {
         Matcher matcher = Pattern.compile("(\\brel=\"(.*?)\")").matcher(imagetag); //parse <img src=""></img> matches for now..
         
@@ -1257,7 +1275,7 @@ class ModuleOne implements Runnable
         return match;       
     }  
     
-    public String parselinkfortypevalue(String imagetag)
+    public String parselinkfortypeattr(String imagetag)
     {
         Matcher matcher = Pattern.compile("(\\btype=\"(.*?)\")").matcher(imagetag); //parse <img src=""></img> matches for now..
         
