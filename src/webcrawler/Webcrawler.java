@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -40,13 +41,13 @@ public class Webcrawler implements Runnable
     
     //
     
-    public static final Integer LOCAL_RECURSE_DEPTH = 4;
+    public static final Integer LOCAL_RECURSE_DEPTH = 2;
     
     public static final Integer GLOBAL_RECURSE_DEPTH = 4;
     
     //
     
-    public static final String BASEDIR = "C:\\Users\\mearv\\OneDrive\\Desktop\\Output";
+    public static final String BASEDIR = Utils.dofileseparatornormalization("C:\\Users\\mearv\\OneDrive\\Desktop\\Websites\\storage");
             
     //
     
@@ -63,7 +64,6 @@ public class Webcrawler implements Runnable
         webcrawler.registrar.register(ModuleTwo.class);
         
         webcrawler.registrar.register(ModuleThree.class);
-        
         
         //
         
@@ -120,13 +120,13 @@ class ModuleOne implements Runnable
 {
     //pull the website recursively 
     
-    WorkerThread wthread_001 = new WorkerThread(this);
+    WorkerThread wthread_001 = new WorkerThread(this,"thread_01");
 
-    WorkerThread wthread_002 = new WorkerThread(this);
+    WorkerThread wthread_002 = new WorkerThread(this,"thread_02");
 
-    WorkerThread wthread_003 = new WorkerThread(this);
+    WorkerThread wthread_003 = new WorkerThread(this,"thread_03");
 
-    WorkerThread wthread_004 = new WorkerThread(this);
+    WorkerThread wthread_004 = new WorkerThread(this,"thread_04");
 
     //
    
@@ -147,7 +147,7 @@ class ModuleOne implements Runnable
             param.href = websites.get(i);
             
             //
-            if(param==null /*|| !param.baseURL.endsWith(".org") || !param.baseURL.endsWith(".com") || !param.baseURL.endsWith(".edu")*/)
+            if(param==null)
             {
                 System.out.println(param.baseURL+" is unsupported or such.");
             }
@@ -182,7 +182,13 @@ class ModuleOne implements Runnable
 
         wthread_004.start();
     }
-    
+
+    /**
+     *
+     * @param param
+     * @return
+     * @throws Exception
+     */
     public ArrayList<String> doparseanchors(WebcrawlerParam param) throws Exception
     {
         ArrayList<String> anchorlist = new ArrayList();
@@ -206,7 +212,13 @@ class ModuleOne implements Runnable
         
         return anchorlist;
     }
-    
+
+    /**
+     *
+     * @param param
+     * @return
+     * @throws Exception
+     */
     public String dodeterminefullpathforpersist(WebcrawlerParam param) throws Exception
     {
         if(param==null) throw new NullPointerException();
@@ -225,7 +237,9 @@ class ModuleOne implements Runnable
         {
             retval = param.baseURL+System.getProperty("file.separator")+param.href;
             
-            retval = retval.replace("https", "");           
+            retval = retval.replace("https", "");
+
+            retval = retval.replace("http", "");
 
             retval = retval.replace(":", "");
 
@@ -237,7 +251,9 @@ class ModuleOne implements Runnable
         {                  
             retval = param.href;
             
-            retval = retval.replace("https", "");                       
+            retval = retval.replace("https", "");
+
+            retval = retval.replace("http", "");
 
             retval = retval.replace(":", "");
 
@@ -248,27 +264,17 @@ class ModuleOne implements Runnable
         
         return retval;
     }
-    
+
+    /**
+     *
+     * @param param
+     * @param inputURL
+     * @return
+     * @throws Exception
+     */
     public String dodeterminefullpathforhttpreference(WebcrawlerParam param, String inputURL) throws Exception
     {
         if(inputURL==null || inputURL.isEmpty()) throw new Exception();
-        
-        //
-        
-        String href = null;
-        
-        //
-                       
-        Matcher matcher = Pattern.compile("<a\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(inputURL); //parse <img src=""></img> matches for now..
-        
-        //
-        
-        while(matcher.find())
-        {
-            String match = matcher.group();
-                        
-            href = match;
-        }              
         
         //
         
@@ -280,13 +286,11 @@ class ModuleOne implements Runnable
             {
                 inputURL = "https:"+inputURL;
             }
-            
-            if(inputURL.startsWith("/"))
+            else if(inputURL.startsWith("/"))
             {
                 inputURL = param.baseURL + inputURL;
             }
-            
-            if(inputURL.startsWith("./"))
+            else if(inputURL.startsWith("./"))
             {
                 inputURL = param.baseURL + inputURL;
             }                       
@@ -303,9 +307,19 @@ class ModuleOne implements Runnable
         
         return inputURL;
     }
-    
+
+    /**
+     *
+     * @param param
+     * @return
+     * @throws Exception
+     */
     public String dorequestwithnopersistence(WebcrawlerParam param) throws Exception
     {
+        String threadname = Thread.currentThread().getName();
+
+        //
+
         URL url=null;
         
         HttpURLConnection connection=null;
@@ -323,8 +337,10 @@ class ModuleOne implements Runnable
         connection = (HttpURLConnection)url.openConnection();
             
         connection.setRequestMethod("GET");
+
+        connection.setConnectTimeout(30000);
             
-        connection.setReadTimeout(2000);
+        connection.setReadTimeout(10000);
             
         connection.setRequestProperty("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36");
                     
@@ -362,7 +378,7 @@ class ModuleOne implements Runnable
                     
                     if(responsecode!=HttpURLConnection.HTTP_OK)
                     {
-                        System.out.println("Request for website ["+param.baseURL+"] failed with fatal code: "+responsecode);
+                        System.out.println("    >> Thread \""+threadname+"\" :: request for website ["+param.href+"] failed with fatal code: "+responsecode);
                     }
                 }
             }            
@@ -384,6 +400,10 @@ class ModuleOne implements Runnable
 
             param.siteHTML=builder.toString();
         }
+        catch(SocketTimeoutException stoe)
+        {
+            System.out.println("    >> "+stoe.getMessage()+" for "+param.href);
+        }
         catch(FileNotFoundException fnfe)
         {
             //404 returned
@@ -401,9 +421,19 @@ class ModuleOne implements Runnable
         
         return builder.toString();       
     }
-    
+
+    /**
+     *
+     * @param param
+     * @return
+     * @throws Exception
+     */
     public String dorequest(WebcrawlerParam param) throws Exception
     {
+        String threadname = Thread.currentThread().getName();
+
+        //
+
         URL url=null;
         
         HttpURLConnection connection=null;
@@ -424,6 +454,8 @@ class ModuleOne implements Runnable
         connection.setRequestMethod("GET");
             
         connection.setReadTimeout(10000);
+
+        connection.setConnectTimeout(30000);
             
         connection.setRequestProperty("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36");
                     
@@ -463,7 +495,7 @@ class ModuleOne implements Runnable
                     
                     if(responsecode!=HttpURLConnection.HTTP_OK)
                     {
-                        System.out.println("Request for website ["+param.baseURL+"] failed with fatal code: "+responsecode);
+                        System.out.println("    >> Thread \""+threadname+"\" :: request for website ["+param.href+"] failed with fatal code: "+responsecode);
                     }                    
                 }
             }
@@ -492,6 +524,10 @@ class ModuleOne implements Runnable
             //
 
             //return builder.toString();                      
+        }
+        catch(SocketTimeoutException stoe)
+        {
+            System.out.println("    >> "+stoe.getMessage()+" for "+param.href);
         }
         catch(ConnectException ce)
         {
@@ -524,6 +560,8 @@ class ModuleOne implements Runnable
      */
     public String dosinglesiterecurse(WebcrawlerParam param, Integer depth)
     {
+        String threadname = Thread.currentThread().getName();
+
         //
         
         ArrayList<String> anchors = param.siteAnchors;
@@ -534,13 +572,13 @@ class ModuleOne implements Runnable
             
         if(anchors==null || anchors.isEmpty())
         {
-            System.out.println("Site "+param.baseURL+" reports no <a> links of any kind.");
+            System.out.println("    >> Thread \""+threadname+"\" :: "+param.baseURL+" reports no <a> links of any kind.");
             
             return null;
         }
         else
         {
-            System.out.println("Site "+param.baseURL+" reports "+anchors.size()+" <a> links.");
+            System.out.println("    >> Thread \""+threadname+"\" :: "+param.baseURL+" reports "+anchors.size()+" <a> links.");
         }
                
         //
@@ -569,23 +607,76 @@ class ModuleOne implements Runnable
             //
             
             if(anchor==null || anchor.isEmpty()) continue;
+
+            //
             
             String href_quickref;
+
+            String baseurl_quickref;
+
+            //
+
+            baseurl_quickref = new StringBuffer(param.baseURL).toString();
+
+            //
+
+            if(baseurl_quickref.startsWith("https://"))
+            {
+                baseurl_quickref = baseurl_quickref.substring(8);
+            }
+            else if(baseurl_quickref.startsWith("http://"))
+            {
+                baseurl_quickref = baseurl_quickref.substring(7);
+            }
+
+            //
             
-            href_quickref = this.parseanchorforhrefvalue(anchor).trim();
+            href_quickref = this.parseanchorforhrefattributevalue(anchor);
+
+            //
+
+            if(href_quickref==null) continue;
+
+            //
             
-            if(href_quickref.endsWith("/") || href_quickref.endsWith("/\""))
+            if(href_quickref.endsWith("/"))
             {            
                 href_quickref = href_quickref.substring(href_quickref.length()-1);
             }
-            
-            if( href_quickref==null || !(href_quickref.startsWith("https://www."+param.baseURL) || href_quickref.startsWith("http://wwww."+param.baseURL) || href_quickref.startsWith("http://"+param.baseURL) || href_quickref.startsWith("https://"+param.baseURL) || href_quickref.startsWith(param.baseURL) || href_quickref.startsWith("/") || href_quickref.startsWith("./") || href_quickref.startsWith("//") || href_quickref.startsWith("..") || href_quickref.startsWith("#") || href_quickref.startsWith("?")) )
+
+            //
+
+            if( !(href_quickref.startsWith("https://www."+baseurl_quickref) || href_quickref.startsWith("http://wwww."+baseurl_quickref) || href_quickref.startsWith("http://"+baseurl_quickref) || href_quickref.startsWith("https://"+baseurl_quickref) || href_quickref.startsWith(baseurl_quickref) || href_quickref.startsWith("/") || href_quickref.startsWith("./") || href_quickref.startsWith("//") || href_quickref.startsWith("..") || href_quickref.startsWith("#") || href_quickref.startsWith("?")) )
             {                 
                 //also check xxx.yyy.root.com please before failing
                 
                 boolean match = false;
+
+                //
+
+                if(href_quickref.startsWith("https://"))
+                {
+                    href_quickref = href_quickref.substring(8);
+                }
+                else if(href_quickref.startsWith("http://"))
+                {
+                    href_quickref = href_quickref.substring(7);
+                }
+
+                //
+
+                if(baseurl_quickref.startsWith("https://"))
+                {
+                    baseurl_quickref = baseurl_quickref.substring(8);
+                }
+                else if(baseurl_quickref.startsWith("http://"))
+                {
+                    baseurl_quickref = baseurl_quickref.substring(7);
+                }
+
+                //
                 
-                Matcher matcher = Pattern.compile("([\\w]+\\.)*"+param.baseURL).matcher(href_quickref); //will match store.google.com  go.stop.google.com etc.
+                Matcher matcher = Pattern.compile("([\\w]+\\.)*"+baseurl_quickref).matcher(href_quickref); //will match store.google.com  go.stop.google.com etc.
 
                 //
 
@@ -594,14 +685,17 @@ class ModuleOne implements Runnable
                 //
                 
                 if(!match)
-                
-                System.out.println("Anchor #"+i+", \""+anchor+"\", for "+param.baseURL+" is being skipped for being unintelligible or not properly a member site of "+param.baseURL);     
-                
-                continue;
+                {
+                    System.out.println("    >> Thread \""+threadname+"\" :: anchor #" + i + ", \"" + this.parseanchorforhrefattributevalue(anchor) + "\", for " + param.baseURL + " is being skipped for being unintelligible or not properly a member site of " + param.baseURL);
+
+                    continue;
+                }
             }
             else
             {
                 // intelligible but possibly not local site i.e. wellsfargoadvisors.com off of wellsfargo.com
+
+                System.out.println("    >> Thread \""+threadname+"\" :: anchor #" + i + ", \"" + this.parseanchorforhrefattributevalue(anchor) + "\", for " + param.baseURL + " is being included for single site recursion.");
             }
             
             //
@@ -612,7 +706,7 @@ class ModuleOne implements Runnable
                 
                 recursiveparam.baseURL = param.baseURL;
                 
-                recursiveparam.href = this.parseanchorforhrefvalue(anchor);
+                recursiveparam.href = this.parseanchorforhrefattributevalue(anchor);
                 
                 if(recursiveparam.href==null || recursiveparam.href.isEmpty()) continue;
                 
@@ -630,9 +724,9 @@ class ModuleOne implements Runnable
                 {                
                     Webcrawler.visitedsitelinks.put(recursiveparam.href, "visited");
                     
-                    this.dopersistsiteurlasvisited(recursiveparam.href);                    
+                    //this.dopersistsiteurlasvisited(recursiveparam.href);
                     
-                    System.out.println("Local recursion has visited "+Webcrawler.visitedsitelinks.size()+" sites.");
+                    System.out.println("Local recursion has visited "+Webcrawler.visitedsitelinks.size()+" site(s).");
                 }                
                 else continue;
                 
@@ -718,7 +812,7 @@ class ModuleOne implements Runnable
         {
             for(int i=0; i<anchors.size(); i++)
             {
-                String href = this.parseanchorforhrefvalue(anchors.get(i));                
+                String href = this.parseanchorforhrefattributevalue(anchors.get(i));
             }
         }
                
@@ -738,7 +832,7 @@ class ModuleOne implements Runnable
                 
                 recursiveparam.baseURL = param.baseURL;
                 
-                recursiveparam.href = this.parseanchorforhrefvalue(anchor);
+                recursiveparam.href = this.parseanchorforhrefattributevalue(anchor);
                 
                 if(recursiveparam.href==null || recursiveparam.href.isEmpty()) continue;
                 
@@ -758,7 +852,7 @@ class ModuleOne implements Runnable
                     
                     this.dopersistsiteurlasvisited(recursiveparam.href);
                     
-                    System.out.println("Global recursion has visited "+Webcrawler.visitedsitelinks.size()+" sites.");
+                    System.out.println("Global recursion has visited "+Webcrawler.visitedsitelinks.size()+" site(s).");
                     
                 }                
                 else continue;
@@ -820,7 +914,13 @@ class ModuleOne implements Runnable
             
         return "success";
     }
-    
+
+    /**
+     *
+     * @param param
+     * @return
+     * @throws Exception
+     */
     public String dopersist(WebcrawlerParam param) throws Exception
     {
         Date date = new Date();
@@ -848,40 +948,37 @@ class ModuleOne implements Runnable
         String sday = dayformat.format(day);
         
         //                
-        
-        String fileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/index.html";
-        
-        String imagefileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/images/";
-        
-        String scriptfileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/javascript/";
-        
-        String cssfileref = "/home/oem/Desktop/Webpages/storage/"+smonth+"-"+sday+"-"+syear+"/"+param.unqualifiedURL+"/css/";
-        
-        
+
+        String file_separator = System.getProperty("file.separator");
+
         //
-               
-        //System.out.println("-- -- -- -- --");
+
+        String dirref = Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\")+Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL));
+
+        String fileref = Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\")+Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL))+Utils.dofileseparatornormalization("\\"+"index.html");
         
-        //System.out.println("ModuleOne:dopersist has href value: "+param.href);
-                
-        //System.out.println("ModuleOne:dopersist has baseURL value: "+param.baseURL);       
+        String imagefileref = Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\")+Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL))+Utils.dofileseparatornormalization("\\"+"images");
         
-        //System.out.println("ModuleOne:dopersist has unqualified value: "+param.unqualifiedURL); 
+        String scriptfileref = Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\")+Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL))+Utils.dofileseparatornormalization("\\"+"javascript");
         
-        //System.out.println("-- -- -- -- --");
+        String cssfileref = Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\")+Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL))+Utils.dofileseparatornormalization("\\"+"css");
+
+        //
     
         try
         {
-            File dir = new File(fileref);
+            File dir = new File(dirref);
             
-            if(!dir.exists())dir.mkdirs();
-            
+            if(!dir.exists()) dir.mkdirs();
+
             //
-            
-            File file = new File(fileref);
-            
-            if(file.exists()) file.delete(); //no dupes 
-            
+
+            File file = new File(dir.getAbsolutePath(), "index.html");
+
+            if(file.exists()) file.delete();
+
+            file.createNewFile();
+
             //
             
             File imagedir = new File(imagefileref);
@@ -910,7 +1007,7 @@ class ModuleOne implements Runnable
                 {
                     try
                     {
-                        this.persistimage(param, this.parseimageforsrcvalue(param.siteImages.get(i)), imagefileref);
+                        this.persistimage(param, this.parseimageforsrcattributevalue(param.siteImages.get(i)), imagefileref);
                     }
                     catch(Exception e)
                     {
@@ -929,7 +1026,7 @@ class ModuleOne implements Runnable
                 {
                     try
                     {
-                        this.persistfile(param, this.parselinkforhrefvalue(param.siteStyleSheets.get(i)), cssfileref);
+                        this.persistfile(param, this.parselinkforhrefattributevalue(param.siteStyleSheets.get(i)), cssfileref);
                     }
                     catch(Exception e)
                     {
@@ -948,7 +1045,7 @@ class ModuleOne implements Runnable
                 {
                     try
                     {
-                        this.persistfile(param, this.parsescriptforsrcvalue(param.siteScripts.get(i)), scriptfileref);
+                        this.persistfile(param, this.parsescriptforsrcattributevalue(param.siteScripts.get(i)), scriptfileref);
                     }
                     catch(Exception e)
                     {
@@ -958,10 +1055,8 @@ class ModuleOne implements Runnable
             }
 
             //
-            
+
             FileWriter writer = new FileWriter(file);
-            
-            //
             
             writer.write(param.siteHTML);
             
@@ -971,7 +1066,11 @@ class ModuleOne implements Runnable
         }
         catch(Exception e)
         {
-            return e.getMessage();
+            System.err.println(fileref);
+
+            e.printStackTrace();
+
+            //return e.getMessage();
         }
         finally
         {
@@ -980,9 +1079,18 @@ class ModuleOne implements Runnable
         
         return "success";
     }
-    
+
+    /**
+     *
+     * @param param
+     * @return
+     */
     public ArrayList<String> parsesitecss(WebcrawlerParam param)
     {
+        String threadname = Thread.currentThread().getName();
+
+        //
+
         ArrayList<String> linklist = new ArrayList();
         
         String originalsiteHTML = new StringBuffer(param.siteHTML).toString();
@@ -1018,7 +1126,7 @@ class ModuleOne implements Runnable
             
             recursiveparam = new WebcrawlerParam();
             
-            recursiveparam.href = this.parselinkforhrefvalue(linktag);            
+            recursiveparam.href = this.parselinkforhrefattributevalue(linktag);
             
             //
             
@@ -1092,7 +1200,7 @@ class ModuleOne implements Runnable
 
         //
         
-        System.out.println("Site "+param.href+", at two levels of recursion, had "+linklist.size()+" <link> tag(s).");
+        System.out.println("    >> Thread \""+threadname+"\" :: "+param.href+", at two levels of recursion, had "+linklist.size()+" <link> tag(s).");
          
         //
         
@@ -1100,11 +1208,11 @@ class ModuleOne implements Runnable
         {
             String linktag = linklist.get(i);
             
-            String href_quickref = this.parselinkforhrefvalue(linktag);
+            String href_quickref = this.parselinkforhrefattributevalue(linktag);
             
-            String rel_quickref = this.parselinkforrelattr(linktag);
+            String rel_quickref = this.parselinkforrelattributevalue(linktag);
             
-            String type_quickref = this.parselinkfortypeattr(linktag);
+            String type_quickref = this.parselinkfortypeattributevalue(linktag);
 
             //
 
@@ -1131,8 +1239,13 @@ class ModuleOne implements Runnable
         //        
         
         return linklist;        
-    }     
-    
+    }
+
+    /**
+     *
+     * @param param
+     * @return
+     */
     public ArrayList<String> parsesiteimages(WebcrawlerParam param)
     {
         ArrayList<String> imagelist = new ArrayList();
@@ -1157,8 +1270,13 @@ class ModuleOne implements Runnable
         //
         
         return imagelist;
-    } 
-    
+    }
+
+    /**
+     *
+     * @param param
+     * @return
+     */
     public ArrayList<String> parsesitescripts(WebcrawlerParam param)
     {
         ArrayList<String> scriptlist = new ArrayList();
@@ -1186,7 +1304,7 @@ class ModuleOne implements Runnable
         {
             String match = matcher_link_tags.group();
                        
-            String href = this.parselinkforhrefvalue(match);
+            String href = this.parselinkforhrefattributevalue(match);
 
             //
 
@@ -1207,9 +1325,14 @@ class ModuleOne implements Runnable
         //
         
         return scriptlist;
-    }   
-    
-    public String parselinkforhrefvalue(String linktag)
+    }
+
+    /**
+     *
+     * @param linktag
+     * @return
+     */
+    public String parselinkforhrefattributevalue(String linktag)
     {
         Matcher matcher = Pattern.compile("(href=\"(.*?)\")").matcher(linktag); //parse <link src=""></link> matches for now..
         
@@ -1229,9 +1352,14 @@ class ModuleOne implements Runnable
         match = match.replace("href=\"", "").replace("\"", "");                
         
         return match;       
-    }  
-    
-    public String parseimageforsrcvalue(String linktag)
+    }
+
+    /**
+     *
+     * @param linktag
+     * @return
+     */
+    public String parseimageforsrcattributevalue(String linktag)
     {
         Matcher matcher = Pattern.compile("(src=\"(.*?)\")").matcher(linktag); //parse <link src=""></link> matches for now..
         
@@ -1251,9 +1379,14 @@ class ModuleOne implements Runnable
         match = match.replace("src=\"", "").replace("\"", "");                
         
         return match;       
-    }    
-    
-    public String parselinkforrelattr(String imagetag)
+    }
+
+    /**
+     *
+     * @param imagetag
+     * @return
+     */
+    public String parselinkforrelattributevalue(String imagetag)
     {
         Matcher matcher = Pattern.compile("(\\brel=\"(.*?)\")").matcher(imagetag); //parse <img src=""></img> matches for now..
         
@@ -1273,9 +1406,14 @@ class ModuleOne implements Runnable
         match = match.replace("rel=\"", "").replace("\"", "");                
         
         return match;       
-    }  
-    
-    public String parselinkfortypeattr(String imagetag)
+    }
+
+    /**
+     *
+     * @param imagetag
+     * @return
+     */
+    public String parselinkfortypeattributevalue(String imagetag)
     {
         Matcher matcher = Pattern.compile("(\\btype=\"(.*?)\")").matcher(imagetag); //parse <img src=""></img> matches for now..
         
@@ -1295,10 +1433,17 @@ class ModuleOne implements Runnable
         match = match.replace("type=\"", "").replace("\"", "");                
         
         return match;       
-    }      
-    
-    public String parseanchorforhrefvalue(String hreftag)
+    }
+
+    /**
+     *
+     * @param hreftag
+     * @return
+     */
+    public String parseanchorforhrefattributevalue(String hreftag)
     {
+        //System.out.println("HREFTAG: "+hreftag);
+
         Matcher matcher = Pattern.compile("(\\bhref=\"(.*?)\")").matcher(hreftag); //parse <img src=""></img> matches for now..
         
         //
@@ -1317,9 +1462,14 @@ class ModuleOne implements Runnable
         match = match.replace("href=\"", "").replace("\"", "");                
         
         return match;       
-    }    
-    
-    public String parsescriptforsrcvalue(String scripttag)
+    }
+
+    /**
+     *
+     * @param scripttag
+     * @return
+     */
+    public String parsescriptforsrcattributevalue(String scripttag)
     {                                       
         Matcher matcher = Pattern.compile("(\\bsrc=\"(.*?)\")").matcher(scripttag); //parse <img src=""></img> matches for now..
         
@@ -1339,8 +1489,15 @@ class ModuleOne implements Runnable
         match = match.replace("src=\"", "").replace("\"", "");                
         
         return match;     
-    }    
-    
+    }
+
+    /**
+     *
+     * @param param
+     * @param inputURL
+     * @param outputURL
+     * @throws Exception
+     */
     public void persistimage(WebcrawlerParam param, String inputURL, String outputURL) throws Exception 
     {                
         if(inputURL.startsWith("//") || inputURL.startsWith("/") || inputURL.startsWith("./"))
@@ -1419,8 +1576,15 @@ class ModuleOne implements Runnable
         //
         
         System.gc();
-    }  
-    
+    }
+
+    /**
+     *
+     * @param param
+     * @param inputURL
+     * @param outputURL
+     * @throws Exception
+     */
     public void persistfile(WebcrawlerParam param, String inputURL, String outputURL) throws Exception 
     {               
         if(inputURL==null || inputURL.isEmpty())
@@ -1501,8 +1665,13 @@ class ModuleOne implements Runnable
         //
         
         System.gc();
-    }     
-    
+    }
+
+    /**
+     *
+     * @param url
+     * @return
+     */
     public String dopersistsiteurlasvisited(String url)
     {
         Date date = new Date();        
@@ -1529,13 +1698,13 @@ class ModuleOne implements Runnable
         
         String syear = "20"+yearformat.format(year).substring(1);
         
-        String sday = dayformat.format(day);        
-        
+        String sday = dayformat.format(day);
+
         //
         
-        File visitedsitesdir = new File(Webcrawler.BASEDIR+"/"+smonth+"-"+sday+"-"+syear+"/meta/");
+        File visitedsitesdir = new File(Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\"+"meta"));
         
-        File visitedsitesfile = new File(Webcrawler.BASEDIR+"/"+smonth+"-"+sday+"-"+syear+"/meta/visited.csv");
+        File visitedsitesfile = new File(Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\"+"meta"+"\\"+"visited.csv"));
         
         //
         
@@ -1547,59 +1716,65 @@ class ModuleOne implements Runnable
         //
         
         try
-        {                        
-            BufferedReader reader = new BufferedReader(new FileReader(visitedsitesfile));            
-            
+        {
+            if(!visitedsitesfile.exists()) throw new Exception(">>Index file ["+visitedsitesfile.getName()+"] is missing.");
+
+            BufferedReader reader = new BufferedReader(new FileReader(visitedsitesfile));
+
             // https;//google.com, 02-12-2018, 13:37 EST
 
             String sitename = null;
-            
+
             String line = null;
-            
+
             String[] tokens = null;
-            
-            while((line=reader.readLine())!=null)
+
+            while ((line = reader.readLine()) != null)
             {
                 tokens = line.split(",");
-                
-                if(tokens==null) continue;
-                
-                sitename = tokens[0];    
-                
-                //
-                
-                sitename = sitename.trim();
-                
-                url = url.trim();
-                
-                //
-                
-                while(sitename.endsWith("/"))
-                {
-                    sitename = sitename.substring(sitename.length()-1);
-                }
-                
-                while(url.endsWith("/"))
-                {
-                    url = url.substring(url.length()-1);
-                }                
 
-                if(sitename.equals(url))
-                {                    
+                if (tokens == null) continue;
+
+                sitename = tokens[0];
+
+                //
+
+                sitename = sitename.trim();
+
+                url = url.trim();
+
+                //
+
+                while (sitename.endsWith("/")) {
+                    sitename = sitename.substring(sitename.length() - 1);
+                }
+
+                while (url.endsWith("/")) {
+                    url = url.substring(url.length() - 1);
+                }
+
+                if (sitename.equals(url)) {
                     reader.close();
-                    
+
                     reader = null;
-                    
+
                     return "preexisting";
                 }
             }
-            
+
             //
 
             reader.close();
-                    
-            reader = null;            
-            
+
+            reader = null;
+        }
+        catch(Exception e)
+        {
+            System.err.println(e.getMessage());    //for now let's listen
+        }
+
+        try
+        {
             //
             
             BufferedWriter writer = new BufferedWriter(new FileWriter(visitedsitesfile, true));          
@@ -1616,8 +1791,7 @@ class ModuleOne implements Runnable
         }
         catch(Exception e)
         {
-            //
-            
+            System.err.println(e.getMessage());    //for now let's listen
         }
         
         return "success";
@@ -1650,6 +1824,9 @@ class ModuleThree implements Runnable
     }
 }
 
+/**
+ *
+ */
 class WebcrawlerParam
 {
     public String siteHTML;
@@ -1675,18 +1852,42 @@ class WebcrawlerParam
     public String anchor;
 }
 
+/**
+ *
+ */
 class WorkerThread extends Thread
 {
-    public WorkerThread(ModuleOne runner)
-    {
-        this.runner = runner;
-    }
-    
     public Queue<WebcrawlerParam> queue = new ArrayBlockingQueue(100);
     
     public Boolean running = true;
     
     public ModuleOne runner = null;
+
+    //
+
+    public WorkerThread(ModuleOne runner, String threadname)
+    {
+        this.runner = runner;
+
+        this.setName(threadname);
+    }
+
+    public WorkerThread(ModuleOne runner)
+    {
+        this.runner = runner;
+    }
+
+    public WorkerThread()
+    {
+        //
+    }
+
+    public WorkerThread(String threadname)
+    {
+        super(threadname);
+    }
+
+    //
     
     public void run()
     {
@@ -1696,11 +1897,11 @@ class WorkerThread extends Thread
             {
                 try
                 {
-                    this.wait(1000L);
+                    this.wait(500L);
                 }
                 catch(Exception e)
                 {
-                    //
+                    e.printStackTrace();
                 }
             }
             else
@@ -1716,6 +1917,10 @@ class WorkerThread extends Thread
 
                     //
 
+                    System.out.println("Thread \""+this.getName()+"\" now working with site: "+param.baseURL);
+
+                    //
+
                     param.baseURL = websiteURL;
 
                     param.href = websiteURL;
@@ -1724,15 +1929,96 @@ class WorkerThread extends Thread
 
                     param.siteAnchors = runner.doparseanchors(param);
 
-                    param.recurseMessage = runner.dosinglesiterecurse(param, 0);   
+                    param.recurseMessage = runner.dosinglesiterecurse(param, 0);
                     
                     //
                 }
                 catch(Exception e)
                 {
-                    //
+                    e.printStackTrace();
                 }
             }
         }
+    }
+}
+
+class Utils
+{
+    public final static String OS_SENSITIVE_SLASH = System.getProperty("file.separator");
+
+    /**
+     * Please send here to clear file strings (C:/programs/data/text.xml) against particular Operating System file separator implementations (System.getProperty("file.separator");.
+     *
+     * @param basedir
+     * @return
+     */
+    public static String dofileseparatornormalization(String basedir)
+    {
+        String retval = "";
+
+        if(System.getProperty("os.name").contains("indows"))
+        {
+            retval = basedir.replace("/", Utils.OS_SENSITIVE_SLASH);
+        }
+        else
+        {
+            retval = basedir.replace("\\", Utils.OS_SENSITIVE_SLASH);
+        }
+
+        return retval;
+    }
+
+    /**
+     * Please send only HTTP URL portion here for escapement into Windows safe file string(s); will removed unsafe characters (<, >, |, ", *, etc.)
+     *
+     * @param rawURL
+     * @return
+     */
+    public static String doURLnormalization(String rawURL)
+    {
+        String url_portion = "";
+
+        //
+
+        if(rawURL==null || rawURL.isEmpty()) return null;
+
+        //
+
+        if(rawURL.endsWith("/")) rawURL = rawURL.substring(rawURL.length()-1);
+
+        //
+
+        url_portion = rawURL.replace(".LT.", "..LT.."); // less than escaping ~ ? ~ .LT. --> ..LT..
+
+        url_portion = url_portion.replace(".GT.", "..GT.."); // greater than escaping ~ ? ~ .GT. --> ..GT..
+
+        url_portion = url_portion.replace(".CO.", "..CO.."); // colon escaping ~ ? ~ .CO. --> ..CO..
+
+        url_portion = url_portion.replace(".DQ.", "..DQ.."); // double quote escaping ~ ? ~ .DQ. --> ..DQ..
+
+        url_portion = url_portion.replace(".FS.", "..FS.."); // forward slash escaping ~ ? ~ .FS. --> ..FS..
+
+        url_portion = url_portion.replace(".BS.", "..BS.."); // back slash escaping ~ ? ~ .BS. --> ..BS..
+
+        url_portion = url_portion.replace(".PI.", "..PI.."); // pipe escaping ~ ? ~ .PI. --> ..PI..
+
+        url_portion = url_portion.replace(".AS.", "..AS.."); // asterix escaping ~ ? ~ .AS. --> ..AS..
+
+        url_portion = url_portion.replace(".QM.", "..QM.."); // question mark escaping ~ ? ~ .QM. --> ..QM..
+
+        // .QM..QM. => ..QM....QM.. or ..QM...QM.. check please
+
+        url_portion = url_portion
+                .replace("<",".LT.")
+                .replace(">",".GT.")
+                .replace(":",".CO.")
+                .replace("\"",".DQ.")
+                .replace("/",".FS.")
+                .replace("\\",".BS.")
+                .replace("|",".PI.")
+                .replace("*",".AS.")
+                .replace("?", ".QM.");
+
+        return url_portion;
     }
 }

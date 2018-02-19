@@ -142,7 +142,9 @@ public class Preinitialization implements Runnable
             
         connection.setRequestMethod("GET");
             
-        connection.setReadTimeout(5000);
+        connection.setReadTimeout(10000);
+
+        connection.setConnectTimeout(30000);
             
         connection.setRequestProperty("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36");
                     
