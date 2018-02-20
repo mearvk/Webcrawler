@@ -539,7 +539,7 @@ class ModuleOne implements Runnable
         }
         catch(Exception e)
         {
-            //
+            //e.printStackTrace();
         }
         finally
         {            
@@ -564,7 +564,7 @@ class ModuleOne implements Runnable
 
         //
         
-        ArrayList<String> anchors = param.siteAnchors;
+        ArrayList<String> anchors = new ArrayList(new HashSet(param.siteAnchors));
         
         ArrayList<String> errors = null;
                                            
@@ -578,7 +578,7 @@ class ModuleOne implements Runnable
         }
         else
         {
-            System.out.println("    >> Thread \""+threadname+"\" :: "+param.baseURL+" reports "+anchors.size()+" <a> links.");
+            //System.out.println("    >> Thread \""+threadname+"\" :: "+param.baseURL+" reports "+anchors.size()+" <a> links.");
         }
                
         //
@@ -646,7 +646,7 @@ class ModuleOne implements Runnable
 
             //
 
-            if( !(href_quickref.startsWith("https://www."+baseurl_quickref) || href_quickref.startsWith("http://wwww."+baseurl_quickref) || href_quickref.startsWith("http://"+baseurl_quickref) || href_quickref.startsWith("https://"+baseurl_quickref) || href_quickref.startsWith(baseurl_quickref) || href_quickref.startsWith("/") || href_quickref.startsWith("./") || href_quickref.startsWith("//") || href_quickref.startsWith("..") || href_quickref.startsWith("#") || href_quickref.startsWith("?")) )
+            if( !(href_quickref.startsWith("https://www."+baseurl_quickref) || href_quickref.startsWith("http://wwww."+baseurl_quickref) || href_quickref.startsWith("http://"+baseurl_quickref) || href_quickref.startsWith("https://"+baseurl_quickref) || href_quickref.startsWith(baseurl_quickref) || href_quickref.startsWith("/") || href_quickref.startsWith("./") || href_quickref.startsWith("//") || href_quickref.startsWith("..") || href_quickref.startsWith("#") || href_quickref.startsWith("?") || href_quickref.endsWith(".html")) )
             {                 
                 //also check xxx.yyy.root.com please before failing
                 
@@ -695,7 +695,10 @@ class ModuleOne implements Runnable
             {
                 // intelligible but possibly not local site i.e. wellsfargoadvisors.com off of wellsfargo.com
 
-                System.out.println("    >> Thread \""+threadname+"\" :: anchor #" + i + ", \"" + this.parseanchorforhrefattributevalue(anchor) + "\", for " + param.baseURL + " is being included for single site recursion.");
+                if(Webcrawler.visitedsitelinks.get(this.parseanchorforhrefattributevalue(anchor))==null || Webcrawler.visitedsitelinks.get(this.parseanchorforhrefattributevalue(anchor)).isEmpty())
+                {
+                    //System.out.println("    >> Thread \"" + threadname + "\" :: anchor #" + i + ", \"" + this.parseanchorforhrefattributevalue(anchor) + "\", for " + param.baseURL + " is being included for single site recursion.");
+                }
             }
             
             //
@@ -726,7 +729,7 @@ class ModuleOne implements Runnable
                     
                     //this.dopersistsiteurlasvisited(recursiveparam.href);
                     
-                    System.out.println("Local recursion has visited "+Webcrawler.visitedsitelinks.size()+" site(s).");
+                    System.out.println("Local recursion has visited and downloaded images, css and HTML from "+Webcrawler.visitedsitelinks.size()+" site(s) and/or link(s).");
                 }                
                 else continue;
                 
@@ -953,7 +956,7 @@ class ModuleOne implements Runnable
 
         //
 
-        String dirref = Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\")+Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL));
+        String dirref = Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\")+Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL)+"\\");
 
         String fileref = Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\")+Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL))+Utils.dofileseparatornormalization("\\"+"index.html");
         
@@ -1200,7 +1203,7 @@ class ModuleOne implements Runnable
 
         //
         
-        System.out.println("    >> Thread \""+threadname+"\" :: "+param.href+", at two levels of recursion, had "+linklist.size()+" <link> tag(s).");
+        //System.out.println("    >> Thread \""+threadname+"\" :: "+param.href+", at two levels of recursion, had "+linklist.size()+" <link> tag(s).");
          
         //
         
@@ -1976,7 +1979,11 @@ class Utils
      */
     public static String doURLnormalization(String rawURL)
     {
+        String website_name = "";
+
         String url_portion = "";
+
+        Integer break_index = 0;
 
         //
 
@@ -1984,41 +1991,85 @@ class Utils
 
         //
 
-        if(rawURL.endsWith("/")) rawURL = rawURL.substring(rawURL.length()-1);
+        if(rawURL.endsWith("/")) rawURL = rawURL.substring(0,rawURL.length()-1);
 
         //
 
-        url_portion = rawURL.replace(".LT.", "..LT.."); // less than escaping ~ ? ~ .LT. --> ..LT..
+        if(rawURL.startsWith("https://"))
+        {
+            website_name = rawURL.substring(8);
+        }
+        else if(rawURL.startsWith("http://"))
+        {
+            website_name = rawURL.substring(7);
+        }
 
-        url_portion = url_portion.replace(".GT.", "..GT.."); // greater than escaping ~ ? ~ .GT. --> ..GT..
+        //
 
-        url_portion = url_portion.replace(".CO.", "..CO.."); // colon escaping ~ ? ~ .CO. --> ..CO..
+        website_name = rawURL;
 
-        url_portion = url_portion.replace(".DQ.", "..DQ.."); // double quote escaping ~ ? ~ .DQ. --> ..DQ..
+        //
 
-        url_portion = url_portion.replace(".FS.", "..FS.."); // forward slash escaping ~ ? ~ .FS. --> ..FS..
+        break_index = website_name.indexOf("/");
 
-        url_portion = url_portion.replace(".BS.", "..BS.."); // back slash escaping ~ ? ~ .BS. --> ..BS..
+        //
 
-        url_portion = url_portion.replace(".PI.", "..PI.."); // pipe escaping ~ ? ~ .PI. --> ..PI..
+        if(break_index>0)
+        {
+            website_name = rawURL.substring(0, break_index);         //trim for www.google.com or google.com
+        }
 
-        url_portion = url_portion.replace(".AS.", "..AS.."); // asterix escaping ~ ? ~ .AS. --> ..AS..
+        if(break_index>0)
+        {
+            url_portion = rawURL.substring(break_index);                       //trim for ?q=fantasy_football
+        }
 
-        url_portion = url_portion.replace(".QM.", "..QM.."); // question mark escaping ~ ? ~ .QM. --> ..QM..
+        //
+
+        url_portion = url_portion.replace(".LT.", "..LT..");    // less than escaping ~ ? ~ .LT. --> ..LT..
+
+        url_portion = url_portion.replace(".GT.", "..GT..");    // greater than escaping ~ ? ~ .GT. --> ..GT..
+
+        url_portion = url_portion.replace(".CO.", "..CO..");    // colon escaping ~ ? ~ .CO. --> ..CO..
+
+        url_portion = url_portion.replace(".DQ.", "..DQ..");    // double quote escaping ~ ? ~ .DQ. --> ..DQ..
+
+        url_portion = url_portion.replace(".FS.", "..FS..");    // forward slash escaping ~ ? ~ .FS. --> ..FS..
+
+        url_portion = url_portion.replace(".BS.", "..BS..");    // back slash escaping ~ ? ~ .BS. --> ..BS..
+
+        url_portion = url_portion.replace(".PI.", "..PI..");    // pipe escaping ~ ? ~ .PI. --> ..PI..
+
+        url_portion = url_portion.replace(".AS.", "..AS..");    // asterix escaping ~ ? ~ .AS. --> ..AS..
+
+        url_portion = url_portion.replace(".QM.", "..QM..");    // question mark escaping ~ ? ~ .QM. --> ..QM..
 
         // .QM..QM. => ..QM....QM.. or ..QM...QM.. check please
 
-        url_portion = url_portion
-                .replace("<",".LT.")
-                .replace(">",".GT.")
-                .replace(":",".CO.")
-                .replace("\"",".DQ.")
-                .replace("/",".FS.")
-                .replace("\\",".BS.")
-                .replace("|",".PI.")
-                .replace("*",".AS.")
-                .replace("?", ".QM.");
+        url_portion = url_portion.replace("<",".LT.");
 
-        return url_portion;
+        url_portion = url_portion.replace(">",".GT.");
+
+        url_portion = url_portion.replace(":",".CO.");
+
+        url_portion = url_portion.replace("\"",".DQ.");
+
+        url_portion = url_portion.replace("/",".FS.");
+
+        url_portion = url_portion.replace("\\",".BS.");
+
+        url_portion = url_portion.replace("|",".PI.");
+
+        url_portion = url_portion.replace("*",".AS.");
+
+        url_portion = url_portion.replace("?", ".QM.");
+
+        //
+
+        //url_portion = url_portion+System.getProperty("file.separator");
+
+        //
+
+        return (website_name+System.getProperty("file.separator")+url_portion).replace(".FS.", "\\");
     }
 }
