@@ -7,7 +7,7 @@ package webcrawler.exceptions;
 
 /**
  *
- * @author oem
+ * @author Max Rupplin
  */
 public class TayException extends Exception
 {

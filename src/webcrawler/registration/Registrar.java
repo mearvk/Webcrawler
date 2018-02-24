@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package webcrawler;
+package webcrawler.registration;
 
 import java.util.ArrayList;
 
 /**
  *
- * @author oem
+ * @author Max Rupplin
  */
 public class Registrar
 {

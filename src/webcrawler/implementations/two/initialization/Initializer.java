@@ -1,10 +1,13 @@
-package webcrawler;
+package webcrawler.implementations.two.initialization;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Initializer
+/**
+ * @author Max Rupplin
+ */
+public class Initializer extends webcrawler.intialization.Initializer
 {    
     public String baseURL;
     
