@@ -1,5 +1,7 @@
 package webcrawler.implementations.utils;
 
+import java.nio.file.Paths;
+
 public class Utils
 {
     public final static String OS_SENSITIVE_SLASH = System.getProperty("file.separator");
@@ -22,6 +24,12 @@ public class Utils
         {
             retval = basedir.replace("\\", Utils.OS_SENSITIVE_SLASH);
         }
+
+        //
+
+        retval = Paths.get(basedir).normalize().toString();
+
+        //
 
         return retval;
     }
@@ -128,13 +136,7 @@ public class Utils
 
         //
 
-        //url_portion = url_portion+System.getProperty("file.separator");
-
-        //
-
-        //return (website_name+System.getProperty("file.separator")+url_portion).replace(".FS.", "\\");
-
-        if(break_index==-1)
+        if(break_index==-1) //only a HTTP URL, not a file URL
         {
             return (url_portion).replace(".FS.", "\\");
         }

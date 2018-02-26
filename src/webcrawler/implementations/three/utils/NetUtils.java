@@ -1,8 +1,8 @@
-package webcrawler.implementations.two.utils;
+package webcrawler.implementations.three.utils;
 
 import jdk.jfr.Description;
 import webcrawler.common.WebcrawlerParam;
-import webcrawler.implementations.two.Webcrawler;
+import webcrawler.implementations.three.Webcrawler;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -20,13 +20,15 @@ public class NetUtils
      * @param depth
      * @return
      */
-    public static synchronized ArrayList<String> dorequestandstoreanchors(WebcrawlerParam param, ArrayList<String> storedanchors, Integer depth)
+    public static ArrayList<String> dorequestandstoreanchors(WebcrawlerParam param, ArrayList<String> storedanchors, Integer depth)
     {
         String threadname = Thread.currentThread().getName();
 
         //
 
         if(Webcrawler.LOCAL_RECURSE_DEPTH<=depth) return null;
+
+        //
 
         if(storedanchors==null) storedanchors = new ArrayList<String>();
 
@@ -38,48 +40,23 @@ public class NetUtils
 
             //
 
-            outer:
+            //Webcrawler..addAll(storedanchors);
+
+            //
+
             for(int i=0; i<storedanchors.size(); i++)
             {
-                if(storedanchors.get(i)==null) continue;
-
-                //
-
-                inner:
-                for(int j=0; j<Webcrawler.readyanchorlinks.size(); j++)
-                {
-                    if (Webcrawler.readyanchorlinks.get(j)==null || Webcrawler.readyanchorlinks.get(j).isEmpty() )
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        String storedanchor = storedanchors.get(i);
-
-                        String visitedanchor = Webcrawler.readyanchorlinks.get(j);
-
-                        //
-
-                        if(storedanchor==null || visitedanchor==null) continue;
-
-                        //
-
-                        if(storedanchor.trim().equalsIgnoreCase(visitedanchor.trim()))
-                        {
-                            System.out.println("Site or link \""+storedanchor+"\" has already been visited; skipping.");
-
-                            continue outer;
-                        }
-                    }
-                }
-
-                //
+                if(Webcrawler.visitedsitelinks.contains(storedanchors.get(i))) continue;
 
                 try
                 {
                     String anchor = storedanchors.get(i);
 
+                    //
+
                     if(anchor == null) continue;    //skip for now
+
+                    //
 
                     anchor = anchor.startsWith("//") ? anchor.substring(2) : anchor;
 
@@ -91,11 +68,25 @@ public class NetUtils
 
                     try
                     {
-                        recursisveparam = new WebcrawlerParam(param, anchor);
+                        recursisveparam = new WebcrawlerParam();
 
-                        System.out.println(threadname+" :: visiting "+anchor+".");
+                        recursisveparam.url = param.url;
+
+                        recursisveparam.href = anchor;
 
                         recursisveparam.html = NetUtils.dorequest(recursisveparam);
+
+                        //
+
+                        Webcrawler.visitedsitelinks.add(anchor);
+
+                        //
+
+                        dorequestandstoreanchors(recursisveparam, storedanchors, depth + 1);
+
+                        //
+
+                        System.out.println(">> "+param.url+" branch "+anchor+" precursed.");
                     }
                     catch(FileNotFoundException fnfe)
                     {
@@ -106,9 +97,6 @@ public class NetUtils
                         System.err.println("NetUtils.dorequestandstoreanchors :: "+e);
                     }
 
-                    //
-
-                    dorequestandstoreanchors(recursisveparam, storedanchors, depth + 1);
                 }
                 catch(Exception e)
                 {
@@ -138,7 +126,7 @@ public class NetUtils
      * @return
      * @throws Exception
      */
-    public static synchronized String dorequest(WebcrawlerParam param) throws Exception
+    public static String dorequest(WebcrawlerParam param) throws Exception
     {
         String threadname = Thread.currentThread().getName();
 
@@ -172,7 +160,7 @@ public class NetUtils
         }
         catch (Exception e)
         {
-            System.err.println("NetUtils.dorequest :: unable to setup URL: \""+param.href+"\"");
+            //System.err.println("NetUtils.dorequest :: unable to setup URL: \""+param.href+"\"");
         }
 
         //
@@ -249,7 +237,7 @@ public class NetUtils
         }
         catch(FileNotFoundException fnfe)
         {
-            System.err.println("NetUtils.dorequest :: Site or link not found: "+param.href);
+            //System.err.println("NetUtils.dorequest :: Site or link not found: "+param.href);
         }
         catch(Exception e)
         {
@@ -276,7 +264,7 @@ public class NetUtils
      * @throws Exception
      */
     @Description("Extension Safe")
-    public static synchronized String dorequestandstoresite(WebcrawlerParam param) throws Exception
+    public static String dorequestandstoresite(WebcrawlerParam param) throws Exception
     {
         String threadname = Thread.currentThread().getName();
 
@@ -377,7 +365,7 @@ public class NetUtils
 
             //
 
-            //return builder.toString();
+            //System.out.println("Site link \""+param.href+"\" queried and stored.");
         }
         catch(SocketTimeoutException stoe)
         {

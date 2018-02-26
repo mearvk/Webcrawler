@@ -1,7 +1,7 @@
-package webcrawler.implementations.two.utils;
+package webcrawler.implementations.three.utils;
 
 import webcrawler.common.WebcrawlerParam;
-import webcrawler.implementations.two.Webcrawler;
+import webcrawler.implementations.three.Webcrawler;
 import webcrawler.implementations.utils.Utils;
 
 import java.io.*;
@@ -23,7 +23,7 @@ public class FileUtils
 
     //
 
-    public static synchronized File doclearfileurl(File file)
+    public static File doclearfileurl(File file)
     {
         String SLASH = System.getProperty("file.separator");
 
@@ -85,7 +85,7 @@ public class FileUtils
      * @return
      * @throws Exception
      */
-    public static synchronized String dodeterminefullpathforpersist(WebcrawlerParam param) throws Exception
+    public static String dodeterminefullpathforpersist(WebcrawlerParam param) throws Exception
     {
         if(param==null) throw new NullPointerException();
 
@@ -138,7 +138,7 @@ public class FileUtils
      * @return
      * @throws Exception
      */
-    public static synchronized String dodeterminefullpathforhttpreference(WebcrawlerParam param, String inputURL) throws Exception
+    public static String dodeterminefullpathforhttpreference(WebcrawlerParam param, String inputURL) throws Exception
     {
         if(inputURL==null || inputURL.isEmpty()) throw new Exception();
 
@@ -264,7 +264,7 @@ public class FileUtils
                     }
                     catch(Exception e)
                     {
-                        System.err.println("FileUtils.dopersist :: "+e.getMessage());
+                        //System.err.println("FileUtils.dopersist :: "+e.getMessage());
                     }
                 }
             }
@@ -283,7 +283,7 @@ public class FileUtils
                     }
                     catch(Exception e)
                     {
-                        System.err.println("FileUtils.dopersist :: "+e.getMessage());
+                        //System.err.println("FileUtils.dopersist :: "+e.getMessage());
                     }
                 }
             }
@@ -302,7 +302,7 @@ public class FileUtils
                     }
                     catch(Exception e)
                     {
-                        System.err.println("FileUtils.dopersist :: "+e.getMessage());
+                        //System.err.println("FileUtils.dopersist :: "+e.getMessage());
                     }
                 }
             }
@@ -319,7 +319,7 @@ public class FileUtils
         }
         catch(Exception e)
         {
-            System.err.println("FileUtils.dopersist :: "+e.getMessage());
+            //System.err.println("FileUtils.dopersist :: "+e.getMessage());
         }
         finally
         {
@@ -516,6 +516,12 @@ public class FileUtils
 
         String filename = inputURL.substring(inputURL.lastIndexOf("/")+1);
 
+        //
+
+        if(filename==null || filename.isEmpty()) return;
+
+        //
+
         String SLASH = System.getProperty("file.separator");
 
         //
@@ -535,6 +541,8 @@ public class FileUtils
             //
 
             String correctedfilename = Paths.get(outputURL +SLASH+ Utils.doURLnormalization(filename)).normalize().toString();
+
+            System.out.println("FileUtils.persistfile :: corrected file name: "+correctedfilename);
 
             //
 
@@ -569,11 +577,11 @@ public class FileUtils
         }
         catch(FileNotFoundException fnfe)
         {
-            System.err.println("FileUtils.persistfile :: Site or link not found: \""+fnfe.getMessage()+"\"");
+            //System.err.println("FileUtils.persistfile :: Site or link not found: \""+fnfe.getMessage()+"\"");
         }
         catch(Exception e)
         {
-            System.err.println("FileUtils.persistfile :: Exception: "+e.getMessage());
+            //System.err.println("FileUtils.persistfile :: Exception: "+e.getMessage());
         }
 
         //
@@ -623,6 +631,12 @@ public class FileUtils
 
         String filename = inputURL.substring(inputURL.lastIndexOf("/")+1);
 
+        //
+
+        if(filename==null || filename.isEmpty()) return;
+
+        //
+
         String SLASH = System.getProperty("file.separator");
 
         //
@@ -640,6 +654,8 @@ public class FileUtils
             //
 
             String correctedfilename = Paths.get(outputURL +SLASH+ Utils.doURLnormalization(filename)).normalize().toString();
+
+            System.out.println("FileUtils.persistimage :: corrected file name: "+correctedfilename);
 
             //
 
@@ -668,11 +684,16 @@ public class FileUtils
         }
         catch (FileNotFoundException fnfe)
         {
-            System.err.println("FileUtils.persistimage :: File not found: \""+fnfe.getMessage()+"\"");
+            if(fnfe.getMessage().contains("403"))
+            {
+                new String("test");
+            }
+
+            //System.err.println("FileUtils.persistimage :: File not found: \""+fnfe.getMessage()+"\"");
         }
         catch(Exception e)
         {
-            System.err.println("FileUtils.persistimage :: Exception: "+e.getMessage());
+            //System.err.println("FileUtils.persistimage :: Exception: "+e.getMessage());
         }
 
         //

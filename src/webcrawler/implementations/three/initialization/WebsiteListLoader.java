@@ -1,11 +1,12 @@
-package webcrawler.implementations.two.initialization;
+package webcrawler.implementations.three.initialization;
 
 import webcrawler.common.WebcrawlerParam;
-import webcrawler.implementations.two.Webcrawler;
+import webcrawler.implementations.three.Webcrawler;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -299,7 +300,7 @@ class WebsiteListLoader implements Runnable
 
         //
 
-        url = new URL(param.href);
+        url = new URL(new URI(param.href).normalize().toString());
 
 
         //
@@ -343,13 +344,17 @@ class WebsiteListLoader implements Runnable
 
         param.html =builder.toString();
 
+        System.out.println("-- -- -- -- -- -- -- -- -- -- -- -- -- -- --");
+
         ArrayList<String> websites = this.doparseHTMLlinks(param);
+
+        System.out.println("-- -- -- -- -- -- -- -- -- -- -- -- -- -- --");
 
         //
 
         Initializer initializer = null;
 
-        initializer = (Initializer)Webcrawler.values.get("initializer");
+        initializer = (Initializer) Webcrawler.values.get("initializer");
 
         initializer.variables.put("websites", websites);
 

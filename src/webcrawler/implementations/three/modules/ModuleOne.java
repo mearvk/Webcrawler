@@ -1,17 +1,20 @@
-package webcrawler.implementations.two.modules;
+package webcrawler.implementations.three.modules;
 
 import jdk.jfr.Description;
 import webcrawler.common.WebcrawlerParam;
 import webcrawler.exceptions.StackDepthException;
-import webcrawler.implementations.two.Webcrawler;
-import webcrawler.implementations.two.initialization.Initializer;
-import webcrawler.implementations.two.threading.WorkerThread;
-import webcrawler.implementations.two.utils.FileUtils;
-import webcrawler.implementations.two.utils.NetUtils;
-import webcrawler.implementations.two.utils.ParseUtils;
+import webcrawler.implementations.three.Webcrawler;
+import webcrawler.implementations.three.initialization.Initializer;
+import webcrawler.implementations.three.threading.WorkerThread;
+import webcrawler.implementations.three.utils.FileUtils;
+import webcrawler.implementations.three.utils.NetUtils;
+import webcrawler.implementations.three.utils.ParseUtils;
 
 import java.io.FileNotFoundException;
+import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Vector;
 
 public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 {
@@ -39,6 +42,31 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
     //
 
+    public ModuleOne()
+    {
+        this.wthread_001.start();
+
+        this.wthread_002.start();
+
+        this.wthread_003.start();
+
+        this.wthread_004.start();
+
+        this.wthread_005.start();
+
+        this.wthread_006.start();
+
+        this.wthread_007.start();
+
+        this.wthread_008.start();
+
+        this.wthread_009.start();
+
+        this.wthread_010.start();
+    }
+
+    //
+
     public void run()
     {
         ArrayList<String> websites = (ArrayList<String>)((Initializer) Webcrawler.values.get("initializer")).variables.get("websites");
@@ -53,85 +81,31 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             try
             {
-                param.baseurl = ParseUtils.parseforbaseurl(websites.get(i));
+                URI uri;
 
-                param.url = websites.get(i);
+                uri = new URI(websites.get(i));
 
-                param.href = websites.get(i);
+                uri = uri.normalize();
 
                 //
-                if (param == null)
-                {
-                    System.out.println(param.url + " is unsupported or such.");
-                }
-                else if (i % 10 == 9)
-                {
-                    wthread_010.queue.offer(param);
-                }
-                else if (i % 10 == 8)
-                {
-                    wthread_009.queue.offer(param);
-                }
-                else if (i % 10 == 7)
-                {
-                    wthread_008.queue.offer(param);
-                }
-                else if (i % 10 == 6)
-                {
-                    wthread_007.queue.offer(param);
-                }
-                else if (i % 10 == 5)
-                {
-                    wthread_006.queue.offer(param);
-                }
-                else if (i % 10 == 4)
-                {
-                    wthread_005.queue.offer(param);
-                }
-                else if (i % 10 == 3)
-                {
-                    wthread_004.queue.offer(param);
-                }
-                else if (i % 10 == 2)
-                {
-                    wthread_003.queue.offer(param);
-                }
-                else if (i % 10 == 1)
-                {
-                    wthread_002.queue.offer(param);
-                }
-                else if (i % 10 == 0)
-                {
-                    wthread_001.queue.offer(param);
-                }
+
+                param.url = uri.toString();
+
+                param.href = uri.toString();
+
+                param.baseurl = ParseUtils.parseforbaseurl(websites.get(i));
+
+                if(param.baseurl==null) continue;
+
+                //
+
+                this.dolocalsiterecurse(param, Webcrawler.LOCAL_RECURSE_DEPTH);
             }
             catch(Exception e)
             {
-                System.out.println(e);
+
             }
         }
-
-        //
-
-        wthread_001.start();
-
-        wthread_002.start();
-
-        wthread_003.start();
-
-        wthread_004.start();
-
-        wthread_005.start();
-
-        wthread_006.start();
-
-        wthread_007.start();
-
-        wthread_008.start();
-
-        wthread_009.start();
-
-        wthread_010.start();
     }
 
     //
@@ -144,9 +118,9 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         try
         {
-            NetUtils.dorequestandstoresite(param); //initial HTML load
+            NetUtils.dorequestandstoresite(param);
 
-            NetUtils.dorequestandstoreanchors(param, anchorset, 0); //rget anchors
+            NetUtils.dorequestandstoreanchors(param, anchorset, 0);
 
             //
 
@@ -171,21 +145,110 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                     //
 
-                    NetUtils.dorequestandstoresite(recursiveparam);
+                    switch(i%10)
+                    {
+                        case 9:
+
+                            synchronized (wthread_010.queue)
+                            {
+                                wthread_010.queue.offer(recursiveparam);
+
+                                break;
+                            }
+
+                        case 8:
+
+                            synchronized (wthread_009.queue)
+                            {
+                                wthread_009.queue.offer(recursiveparam);
+
+                                break;
+                            }
+
+                        case 7:
+
+                            synchronized (wthread_008.queue)
+                            {
+                                wthread_008.queue.offer(recursiveparam);
+
+                                break;
+                            }
+
+                        case 6:
+
+                            synchronized (wthread_007.queue)
+                            {
+                                wthread_007.queue.offer(recursiveparam);
+
+                                break;
+                            }
+
+                        case 5:
+
+                            synchronized (wthread_006.queue)
+                            {
+                                wthread_006.queue.offer(recursiveparam);
+
+                                break;
+                            }
+
+                        case 4:
+
+                            synchronized (wthread_005.queue)
+                            {
+                                wthread_005.queue.offer(recursiveparam);
+
+                                break;
+                            }
+
+                        case 3:
+
+                            synchronized (wthread_004.queue)
+                            {
+                                wthread_004.queue.offer(recursiveparam);
+
+                                break;
+                            }
+
+                        case 2:
+
+                            synchronized (wthread_003.queue)
+                            {
+                                wthread_003.queue.offer(recursiveparam);
+
+                                break;
+                            }
+
+                        case 1:
+
+                            synchronized (wthread_002.queue)
+                            {
+                                wthread_002.queue.offer(recursiveparam);
+
+                                break;
+                            }
+
+                        case 0:
+
+                            synchronized (wthread_001.queue)
+                            {
+                                wthread_001.queue.offer(recursiveparam);
+
+                                break;
+                            }
+
+                        default: break;
+                    }
 
                     //
-
-                    System.out.println("Site link \""+recursiveparam.href+"\" queried and stored.");
-                }
-                catch(FileNotFoundException fnfe)
-                {
-                    System.err.println("ModuleOne.dolocalsiterecurse :: Site/link not found: "+recursiveparam.href);
                 }
                 catch (Exception e)
                 {
                     System.err.println("ModuleOne.dolocalsiterecurse :: "+e.getMessage());
                 }
             }
+
+            System.out.println("Anchor enqueue complete for site: "+param.href);
         }
         catch(Exception e)
         {
@@ -300,14 +363,11 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 //
 
-                if(Webcrawler.visitedsitelinks.get(recursiveparam.href)==null || Webcrawler.visitedsitelinks.get(recursiveparam.href).isEmpty())
+                if(Webcrawler.visitedsitelinks.add(recursiveparam.href)==Boolean.TRUE)
                 {
-                    Webcrawler.visitedsitelinks.put(recursiveparam.href, "visited");
-
-                    FileUtils.dopersistsiteurlasvisited(recursiveparam.href);
+                    FileUtils.dopersistsiteurlasvisited(recursiveparam.href); //
 
                     System.out.println("Global recursion has visited "+ Webcrawler.visitedsitelinks.size()+" site(s).");
-
                 }
                 else continue;
 
