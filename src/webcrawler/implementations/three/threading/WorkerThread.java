@@ -29,19 +29,7 @@ public class WorkerThread extends Thread
 
         this.setName(threadname);
     }
-
-    public WorkerThread(ModuleOne runner)
-    {
-        this.module = runner;
-    }
-
-    public WorkerThread() {}
-
-    public WorkerThread(String threadname)
-    {
-        super(threadname);
-    }
-
+    
     //
 
     public void run()
@@ -70,11 +58,7 @@ public class WorkerThread extends Thread
             {
                 try
                 {
-                    WebcrawlerParam param;
-
-                    //
-
-                    param = queue.poll();
+                    WebcrawlerParam  param = queue.poll();
 
                     //
 
