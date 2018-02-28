@@ -36,9 +36,9 @@ public class Webcrawler implements Runnable
     
     //
     
-    public static final Integer LOCAL_RECURSE_DEPTH = 10;
+    public static final Integer LOCAL_RECURSE_DEPTH = 1;
     
-    public static final Integer GLOBAL_RECURSE_DEPTH = 10;
+    public static final Integer GLOBAL_RECURSE_DEPTH = 1;
     
     //
     
@@ -52,7 +52,7 @@ public class Webcrawler implements Runnable
                 
         //
         
-        webcrawler.registrar.register(Preinitializer.class);
+        //webcrawler.registrar.register(Preinitializer.class);
 
         webcrawler.registrar.register(Initializer.class);
         
