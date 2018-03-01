@@ -5,11 +5,12 @@
  */
 package webcrawler.implementations.three.initialization;
 
+import webcrawler.implementations.three.system.SystemReadout;
 import webcrawler.registration.Registrar;
 
 /**
  *
- * @author Max Rupplin (sr scientologist)
+ * @author Max Rupplin
  */
 public class Preinitializer extends webcrawler.intialization.Preinitializer implements Runnable
 {
@@ -19,7 +20,7 @@ public class Preinitializer extends webcrawler.intialization.Preinitializer impl
 
     public Preinitializer()
     {
-        this.registrar.register(WebsiteListLoader.class);
+        this.registrar.register(SystemReadout.class);
     }
 
     //

@@ -1,6 +1,7 @@
 package webcrawler.implementations.three.utils;
 
 import jdk.jfr.Description;
+import webcrawler.common.SiteSpecialization;
 import webcrawler.common.WebcrawlerParam;
 import webcrawler.implementations.three.Webcrawler;
 
@@ -13,6 +14,58 @@ import java.util.HashSet;
 
 public class NetUtils
 {
+    /**
+     *
+     * @param param
+     * @param storedanchors
+     * @return
+     */
+    public static ArrayList<String> dorequestandstorespecializedanchors(WebcrawlerParam param, ArrayList<String> storedanchors)
+    {
+        if(storedanchors==null) storedanchors = new ArrayList<String>();
+
+        //
+
+        ArrayList<SiteSpecialization> list;
+
+        //
+
+        synchronized (WebcrawlerParam.manual_entries)
+        {
+            list = (ArrayList<SiteSpecialization>)WebcrawlerParam.manual_entries.websites.clone();
+
+            WebcrawlerParam.manual_entries.notify();
+        }
+
+        //
+
+        for(int i=0; i<list.size(); i++)
+        {
+            SiteSpecialization site = list.get(i);
+
+            //
+
+            WebcrawlerParam _param = new WebcrawlerParam();
+
+            try
+            {
+                _param.href = new URI(site.SITENAME).normalize().toString();
+
+                _param.url = new URI(site.SITENAME).normalize().toString();
+
+                //
+
+                NetUtils.dorequestandstoreanchors(param, storedanchors, site.LOCAL_DEPTH);
+            }
+            catch(Exception e)
+            {
+                //
+            }
+        }
+
+        return storedanchors;
+    }
+
     /**
      *
      * @param param
@@ -82,11 +135,11 @@ public class NetUtils
 
                         //
 
-                        dorequestandstoreanchors(recursisveparam, storedanchors, depth + 1);
+                        NetUtils.dorequestandstoreanchors(recursisveparam, storedanchors, depth + 1);
 
                         //
 
-                        System.out.println(">> "+param.url+" branch "+anchor+" precursed.");
+                        //System.out.println(">> "+param.url+" branch "+anchor+" precursed.");
                     }
                     catch(FileNotFoundException fnfe)
                     {
@@ -160,7 +213,7 @@ public class NetUtils
         }
         catch (Exception e)
         {
-            //System.err.println("NetUtils.dorequest :: unable to setup URL: \""+param.href+"\"");
+            //System.err.println("NetUtils.dopreload :: unable to setup URL: \""+param.href+"\"");
         }
 
         //
@@ -237,7 +290,7 @@ public class NetUtils
         }
         catch(FileNotFoundException fnfe)
         {
-            //System.err.println("NetUtils.dorequest :: Site or link not found: "+param.href);
+            //System.err.println("NetUtils.dopreload :: Site or link not found: "+param.href);
         }
         catch(Exception e)
         {
@@ -270,94 +323,9 @@ public class NetUtils
 
         //
 
-        URL url=null;
-
-        HttpURLConnection connection=null;
-
-        //
-
         try
         {
-            url = new URL(new URI(param.href).normalize().toString());
-        }
-        catch(Exception e)
-        {
-            System.err.println("NetUtils.dorequestandstoresite :: unable to setup URL: "+param.href);
-        }
-
-        //
-
-        if(url==null) return null;
-
-        //
-
-        connection = (HttpURLConnection)url.openConnection();
-
-        connection.setRequestMethod("GET");
-
-        connection.setReadTimeout(10000);
-
-        connection.setConnectTimeout(30000);
-
-        connection.setRequestProperty("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36");
-
-        //
-
-        if(connection==null) return null;
-
-        //
-
-        StringBuilder builder = new StringBuilder();
-
-        //
-
-        try
-        {
-            int responsecode = connection.getResponseCode();
-
-            //
-
-            if(responsecode!=HttpURLConnection.HTTP_OK)
-            {
-                if(responsecode == HttpURLConnection.HTTP_MOVED_TEMP || responsecode == HttpURLConnection.HTTP_MOVED_PERM || responsecode == HttpURLConnection.HTTP_SEE_OTHER)
-                {
-                    String newurl = param.href = connection.getHeaderField("location");
-
-                    String cookies = connection.getHeaderField("set-cookie");
-
-                    //
-
-                    connection = (HttpURLConnection) new URL(newurl).openConnection();
-
-                    connection.setRequestProperty("cookies", cookies);
-
-                    responsecode = connection.getResponseCode();
-
-                    //
-
-                    if(responsecode!=HttpURLConnection.HTTP_OK)
-                    {
-                        System.out.println("    >> Thread \""+threadname+"\" :: request for website ["+param.href+"] failed with fatal code: "+responsecode);
-                    }
-                }
-            }
-
-            String string=null;
-
-            //
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-            while((string=reader.readLine())!=null)
-            {
-                builder.append(string);
-            }
-
-            //
-
-            param.html = builder.toString();
-
-            param.unqualifiedURL = FileUtils.dodeterminefullpathforpersist(param);
+            NetUtils.dorequest(param);
 
             //
 
@@ -390,10 +358,10 @@ public class NetUtils
 
         //
 
-        if(builder==null) throw new Exception("Unable to retrieve HTML for site: "+param.url);
+        if(param.html==null) throw new Exception("Unable to retrieve HTML for site: "+param.url);
 
         //
 
-        return builder.toString();
+        return param.html;
     }
 }

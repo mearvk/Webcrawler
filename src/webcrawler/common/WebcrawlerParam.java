@@ -2,6 +2,8 @@ package webcrawler.common;
 
 import java.util.ArrayList;
 
+import webcrawler.implementations.three.mapping.SiteSpecializationMap;
+
 /**
  *
  */
@@ -42,4 +44,8 @@ public class WebcrawlerParam
     public String unqualifiedURL;
 
     public String anchor;
+
+    //
+
+    public static SiteSpecializationMap manual_entries = new SiteSpecializationMap();
 }

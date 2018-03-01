@@ -1,7 +1,5 @@
 package webcrawler.common;
 
-import java.util.ArrayList;
-
 public abstract class ModuleOne
 {
     public Object runner;

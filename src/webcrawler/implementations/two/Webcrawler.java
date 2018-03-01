@@ -1,14 +1,16 @@
 package webcrawler.implementations.two;
 
+import webcrawler.implementations.two.initialization.Initializer;
+import webcrawler.implementations.two.initialization.Preinitializer;
 import webcrawler.implementations.two.modules.ModuleOne;
 import webcrawler.implementations.two.modules.ModuleThree;
 import webcrawler.implementations.two.modules.ModuleTwo;
-import webcrawler.implementations.two.initialization.Initializer;
-import webcrawler.implementations.two.initialization.Preinitializer;
 import webcrawler.implementations.utils.Utils;
 import webcrawler.registration.Registrar;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Max Rupplin

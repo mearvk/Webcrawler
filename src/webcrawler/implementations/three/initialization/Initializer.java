@@ -1,5 +1,7 @@
 package webcrawler.implementations.three.initialization;
 
+import webcrawler.registration.Registrar;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,51 +9,60 @@ import java.util.Map;
 /**
  * @author Max Rupplin
  */
-public class Initializer extends webcrawler.intialization.Initializer
-{    
-    public String baseURL;
+public class Initializer extends webcrawler.intialization.Initializer implements Runnable
+{
+    public Registrar registrar = new Registrar();
+
+    //
     
     public Map<String, Object> variables = new HashMap();
+
+    public ArrayList<String> websites = new ArrayList();
+
+    //
     
     public Initializer()
     {
-        
+        this.registrar.register(WebsiteListLoader.class);
     }
     
     public void initialize()
     {
-        //
-        
         variables.put("initializer", this);
-                
-        //        
-                
-        variables.put("method", "GET");
-        
-        variables.put("user-agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:56.0) Gecko/20100101 Firefox/56.0");
-        
-        variables.put("time_accrued", 1000L);
-        
-        //
-        
-        ArrayList<String> websites = new ArrayList();
-        
-        websites.add("https://washingtonpost.com");
-        
-        websites.add("https://google.com");
-        
-        //websites.add("https://microsoft.com");
-        
-        //websites.add("https://mozilla.com");
-        
-        //websites.add("https://oracle.com");
-        
-        //websites.add("https://ebay.com");
-        
-        //websites.add("https://adobe.com");
-        
-        //
-        
-        variables.put("websites", websites);
+    }
+
+    @Override
+    public void run()
+    {
+        for(Class _class : registrar.classes)
+        {
+            Object object = null;
+
+            Runnable runner = null;
+
+            try
+            {
+                object = _class.newInstance();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+                return;
+            }
+
+            if (object instanceof Runnable)
+            {
+                runner = (Runnable) object;
+            }
+
+            if (runner != null)
+            {
+                runner.run();
+            }
+            else
+            {
+                System.out.println("No module object was found for class " + _class.getName());
+            }
+        }
     }
 }

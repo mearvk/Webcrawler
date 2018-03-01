@@ -172,7 +172,7 @@ public class NetUtils
         }
         catch (Exception e)
         {
-            System.err.println("NetUtils.dorequest :: unable to setup URL: \""+param.href+"\"");
+            System.err.println("NetUtils.dopreload :: unable to setup URL: \""+param.href+"\"");
         }
 
         //
@@ -249,7 +249,7 @@ public class NetUtils
         }
         catch(FileNotFoundException fnfe)
         {
-            System.err.println("NetUtils.dorequest :: Site or link not found: "+param.href);
+            System.err.println("NetUtils.dopreload :: Site or link not found: "+param.href);
         }
         catch(Exception e)
         {

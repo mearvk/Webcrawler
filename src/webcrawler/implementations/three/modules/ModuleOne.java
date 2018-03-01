@@ -10,14 +10,13 @@ import webcrawler.implementations.three.utils.FileUtils;
 import webcrawler.implementations.three.utils.NetUtils;
 import webcrawler.implementations.three.utils.ParseUtils;
 
-import java.io.FileNotFoundException;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Vector;
 
 public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 {
+    public final Integer THREADCOUNT = 12;
+
     //pull the website recursively
 
     WorkerThread wthread_001 = new WorkerThread(this,"Thread 01");
@@ -39,6 +38,10 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
     WorkerThread wthread_009 = new WorkerThread(this,"Thread 09");
 
     WorkerThread wthread_010 = new WorkerThread(this,"Thread 10");
+
+    WorkerThread wthread_011 = new WorkerThread(this,"Thread 11");
+
+    WorkerThread wthread_012 = new WorkerThread(this,"Thread 12");
 
     //
 
@@ -63,13 +66,17 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
         this.wthread_009.start();
 
         this.wthread_010.start();
+
+        this.wthread_011.start();
+
+        this.wthread_012.start();
     }
 
     //
 
     public void run()
     {
-        ArrayList<String> websites = (ArrayList<String>)((Initializer) Webcrawler.values.get("initializer")).variables.get("websites");
+        ArrayList<String> websites = (ArrayList<String>)((Initializer) Webcrawler.modules.get("initializer")).variables.get("websites");
 
         //
 
@@ -94,6 +101,8 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
                 param.href = uri.toString();
 
                 param.baseurl = ParseUtils.parseforbaseurl(websites.get(i));
+
+                //
 
                 if(param.baseurl==null) continue;
 
@@ -122,6 +131,8 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             NetUtils.dorequestandstoreanchors(param, anchorset, 0);
 
+            NetUtils.dorequestandstorespecializedanchors(param, anchorset);
+
             //
 
             for(int i=0; i<anchorset.size(); i++)
@@ -145,8 +156,26 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                     //
 
-                    switch(i%10)
+                    switch(i%this.THREADCOUNT)
                     {
+                        case 11:
+
+                            synchronized (wthread_012.queue)
+                            {
+                                wthread_012.queue.offer(recursiveparam);
+
+                                break;
+                            }
+
+                        case 10:
+
+                            synchronized (wthread_011.queue)
+                            {
+                                wthread_011.queue.offer(recursiveparam);
+
+                                break;
+                            }
+
                         case 9:
 
                             synchronized (wthread_010.queue)
@@ -274,9 +303,11 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         try
         {
-            param.html = NetUtils.dorequestandstoresite(param);
+            NetUtils.dorequestandstoresite(param);
 
-            anchorset = NetUtils.dorequestandstoreanchors(param, null, 0);
+            NetUtils.dorequestandstoreanchors(param, anchorset, 0);
+
+            NetUtils.dorequestandstorespecializedanchors(param, anchorset);
         }
         catch(Exception e)
         {

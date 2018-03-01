@@ -23,6 +23,11 @@ public class FileUtils
 
     //
 
+    /**
+     *
+     * @param file
+     * @return
+     */
     public static File doclearfileurl(File file)
     {
         String SLASH = System.getProperty("file.separator");
@@ -542,7 +547,7 @@ public class FileUtils
 
             String correctedfilename = Paths.get(outputURL +SLASH+ Utils.doURLnormalization(filename)).normalize().toString();
 
-            System.out.println("FileUtils.persistfile :: corrected file name: "+correctedfilename);
+            //System.out.println("FileUtils.persistfile :: corrected file name: "+correctedfilename);
 
             //
 
@@ -655,7 +660,7 @@ public class FileUtils
 
             String correctedfilename = Paths.get(outputURL +SLASH+ Utils.doURLnormalization(filename)).normalize().toString();
 
-            System.out.println("FileUtils.persistimage :: corrected file name: "+correctedfilename);
+            //System.out.println("FileUtils.persistimage :: corrected file name: "+correctedfilename);
 
             //
 

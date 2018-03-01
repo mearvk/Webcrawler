@@ -46,7 +46,7 @@ public class WorkerThread extends Thread implements ShutdownThread
                     {
                         this.wait(this.wait_millis);
 
-                        this.isinactive(this.wait_millis);
+                        this.doisinactive(this.wait_millis);
                     }
                 }
                 catch(Exception e)
@@ -56,7 +56,7 @@ public class WorkerThread extends Thread implements ShutdownThread
             }
             else
             {
-                this.time_accrued = 0x0L;
+                this.time_accrued = 0L;
 
                 try
                 {
@@ -86,7 +86,7 @@ public class WorkerThread extends Thread implements ShutdownThread
     }
 
     @Override
-    public void isinactive(long millis)
+    public void doisinactive(long millis)
     {
         if(this.running)
         {

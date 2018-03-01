@@ -1,13 +1,11 @@
 package webcrawler.implementations.two.threading;
 
-import webcrawler.common.WebcrawlerParam;
 import webcrawler.common.ModuleOne;
-import webcrawler.implementations.two.utils.FileUtils;
+import webcrawler.common.WebcrawlerParam;
 import webcrawler.implementations.two.utils.NetUtils;
 import webcrawler.implementations.two.utils.ParseUtils;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 

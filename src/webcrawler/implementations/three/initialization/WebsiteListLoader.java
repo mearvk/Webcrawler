@@ -26,7 +26,7 @@ class WebsiteListLoader implements Runnable
 
         try
         {
-            this.dorequest(param);
+            this.dopreload(param);
         }
         catch(Exception e)
         {
@@ -37,262 +37,16 @@ class WebsiteListLoader implements Runnable
 
         Initializer initializer = null;
 
-        initializer = (Initializer) Webcrawler.values.get("initializer");
+        initializer = (Initializer) Webcrawler.modules.get("initializer");
 
         //
 
-        ArrayList<String> websites;
+        ArrayList<String> websites = null;
 
         websites = (ArrayList<String>)initializer.variables.get("websites");
-
-        //
-
-        websites.add("https://spiderbytes.nytimes.com");
-
-        //
-
-        websites.add("https://en.wikipedia.org/wiki/Computer_science");
-
-        websites.add("https://en.wikipedia.org/wiki/Mathematics");
-
-        websites.add("https://en.wikipedia.org/wiki/Logic");
-
-        websites.add("https://en.wikipedia.org/wiki/Constitution");
-
-        websites.add("https://en.wikipedia.org/wiki/Church");
-
-        websites.add("https://en.wikipedia.org/wiki/Xenu");
-
-        websites.add("https://en.wikipedia.org/wiki/Religion");
-
-        websites.add("https://en.wikipedia.org/wiki/Spirituality");
-
-        websites.add("https://en.wikipedia.org/wiki/Philosophy");
-
-        websites.add("https://en.wikipedia.org/wiki/Network_analysis_(electrical_circuits)");
-
-        websites.add("https://en.wikipedia.org/wiki/Calculus");
-
-        websites.add("https://en.wikipedia.org/wiki/Trigonometry");
-
-        websites.add("https://en.wikipedia.org/wiki/Psychology");
-
-        websites.add("https://en.wikipedia.org/wiki/Psychiatry");
-
-        websites.add("https://en.wikipedia.org/wiki/Pharmacology");
-
-        websites.add("https://en.wikipedia.org/wiki/Algebra");
-
-        websites.add("https://en.wikipedia.org/wiki/Linear_algebra");
-
-        websites.add("https://en.wikipedia.org/wiki/Science");
-
-        websites.add("https://en.wikipedia.org/wiki/Chemistry");
-
-        websites.add("https://en.wikipedia.org/wiki/Intelligence_quotient");
-
-        websites.add("https://en.wikipedia.org/wiki/President_of_the_United_States");
-
-        websites.add("https://en.wikipedia.org/wiki/Vice_President_of_the_United_States");
-
-        websites.add("https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population");
-
-        websites.add("https://en.wikipedia.org/wiki/Wikipedia");
-
-        websites.add("https://en.wikipedia.org/wiki/Pope");
-
-        websites.add("https://en.wikipedia.org/wiki/Pope_Francis");
-
-        websites.add("https://en.wikipedia.org/wiki/L._Ron_Hubbard");
-
-        websites.add("https://en.wikipedia.org/wiki/Truth");
-
-        websites.add("https://en.wikipedia.org/wiki/Java_(programming_language)");
-
-        websites.add("https://en.wikipedia.org/wiki/C_(programming_language)");
-
-        websites.add("https://en.wikipedia.org/wiki/C%2B%2B");
-
-        websites.add("https://en.wikipedia.org/wiki/Music");
-
-        websites.add("https://www.google.com/search?source=hp&q=computer+software&oq=computer+software");
-
-        websites.add("https://www.google.com/search?source=hp&q=system+models&oq=computer+software");
-
-        websites.add("https://www.google.com/search?source=hp&q=reality&oq=reality");
-
-        websites.add("https://www.google.com/search?source=hp&q=teaching&oq=teaching");
-
-        websites.add("https://www.google.com/search?source=hp&q=organization&oq=organization");
-
-        websites.add("https://www.google.com/search?source=hp&q=philosophy&oq=philosophy");
-
-        websites.add("https://www.google.com/search?source=hp&q=honor&oq=honor");
-
-        //
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=church&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=life&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=java+programming&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=c+programming&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=religion&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=scientology&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=president%20trump&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=united%20states%20constitution&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=presidential%20signing%20orders&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=state%20of%20the%20union&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=north%20carolina%20law&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=federalism&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=germany&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=latin%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=italian%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=spanish%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=portugese%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=hindi%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=bengali%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=javanese%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=punjabi%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=landha%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=arabic%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=german%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=french%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=afrikaans%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=dutch%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=chinese%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=mandarin%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=cantonese%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=japanese%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=swahili%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=russian%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=icelandic%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=polynesian%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=inuit%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=korean%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=tagalog%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=tsimshian%20dictionary&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=shakespeare&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=existentialism&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=engineering&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=calculus&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=calculus&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=linear%20algebra&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=trigonometry%20algebra&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=trigonometry&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=fourier&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=chess&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=crime&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=children&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=psychology&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=psychiatry&tbs=,bkv:f&num=100");
-
-        websites.add("https://www.google.com/search?tbo=p&tbm=bks&q=chemistry&tbs=,bkv:f&num=100");
-
-        //
-
-        websites.add("https://news.google.com/news/?ned=us&gl=US&hl=en");                   //usa
-
-        websites.add("https://news.google.com/news/?ned=uk&gl=GB&hl=en-GB");                //uk
-
-        websites.add("https://news.google.com/news/headlines?ned=ar_me&hl=ar&gl=ME");       //arab
-
-        websites.add("https://news.google.com/news/headlines?ned=en_zw&hl=en&gl=ZW");       //zimbabwe
-
-        websites.add("https://news.google.com/news/headlines?ned=es_co&hl=es-419&gl=CO");   //columbia
-
-        websites.add("https://news.google.com/news/headlines?ned=en_bw&hl=en&gl=BW");       //botswana
-
-        websites.add("https://news.google.com/news/headlines?ned=cn&hl=zh-CN&gl=CN");       //china
-
-        websites.add("https://news.google.com/news/headlines?ned=it&hl=it&gl=IT");          //italy
-
-        websites.add("https://news.google.com/news/headlines?ned=hk&hl=zh-HK&gl=HK");       //hong kong
-
-        websites.add("https://news.google.com/news/headlines?ned=nl_nl&hl=nl&gl=NL");       //netherlands
-
-        websites.add("https://news.google.com/news/headlines?ned=en_il&hl=en&gl=IL");       //israel
-
-        websites.add("https://news.google.com/news/headlines?ned=pt-PT_pt&hl=pt-PT&gl=PT"); //portugal
-
-        //
-
-        websites.add("https://raleigh.craigslist.org/search/sss?query=trucks&sort=rel");
-
-        websites.add("https://raleigh.craigslist.org/search/sss?query=cars&sort=rel");
-
-        websites.add("https://raleigh.craigslist.org/search/sss?query=bmw&sort=rel");
-
-        websites.add("https://raleigh.craigslist.org/search/sss?query=bitcoin&sort=rel");
-
-        websites.add("https://raleigh.craigslist.org/search/sss?query=mercedes&sort=rel");
-
-        websites.add("https://raleigh.craigslist.org/search/sss?query=trailers&sort=rel");
-
-        websites.add("https://raleigh.craigslist.org/search/sss?query=porsche&sort=rel");
-
-        websites.add("https://raleigh.craigslist.org/search/sss?query=computer+hardware&sort=rel");
-
-        websites.add("https://raleigh.craigslist.org/search/sss?query=computer+software&sort=rel");
-
-        websites.add("https://raleigh.craigslist.org/search/sss?query=ham+radio&sort=rel");
-
-        websites.add("https://raleigh.craigslist.org/search/sss?query=telescope&sort=rel");
-
-        websites.add("https://raleigh.craigslist.org/search/sss?query=solar+panels&sort=rel");
     }
 
-    public String dorequest(WebcrawlerParam param) throws Exception
+    public String dopreload(WebcrawlerParam param) throws Exception
     {
         URL url=null;
 
@@ -342,11 +96,13 @@ class WebsiteListLoader implements Runnable
 
         //
 
-        param.html =builder.toString();
+        param.html = builder.toString();
+
+        //
 
         System.out.println("-- -- -- -- -- -- -- -- -- -- -- -- -- -- --");
 
-        ArrayList<String> websites = this.doparseHTMLlinks(param);
+        ArrayList<String> websites = this.doparseQUANTCASTlinks(param);
 
         System.out.println("-- -- -- -- -- -- -- -- -- -- -- -- -- -- --");
 
@@ -354,7 +110,7 @@ class WebsiteListLoader implements Runnable
 
         Initializer initializer = null;
 
-        initializer = (Initializer) Webcrawler.values.get("initializer");
+        initializer = (Initializer) Webcrawler.modules.get("initializer");
 
         initializer.variables.put("websites", websites);
 
@@ -363,7 +119,7 @@ class WebsiteListLoader implements Runnable
         return builder.toString();
     }
 
-    public ArrayList<String> doparseHTMLlinks(WebcrawlerParam param)
+    public ArrayList<String> doparseQUANTCASTlinks(WebcrawlerParam param)
     {
         ArrayList<String> links = new ArrayList<String>();
 

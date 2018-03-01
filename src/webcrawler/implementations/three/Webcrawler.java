@@ -8,7 +8,6 @@ import webcrawler.implementations.three.modules.ModuleTwo;
 import webcrawler.implementations.utils.Utils;
 import webcrawler.registration.Registrar;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -26,7 +25,7 @@ public class Webcrawler implements Runnable
     
     //
     
-    public static Map<String, Object> values = new HashMap();
+    public static Map<String, Object> modules = new HashMap();
 
     public static HashSet<String> readyanchorlinks = new HashSet();
 
@@ -52,7 +51,7 @@ public class Webcrawler implements Runnable
                 
         //
         
-        //webcrawler.registrar.register(Preinitializer.class);
+        webcrawler.registrar.register(Preinitializer.class);
 
         webcrawler.registrar.register(Initializer.class);
         
@@ -68,13 +67,13 @@ public class Webcrawler implements Runnable
         
         //
         
-        Webcrawler.values.put("webcrawler", webcrawler);
+        Webcrawler.modules.put("webcrawler", webcrawler);
 
-        Webcrawler.values.put("preinitializer", webcrawler.preinitializer);
+        Webcrawler.modules.put("preinitializer", webcrawler.preinitializer);
 
-        Webcrawler.values.put("initializer", webcrawler.initializer);
+        Webcrawler.modules.put("initializer", webcrawler.initializer);
 
-        Webcrawler.values.put("registrar", webcrawler.registrar);
+        Webcrawler.modules.put("registrar", webcrawler.registrar);
         
         //
         
