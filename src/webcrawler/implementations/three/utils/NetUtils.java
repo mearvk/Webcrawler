@@ -167,7 +167,7 @@ public class NetUtils
         }
         finally
         {
-            System.out.println("Precurse for site \""+param.url+"\" completed.");
+            System.out.println("\nPrecurse for site \""+param.url+"\" completed.\n");
         }
 
         return storedanchors;
@@ -329,15 +329,15 @@ public class NetUtils
 
             //
 
-            FileUtils.dopersist(param);
+            FileUtils.doextractbaseURL(param);
 
             //
 
-            //System.out.println("Site link \""+param.href+"\" queried and stored.");
+            FileUtils.dopersist(param);
         }
         catch(SocketTimeoutException stoe)
         {
-            System.out.println("    >> "+stoe.getMessage()+" for "+param.href);
+            //System.out.println("    >> "+stoe.getMessage()+" for "+param.href);
         }
         catch(ConnectException ce)
         {
@@ -349,7 +349,7 @@ public class NetUtils
         }
         catch(Exception e)
         {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
         finally
         {

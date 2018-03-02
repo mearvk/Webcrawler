@@ -90,7 +90,7 @@ public class FileUtils
      * @return
      * @throws Exception
      */
-    public static String dodeterminefullpathforpersist(WebcrawlerParam param) throws Exception
+    public static String doextractbaseURL(WebcrawlerParam param) throws Exception
     {
         if(param==null) throw new NullPointerException();
 
@@ -133,7 +133,7 @@ public class FileUtils
             retval = retval.replace("..", "");
         }
 
-        return retval;
+        return param.unqualifiedURL = retval;
     }
 
     /**
@@ -185,7 +185,7 @@ public class FileUtils
      * @return
      * @throws Exception
      */
-    public static synchronized String dopersist(WebcrawlerParam param) throws Exception
+    public static String dopersist(WebcrawlerParam param) throws Exception
     {
         Date date = new Date();
 
@@ -339,7 +339,7 @@ public class FileUtils
      * @param url
      * @return
      */
-    public static synchronized String dopersistsiteurlasvisited(String url)
+    public static String dopersistsiteurlasvisited(String url)
     {
         Date date = new Date();
 
@@ -463,7 +463,7 @@ public class FileUtils
      * @param outputURL
      * @throws Exception
      */
-    public static synchronized void persistfile(WebcrawlerParam param, String inputURL, String outputURL) throws Exception
+    public static void persistfile(WebcrawlerParam param, String inputURL, String outputURL) throws Exception
     {
         //
 
@@ -547,7 +547,7 @@ public class FileUtils
 
             String correctedfilename = Paths.get(outputURL +SLASH+ Utils.doURLnormalization(filename)).normalize().toString();
 
-            //System.out.println("FileUtils.persistfile :: corrected file name: "+correctedfilename);
+            System.out.println("FileUtils.persistfile :: corrected file name: "+correctedfilename);
 
             //
 
@@ -601,7 +601,7 @@ public class FileUtils
      * @param outputURL
      * @throws Exception
      */
-    public static synchronized void persistimage(WebcrawlerParam param, String inputURL, String outputURL) throws Exception
+    public static void persistimage(WebcrawlerParam param, String inputURL, String outputURL) throws Exception
     {
         if(inputURL.startsWith("//") || inputURL.startsWith("/") || inputURL.startsWith("./"))
         {
@@ -660,7 +660,7 @@ public class FileUtils
 
             String correctedfilename = Paths.get(outputURL +SLASH+ Utils.doURLnormalization(filename)).normalize().toString();
 
-            //System.out.println("FileUtils.persistimage :: corrected file name: "+correctedfilename);
+            System.out.println("FileUtils.persistimage :: corrected file name: "+correctedfilename);
 
             //
 

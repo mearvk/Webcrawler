@@ -23,8 +23,11 @@ public class WorkerThread extends Thread implements ShutdownThread
 
     public Long wait_millis = 1000L;
 
-    //
-
+    /**
+     *
+     * @param runner
+     * @param threadname
+     */
     public WorkerThread(ModuleOne runner, String threadname)
     {
         this.module = runner;
@@ -32,61 +35,81 @@ public class WorkerThread extends Thread implements ShutdownThread
         this.setName(threadname);
     }
 
-    //
 
+    /**
+     *
+     */
     public void run()
     {
         while(running)
         {
-            if(queue.isEmpty())
+            try
             {
-                try
-                {
-                    synchronized (this)
-                    {
-                        this.wait(this.wait_millis);
-
-                        this.doisinactive(this.wait_millis);
-                    }
-                }
-                catch(Exception e)
-                {
-                    e.printStackTrace();
-                }
+                this.sleepily().processqueue();
             }
-            else
+            catch(Exception e)
             {
-                this.time_accrued = 0L;
-
-                try
-                {
-                    WebcrawlerParam  param = queue.poll();
-
-                    //
-
-                    System.err.println("* "+this.getName()+" has link \""+param.href+"\" for site \"" +param.url+"\"");
-
-                    //
-
-                    NetUtils.dorequestandstoresite(param);
-                }
-                catch(Exception e)
-                {
-                    if(e instanceof FileNotFoundException | e instanceof IllegalArgumentException)
-                    {
-                        System.err.println(e.getMessage());
-                    }
-                    else
-                    {
-                        e.printStackTrace();
-                    }
-                }
+                //
             }
         }
     }
 
+    /**
+     *
+     */
+    protected void processqueue()
+    {
+        if(this.queue==null || this.queue.isEmpty()) return;
+
+        //
+
+        this.time_accrued = 0L;
+
+        //
+
+        try
+        {
+            NetUtils.dorequestandstoresite(queue.poll());
+        }
+        catch(Exception e)
+        {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    protected WorkerThread sleepily()
+    {
+        if( this.queue!=null && !this.queue.isEmpty()) return this;
+
+        //
+
+        try
+        {
+            synchronized (this)
+            {
+                this.wait(this.wait_millis);
+
+                this.inactive(this.wait_millis);
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return this;
+    }
+
+    /**
+     *
+     * @param millis
+     */
     @Override
-    public void doisinactive(long millis)
+    public void inactive(long millis)
     {
         if(this.running)
         {
@@ -106,6 +129,9 @@ public class WorkerThread extends Thread implements ShutdownThread
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void shutdown()
     {

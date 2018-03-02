@@ -94,7 +94,9 @@ public class Webcrawler implements Runnable
             }
             catch(Exception e)
             {
-                e.printStackTrace(); return;
+                e.printStackTrace();
+
+                return;
             }
             
             if(object instanceof Runnable)

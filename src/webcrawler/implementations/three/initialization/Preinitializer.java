@@ -16,22 +16,25 @@ public class Preinitializer extends webcrawler.intialization.Preinitializer impl
 {
     public Registrar registrar = new Registrar();
 
-    //
-
+    /**
+     *
+     */
     public Preinitializer()
     {
         this.registrar.register(SystemReadout.class);
     }
 
-    //
-
+    /**
+     *
+     */
     public void preinitialize()
     {
 
     }
 
-    //
-
+    /**
+     *
+     */
     public void run()
     {
         for(Class _class : registrar.classes)

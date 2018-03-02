@@ -14,6 +14,8 @@ public class Utils
      */
     public static String dofileseparatornormalization(String basedir)
     {
+        if(basedir==null) return null;
+
         String retval = "";
 
         if(System.getProperty("os.name").contains("indows"))

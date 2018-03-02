@@ -14,6 +14,9 @@ import java.util.regex.Pattern;
 
 class WebsiteListLoader implements Runnable
 {
+    /**
+     *
+     */
     public void run()
     {
         WebcrawlerParam param = new WebcrawlerParam();
@@ -46,6 +49,12 @@ class WebsiteListLoader implements Runnable
         websites = (ArrayList<String>)initializer.variables.get("websites");
     }
 
+    /**
+     *
+     * @param param
+     * @return
+     * @throws Exception
+     */
     public String dopreload(WebcrawlerParam param) throws Exception
     {
         URL url=null;
@@ -69,7 +78,7 @@ class WebsiteListLoader implements Runnable
 
         connection.setReadTimeout(10000);
 
-        connection.setConnectTimeout(30000);
+        connection.setConnectTimeout(10000);
 
         connection.setRequestProperty("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36");
 
@@ -119,6 +128,11 @@ class WebsiteListLoader implements Runnable
         return builder.toString();
     }
 
+    /**
+     *
+     * @param param
+     * @return
+     */
     public ArrayList<String> doparseQUANTCASTlinks(WebcrawlerParam param)
     {
         ArrayList<String> links = new ArrayList<String>();

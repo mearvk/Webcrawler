@@ -47,6 +47,7 @@ public class Initializer extends webcrawler.intialization.Initializer implements
             catch (Exception e)
             {
                 e.printStackTrace();
+
                 return;
             }
 
