@@ -41,7 +41,7 @@ public class Webcrawler implements Runnable
     
     //
     
-    public static final String BASEDIR = Utils.dofileseparatornormalization("DC:\\Users\\mearv\\OneDrive\\Desktop\\Websites\\storage");
+    public static final String BASEDIR = Utils.dofileseparatornormalization("C:\\Users\\mearv\\OneDrive\\Desktop\\Websites\\storage");
             
     //
     
