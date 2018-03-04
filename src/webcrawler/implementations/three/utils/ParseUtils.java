@@ -1,6 +1,5 @@
 package webcrawler.implementations.three.utils;
 
-import jdk.jfr.Description;
 import webcrawler.common.WebcrawlerParam;
 import webcrawler.implementations.three.Webcrawler;
 
@@ -17,7 +16,6 @@ public class ParseUtils
      * @return
      * @throws Exception
      */
-    @Description("Extension Safe")
     public static ArrayList<String> doparseanchors(WebcrawlerParam param) throws Exception
     {
         ArrayList<String> anchorlist = new ArrayList();

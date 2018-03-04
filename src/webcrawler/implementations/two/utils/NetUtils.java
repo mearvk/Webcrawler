@@ -1,6 +1,5 @@
 package webcrawler.implementations.two.utils;
 
-import jdk.jfr.Description;
 import webcrawler.common.WebcrawlerParam;
 import webcrawler.implementations.two.Webcrawler;
 
@@ -275,7 +274,7 @@ public class NetUtils
      * @return
      * @throws Exception
      */
-    @Description("Extension Safe")
+    //@Description("Extension Safe")
     public static synchronized String dorequestandstoresite(WebcrawlerParam param) throws Exception
     {
         String threadname = Thread.currentThread().getName();

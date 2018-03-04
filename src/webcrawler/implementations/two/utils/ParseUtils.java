@@ -1,6 +1,5 @@
 package webcrawler.implementations.two.utils;
 
-import jdk.jfr.Description;
 import webcrawler.common.WebcrawlerParam;
 import webcrawler.implementations.two.Webcrawler;
 
@@ -17,7 +16,7 @@ public class ParseUtils
      * @return
      * @throws Exception
      */
-    @Description("Extension Safe")
+    //@Description("Extension Safe")
     public static synchronized ArrayList<String> doparseanchors(WebcrawlerParam param) throws Exception
     {
         ArrayList<String> anchorlist = new ArrayList();

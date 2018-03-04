@@ -1,6 +1,5 @@
 package webcrawler.implementations.three.modules;
 
-import jdk.jfr.Description;
 import webcrawler.common.WebcrawlerParam;
 import webcrawler.exceptions.StackDepthException;
 import webcrawler.implementations.three.Webcrawler;
@@ -118,7 +117,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
     }
 
     //
-    @Description("Extension Safe")
+    //@Description("Extension Safe")
     public synchronized String dolocalsiterecurse(WebcrawlerParam param, Integer depth)
     {
         ArrayList<String> anchorset = new ArrayList<String>();
@@ -294,7 +293,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
     }
 
     //
-    @Description("Extension Safe")
+    //
     public synchronized String doglobalsiterecurse(WebcrawlerParam param, Integer depth)
     {
         ArrayList<String> anchorset = new ArrayList<String>();
@@ -341,7 +340,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
     }
 
     //
-    @Description("Extension Safe")
+    //
     public synchronized String dorecurse(WebcrawlerParam param, Integer depth) throws Exception
     {
         ArrayList<String> anchors = param.siteAnchors;
