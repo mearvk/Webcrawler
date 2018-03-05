@@ -265,7 +265,7 @@ public class FileUtils
                 {
                     try
                     {
-                        FileUtils.persistimage(param, ParseUtils.parseimageforsrcattributevalue(param.siteImages.get(i)), imagefileref);
+                        //FileUtils.persistimage(param, ParseUtils.parseimageforsrcattributevalue(param.siteImages.get(i)), imagefileref);
                     }
                     catch(Exception e)
                     {
@@ -547,7 +547,7 @@ public class FileUtils
 
             String correctedfilename = Paths.get(outputURL +SLASH+ Utils.doURLnormalization(filename)).normalize().toString();
 
-            System.out.println("FileUtils.persistfile :: corrected file name: "+correctedfilename);
+            //System.out.println("FileUtils.persistfile :: corrected file name: "+correctedfilename);
 
             //
 
@@ -660,7 +660,7 @@ public class FileUtils
 
             String correctedfilename = Paths.get(outputURL +SLASH+ Utils.doURLnormalization(filename)).normalize().toString();
 
-            System.out.println("FileUtils.persistimage :: corrected file name: "+correctedfilename);
+            //System.out.println("FileUtils.persistimage :: corrected file name: "+correctedfilename);
 
             //
 
@@ -691,7 +691,7 @@ public class FileUtils
         {
             if(fnfe.getMessage().contains("403"))
             {
-                new String("test");
+                new String("403 error thrown");
             }
 
             //System.err.println("FileUtils.persistimage :: File not found: \""+fnfe.getMessage()+"\"");
