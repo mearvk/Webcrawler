@@ -31,7 +31,7 @@ public class Utils
 
         //
 
-        retval = Paths.get(basedir).normalize().toString();
+        retval = Paths.get(retval).normalize().toString();
 
         //
 
@@ -73,7 +73,7 @@ public class Utils
 
         //
 
-        website_name = rawURL;
+        website_name = rawURL; //?
 
         //
 
