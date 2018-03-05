@@ -41,7 +41,7 @@ public class Webcrawler implements Runnable
     
     //
     
-    public static final String BASEDIR = Utils.dofileseparatornormalization("/home/abasath/sprug");
+    public static final String BASEDIR = Utils.dofileseparatornormalization("/home/abasatho/sprug");
             
     //
     
