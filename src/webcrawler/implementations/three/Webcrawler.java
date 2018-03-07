@@ -35,9 +35,9 @@ public class Webcrawler implements Runnable
     
     //
     
-    public static final Integer LOCAL_RECURSE_DEPTH = 1;
+    public static final Integer LOCAL_RECURSE_DEPTH = 5;
     
-    public static final Integer GLOBAL_RECURSE_DEPTH = 1;
+    public static final Integer GLOBAL_RECURSE_DEPTH = 5;
     
     //
     

@@ -265,7 +265,7 @@ public class FileUtils
                 {
                     try
                     {
-                        //FileUtils.persistimage(param, ParseUtils.parseimageforsrcattributevalue(param.siteImages.get(i)), imagefileref);
+                        FileUtils.persistimage(param, ParseUtils.parseimageforsrcattributevalue(param.siteImages.get(i)), imagefileref);
                     }
                     catch(Exception e)
                     {
