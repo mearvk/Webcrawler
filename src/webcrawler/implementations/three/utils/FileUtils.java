@@ -231,7 +231,7 @@ public class FileUtils
 
             File file = new File(dir.getAbsolutePath(), "index.html");
 
-            if(file.exists()) file.delete(); //weird case where new directory is made for URL and followed by ./index.html and here we do not treat second directory creation step.
+            if(file.exists()) return "skipping";
 
             file = FileUtils.doclearfileurl(file);
 
