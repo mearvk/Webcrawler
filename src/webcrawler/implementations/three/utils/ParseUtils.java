@@ -58,7 +58,7 @@ public class ParseUtils
 
         //
 
-        Matcher matcher = Pattern.compile("<a\\s+.*?>(?:.*?)</a>").matcher(param.html); //parse <a href=""></a> matches for now..
+        Matcher matcher = Pattern.compile("<a\\s+.*?>(?:.*?)").matcher(param.html); //parse <a href=""></a> matches for now..
 
         //
 

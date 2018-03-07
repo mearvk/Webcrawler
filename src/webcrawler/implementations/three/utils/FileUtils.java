@@ -209,15 +209,15 @@ public class FileUtils
 
         //
 
-        String dirref = Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\") +SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL));
+        String dirref = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL));
 
-        String fileref = Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\")+SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL))+ Utils.dofileseparatornormalization("\\"+"index.html");
+        String fileref = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL)) +SLASH+ "index.html";
 
-        String imagefileref = Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\")+SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL))+ Utils.dofileseparatornormalization("\\"+"images");
+        String imagefileref = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL)) +SLASH+ "images";
 
-        String scriptfileref = Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\")+SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL))+ Utils.dofileseparatornormalization("\\"+"javascript");
+        String scriptfileref = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL)) +SLASH+ "javascript";
 
-        String cssfileref = Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\")+SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL))+ Utils.dofileseparatornormalization("\\"+"css");
+        String cssfileref = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear+SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL)) +SLASH+ "css";
 
         //
 
@@ -231,7 +231,7 @@ public class FileUtils
 
             File file = new File(dir.getAbsolutePath(), "index.html");
 
-            if(file.exists()) file.delete(); //weird case where new directory is made for URL and followed by ./index.html and here we do not treat second directory creation step.
+            if(file.exists()) return "skipping";
 
             file = FileUtils.doclearfileurl(file);
 
