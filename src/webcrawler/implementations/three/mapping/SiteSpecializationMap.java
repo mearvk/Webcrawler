@@ -259,5 +259,17 @@ public class SiteSpecializationMap
         this.websites.add(new SiteSpecialization("https://raleigh.craigslist.org/search/sss?query=telescope&sort=rel", 4, 4, false));
 
         this.websites.add(new SiteSpecialization("https://raleigh.craigslist.org/search/sss?query=solar+panels&sort=rel", 4, 4, false));
+
+        //
+
+        this.websites.add(new SiteSpecialization("https://www.yelp.com/search?find_desc=Bars&find_loc=North+Carolina",4,4, true));
+
+        this.websites.add(new SiteSpecialization("https://www.yelp.com/search?find_desc=Bars&find_loc=Alabama",4,4, true));
+
+        this.websites.add(new SiteSpecialization("https://www.yelp.com/search?find_desc=Bars&find_loc=Fayetteville",4,4, true));
+
+        this.websites.add(new SiteSpecialization("https://www.yelp.com/search?find_desc=Bars&find_loc=Raleigh",4,4, true));
+
+        this.websites.add(new SiteSpecialization("https://www.yelp.com/search?find_desc=Bars&find_loc=Raleigh",4,4, true));
     }
 }

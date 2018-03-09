@@ -264,7 +264,7 @@ public class FileUtils
                     }
                     catch(Exception e)
                     {
-                        System.err.println("FileUtils.dopersist :: "+e.getMessage());
+                        System.err.println("FileUtils.dofullpersist :: "+e.getMessage());
                     }
                 }
             }
@@ -283,7 +283,7 @@ public class FileUtils
                     }
                     catch(Exception e)
                     {
-                        System.err.println("FileUtils.dopersist :: "+e.getMessage());
+                        System.err.println("FileUtils.dofullpersist :: "+e.getMessage());
                     }
                 }
             }
@@ -302,7 +302,7 @@ public class FileUtils
                     }
                     catch(Exception e)
                     {
-                        System.err.println("FileUtils.dopersist :: "+e.getMessage());
+                        System.err.println("FileUtils.dofullpersist :: "+e.getMessage());
                     }
                 }
             }
@@ -319,7 +319,7 @@ public class FileUtils
         }
         catch(Exception e)
         {
-            System.err.println("FileUtils.dopersist :: "+e.getMessage());
+            System.err.println("FileUtils.dofullpersist :: "+e.getMessage());
         }
         finally
         {

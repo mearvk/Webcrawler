@@ -75,11 +75,17 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
     public void run()
     {
-        ArrayList<String> websites = (ArrayList<String>)((Initializer) Webcrawler.modules.get("initializer")).variables.get("websites");
+        //
+
+        NetUtils.dorequestandstorespecializedsites(new ArrayList<>());
 
         //
 
-        for(int i=0; i<websites.size(); i++)
+        ArrayList<String> sitelist = (ArrayList<String>)((Initializer) Webcrawler.modules.get("initializer")).variables.get("sitelist");
+
+        //
+
+        for(String site : sitelist)
         {
             WebcrawlerParam param = new WebcrawlerParam();
 
@@ -89,7 +95,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
             {
                 URI uri;
 
-                uri = new URI(websites.get(i));
+                uri = new URI(site);
 
                 uri = uri.normalize();
 
@@ -99,7 +105,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 param.href = uri.toString();
 
-                param.baseurl = ParseUtils.parseforbaseurl(websites.get(i));
+                param.baseurl = ParseUtils.parseforbaseurl(site);
 
                 //
 
@@ -111,7 +117,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
             }
             catch(Exception e)
             {
-
+                System.err.println(e);
             }
         }
     }
@@ -126,11 +132,9 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         try
         {
-            NetUtils.dorequestandstoresite(param);
+            NetUtils.dorequestandstorehtml(param);
 
-            NetUtils.dorequestandstoreanchors(param, anchorset, 0);
-
-            NetUtils.dorequestandstorespecializedanchors(param, anchorset);
+            NetUtils.dorequestandstoreanchors(param, anchorset, 0, Integer.MIN_VALUE);
 
             //
 
@@ -304,9 +308,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
         {
             NetUtils.dorequestandstoresite(param);
 
-            NetUtils.dorequestandstoreanchors(param, anchorset, 0);
-
-            NetUtils.dorequestandstorespecializedanchors(param, anchorset);
+            NetUtils.dorequestandstoreanchors(param, anchorset, 0, -1);
         }
         catch(Exception e)
         {

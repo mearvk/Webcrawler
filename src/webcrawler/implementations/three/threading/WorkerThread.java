@@ -41,6 +41,8 @@ public class WorkerThread extends Thread implements ShutdownThread
      */
     public void run()
     {
+        System.err.println("\""+this.getName()+"\" is up...");
+
         while(running)
         {
             try

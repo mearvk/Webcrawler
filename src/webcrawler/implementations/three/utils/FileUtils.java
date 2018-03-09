@@ -90,7 +90,7 @@ public class FileUtils
      * @return
      * @throws Exception
      */
-    public static String doextractbaseURL(WebcrawlerParam param) throws Exception
+    public static String pullbaseURL(WebcrawlerParam param) throws Exception
     {
         if(param==null) throw new NullPointerException();
 
@@ -185,7 +185,82 @@ public class FileUtils
      * @return
      * @throws Exception
      */
-    public static String dopersist(WebcrawlerParam param) throws Exception
+    public static String doquickpersist(String baseURL, String value) throws Exception
+    {
+        Date date = new Date();
+
+        Integer month = date.getMonth()+1;
+
+        Integer day = date.getDate();
+
+        Integer year = date.getYear();
+
+        //
+
+        String smonth = String.format("%02d", month);
+
+        String syear = "20"+String.format("%02d", year).substring(1);
+
+        String sday = String.format("%02d", day);
+
+        //
+
+        String SLASH = System.getProperty("file.separator");
+
+        //
+
+        String dirref = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ baseURL;
+
+        //
+
+        try
+        {
+            File dir = new File(dirref);
+
+            if (!dir.exists()) dir.mkdirs();
+
+            //
+
+            File file = new File(dir.getAbsolutePath(), "index.html");
+
+            if (file.exists()) return "skipping";
+
+            file = FileUtils.doclearfileurl(file);
+
+            file.createNewFile();
+
+            //
+
+            try
+            {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+
+                writer.write(value);
+
+                writer.flush();
+
+                writer.close();
+            }
+            catch(Exception e)
+            {
+                //
+            }
+        }
+        catch(Exception e)
+        {
+            //
+        }
+
+        return null;
+    }
+
+    /**
+     *
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    public static String dofullpersist(WebcrawlerParam param) throws Exception
     {
         Date date = new Date();
 
@@ -265,11 +340,11 @@ public class FileUtils
                 {
                     try
                     {
-                        FileUtils.persistimage(param, ParseUtils.parseimageforsrcattributevalue(param.siteImages.get(i)), imagefileref);
+                        FileUtils.persistfile(param, ParseUtils.parseimageforsrcattributevalue(param.siteImages.get(i)), imagefileref);
                     }
                     catch(Exception e)
                     {
-                        //System.err.println("FileUtils.dopersist :: "+e.getMessage());
+                        //System.err.println("FileUtils.dofullpersist :: "+e.getMessage());
                     }
                 }
             }
@@ -288,7 +363,7 @@ public class FileUtils
                     }
                     catch(Exception e)
                     {
-                        //System.err.println("FileUtils.dopersist :: "+e.getMessage());
+                        //System.err.println("FileUtils.dofullpersist :: "+e.getMessage());
                     }
                 }
             }
@@ -307,7 +382,7 @@ public class FileUtils
                     }
                     catch(Exception e)
                     {
-                        //System.err.println("FileUtils.dopersist :: "+e.getMessage());
+                        //System.err.println("FileUtils.dofullpersist :: "+e.getMessage());
                     }
                 }
             }
@@ -324,7 +399,7 @@ public class FileUtils
         }
         catch(Exception e)
         {
-            //System.err.println("FileUtils.dopersist :: "+e.getMessage());
+            //System.err.println("FileUtils.dofullpersist :: "+e.getMessage());
         }
         finally
         {
@@ -454,6 +529,11 @@ public class FileUtils
         }
 
         return "success";
+    }
+
+    public static void persistfile(String outputURL) throws Exception
+    {
+        return;
     }
 
     /**

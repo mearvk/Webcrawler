@@ -15,32 +15,31 @@ public class NetUtils
 {
     /**
      *
-     * @param param
      * @param storedanchors
      * @return
      */
-    public static ArrayList<String> dorequestandstorespecializedanchors(WebcrawlerParam param, ArrayList<String> storedanchors)
+    public static ArrayList<String> dorequestandstorespecializedsites(ArrayList<String> storedanchors)
     {
         if(storedanchors==null) storedanchors = new ArrayList<String>();
 
         //
 
-        ArrayList<SiteSpecialization> list;
+        ArrayList<SiteSpecialization> specialized_clone;
 
         //
 
-        synchronized (WebcrawlerParam.manual_entries)
+        synchronized (WebcrawlerParam.sites)
         {
-            list = (ArrayList<SiteSpecialization>)WebcrawlerParam.manual_entries.websites.clone();
+            specialized_clone = (ArrayList<SiteSpecialization>)WebcrawlerParam.sites.websites.clone();
 
-            WebcrawlerParam.manual_entries.notify();
+            WebcrawlerParam.sites.notify();
         }
 
         //
 
-        for(int i=0; i<list.size(); i++)
+        for(SiteSpecialization site : specialized_clone)
         {
-            SiteSpecialization site = list.get(i);
+            //SiteSpecialization site = specialized_clone.get(i);
 
             //
 
@@ -54,11 +53,19 @@ public class NetUtils
 
                 //
 
-                NetUtils.dorequestandstoreanchors(param, storedanchors, site.LOCAL_DEPTH);
+                NetUtils.dorequestandstorehtml(_param);
+
+                NetUtils.dorequestandstoreanchors(_param, storedanchors, 0, site.LOCAL_DEPTH);
+
+                System.out.println("\nPrecurse for site \""+_param.url+"\" completed at "+site.LOCAL_DEPTH+" degrees of recursion.\n");
             }
             catch(Exception e)
             {
                 //
+            }
+            finally
+            {
+                System.gc();
             }
         }
 
@@ -70,15 +77,23 @@ public class NetUtils
      * @param param
      * @param storedanchors
      * @param depth
+     * @param MAX_DEPTH
      * @return
      */
-    public static ArrayList<String> dorequestandstoreanchors(WebcrawlerParam param, ArrayList<String> storedanchors, Integer depth)
+    public static ArrayList<String> dorequestandstoreanchors(WebcrawlerParam param, ArrayList<String> storedanchors, Integer depth, final Integer MAX_DEPTH)
     {
         String threadname = Thread.currentThread().getName();
 
         //
 
-        if(Webcrawler.LOCAL_RECURSE_DEPTH<=depth) return null;
+        if(MAX_DEPTH<=0)
+        {
+            if (Webcrawler.LOCAL_RECURSE_DEPTH <= depth) return null;
+        }
+        else
+        {
+            if(depth >= MAX_DEPTH) return null;
+        }
 
         //
 
@@ -126,7 +141,7 @@ public class NetUtils
 
                         recursisveparam.href = anchor;
 
-                        recursisveparam.html = NetUtils.dorequest(recursisveparam);
+                        recursisveparam.html = NetUtils.dorequestandstorehtml(recursisveparam);
 
                         //
 
@@ -134,7 +149,7 @@ public class NetUtils
 
                         //
 
-                        NetUtils.dorequestandstoreanchors(recursisveparam, storedanchors, depth + 1);
+                        NetUtils.dorequestandstoreanchors(recursisveparam, storedanchors, depth + 1, MAX_DEPTH);
 
                         //
 
@@ -166,7 +181,7 @@ public class NetUtils
         }
         finally
         {
-            System.out.println("\nPrecurse for site \""+param.url+"\" completed.\n");
+            System.gc();
         }
 
         return storedanchors;
@@ -328,11 +343,11 @@ public class NetUtils
 
             //
 
-            FileUtils.doextractbaseURL(param);
+            FileUtils.pullbaseURL(param);
 
             //
 
-            FileUtils.dopersist(param);
+            FileUtils.dofullpersist(param);
         }
         catch(SocketTimeoutException stoe)
         {
@@ -362,5 +377,31 @@ public class NetUtils
         //
 
         return param.html;
+    }
+
+    public static String dorequestandstorehtml(WebcrawlerParam param) throws Exception
+    {
+        try
+        {
+            NetUtils.dorequest(param);
+
+            //
+
+            FileUtils.pullbaseURL(param);
+
+            //
+
+            FileUtils.doquickpersist(param.baseurl, param.html);
+
+            //
+
+            return "success";
+        }
+        catch(Exception e)
+        {
+            System.err.println(e);
+        }
+
+        return "failure";
     }
 }

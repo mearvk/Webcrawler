@@ -47,5 +47,5 @@ public class WebcrawlerParam
 
     //
 
-    public static SiteSpecializationMap manual_entries = new SiteSpecializationMap();
+    public static SiteSpecializationMap sites = new SiteSpecializationMap();
 }
