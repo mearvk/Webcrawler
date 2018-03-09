@@ -1,8 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dcdb4ecf-11f0-403a-ab21-3ca390385c30" name="Default" comment="">
+    <list default="true" id="dcdb4ecf-11f0-403a-ab21-3ca390385c30" name="Default" comment="Latest Version">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/base/BaseConstruct.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/base/BaseConstruct.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/FunctionList.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/FunctionList.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/ModuleOne.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/ModuleOne.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/ModuleThree.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/ModuleThree.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/ModuleTwo.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/ModuleTwo.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/SiteSpecialization.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/SiteSpecialization.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/SiteSpecializationMap.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/SiteSpecializationMap.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/WebcrawlerParam.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/WebcrawlerParam.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/exceptions/StackDepthException.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/exceptions/StackDepthException.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/exceptions/TayException.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/exceptions/TayException.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/ModuleOne.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/ModuleOne.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/ModuleThree.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/ModuleThree.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/ModuleTwo.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/ModuleTwo.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/Utils.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/Utils.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/Webcrawler.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/Webcrawler.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/WebcrawlerParam.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/WebcrawlerParam.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/WorkerThread.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/WorkerThread.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/initialization/Initializer.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/initialization/Initializer.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/initialization/Preinitialization.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/initialization/Preinitialization.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/initialization/WebsiteListLoader.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/initialization/WebsiteListLoader.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/modules/ModuleOne.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/modules/ModuleOne.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/modules/ModuleThree.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/modules/ModuleThree.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/modules/ModuleTwo.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/modules/ModuleTwo.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/threading/WorkerThread.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/one/threading/WorkerThread.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/Webcrawler.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/Webcrawler.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/initialization/Initializer.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/initialization/Initializer.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/initialization/Preinitializer.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/initialization/Preinitializer.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/initialization/WebsiteListLoader.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/initialization/WebsiteListLoader.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/mapping/SiteSpecializationMap.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/mapping/SiteSpecializationMap.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/modules/ModuleOne.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/modules/ModuleOne.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/modules/ModuleThree.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/modules/ModuleThree.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/modules/ModuleTwo.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/modules/ModuleTwo.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/system/SystemReadout.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/system/SystemReadout.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/threading/ShutdownThread.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/threading/ShutdownThread.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/threading/WorkerThread.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/threading/WorkerThread.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/FileUtils.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/FileUtils.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/NetUtils.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/NetUtils.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/ParseUtils.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/ParseUtils.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/Webcrawler.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/Webcrawler.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/initialization/Initializer.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/initialization/Initializer.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/initialization/Preinitializer.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/initialization/Preinitializer.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/initialization/WebsiteListLoader.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/initialization/WebsiteListLoader.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/modules/ModuleOne.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/modules/ModuleOne.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/modules/ModuleThree.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/modules/ModuleThree.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/modules/ModuleTwo.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/modules/ModuleTwo.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/threading/WorkerThread.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/threading/WorkerThread.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/utils/FileUtils.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/utils/FileUtils.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/utils/NetUtils.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/utils/NetUtils.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/utils/ParseUtils.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/utils/ParseUtils.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/utils/Utils.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/utils/Utils.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/intialization/Initializer.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/intialization/Initializer.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/intialization/Preinitializer.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/intialization/Preinitializer.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/registration/Registrar.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/registration/Registrar.class" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,8 +83,8 @@
       <file leaf-file-name="NetUtils.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-525">
-              <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+            <state relative-caret-position="631">
+              <caret line="74" column="7" lean-forward="false" selection-start-line="74" selection-start-column="7" selection-end-line="74" selection-end-column="7" />
               <folding>
                 <element signature="method#dorequest#0;class#NetUtils#0" expanded="false" />
               </folding>
@@ -169,7 +223,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/mearv/Projects/Webcrawler/src/webcrawler/implementations/three/utils/NetUtils.java" />
   </component>
@@ -365,18 +419,25 @@
       <option name="project" value="LOCAL" />
       <updated>1520556340251</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Latest Version">
+      <created>1520559570258</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1520559570258</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20171000" />
+    <option name="totallyTimeSpent" value="21308000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1216" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32971996" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32971996" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -387,7 +448,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15833333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15260416" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32971996" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -640,8 +701,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-525">
-          <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+        <state relative-caret-position="631">
+          <caret line="74" column="7" lean-forward="false" selection-start-line="74" selection-start-column="7" selection-end-line="74" selection-end-column="7" />
           <folding>
             <element signature="method#dorequest#0;class#NetUtils#0" expanded="false" />
           </folding>
