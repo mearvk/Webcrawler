@@ -1,24 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dcdb4ecf-11f0-403a-ab21-3ca390385c30" name="Default" comment="">
+    <list default="true" id="dcdb4ecf-11f0-403a-ab21-3ca390385c30" name="Default" comment="Latest Version">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/SiteSpecialization.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/SiteSpecialization.class" />
-      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/WebcrawlerParam.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/WebcrawlerParam.class" />
-      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/mapping/SiteSpecializationMap.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/mapping/SiteSpecializationMap.class" />
-      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/modules/ModuleOne.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/modules/ModuleOne.class" />
-      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/threading/WorkerThread.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/threading/WorkerThread.class" />
-      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/FileUtils.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/FileUtils.class" />
-      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/NetUtils.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/NetUtils.class" />
-      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/utils/FileUtils.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/utils/FileUtils.class" />
-      <change beforePath="$PROJECT_DIR$/src/webcrawler/common/SiteSpecialization.java" afterPath="$PROJECT_DIR$/src/webcrawler/common/SiteSpecialization.java" />
-      <change beforePath="$PROJECT_DIR$/src/webcrawler/common/WebcrawlerParam.java" afterPath="$PROJECT_DIR$/src/webcrawler/common/WebcrawlerParam.java" />
-      <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/three/mapping/SiteSpecializationMap.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/three/mapping/SiteSpecializationMap.java" />
-      <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/three/modules/ModuleOne.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/three/modules/ModuleOne.java" />
-      <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/three/threading/WorkerThread.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/three/threading/WorkerThread.java" />
-      <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/FileUtils.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/FileUtils.java" />
-      <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java" />
-      <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/two/utils/FileUtils.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/two/utils/FileUtils.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,8 +29,8 @@
       <file leaf-file-name="NetUtils.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-397">
-              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state relative-caret-position="283">
+              <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
               <folding>
                 <element signature="method#dorequest#0;class#NetUtils#0" expanded="false" />
               </folding>
@@ -360,11 +344,18 @@
       <option name="project" value="LOCAL" />
       <updated>1520450372044</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Latest Version">
+      <created>1520555277773</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1520555277774</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18458000" />
+    <option name="totallyTimeSpent" value="19060000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1216" extended-state="6" />
@@ -635,8 +626,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-397">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state relative-caret-position="283">
+          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
           <folding>
             <element signature="method#dorequest#0;class#NetUtils#0" expanded="false" />
           </folding>
