@@ -100,43 +100,136 @@ public class ParseUtils
      * @return
      * @throws Exception
      */
-    public static String parseforbaseurl(String param)
+    public static String dogetbasedomainname(final String param) throws Exception
+    {
+        if(param==null) throw new NullPointerException();
+
+        //
+
+        String retval=param;
+
+        //https://store.google.com --> google.com ... ok
+
+        if(param.startsWith("/")) //relative path
+        {
+            retval = retval.replace("https", "");
+
+            retval = retval.replace("http", "");
+
+            retval = retval.replace(":", "");
+
+            retval = retval.replace("//", "");
+
+            retval = retval.replace("..", "");
+
+            if(retval.indexOf("/")!=-1)
+            {
+                retval = retval.substring(0, retval.indexOf("/"));
+            }
+        }
+        else //full path in HREF link
+        {
+            retval = retval.replace("https", "");
+
+            retval = retval.replace("http", "");
+
+            retval = retval.replace(":", "");
+
+            retval = retval.replace("//", "");
+
+            retval = retval.replace("..", "");
+
+            if(retval.indexOf("/")!=-1)
+            {
+                retval = retval.substring(0, retval.indexOf("/"));
+            }
+        }
+
+        //
+
+        retval = retval.trim();
+
+        //
+
+        int periods = retval.split("\\.").length;
+
+        //
+
+        if(periods<=1) throw new Exception("Unusual domain name: "+retval);
+
+        //
+
+        if(periods==2) return retval;
+
+        //
+
+        String suffix, base;
+
+        suffix = base = null;
+
+        if(periods>2)
+        {
+            suffix = retval.split("\\.")[periods - 1];
+
+            base = retval.split("\\.")[periods - 2];
+        }
+
+        //
+
+        String debug = base+"."+suffix;
+
+        //
+
+        return base+"."+suffix;
+    }
+
+    /**
+     *
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    public static String dogetfulldomainname(String param)
     {
         if(param==null || param.isEmpty()) return null;
 
         //
 
-        if(param.startsWith("https://"))
+        //https://store.google.com --> store.google.com ... ok
+
+        //
+
+        if(param.startsWith("https://"))                        //remove https://
         {
             param = param.substring(8);
         }
 
-        if(param.startsWith("http://"))
+        if(param.startsWith("http://"))                         //remove http://
         {
             param = param.substring(7);
         }
 
-        if(param.endsWith("/"))
+        if(param.endsWith("/"))                                 //remove final / ... eg. hoogle.com/
         {
             param = param.substring(0,param.length()-1);
         }
 
-        if(param.startsWith("//"))
+        if(param.startsWith("//"))                              //remove //hoogle.com --> hoogle.com
         {
             param = param.substring(2);
         }
 
-        if(param.startsWith("/"))
+        if(param.startsWith("/"))                               //remove /hoogle.com --> hoogle.com
         {
             param = param.substring(1);
         }
 
-        if(param.startsWith("#"))
+        if(param.startsWith("#"))                               //remove #hoogle.com --> hoogle.com
         {
             param = param.substring(1);
         }
 
-        if(param.startsWith("./"))
+        if(param.startsWith("./"))                              //remove ./hoogle.com --> hoogle.com
         {
             param = param.substring(2);
         }
@@ -147,24 +240,21 @@ public class ParseUtils
         {
             try
             {
-                param = param.substring(0, param.indexOf("/"));
+                param = param.substring(0, param.indexOf("/")); //grab only DNS name eg.  hoogle.com/?serach=123 --> hoogle.com
             }
             catch(Exception e)
             {
-                //System.out.println(e.getMessage());
+                //
             }
         }
 
         //
 
-        if(!param.contains(".edu") && !param.contains(".com") && !param.contains(".net") && !param.contains(".org") && !param.contains(".uk"))
-        {
-            /*System.err.println("Unsupported extension: "+param);*/ return null;
-        }
+        //grade extensions?
 
         //
 
-        String debug = param;
+        String debug = param;   //here for debug look
 
         //
 
@@ -223,6 +313,10 @@ public class ParseUtils
 
         //
 
+        matcher = null;
+
+        //
+
         return scriptlist;
     }
 
@@ -249,6 +343,12 @@ public class ParseUtils
         if(match==null) return null;
 
         match = match.replace("href=\"", "").replace("\"", "");
+
+        //
+
+        matcher = null;
+
+        //
 
         return match;
     }
@@ -277,6 +377,12 @@ public class ParseUtils
 
         match = match.replace("src=\"", "").replace("\"", "");
 
+        //
+
+        matcher = null;
+
+        //
+
         return match;
     }
 
@@ -304,6 +410,12 @@ public class ParseUtils
 
         match = match.replace("rel=\"", "").replace("\"", "");
 
+        //
+
+        matcher = null;
+
+        //
+
         return match;
     }
 
@@ -330,6 +442,12 @@ public class ParseUtils
         if(match==null) return null;
 
         match = match.replace("type=\"", "").replace("\"", "");
+
+        //
+
+        matcher = null;
+
+        //
 
         return match;
     }
@@ -360,6 +478,12 @@ public class ParseUtils
 
         match = match.replace("href=\"", "").replace("\"", "");
 
+        //
+
+        matcher = null;
+
+        //
+
         return match;
     }
 
@@ -386,6 +510,12 @@ public class ParseUtils
         if(match==null) return null;
 
         match = match.replace("src=\"", "").replace("\"", "");
+
+        //
+
+        matcher = null;
+
+        //
 
         return match;
     }
@@ -442,6 +572,8 @@ public class ParseUtils
             }
         }
 
+        matcher = null;
+
         //
 
         return param.siteStyleSheets = linkedlist;
@@ -472,6 +604,10 @@ public class ParseUtils
         //
 
         param.siteImages = imagelist;
+
+        //
+
+        matcher = null;
 
         //
 

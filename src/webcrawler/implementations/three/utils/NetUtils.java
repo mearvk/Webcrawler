@@ -24,40 +24,33 @@ public class NetUtils
 
         //
 
-        ArrayList<SiteSpecialization> specialized_clone;
-
-        //
-
-        synchronized (WebcrawlerParam.sites)
+        for(SiteSpecialization site : WebcrawlerParam.sites.websites)
         {
-            specialized_clone = (ArrayList<SiteSpecialization>)WebcrawlerParam.sites.websites.clone();
-
-            WebcrawlerParam.sites.notify();
-        }
-
-        //
-
-        for(SiteSpecialization site : specialized_clone)
-        {
-            //SiteSpecialization site = specialized_clone.get(i);
-
-            //
-
-            WebcrawlerParam _param = new WebcrawlerParam();
+            WebcrawlerParam param = new WebcrawlerParam();
 
             try
             {
-                _param.href = new URI(site.SITENAME).normalize().toString();
+                param.href = new URI(site.SITENAME).normalize().toString();
 
-                _param.url = new URI(site.SITENAME).normalize().toString();
+                param.url = new URI(site.SITENAME).normalize().toString();
+
+                param.basedomainname = ParseUtils.dogetbasedomainname(site.SITENAME);
+
+                param.fulldomainname = ParseUtils.dogetfulldomainname(site.SITENAME);
 
                 //
 
-                NetUtils.dorequestandstorehtml(_param);
+                NetUtils.dorequestandstorehtml(param);
 
-                NetUtils.dorequestandstoreanchors(_param, storedanchors, 0, site.LOCAL_DEPTH);
+                NetUtils.dorequestandstoreanchors(param, storedanchors, 0, site.LOCAL_DEPTH);
 
-                System.out.println("\nPrecurse for site \""+_param.url+"\" completed at "+site.LOCAL_DEPTH+" degrees of recursion.\n");
+                //
+
+                System.out.println("\nPrecurse for site \""+param.url+"\" completed at "+site.LOCAL_DEPTH+" degrees of recursion.\n");
+
+                System.out.println("Available memory: "+Runtime.getRuntime().freeMemory()+"\n");
+
+                System.out.println("Available CPUs: "+Runtime.getRuntime().availableProcessors()+"\n");
             }
             catch(Exception e)
             {
@@ -104,10 +97,6 @@ public class NetUtils
         try
         {
             storedanchors.addAll(new HashSet<>(ParseUtils.doparseandsortanchors(param)));
-
-            //
-
-            //Webcrawler..addAll(storedanchors);
 
             //
 
@@ -193,7 +182,7 @@ public class NetUtils
      * @return
      * @throws Exception
      */
-    public static String dorequest(WebcrawlerParam param) throws Exception
+    public static String dositerequest(WebcrawlerParam param) throws Exception
     {
         String threadname = Thread.currentThread().getName();
 
@@ -312,6 +301,8 @@ public class NetUtils
         }
         finally
         {
+            connection = null;
+
             System.gc();
         }
 
@@ -339,15 +330,15 @@ public class NetUtils
 
         try
         {
-            NetUtils.dorequest(param);
+            NetUtils.dositerequest(param);
 
             //
 
-            FileUtils.pullbaseURL(param);
+            ParseUtils.dogetbasedomainname(param.href);
 
             //
 
-            FileUtils.dofullpersist(param);
+            FileUtils.dofullsitepersist(param);
         }
         catch(SocketTimeoutException stoe)
         {
@@ -379,19 +370,21 @@ public class NetUtils
         return param.html;
     }
 
+    /**
+     *
+     * @param param
+     * @return
+     * @throws Exception
+     */
     public static String dorequestandstorehtml(WebcrawlerParam param) throws Exception
     {
         try
         {
-            NetUtils.dorequest(param);
+            NetUtils.dositerequest(param);
 
             //
 
-            FileUtils.pullbaseURL(param);
-
-            //
-
-            FileUtils.doquickpersist(param.baseurl, param.html);
+            FileUtils.doquickpersist(param.basedomainname, param.html);
 
             //
 

@@ -37,11 +37,11 @@ public class WebcrawlerParam
 
     public String persistMessage;
 
-    public String baseurl;
+    public String basedomainname;
+
+    public String fulldomainname;
 
     public String url;
-
-    public String unqualifiedURL;
 
     public String anchor;
 

@@ -2,6 +2,7 @@ package webcrawler.implementations.one.modules;
 
 import webcrawler.common.WebcrawlerParam;
 import webcrawler.exceptions.StackDepthException;
+import webcrawler.implementations.three.utils.ParseUtils;
 import webcrawler.implementations.two.Webcrawler;
 import webcrawler.implementations.two.initialization.Initializer;
 import webcrawler.implementations.two.threading.WorkerThread;
@@ -142,58 +143,6 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
         //
 
         return anchorlist;
-    }
-
-    /**
-     *
-     * @param param
-     * @return
-     * @throws Exception
-     */
-    public String dodeterminefullpathforpersist(WebcrawlerParam param) throws Exception
-    {
-        if(param==null) throw new NullPointerException();
-
-        if(param.url ==null) throw new NullPointerException();
-
-        if(param.href==null) throw new NullPointerException();
-
-        //
-
-        String retval=null;
-
-        //
-
-        if(param.href.startsWith("/")) //relative path
-        {
-            retval = param.url +System.getProperty("file.separator")+param.href;
-
-            retval = retval.replace("https", "");
-
-            retval = retval.replace("http", "");
-
-            retval = retval.replace(":", "");
-
-            retval = retval.replace("//", "");
-
-            retval = retval.replace("..", "");
-        }
-        else //full path in HREF link
-        {
-            retval = param.href;
-
-            retval = retval.replace("https", "");
-
-            retval = retval.replace("http", "");
-
-            retval = retval.replace(":", "");
-
-            retval = retval.replace("//", "");
-
-            retval = retval.replace("..", "");
-        }
-
-        return retval;
     }
 
     /**
@@ -444,9 +393,9 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             //
 
-            param.html =builder.toString();
+            param.html = builder.toString();
 
-            param.unqualifiedURL = this.dodeterminefullpathforpersist(param);
+            param.basedomainname = ParseUtils.dogetbasedomainname(param.href);
 
             //
 
@@ -875,19 +824,19 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         //
 
-        String file_separator = System.getProperty("file.separator");
+        String SLASH = System.getProperty("file.separator");
 
         //
 
-        String dirref = Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\")+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL)+"\\");
+        String dirref = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.doURLnormalization(param.href);
 
-        String fileref = Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\")+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL))+ Utils.dofileseparatornormalization("\\"+"index.html");
+        String fileref = dirref +SLASH+ Utils.doURLnormalization(param.href) +SLASH+ "index.html";
 
-        String imagefileref = Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\")+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL))+ Utils.dofileseparatornormalization("\\"+"images");
+        String imagefileref = dirref +SLASH+ Utils.doURLnormalization(param.href) +SLASH+ "images";
 
-        String scriptfileref = Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\")+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL))+ Utils.dofileseparatornormalization("\\"+"javascript");
+        String scriptfileref = dirref +SLASH+ Utils.doURLnormalization(param.href) +SLASH+ "scripts";
 
-        String cssfileref = Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\")+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL))+ Utils.dofileseparatornormalization("\\"+"css");
+        String cssfileref = dirref +SLASH+ Utils.doURLnormalization(param.href) +SLASH+ "css";
 
         //
 

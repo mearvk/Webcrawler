@@ -109,11 +109,13 @@ class WebsiteListLoader implements Runnable
 
         //
 
-        System.out.println("-- -- -- -- -- -- -- -- -- -- -- -- -- -- --");
+        System.err.println("❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊");
 
         ArrayList<String> websites = this.doparseQUANTCASTlinks(param);
 
-        System.out.println("-- -- -- -- -- -- -- -- -- -- -- -- -- -- --");
+        System.err.println("Initialized Top 100 Websites...");
+
+        System.err.println("❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊");
 
         //
 
@@ -151,11 +153,11 @@ class WebsiteListLoader implements Runnable
             {
                 s = s.replace("name=", "https://").replace("\"", "");
 
-                System.out.println(s);
+                //System.out.println(s);
             }
             else
             {
-                System.out.println("No match");
+                //System.out.println("Unable to load top 100 websites off Quantcast.com/top-sites.");
 
                 continue;
             }

@@ -28,7 +28,7 @@ public class FileUtils
      * @param file
      * @return
      */
-    public static File doclearfileurl(File file)
+    public static File doguardagainstlongfilenames(File file)
     {
         String SLASH = System.getProperty("file.separator");
 
@@ -84,57 +84,7 @@ public class FileUtils
         return new File(NEWFILENAME);
     }
 
-    /**
-     *
-     * @param param
-     * @return
-     * @throws Exception
-     */
-    public static String pullbaseURL(WebcrawlerParam param) throws Exception
-    {
-        if(param==null) throw new NullPointerException();
 
-        if(param.url ==null) throw new NullPointerException();
-
-        if(param.href==null) throw new NullPointerException();
-
-        //
-
-        String retval=null;
-
-        //
-
-        if(param.href.startsWith("/")) //relative path
-        {
-            retval = param.url +System.getProperty("file.separator")+param.href;
-
-            retval = retval.replace("https", "");
-
-            retval = retval.replace("http", "");
-
-            retval = retval.replace(":", "");
-
-            retval = retval.replace("//", "");
-
-            retval = retval.replace("..", "");
-        }
-        else //full path in HREF link
-        {
-            retval = param.href;
-
-            retval = retval.replace("https", "");
-
-            retval = retval.replace("http", "");
-
-            retval = retval.replace(":", "");
-
-            retval = retval.replace("//", "");
-
-            retval = retval.replace("..", "");
-        }
-
-        return param.unqualifiedURL = retval;
-    }
 
     /**
      *
@@ -181,7 +131,8 @@ public class FileUtils
 
     /**
      *
-     * @param param
+     * @param baseURL
+     * @param value
      * @return
      * @throws Exception
      */
@@ -225,26 +176,33 @@ public class FileUtils
 
             if (file.exists()) return "skipping";
 
-            file = FileUtils.doclearfileurl(file);
+            file = FileUtils.doguardagainstlongfilenames(file);
 
             file.createNewFile();
 
             //
 
-            try
-            {
-                BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            BufferedWriter writer;
 
-                writer.write(value);
+            writer = new BufferedWriter(new FileWriter(file));
 
-                writer.flush();
+            writer.write(value);
 
-                writer.close();
-            }
-            catch(Exception e)
-            {
-                //
-            }
+            writer.flush();
+
+            writer.close();
+
+            //
+
+            writer = null;
+
+            dir = null;
+
+            file = null;
+
+            //
+
+            System.gc();
         }
         catch(Exception e)
         {
@@ -260,7 +218,7 @@ public class FileUtils
      * @return
      * @throws Exception
      */
-    public static String dofullpersist(WebcrawlerParam param) throws Exception
+    public static String dofullsitepersist(WebcrawlerParam param) throws Exception
     {
         Date date = new Date();
 
@@ -284,21 +242,21 @@ public class FileUtils
 
         //
 
-        String dirref = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL));
+        String basedir = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.fulldomainname));
 
-        String fileref = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL)) +SLASH+ "index.html";
+        //
 
-        String imagefileref = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL)) +SLASH+ "images";
+        String imagefileref = basedir +SLASH+ "images";
 
-        String scriptfileref = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL)) +SLASH+ "javascript";
+        String scriptfileref = basedir +SLASH+ "javascript";
 
-        String cssfileref = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.unqualifiedURL)) +SLASH+ "css";
+        String cssfileref = basedir +SLASH+ "css";
 
         //
 
         try
         {
-            File dir = new File(dirref);
+            File dir = new File(basedir);
 
             if(!dir.exists()) dir.mkdirs();
 
@@ -308,7 +266,7 @@ public class FileUtils
 
             if(file.exists()) return "skipping";
 
-            file = FileUtils.doclearfileurl(file);
+            file = FileUtils.doguardagainstlongfilenames(file);
 
             file.createNewFile();
 
@@ -344,7 +302,7 @@ public class FileUtils
                     }
                     catch(Exception e)
                     {
-                        //System.err.println("FileUtils.dofullpersist :: "+e.getMessage());
+                        //System.err.println("FileUtils.dofullsitepersist :: "+e.getMessage());
                     }
                 }
             }
@@ -363,7 +321,7 @@ public class FileUtils
                     }
                     catch(Exception e)
                     {
-                        //System.err.println("FileUtils.dofullpersist :: "+e.getMessage());
+                        //System.err.println("FileUtils.dofullsitepersist :: "+e.getMessage());
                     }
                 }
             }
@@ -382,7 +340,7 @@ public class FileUtils
                     }
                     catch(Exception e)
                     {
-                        //System.err.println("FileUtils.dofullpersist :: "+e.getMessage());
+                        //System.err.println("FileUtils.dofullsitepersist :: "+e.getMessage());
                     }
                 }
             }
@@ -396,10 +354,24 @@ public class FileUtils
             writer.flush();
 
             writer.close();
+
+            //
+
+            writer = null;
+
+            dir = null;
+
+            file = null;
+
+            cssdir = null;
+
+            imagedir = null;
+
+            scriptdir = null;
         }
         catch(Exception e)
         {
-            //System.err.println("FileUtils.dofullpersist :: "+e.getMessage());
+            System.err.println(e);
         }
         finally
         {
@@ -436,82 +408,46 @@ public class FileUtils
 
         //
 
-        File visitedsitesdir = new File(Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\"+"meta"));
-
-        File visitedsitesfile = new File(Utils.dofileseparatornormalization(Webcrawler.BASEDIR+"\\"+smonth+"-"+sday+"-"+syear+"\\"+"meta"+"\\"+"visited.csv"));
+        String SLASH = System.getProperty("file.separator");
 
         //
 
-        if(!visitedsitesdir.exists())
-        {
-            visitedsitesdir.mkdirs();
-        }
+        File metadir = new File(Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ "meta");
+
+        File linksfile = new File(metadir.getAbsolutePath(), "links.csv");
 
         //
 
-        try
+        BufferedWriter writer;
+
+        //
+
+        if(!linksfile.exists())
         {
-            if(!visitedsitesfile.exists()) throw new Exception(">>Index file ["+visitedsitesfile.getName()+"] is missing.");
-
-            BufferedReader reader = new BufferedReader(new FileReader(visitedsitesfile));
-
-            // https;//google.com, 02-12-2018, 13:37 EST
-
-            String sitename = null;
-
-            String line = null;
-
-            String[] tokens = null;
-
-            while ((line = reader.readLine()) != null)
+            try
             {
-                tokens = line.split(",");
+                linksfile = FileUtils.doguardagainstlongfilenames(linksfile);
 
-                if (tokens == null) continue;
-
-                sitename = tokens[0];
-
-                //
-
-                sitename = sitename.trim();
-
-                url = url.trim();
-
-                //
-
-                while (sitename.endsWith("/")) {
-                    sitename = sitename.substring(sitename.length() - 1);
-                }
-
-                while (url.endsWith("/")) {
-                    url = url.substring(url.length() - 1);
-                }
-
-                if (sitename.equals(url)) {
-                    reader.close();
-
-                    reader = null;
-
-                    return "preexisting";
-                }
+                linksfile.createNewFile();
             }
-
-            //
-
-            reader.close();
-
-            reader = null;
+            catch (Exception e)
+            {
+                System.err.println(e);
+            }
         }
-        catch(Exception e)
+
+        if (!metadir.exists())
         {
-            System.err.println(e.getMessage());    //for now let's listen
+            metadir.mkdirs();
         }
+
+        //
 
         try
         {
             //
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter(visitedsitesfile, true));
+            writer = new BufferedWriter(new FileWriter(linksfile, true));
 
             writer.write(url+","+date+","+time+"\n");
 
@@ -519,8 +455,6 @@ public class FileUtils
 
             writer.close();
 
-            writer = null;
-
             //
         }
         catch(Exception e)
@@ -528,9 +462,20 @@ public class FileUtils
             System.err.println(e.getMessage());    //for now let's listen
         }
 
+        //
+
+        writer = null;
+
+        metadir = null;
+
+        linksfile = null;
+
+        //
+
         return "success";
     }
 
+    /** */
     public static void persistfile(String outputURL) throws Exception
     {
         return;

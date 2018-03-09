@@ -52,7 +52,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             try
             {
-                param.baseurl = ParseUtils.parseforbaseurl(websites.get(i));
+                param.basedomainname = ParseUtils.parseforbaseurl(websites.get(i));
 
                 param.url = websites.get(i);
 
@@ -165,7 +165,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                     recursiveparam.url = param.url;
 
-                    recursiveparam.baseurl = ParseUtils.parseforbaseurl(param.url);
+                    recursiveparam.basedomainname = ParseUtils.parseforbaseurl(param.url);
 
                     //
 

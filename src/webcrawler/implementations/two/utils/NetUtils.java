@@ -368,7 +368,7 @@ public class NetUtils
 
             param.html = builder.toString();
 
-            param.unqualifiedURL = FileUtils.dodeterminefullpathforpersist(param);
+            //param.href = ParseUtils.dogetbaseURL(param.href);
 
             //
 

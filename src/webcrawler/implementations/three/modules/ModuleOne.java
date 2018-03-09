@@ -105,11 +105,13 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 param.href = uri.toString();
 
-                param.baseurl = ParseUtils.parseforbaseurl(site);
+                param.fulldomainname = ParseUtils.dogetfulldomainname(site);
+
+                param.basedomainname = ParseUtils.dogetbasedomainname(site);
 
                 //
 
-                if(param.baseurl==null) continue;
+                if(param.basedomainname==null) continue;
 
                 //
 
@@ -155,7 +157,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                     recursiveparam.url = param.url;
 
-                    recursiveparam.baseurl = ParseUtils.parseforbaseurl(param.url);
+                    recursiveparam.basedomainname = ParseUtils.dogetfulldomainname(param.url);
 
                     //
 
