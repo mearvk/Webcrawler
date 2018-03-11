@@ -12,18 +12,15 @@ public class SiteSpecializationMap
 
     public SiteSpecializationMap()
     {
-        this.predefined.add(new SiteSpecialization("https://google.com", 1, 1, false));
+        this.predefined.add(new SiteSpecialization("https://google.com", 2, 2, false));
 
         //
 
-        this.predefined.add(new SiteSpecialization("https://spiderbytes.nytimes.com", 1, 1, false));//
-
-        //
-
-        /*
         this.predefined.add(new SiteSpecialization("https://en.wikipedia.org/wiki/Computer_science", 2, 2, false));
 
         this.predefined.add(new SiteSpecialization("https://en.wikipedia.org/wiki/Mathematics", 2, 2, false));
+
+        /*
 
         this.predefined.add(new SiteSpecialization("https://en.wikipedia.org/wiki/Logic", 2, 2, false));
 
