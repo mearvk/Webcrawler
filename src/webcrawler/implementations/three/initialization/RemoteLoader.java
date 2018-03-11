@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RemoteListLoader implements Runnable
+public class RemoteLoader implements Runnable
 {
     /**
      *
      */
-    public RemoteListLoader()
+    public RemoteLoader()
     {
 
     }

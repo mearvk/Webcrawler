@@ -50,6 +50,9 @@ public class NetUtils
                 moduleone = (ModuleOne) Webcrawler.modules.get("moduleone");
 
                 moduleone.offer(param);
+
+
+                Thread.sleep(20000);
             }
             catch(Exception e)
             {
@@ -215,6 +218,8 @@ public class NetUtils
                         NetUtils.dorequestandstoreanchors(recursiveparam, anchors, CURRENT_DEPTH + 1, MAX_DEPTH);
 
                         //
+
+                        recursiveparam.HTML = null;
 
                         //System.out.println(">> "+param.URL+" branch "+anchor+" precursed.");
                     }
