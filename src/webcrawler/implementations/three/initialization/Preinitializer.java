@@ -19,8 +19,6 @@ public class Preinitializer extends webcrawler.intialization.Preinitializer impl
 {
     public Registrar registrar = new Registrar();
 
-    //
-
     public Map<String, Object> variables = new HashMap();
 
     //

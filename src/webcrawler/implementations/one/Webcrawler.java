@@ -908,17 +908,11 @@ class ModuleOne implements Runnable
             }
             catch(NullPointerException npe)
             {
-                // check there will be an error if 404 returned by dorequestandstoresite
+                //
             }
             catch(StackDepthException vdsde)
             {
-                //
-                
-                System.out.println("-- -- -- -- --");
-                
                 System.out.println(vdsde.getMessage());
-                
-                System.out.println("-- -- -- -- --");
                 
                 return null;
             }

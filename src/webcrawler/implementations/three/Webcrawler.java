@@ -1,7 +1,6 @@
 package webcrawler.implementations.three;
 
 import webcrawler.implementations.three.initialization.Initializer;
-import webcrawler.implementations.three.initialization.LocalListLoader;
 import webcrawler.implementations.three.initialization.Preinitializer;
 import webcrawler.implementations.three.modules.ModuleOne;
 import webcrawler.implementations.three.modules.ModuleThree;
@@ -11,7 +10,6 @@ import webcrawler.registration.Registrar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 /**
@@ -43,9 +41,9 @@ public class Webcrawler implements Runnable
     
     //
     
-    public static final Integer LOCAL_RECURSE_DEPTH = 5;
+    public static final Integer LOCAL_RECURSE_DEPTH = 1;
     
-    public static final Integer GLOBAL_RECURSE_DEPTH = 5;
+    public static final Integer GLOBAL_RECURSE_DEPTH = 1;
     
     //
     

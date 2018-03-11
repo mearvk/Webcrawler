@@ -11,8 +11,6 @@ import java.util.Map;
 public class Initializer extends webcrawler.intialization.Initializer implements Runnable
 {
     public Registrar registrar = new Registrar();
-
-    //
     
     public Map<String, Object> variables = new HashMap();
 
@@ -20,9 +18,9 @@ public class Initializer extends webcrawler.intialization.Initializer implements
     
     public Initializer()
     {
-        this.registrar.register(LocalListLoader.class);
+        this.registrar.register(LocalLoader.class);
 
-        this.registrar.register(RemoteListLoader.class);
+        //this.registrar.register(RemoteLoader.class);
     }
     
     public void initialize()

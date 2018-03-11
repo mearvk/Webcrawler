@@ -7,7 +7,7 @@ package webcrawler.registration;
 
 import webcrawler.implementations.three.Webcrawler;
 import webcrawler.implementations.three.initialization.Initializer;
-import webcrawler.implementations.three.initialization.LocalListLoader;
+import webcrawler.implementations.three.initialization.LocalLoader;
 import webcrawler.implementations.three.initialization.Preinitializer;
 import webcrawler.implementations.three.modules.ModuleOne;
 import webcrawler.implementations.three.modules.ModuleThree;
@@ -45,9 +45,9 @@ public class Registrar
 
         try
         {
-            if(_class.newInstance() instanceof LocalListLoader)
+            if(_class.newInstance() instanceof LocalLoader)
             {
-                LocalListLoader manualloader = (LocalListLoader)_class.newInstance();
+                LocalLoader manualloader = (LocalLoader)_class.newInstance();
 
                 this.classes_objects.put(_class, manualloader);
 

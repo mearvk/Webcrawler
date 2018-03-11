@@ -2,9 +2,9 @@ package webcrawler.implementations.three.initialization;
 
 import webcrawler.implementations.three.utils.NetUtils;
 
-public class LocalListLoader implements Runnable
+public class LocalLoader implements Runnable
 {
-    public LocalListLoader()
+    public LocalLoader()
     {
 
     }
