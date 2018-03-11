@@ -137,7 +137,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
         {
             case 11:
 
-                System.err.println("#11: URL enqueue event for : "+param.HREF);
+                System.err.println("URL enqueue event for : "+param.HREF);
 
                 threads.get(11).queue.offer(param);
 
@@ -145,7 +145,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 10:
 
-                System.err.println("#10: URL enqueue event for : "+param.HREF);
+                System.err.println("URL enqueue event for : "+param.HREF);
 
                 threads.get(10).queue.offer(param);
 
@@ -153,7 +153,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 9:
 
-                System.err.println("#09: URL enqueue event for : "+param.HREF);
+                System.err.println("URL enqueue event for : "+param.HREF);
 
                 threads.get(9).queue.offer(param);
 
@@ -161,7 +161,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 8:
 
-                System.err.println("#08: URL enqueue event for : "+param.HREF);
+                System.err.println("URL enqueue event for : "+param.HREF);
 
                 threads.get(8).queue.offer(param);
 
@@ -169,7 +169,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 7:
 
-                System.err.println("#07: URL enqueue event for : "+param.HREF);
+                System.err.println("URL enqueue event for : "+param.HREF);
 
                 threads.get(7).queue.offer(param);
 
@@ -177,7 +177,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 6:
 
-                System.err.println("#06: URL enqueue event for : "+param.HREF);
+                System.err.println("URL enqueue event for : "+param.HREF);
 
                 threads.get(6).queue.offer(param);
 
@@ -185,7 +185,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 5:
 
-                System.err.println("#05: URL enqueue event for : "+param.HREF);
+                System.err.println("URL enqueue event for : "+param.HREF);
 
                 threads.get(5).queue.offer(param);
 
@@ -193,7 +193,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 4:
 
-                System.err.println("#04: URL enqueue event for : "+param.HREF);
+                System.err.println("URL enqueue event for : "+param.HREF);
 
                 threads.get(4).queue.offer(param);
 
@@ -201,7 +201,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 3:
 
-                System.err.println("#03: URL enqueue event for : "+param.HREF);
+                System.err.println("URL enqueue event for : "+param.HREF);
 
                 threads.get(3).queue.offer(param);
 
@@ -209,7 +209,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 2:
 
-                System.err.println("#02: URL enqueue event for : "+param.HREF);
+                System.err.println("URL enqueue event for : "+param.HREF);
 
                 threads.get(2).queue.offer(param);
 
@@ -217,7 +217,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 1:
 
-                System.err.println("#01: URL enqueue event for : "+param.HREF);
+                System.err.println("URL enqueue event for : "+param.HREF);
 
                 threads.get(1).queue.offer(param);
 
@@ -225,7 +225,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 0:
 
-                System.err.println("#00: URL enqueue event for : "+param.HREF);
+                System.err.println("URL enqueue event for : "+param.HREF);
 
                 threads.get(0).queue.offer(param);
 
