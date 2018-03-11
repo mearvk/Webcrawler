@@ -6,59 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="dcdb4ecf-11f0-403a-ab21-3ca390385c30" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/base/BaseConstruct.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/common/FunctionList.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/common/ModuleOne.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/common/ModuleThree.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/common/ModuleTwo.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/common/SiteSpecialization.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/common/SiteSpecializationMap.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/common/WebcrawlerParam.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/exceptions/StackDepthException.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/exceptions/TayException.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/one/ModuleOne.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/one/ModuleThree.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/one/ModuleTwo.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/one/Utils.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/one/Webcrawler.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/one/WebcrawlerParam.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/one/WorkerThread.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/one/initialization/Initializer.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/one/initialization/Preinitialization.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/one/initialization/WebsiteListLoader.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/one/modules/ModuleOne.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/one/modules/ModuleThree.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/one/modules/ModuleTwo.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/one/threading/WorkerThread.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/three/Webcrawler.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/three/initialization/Initializer.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/three/initialization/Preinitializer.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/three/initialization/WebsiteListLoader.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/three/mapping/SiteSpecializationMap.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/three/modules/ModuleOne.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/three/modules/ModuleThree.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/three/modules/ModuleTwo.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/three/system/SystemReadout.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/three/threading/ShutdownThread.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/three/threading/WorkerThread.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/three/utils/FileUtils.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/three/utils/NetUtils.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/three/utils/ParseUtils.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/two/Webcrawler.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/two/initialization/Initializer.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/two/initialization/Preinitializer.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/two/initialization/WebsiteListLoader.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/two/modules/ModuleOne.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/two/modules/ModuleThree.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/two/modules/ModuleTwo.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/two/threading/WorkerThread.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/two/utils/FileUtils.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/two/utils/NetUtils.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/two/utils/ParseUtils.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/implementations/utils/Utils.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/intialization/Initializer.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/intialization/Preinitializer.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Webcrawler/webcrawler/registration/Registrar.class" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -119,8 +66,8 @@
       <file leaf-file-name="ModuleOne.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/modules/ModuleOne.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="227" column="41" lean-forward="false" selection-start-line="227" selection-start-column="41" selection-end-line="227" selection-end-column="41" />
+            <state relative-caret-position="172">
+              <caret line="221" column="11" lean-forward="true" selection-start-line="221" selection-start-column="11" selection-end-line="221" selection-end-column="11" />
               <folding>
                 <element signature="method#ModuleOne#0;class#ModuleOne#0" expanded="false" />
                 <element signature="method#run#0;class#ModuleOne#0" expanded="false" />
@@ -459,7 +406,7 @@
       <workItem from="1520356449221" duration="287000" />
       <workItem from="1520748420147" duration="2382000" />
       <workItem from="1520751200776" duration="18822000" />
-      <workItem from="1520806867436" duration="35000" />
+      <workItem from="1520806867436" duration="231000" />
     </task>
     <task id="LOCAL-00001" summary="Latest Version">
       <created>1520432474240</created>
@@ -559,17 +506,25 @@
       <option name="project" value="LOCAL" />
       <updated>1520804609813</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Latest Version">
+      <created>1520806937095</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1520806937095</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81713000" />
+    <option name="totallyTimeSpent" value="81909000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1216" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2728094" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -592,7 +547,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2728094" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32971996" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -892,7 +846,6 @@
         <state relative-caret-position="697">
           <caret line="51" column="10" lean-forward="false" selection-start-line="51" selection-start-column="10" selection-end-line="51" selection-end-column="10" />
           <folding>
-            <element signature="imports" expanded="false" />
             <element signature="method#run#0;class#Webcrawler#0" expanded="false" />
           </folding>
         </state>
@@ -903,7 +856,6 @@
         <state relative-caret-position="510">
           <caret line="49" column="49" lean-forward="true" selection-start-line="49" selection-start-column="49" selection-end-line="49" selection-end-column="49" />
           <folding>
-            <element signature="imports" expanded="false" />
             <element signature="method#run#0;class#Webcrawler#0" expanded="false" />
           </folding>
         </state>
@@ -929,7 +881,6 @@
         <state relative-caret-position="361">
           <caret line="53" column="20" lean-forward="false" selection-start-line="53" selection-start-column="20" selection-end-line="53" selection-end-column="20" />
           <folding>
-            <element signature="imports" expanded="false" />
             <element signature="method#run#0;class#Webcrawler#0" expanded="false" />
           </folding>
         </state>
@@ -940,7 +891,6 @@
         <state relative-caret-position="-153">
           <caret line="52" column="8" lean-forward="false" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
           <folding>
-            <element signature="imports" expanded="false" />
             <element signature="method#run#0;class#Webcrawler#0" expanded="false" />
           </folding>
         </state>
@@ -950,6 +900,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="326">
           <caret line="233" column="46" lean-forward="false" selection-start-line="233" selection-start-column="46" selection-end-line="233" selection-end-column="46" />
+          <folding>
+            <element signature="method#doguardagainstlongfilenames#0;class#FileUtils#0" expanded="false" />
+            <element signature="method#dodeterminefullpathforhttpreference#0;class#FileUtils#0" expanded="false" />
+            <element signature="method#doquickpersist#0;class#FileUtils#0" expanded="false" />
+            <element signature="method#dopersistsiteurlasvisited#0;class#FileUtils#0" expanded="false" />
+            <element signature="method#persistfile#1;class#FileUtils#0" expanded="false" />
+            <element signature="method#persistimage#0;class#FileUtils#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -972,7 +930,6 @@
         <state relative-caret-position="697">
           <caret line="51" column="10" lean-forward="false" selection-start-line="51" selection-start-column="10" selection-end-line="51" selection-end-column="10" />
           <folding>
-            <element signature="imports" expanded="false" />
             <element signature="method#run#0;class#Webcrawler#0" expanded="false" />
           </folding>
         </state>
@@ -983,7 +940,6 @@
         <state relative-caret-position="510">
           <caret line="49" column="49" lean-forward="true" selection-start-line="49" selection-start-column="49" selection-end-line="49" selection-end-column="49" />
           <folding>
-            <element signature="imports" expanded="false" />
             <element signature="method#run#0;class#Webcrawler#0" expanded="false" />
           </folding>
         </state>
@@ -1000,6 +956,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="244" column="166" lean-forward="false" selection-start-line="244" selection-start-column="166" selection-end-line="244" selection-end-column="166" />
+          <folding>
+            <element signature="method#doguardagainstlongfilenames#0;class#FileUtils#0" expanded="false" />
+            <element signature="method#dodeterminefullpathforhttpreference#0;class#FileUtils#0" expanded="false" />
+            <element signature="method#doquickpersist#0;class#FileUtils#0" expanded="false" />
+            <element signature="method#dopersistsiteurlasvisited#0;class#FileUtils#0" expanded="false" />
+            <element signature="method#persistfile#1;class#FileUtils#0" expanded="false" />
+            <element signature="method#persistimage#0;class#FileUtils#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1025,6 +989,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1122">
           <caret line="154" column="77" lean-forward="false" selection-start-line="154" selection-start-column="77" selection-end-line="154" selection-end-column="77" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1202,8 +1167,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/modules/ModuleOne.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="227" column="41" lean-forward="false" selection-start-line="227" selection-start-column="41" selection-end-line="227" selection-end-column="41" />
+        <state relative-caret-position="172">
+          <caret line="221" column="11" lean-forward="true" selection-start-line="221" selection-start-column="11" selection-end-line="221" selection-end-column="11" />
           <folding>
             <element signature="method#ModuleOne#0;class#ModuleOne#0" expanded="false" />
             <element signature="method#run#0;class#ModuleOne#0" expanded="false" />
