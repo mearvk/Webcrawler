@@ -8,6 +8,9 @@ package webcrawler.implementations.three.initialization;
 import webcrawler.implementations.three.system.SystemReadout;
 import webcrawler.registration.Registrar;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author Max Rupplin
@@ -16,36 +19,36 @@ public class Preinitializer extends webcrawler.intialization.Preinitializer impl
 {
     public Registrar registrar = new Registrar();
 
-    /**
-     *
-     */
+    //
+
+    public Map<String, Object> variables = new HashMap();
+
+    //
+
     public Preinitializer()
     {
         this.registrar.register(SystemReadout.class);
     }
 
-    /**
-     *
-     */
     public void preinitialize()
     {
-
+        this.variables.put("preinitializer", this);
     }
 
-    /**
-     *
-     */
     public void run()
     {
         for(Class _class : registrar.classes)
         {
-            Object object=null;
+            Object object = registrar.classes_objects.get(_class);
 
             Runnable runner=null;
 
             try
             {
-                object = _class.newInstance();
+                if(object==null)
+                {
+                    object = _class.newInstance();
+                }
             }
             catch(Exception e)
             {
@@ -68,4 +71,3 @@ public class Preinitializer extends webcrawler.intialization.Preinitializer impl
         }
     }
 }
-

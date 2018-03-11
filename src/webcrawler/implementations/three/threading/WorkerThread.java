@@ -4,7 +4,7 @@ import webcrawler.common.ModuleOne;
 import webcrawler.common.WebcrawlerParam;
 import webcrawler.implementations.three.utils.NetUtils;
 
-import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -35,7 +35,6 @@ public class WorkerThread extends Thread implements ShutdownThread
         this.setName(threadname);
     }
 
-
     /**
      *
      */
@@ -59,21 +58,49 @@ public class WorkerThread extends Thread implements ShutdownThread
      */
     protected void processqueue()
     {
-        if(this.queue==null || this.queue.isEmpty()) return;
-
-        //
-
-        this.time_accrued = 0L;
-
-        //
-
-        try
+        synchronized (this.queue)
         {
-            NetUtils.dorequestandstoresite(queue.poll());
-        }
-        catch(Exception e)
-        {
-            System.err.println(e.getMessage());
+            if (this.queue == null || this.queue.isEmpty()) return;
+
+            //
+
+            this.time_accrued = 0L;
+
+            //
+
+            try
+            {
+                WebcrawlerParam param = queue.poll();
+
+                //
+
+                System.err.println("URL dequeue event for : " + param.HREF);
+
+                //
+
+                if (param.LDEPTH > 0)
+                {
+                    NetUtils.dorequestandstorepage(param);
+
+                    NetUtils.dorequestandstoreanchors(param, new ArrayList<String>(), 0, param.LDEPTH);
+                }
+                else
+                {
+                    NetUtils.dorequestandstoresite(param);
+                }
+
+                //
+
+                param = null;
+            }
+            catch (Exception e)
+            {
+                System.err.println(e.getMessage());
+            }
+
+            //
+
+            this.queue.notify();
         }
     }
 
@@ -156,10 +183,6 @@ public class WorkerThread extends Thread implements ShutdownThread
             }
         }
 
-        System.err.println("-- -- -- -- -- -- -- -- -- -- -- --");
-
         System.err.println("Thread "+this.getName()+" timed out.");
-
-        System.err.println("-- -- -- -- -- -- -- -- -- -- -- --");
     }
 }

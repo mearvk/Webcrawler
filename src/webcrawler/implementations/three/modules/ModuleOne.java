@@ -3,87 +3,51 @@ package webcrawler.implementations.three.modules;
 import webcrawler.common.WebcrawlerParam;
 import webcrawler.exceptions.StackDepthException;
 import webcrawler.implementations.three.Webcrawler;
-import webcrawler.implementations.three.initialization.Initializer;
 import webcrawler.implementations.three.threading.WorkerThread;
 import webcrawler.implementations.three.utils.FileUtils;
 import webcrawler.implementations.three.utils.NetUtils;
 import webcrawler.implementations.three.utils.ParseUtils;
 
-import java.net.URI;
 import java.util.ArrayList;
 
 public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 {
-    public final Integer THREADCOUNT = 12;
+    public Integer count = 0;
 
-    //pull the website recursively
+    public final Integer threadcount = Runtime.getRuntime().availableProcessors();
 
-    WorkerThread wthread_001 = new WorkerThread(this,"Thread 01");
+    public ArrayList<WorkerThread> threads = new ArrayList<>(threadcount);
 
-    WorkerThread wthread_002 = new WorkerThread(this,"Thread 02");
-
-    WorkerThread wthread_003 = new WorkerThread(this,"Thread 03");
-
-    WorkerThread wthread_004 = new WorkerThread(this,"Thread 04");
-
-    WorkerThread wthread_005 = new WorkerThread(this,"Thread 05");
-
-    WorkerThread wthread_006 = new WorkerThread(this,"Thread 06");
-
-    WorkerThread wthread_007 = new WorkerThread(this,"Thread 07");
-
-    WorkerThread wthread_008 = new WorkerThread(this,"Thread 08");
-
-    WorkerThread wthread_009 = new WorkerThread(this,"Thread 09");
-
-    WorkerThread wthread_010 = new WorkerThread(this,"Thread 10");
-
-    WorkerThread wthread_011 = new WorkerThread(this,"Thread 11");
-
-    WorkerThread wthread_012 = new WorkerThread(this,"Thread 12");
-
-    //
-
+    /**
+     *
+     */
     public ModuleOne()
     {
-        this.wthread_001.start();
+        for(int i = 0; i< threadcount; i++)
+        {
+            WorkerThread worker = new WorkerThread(this,"Thread "+i);
 
-        this.wthread_002.start();
+            //
 
-        this.wthread_003.start();
+            threads.add(worker);
 
-        this.wthread_004.start();
+            //
 
-        this.wthread_005.start();
-
-        this.wthread_006.start();
-
-        this.wthread_007.start();
-
-        this.wthread_008.start();
-
-        this.wthread_009.start();
-
-        this.wthread_010.start();
-
-        this.wthread_011.start();
-
-        this.wthread_012.start();
+            worker.start();
+        }
     }
 
-    //
-
+    /**
+     *
+     */
     public void run()
     {
-        //
+        return;
 
-        NetUtils.dorequestandstorespecializedsites(new ArrayList<>());
-
-        //
-
-        ArrayList<String> sitelist = (ArrayList<String>)((Initializer) Webcrawler.modules.get("initializer")).variables.get("sitelist");
+        /*ArrayList<String> sitelist = (ArrayList<String>)((Initializer) Webcrawler.modules.get("initializer")).variables.get("predefined");
 
         //
+
 
         for(String site : sitelist)
         {
@@ -101,31 +65,206 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 //
 
-                param.url = uri.toString();
+                param.URL = uri.toString();
 
-                param.href = uri.toString();
+                param.HREF = uri.toString();
 
-                param.fulldomainname = ParseUtils.dogetfulldomainname(site);
+                param.FULL_DOMAIN_NAME = ParseUtils.dogetfulldomainname(site);
 
-                param.basedomainname = ParseUtils.dogetbasedomainname(site);
-
-                //
-
-                if(param.basedomainname==null) continue;
+                param.DOMAIN_NAME = ParseUtils.dogetbasedomainname(site);
 
                 //
 
-                this.dolocalsiterecurse(param, Webcrawler.LOCAL_RECURSE_DEPTH);
+                if(param.DOMAIN_NAME==null) continue;
+
+                //
+
+                this.dolocalsiterecurse(param, param.LDEPTH);
             }
             catch(Exception e)
             {
                 System.err.println(e);
             }
         }
+        */
     }
 
-    //
-    //@Description("Extension Safe")
+    /**
+     *
+     * @param param
+     */
+    public void offer(WebcrawlerParam param)
+    {
+        switch(count%this.threadcount)
+        {
+            case 11:
+
+                //synchronized (threads.get(11).queue)
+                //{
+                    System.err.println("URL enqueue event for : "+param.HREF);
+
+                    threads.get(11).queue.offer(param);
+
+                    //threads.get(11).queue.notify();
+                //}
+
+                break;
+
+            case 10:
+
+                //synchronized (threads.get(10).queue)
+                //{
+                    System.err.println("URL enqueue event for : "+param.HREF);
+
+                    threads.get(10).queue.offer(param);
+
+                    //threads.get(10).queue.notify();
+                //}
+
+                break;
+
+            case 9:
+
+                //synchronized (threads.get(9).queue)
+                //{
+                    System.err.println("URL enqueue event for : "+param.HREF);
+
+                    threads.get(9).queue.offer(param);
+
+                    //threads.get(9).queue.notify();
+                //}
+
+                break;
+
+            case 8:
+
+                //synchronized (threads.get(8).queue)
+                //{
+                    System.err.println("URL enqueue event for : "+param.HREF);
+
+                    threads.get(8).queue.offer(param);
+
+                    //threads.get(8).queue.notify();
+                //}
+
+                break;
+
+            case 7:
+
+                //synchronized (threads.get(7).queue)
+                //{
+                    System.err.println("URL enqueue event for : "+param.HREF);
+
+                    threads.get(7).queue.offer(param);
+
+                    //threads.get(7).queue.notify();
+                //}
+
+                break;
+
+            case 6:
+
+                //synchronized (threads.get(6).queue)
+                //{
+                    System.err.println("URL enqueue event for : "+param.HREF);
+
+                    threads.get(6).queue.offer(param);
+
+                    //threads.get(6).queue.notify();
+                //}
+
+                break;
+
+            case 5:
+
+                //synchronized (threads.get(5).queue)
+                //{
+                    System.err.println("URL enqueue event for : "+param.HREF);
+
+                    threads.get(5).queue.offer(param);
+
+                    //threads.get(5).queue.notify();
+                //}
+
+                break;
+
+            case 4:
+
+                //synchronized (threads.get(4).queue)
+                //{
+                    System.err.println("URL enqueue event for : "+param.HREF);
+
+                    threads.get(4).queue.offer(param);
+
+                    //threads.get(4).queue.notify();
+                //}
+
+                break;
+
+            case 3:
+
+                //synchronized (threads.get(3).queue)
+                //{
+                    System.err.println("URL enqueue event for : "+param.HREF);
+
+                    threads.get(3).queue.offer(param);
+
+                    //threads.get(3).queue.notify();
+                //}
+
+                break;
+
+            case 2:
+
+                //synchronized (threads.get(2).queue)
+                //{
+                    System.err.println("URL enqueue event for : "+param.HREF);
+
+                    threads.get(2).queue.offer(param);
+
+                    //threads.get(2).queue.notify();
+                //}
+
+                break;
+
+            case 1:
+
+                //synchronized (threads.get(1).queue)
+                //{
+                    System.err.println("URL enqueue event for : "+param.HREF);
+
+                    threads.get(1).queue.offer(param);
+
+                    //threads.get(1).queue.notify();
+                //}
+
+                break;
+
+            case 0:
+
+                //synchronized (threads.get(0).queue)
+                //{
+                    System.err.println("URL enqueue event for : "+param.HREF);
+
+                    threads.get(0).queue.offer(param);
+
+                    //threads.get(0).queue.notify();
+                //}
+
+                break;
+
+            default: break;
+        }
+
+        count++;
+    }
+
+    /**
+     *
+     * @param param
+     * @param depth
+     * @return
+     */
     public synchronized String dolocalsiterecurse(WebcrawlerParam param, Integer depth)
     {
         ArrayList<String> anchorset = new ArrayList<String>();
@@ -134,7 +273,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         try
         {
-            NetUtils.dorequestandstorehtml(param);
+            NetUtils.dorequestandstorepage(param);
 
             NetUtils.dorequestandstoreanchors(param, anchorset, 0, Integer.MIN_VALUE);
 
@@ -142,7 +281,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             for(int i=0; i<anchorset.size(); i++)
             {
-                System.err.println("Site \""+param.url +"\" anchor member #"+i+" "+anchorset.get(i));
+                System.err.println("Site \""+param.URL +"\" anchor member #"+i+" "+anchorset.get(i));
             }
 
             //
@@ -153,120 +292,120 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 try
                 {
-                    recursiveparam.href = anchorset.get(i);
+                    recursiveparam.HREF = anchorset.get(i);
 
-                    recursiveparam.url = param.url;
+                    recursiveparam.URL = param.URL;
 
-                    recursiveparam.basedomainname = ParseUtils.dogetfulldomainname(param.url);
+                    recursiveparam.DOMAIN_NAME = ParseUtils.dogetfulldomainname(param.URL);
 
                     //
 
-                    switch(i%this.THREADCOUNT)
+                    switch(i%this.threadcount)
                     {
                         case 11:
 
-                            synchronized (wthread_012.queue)
+                            synchronized (threads.get(11).queue)
                             {
-                                wthread_012.queue.offer(recursiveparam);
+                                threads.get(11).queue.offer(recursiveparam);
 
                                 break;
                             }
 
                         case 10:
 
-                            synchronized (wthread_011.queue)
+                            synchronized (threads.get(10).queue)
                             {
-                                wthread_011.queue.offer(recursiveparam);
+                                threads.get(10).queue.offer(recursiveparam);
 
                                 break;
                             }
 
                         case 9:
 
-                            synchronized (wthread_010.queue)
+                            synchronized (threads.get(9).queue)
                             {
-                                wthread_010.queue.offer(recursiveparam);
+                                threads.get(9).queue.offer(recursiveparam);
 
                                 break;
                             }
 
                         case 8:
 
-                            synchronized (wthread_009.queue)
+                            synchronized (threads.get(8).queue)
                             {
-                                wthread_009.queue.offer(recursiveparam);
+                                threads.get(8).queue.offer(recursiveparam);
 
                                 break;
                             }
 
                         case 7:
 
-                            synchronized (wthread_008.queue)
+                            synchronized (threads.get(7).queue)
                             {
-                                wthread_008.queue.offer(recursiveparam);
+                                threads.get(7).queue.offer(recursiveparam);
 
                                 break;
                             }
 
                         case 6:
 
-                            synchronized (wthread_007.queue)
+                            synchronized (threads.get(6).queue)
                             {
-                                wthread_007.queue.offer(recursiveparam);
+                                threads.get(6).queue.offer(recursiveparam);
 
                                 break;
                             }
 
                         case 5:
 
-                            synchronized (wthread_006.queue)
+                            synchronized (threads.get(5).queue)
                             {
-                                wthread_006.queue.offer(recursiveparam);
+                                threads.get(5).queue.offer(recursiveparam);
 
                                 break;
                             }
 
                         case 4:
 
-                            synchronized (wthread_005.queue)
+                            synchronized (threads.get(4).queue)
                             {
-                                wthread_005.queue.offer(recursiveparam);
+                                threads.get(4).queue.offer(recursiveparam);
 
                                 break;
                             }
 
                         case 3:
 
-                            synchronized (wthread_004.queue)
+                            synchronized (threads.get(3).queue)
                             {
-                                wthread_004.queue.offer(recursiveparam);
+                                threads.get(3).queue.offer(recursiveparam);
 
                                 break;
                             }
 
                         case 2:
 
-                            synchronized (wthread_003.queue)
+                            synchronized (threads.get(2).queue)
                             {
-                                wthread_003.queue.offer(recursiveparam);
+                                threads.get(2).queue.offer(recursiveparam);
 
                                 break;
                             }
 
                         case 1:
 
-                            synchronized (wthread_002.queue)
+                            synchronized (threads.get(1).queue)
                             {
-                                wthread_002.queue.offer(recursiveparam);
+                                threads.get(1).queue.offer(recursiveparam);
 
                                 break;
                             }
 
                         case 0:
 
-                            synchronized (wthread_001.queue)
+                            synchronized (threads.get(0).queue)
                             {
-                                wthread_001.queue.offer(recursiveparam);
+                                threads.get(0).queue.offer(recursiveparam);
 
                                 break;
                             }
@@ -282,7 +421,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
                 }
             }
 
-            System.out.println("Anchor enqueue complete for site: "+param.href);
+            System.out.println("Anchor enqueue complete for site: "+param.HREF);
         }
         catch(Exception e)
         {
@@ -298,8 +437,12 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
         return "success";
     }
 
-    //
-    //
+    /**
+     *
+     * @param param
+     * @param depth
+     * @return
+     */
     public synchronized String doglobalsiterecurse(WebcrawlerParam param, Integer depth)
     {
         ArrayList<String> anchorset = new ArrayList<String>();
@@ -321,7 +464,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         for(int i=0; i<anchorset.size(); i++)
         {
-            System.err.println("Site \""+param.url +"\" anchor member #"+i+" "+anchorset.get(i));
+            System.err.println("Site \""+param.URL +"\" anchor member #"+i+" "+anchorset.get(i));
         }
 
         //
@@ -332,7 +475,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             singlesiteparam = new WebcrawlerParam();
 
-            singlesiteparam.href = anchorset.get(i);
+            singlesiteparam.HREF = anchorset.get(i);
         }
 
 
@@ -343,8 +486,13 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
         return "success";
     }
 
-    //
-    //
+    /**
+     *
+     * @param param
+     * @param depth
+     * @return
+     * @throws Exception
+     */
     public synchronized String dorecurse(WebcrawlerParam param, Integer depth) throws Exception
     {
         ArrayList<String> anchors = param.siteAnchors;
@@ -355,7 +503,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         if(anchors==null || anchors.isEmpty())
         {
-            System.out.println("Site "+param.url +" had no links of any kind!");
+            System.out.println("Site "+param.URL +" had no links of any kind!");
 
             return null;
         }
@@ -381,25 +529,25 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
             {
                 //
 
-                recursiveparam.url = param.url;
+                recursiveparam.URL = param.URL;
 
-                recursiveparam.href = ParseUtils.parseanchorforhrefattributevalue(anchor);
+                recursiveparam.HREF = ParseUtils.parseanchorforhrefattributevalue(anchor);
 
-                if(recursiveparam.href==null || recursiveparam.href.isEmpty()) continue;
+                if(recursiveparam.HREF ==null || recursiveparam.HREF.isEmpty()) continue;
 
-                recursiveparam.href = FileUtils.dodeterminefullpathforhttpreference(param, recursiveparam.href);
-
-                //
-
-                if(recursiveparam.href==null) continue;
-
-                if(!recursiveparam.href.contains("http")) continue;
+                recursiveparam.HREF = FileUtils.dodeterminefullpathforhttpreference(param, recursiveparam.HREF);
 
                 //
 
-                if(Webcrawler.visitedsitelinks.add(recursiveparam.href)==Boolean.TRUE)
+                if(recursiveparam.HREF ==null) continue;
+
+                if(!recursiveparam.HREF.contains("http")) continue;
+
+                //
+
+                if(Webcrawler.visitedsitelinks.add(recursiveparam.HREF)==Boolean.TRUE)
                 {
-                    FileUtils.dopersistsiteurlasvisited(recursiveparam.href); //
+                    FileUtils.dopersistsiteurlasvisited(recursiveparam.HREF); //
 
                     System.out.println("Global recursion has visited "+ Webcrawler.visitedsitelinks.size()+" site(s).");
                 }
@@ -407,15 +555,15 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 //
 
-                recursiveparam.url = param.url;
+                recursiveparam.URL = param.URL;
 
                 recursiveparam.anchor = anchor;
 
                 //
 
-                System.out.println("ModuleOne:dorecurse has href value: "+recursiveparam.href);
+                System.out.println("ModuleOne:dorecurse has HREF value: "+recursiveparam.HREF);
 
-                System.out.println("ModuleOne:dorecurse has url value: "+recursiveparam.url);
+                System.out.println("ModuleOne:dorecurse has URL value: "+recursiveparam.URL);
 
                 //
 
@@ -426,7 +574,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 //
 
-                recursiveparam.html = NetUtils.dorequestandstoresite(recursiveparam);
+                recursiveparam.HTML = NetUtils.dorequestandstoresite(recursiveparam);
 
                 recursiveparam.siteAnchors = ParseUtils.doparseanchors(recursiveparam);
 

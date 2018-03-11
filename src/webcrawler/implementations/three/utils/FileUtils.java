@@ -109,11 +109,11 @@ public class FileUtils
             }
             else if(inputURL.startsWith("/"))
             {
-                inputURL = param.url + inputURL;
+                inputURL = param.URL + inputURL;
             }
             else if(inputURL.startsWith("./"))
             {
-                inputURL = param.url + inputURL;
+                inputURL = param.URL + inputURL;
             }
         }
         else if(inputURL.startsWith("http"))
@@ -122,7 +122,7 @@ public class FileUtils
         }
         else if(!inputURL.isEmpty() && inputURL.charAt(0)!='/')
         {
-            inputURL = param.url + "/" + inputURL;
+            inputURL = param.URL + "/" + inputURL;
         }
         else throw new Exception("Neither relative nor absolute URL found for file: \""+inputURL+"\"");
 
@@ -172,7 +172,7 @@ public class FileUtils
 
             //
 
-            File file = new File(dir.getAbsolutePath(), "index.html");
+            File file = new File(dir.getAbsolutePath(), "index.HTML");
 
             if (file.exists()) return "skipping";
 
@@ -242,7 +242,7 @@ public class FileUtils
 
         //
 
-        String basedir = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.fulldomainname));
+        String basedir = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.FULL_DOMAIN_NAME));
 
         //
 
@@ -262,7 +262,7 @@ public class FileUtils
 
             //
 
-            File file = new File(dir.getAbsolutePath(), "index.html");
+            File file = new File(dir.getAbsolutePath(), "index.HTML");
 
             if(file.exists()) return "skipping";
 
@@ -349,7 +349,7 @@ public class FileUtils
 
             FileWriter writer = new FileWriter(file);
 
-            writer.write(param.html);
+            writer.write(param.HTML);
 
             writer.flush();
 
@@ -507,12 +507,12 @@ public class FileUtils
 
             if(inputURL.startsWith("/"))
             {
-                inputURL = param.url + inputURL;
+                inputURL = param.URL + inputURL;
             }
 
             if(inputURL.startsWith("./"))
             {
-                inputURL = param.url + inputURL;
+                inputURL = param.URL + inputURL;
             }
         }
         else if(inputURL.startsWith("http"))
@@ -521,7 +521,7 @@ public class FileUtils
         }
         else if(!inputURL.isEmpty() && inputURL.charAt(0)!='/')
         {
-            inputURL = param.url + "/" + inputURL;
+            inputURL = param.URL + "/" + inputURL;
         }
         else throw new Exception("Neither relative nor absolute URL found for file: \""+inputURL+"\"");
 
@@ -639,12 +639,12 @@ public class FileUtils
 
             if(inputURL.startsWith("/"))
             {
-                inputURL = param.url + inputURL;
+                inputURL = param.URL + inputURL;
             }
 
             if(inputURL.startsWith("./"))
             {
-                inputURL = param.url + inputURL;
+                inputURL = param.URL + inputURL;
             }
         }
         else if(inputURL.startsWith("http"))
@@ -653,7 +653,7 @@ public class FileUtils
         }
         else if(!inputURL.isEmpty() && inputURL.charAt(0)!='/')
         {
-            inputURL = param.url + "/" + inputURL;
+            inputURL = param.URL + "/" + inputURL;
         }
         else throw new Exception("Neither relative nor absolute URL found for file: \""+inputURL+"\"");
 

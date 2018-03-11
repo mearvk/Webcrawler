@@ -23,11 +23,11 @@ public class ParseUtils
 
         //
 
-        if(param==null || param.html ==null) throw new Exception("Site HTML was not ready for site: "+param.url);
+        if(param==null || param.HTML ==null) throw new Exception("Site HTML was not ready for site: "+param.URL);
 
         //
 
-        Matcher matcher = Pattern.compile("<a\\s+.*?>(?:.*?)</a>").matcher(param.html); //parse <a href=""></a> matches for now..
+        Matcher matcher = Pattern.compile("<a\\s+.*?>(?:.*?)</a>").matcher(param.HTML); //parse <a HREF=""></a> matches for now..
 
         //
 
@@ -53,11 +53,11 @@ public class ParseUtils
 
         //
 
-        if(param==null || param.html ==null) throw new Exception("Site HTML was not ready for site: "+param.url);
+        if(param==null || param.HTML ==null) throw new Exception("Site HTML was not ready for site: "+param.URL);
 
         //
 
-        Matcher matcher = Pattern.compile("<a\\s+.*?>(?:.*?)</a>").matcher(param.html); //parse <a href=""></a> matches for now..
+        Matcher matcher = Pattern.compile("<a\\s+.*?>(?:.*?)</a>").matcher(param.HTML); //parse <a HREF=""></a> matches for now..
 
         //
 
@@ -75,7 +75,7 @@ public class ParseUtils
 
             anchor = anchor.startsWith("/") ? anchor.substring(1) : anchor;
 
-            anchor = anchor.startsWith("http") ? anchor : param.url + "/" + anchor;
+            anchor = anchor.startsWith("http") ? anchor : param.URL + "/" + anchor;
 
             //
 
@@ -183,7 +183,7 @@ public class ParseUtils
 
         //
 
-        Matcher matcher = Pattern.compile("<script\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.html);
+        Matcher matcher = Pattern.compile("<script\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.HTML);
 
         //
 
@@ -196,7 +196,7 @@ public class ParseUtils
 
         //
 
-        Matcher matcher_link_tags = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(param.html);
+        Matcher matcher_link_tags = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(param.HTML);
 
         //
 
@@ -249,7 +249,7 @@ public class ParseUtils
 
         if(match==null) return null;
 
-        match = match.replace("href=\"", "").replace("\"", "");
+        match = match.replace("HREF=\"", "").replace("\"", "");
 
         return match;
     }
@@ -359,7 +359,7 @@ public class ParseUtils
 
         if(match==null) return null;
 
-        match = match.replace("href=\"", "").replace("\"", "");
+        match = match.replace("HREF=\"", "").replace("\"", "");
 
         return match;
     }
@@ -404,11 +404,11 @@ public class ParseUtils
 
         ArrayList<String> linklist = new ArrayList();
 
-        String originalsiteHTML = new StringBuffer(param.html).toString();
+        String originalsiteHTML = new StringBuffer(param.HTML).toString();
 
         //
 
-        Matcher matcher = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(param.html);
+        Matcher matcher = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(param.HTML);
 
         //
 
@@ -437,30 +437,30 @@ public class ParseUtils
 
             recursiveparam = new WebcrawlerParam();
 
-            recursiveparam.href = ParseUtils.parselinkforhrefattributevalue(linktag);
+            recursiveparam.HREF = ParseUtils.parselinkforhrefattributevalue(linktag);
 
             //
 
-            if(recursiveparam.href.startsWith("/") || recursiveparam.href.startsWith("./"))
+            if(recursiveparam.HREF.startsWith("/") || recursiveparam.HREF.startsWith("./"))
             {
-                recursiveparam.href = param.url + recursiveparam.href;
+                recursiveparam.HREF = param.URL + recursiveparam.HREF;
             }
 
-            if(recursiveparam.href.endsWith("/"))
+            if(recursiveparam.HREF.endsWith("/"))
             {
-                recursiveparam.href = recursiveparam.href.substring(0,recursiveparam.href.length()-1);
+                recursiveparam.HREF = recursiveparam.HREF.substring(0,recursiveparam.HREF.length()-1);
             }
 
-            if(param.url.endsWith("/"))
+            if(param.URL.endsWith("/"))
             {
-                param.url = param.url.substring(0,param.url.length()-1);
+                param.URL = param.URL.substring(0,param.URL.length()-1);
             }
 
-            if( !(recursiveparam.href.trim().equals(param.url.trim()) || recursiveparam.href.replace("www.","").trim().equals(param.url.replace("www.","").trim())) && (Webcrawler.visitedresourcelinks.get(recursiveparam.href)==null || Webcrawler.visitedresourcelinks.size()==0) )
+            if( !(recursiveparam.HREF.trim().equals(param.URL.trim()) || recursiveparam.HREF.replace("www.","").trim().equals(param.URL.replace("www.","").trim())) && (Webcrawler.visitedresourcelinks.get(recursiveparam.HREF)==null || Webcrawler.visitedresourcelinks.size()==0) )
             {
                 //
 
-                Webcrawler.visitedresourcelinks.put(recursiveparam.href, "visited");
+                Webcrawler.visitedresourcelinks.put(recursiveparam.HREF, "visited");
             }
             else
             {
@@ -471,7 +471,7 @@ public class ParseUtils
 
             //
 
-            if(recursiveparam.href!=null && recursiveparam.href.trim().endsWith(".css"))
+            if(recursiveparam.HREF !=null && recursiveparam.HREF.trim().endsWith(".css"))
             {
                 continue; //
             }
@@ -483,11 +483,11 @@ public class ParseUtils
 
                     //
 
-                    if(recursiveparam.html ==null) continue;
+                    if(recursiveparam.HTML ==null) continue;
 
                     //
 
-                    matcher = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(recursiveparam.html); //parse <img src=""></img> matches for now..
+                    matcher = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(recursiveparam.HTML); //parse <img src=""></img> matches for now..
 
                     while(matcher.find())
                     {
@@ -511,7 +511,7 @@ public class ParseUtils
 
         //
 
-        //System.out.println("    >> Thread \""+threadname+"\" :: "+param.href+", at two levels of recursion, had "+linklist.size()+" <link> tag(s).");
+        //System.out.println("    >> Thread \""+threadname+"\" :: "+param.HREF+", at two levels of recursion, had "+linklist.size()+" <link> tag(s).");
 
         //
 
@@ -545,7 +545,7 @@ public class ParseUtils
 
         param.siteStyleSheets = linklist;
 
-        param.html = originalsiteHTML;
+        param.HTML = originalsiteHTML;
 
         //
 
@@ -563,7 +563,7 @@ public class ParseUtils
 
         //
 
-        Matcher matcher = Pattern.compile("<img\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.html);
+        Matcher matcher = Pattern.compile("<img\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.HTML);
 
         //
 

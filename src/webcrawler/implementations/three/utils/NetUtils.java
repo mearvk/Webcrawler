@@ -3,11 +3,13 @@ package webcrawler.implementations.three.utils;
 import webcrawler.common.SiteSpecialization;
 import webcrawler.common.WebcrawlerParam;
 import webcrawler.implementations.three.Webcrawler;
+import webcrawler.implementations.three.modules.ModuleOne;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.net.*;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -15,46 +17,43 @@ public class NetUtils
 {
     /**
      *
-     * @param storedanchors
      * @return
      */
-    public static ArrayList<String> dorequestandstorespecializedsites(ArrayList<String> storedanchors)
+    public static ArrayList<String> doenqueuelocalsites()
     {
-        if(storedanchors==null) storedanchors = new ArrayList<String>();
+        ArrayList<String> storedanchors = new ArrayList<String>();
 
         //
 
-        for(SiteSpecialization site : WebcrawlerParam.sites.websites)
+        for(SiteSpecialization site : WebcrawlerParam.sites.predefined)
         {
             WebcrawlerParam param = new WebcrawlerParam();
 
             try
             {
-                param.href = new URI(site.SITENAME).normalize().toString();
+                param.HREF = new URI(site.SITENAME).normalize().toString();
 
-                param.url = new URI(site.SITENAME).normalize().toString();
+                param.URL = new URI(site.SITENAME).normalize().toString();
 
-                param.basedomainname = ParseUtils.dogetbasedomainname(site.SITENAME);
+                param.DOMAIN_NAME = ParseUtils.dogetbasedomainname(site.SITENAME);
 
-                param.fulldomainname = ParseUtils.dogetfulldomainname(site.SITENAME);
+                param.FULL_DOMAIN_NAME = ParseUtils.dogetfulldomainname(site.SITENAME);
 
-                //
+                param.LDEPTH = site.LOCAL_DEPTH;
 
-                NetUtils.dorequestandstorehtml(param);
-
-                NetUtils.dorequestandstoreanchors(param, storedanchors, 0, site.LOCAL_DEPTH);
+                param.GDEPTH = site.GLOBAL_DEPTH;
 
                 //
 
-                System.out.println("\nPrecurse for site \""+param.url+"\" completed at "+site.LOCAL_DEPTH+" degrees of recursion.\n");
+                ModuleOne moduleone;
 
-                System.out.println("Available memory: "+Runtime.getRuntime().freeMemory()+"\n");
+                moduleone = (ModuleOne) Webcrawler.modules.get("moduleone");
 
-                System.out.println("Available CPUs: "+Runtime.getRuntime().availableProcessors()+"\n");
+                moduleone.offer(param);
             }
             catch(Exception e)
             {
-                //
+                e.printStackTrace();
             }
             finally
             {
@@ -67,46 +66,106 @@ public class NetUtils
 
     /**
      *
-     * @param param
-     * @param storedanchors
-     * @param depth
+     * @return
+     */
+    public static ArrayList<String> doenqueueremotesites()
+    {
+        ArrayList<String> storedanchors = new ArrayList<String>();
+
+        //
+
+        for(SiteSpecialization site : WebcrawlerParam.sites.predefined)
+        {
+            WebcrawlerParam param = new WebcrawlerParam();
+
+            try
+            {
+                param.HREF = new URI(site.SITENAME).normalize().toString();
+
+                param.URL = new URI(site.SITENAME).normalize().toString();
+
+                param.DOMAIN_NAME = ParseUtils.dogetbasedomainname(site.SITENAME);
+
+                param.FULL_DOMAIN_NAME = ParseUtils.dogetfulldomainname(site.SITENAME);
+
+                param.LDEPTH = site.LOCAL_DEPTH;
+
+                param.GDEPTH = site.GLOBAL_DEPTH;
+
+                //
+
+                ModuleOne moduleone;
+
+                moduleone = (ModuleOne) Webcrawler.modules.get("moduleone");
+
+                moduleone.offer(param);
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+            finally
+            {
+                System.gc();
+            }
+        }
+
+        return storedanchors;
+    }
+
+    /**
+     *
+     * @param CURRENT_DEPTH
      * @param MAX_DEPTH
      * @return
      */
-    public static ArrayList<String> dorequestandstoreanchors(WebcrawlerParam param, ArrayList<String> storedanchors, Integer depth, final Integer MAX_DEPTH)
+    private static boolean exceedsmaximumdepth(final int CURRENT_DEPTH, final int MAX_DEPTH)
     {
-        String threadname = Thread.currentThread().getName();
-
-        //
-
         if(MAX_DEPTH<=0)
         {
-            if (Webcrawler.LOCAL_RECURSE_DEPTH <= depth) return null;
+            if (Webcrawler.LOCAL_RECURSE_DEPTH <= CURRENT_DEPTH) return true;
         }
         else
         {
-            if(depth >= MAX_DEPTH) return null;
+            if(CURRENT_DEPTH >= MAX_DEPTH) return true;
         }
+
+        return false;
+    }
+
+    /**
+     *
+     * @param param
+     * @param anchors
+     * @param CURRENT_DEPTH
+     * @param MAX_DEPTH
+     * @return
+     */
+    public static ArrayList<String> dorequestandstoreanchors(WebcrawlerParam param, ArrayList<String> anchors, final Integer CURRENT_DEPTH, final Integer MAX_DEPTH)
+    {
+        if(anchors==null) throw new InvalidParameterException();
+
+        if(param==null) throw new InvalidParameterException();
 
         //
 
-        if(storedanchors==null) storedanchors = new ArrayList<String>();
+        if( NetUtils.exceedsmaximumdepth(CURRENT_DEPTH, MAX_DEPTH) ) return anchors;
 
         //
 
         try
         {
-            storedanchors.addAll(new HashSet<>(ParseUtils.doparseandsortanchors(param)));
+            anchors.addAll(new HashSet<>(ParseUtils.doparseandsortanchors(param)));
 
             //
 
-            for(int i=0; i<storedanchors.size(); i++)
+            for(int i=0; i<anchors.size(); i++)
             {
-                if(Webcrawler.visitedsitelinks.contains(storedanchors.get(i))) continue;
+                if(Webcrawler.visitedsitelinks.contains(anchors.get(i))) continue;
 
                 try
                 {
-                    String anchor = storedanchors.get(i);
+                    String anchor = anchors.get(i);
 
                     //
 
@@ -120,17 +179,32 @@ public class NetUtils
 
                     //
 
-                    WebcrawlerParam recursisveparam = null;
+                    WebcrawlerParam recursiveparam = null;
 
                     try
                     {
-                        recursisveparam = new WebcrawlerParam();
+                        recursiveparam = new WebcrawlerParam();
 
-                        recursisveparam.url = param.url;
+                        recursiveparam.URL = param.URL;
 
-                        recursisveparam.href = anchor;
+                        recursiveparam.HREF = anchor;
 
-                        recursisveparam.html = NetUtils.dorequestandstorehtml(recursisveparam);
+                        recursiveparam.HTML = NetUtils.dositerequest(recursiveparam);
+
+                        recursiveparam.LDEPTH = 4;
+
+                        recursiveparam.GDEPTH = 4;
+
+                        //
+
+                        if(recursiveparam.HTML==null || recursiveparam.HTML.isEmpty()) continue;
+
+
+                        //
+
+                        ModuleOne moduleone = (ModuleOne)Webcrawler.modules.get("moduleone");
+
+                        moduleone.offer(recursiveparam);
 
                         //
 
@@ -138,15 +212,11 @@ public class NetUtils
 
                         //
 
-                        NetUtils.dorequestandstoreanchors(recursisveparam, storedanchors, depth + 1, MAX_DEPTH);
+                        NetUtils.dorequestandstoreanchors(recursiveparam, anchors, CURRENT_DEPTH + 1, MAX_DEPTH);
 
                         //
 
-                        //System.out.println(">> "+param.url+" branch "+anchor+" precursed.");
-                    }
-                    catch(FileNotFoundException fnfe)
-                    {
-                        System.err.println("NetUtils.dorequestandstoreanchors :: Site or link not found: "+param.href);
+                        //System.out.println(">> "+param.URL+" branch "+anchor+" precursed.");
                     }
                     catch (Exception e)
                     {
@@ -156,24 +226,24 @@ public class NetUtils
                 }
                 catch(Exception e)
                 {
-                    e.printStackTrace();
+                    System.err.println("NetUtils.dorequestandstoreanchors :: "+e.getMessage());
                 }
             }
         }
         catch(FileNotFoundException fnfe)
         {
-            System.err.println("NetUtils.dorequestandstoreanchors :: Site or link not found: "+param.href);
+            System.err.println("NetUtils.dorequestandstoreanchors :: Site or link not found: "+param.HREF);
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            System.err.println("NetUtils.dorequestandstoreanchors :: "+e);
         }
         finally
         {
             System.gc();
         }
 
-        return storedanchors;
+        return anchors;
     }
 
     /**
@@ -196,27 +266,27 @@ public class NetUtils
 
         //
 
-        if(param.href==null || param.href.isEmpty()) return null;
+        if(param.HREF ==null || param.HREF.isEmpty()) return null;
 
         //
 
-        if( param.href.startsWith("http://tel:") || param.href.startsWith("https://tel:") ) throw new Exception("Unhandled protocol ["+param.href+"] : skipping in request.");
+        if( param.HREF.startsWith("http://tel:") || param.HREF.startsWith("https://tel:") ) throw new Exception("Unhandled protocol ["+param.HREF +"] : skipping in request.");
 
-        if( param.href.startsWith("android-app://") || param.href.startsWith("android-app") ) throw new Exception("Unhandled protocol ["+param.href+"] : skipping in request.");
+        if( param.HREF.startsWith("android-app://") || param.HREF.startsWith("android-app") ) throw new Exception("Unhandled protocol ["+param.HREF +"] : skipping in request.");
 
-        if( param.href.startsWith("#") ) throw new Exception("Unhandled protocol ["+param.href+"] : skipping in request.");
+        if( param.HREF.startsWith("#") ) throw new Exception("Unhandled protocol ["+param.HREF +"] : skipping in request.");
 
-        if( param.href.startsWith("data") ) throw new Exception("Unhandled protocol ["+param.href+"] : skipping in request.");
+        if( param.HREF.startsWith("data") ) throw new Exception("Unhandled protocol ["+param.HREF +"] : skipping in request.");
 
         //
 
         try
         {
-            url = new URL(new URI(param.href).normalize().toString());
+            url = new URL(new URI(param.HREF).normalize().toString());
         }
         catch (Exception e)
         {
-            //System.err.println("NetUtils.dopreload :: unable to setup URL: \""+param.href+"\"");
+            //System.err.println("NetUtils.dopreload :: unable to setup URL: \""+param.HREF+"\"");
         }
 
         //
@@ -228,6 +298,8 @@ public class NetUtils
         connection = (HttpURLConnection)url.openConnection();
 
         connection.setReadTimeout(10000);
+
+        connection.setConnectTimeout(10000);
 
         connection.setRequestProperty("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36");
 
@@ -249,7 +321,7 @@ public class NetUtils
             {
                 if(responsecode == HttpURLConnection.HTTP_MOVED_TEMP || responsecode == HttpURLConnection.HTTP_MOVED_PERM || responsecode == HttpURLConnection.HTTP_SEE_OTHER)
                 {
-                    String newurl = param.href = connection.getHeaderField("location");
+                    String newurl = param.HREF = connection.getHeaderField("location");
 
                     String cookies = connection.getHeaderField("set-cookie");
 
@@ -265,7 +337,7 @@ public class NetUtils
 
                     if(responsecode!=HttpURLConnection.HTTP_OK)
                     {
-                        System.out.println("    >> Thread \""+threadname+"\" :: request for website ["+param.href+"] failed with fatal code: "+responsecode);
+                        System.out.println("    >> Thread \""+threadname+"\" :: request for website ["+param.HREF +"] failed with fatal code: "+responsecode);
                     }
                 }
             }
@@ -283,17 +355,21 @@ public class NetUtils
                 builder.append(string);
             }
 
+            reader.close();
+
+            reader = null;
+
             //
 
-            param.html = builder.toString();
+            param.HTML = builder.toString();
         }
         catch(SocketTimeoutException stoe)
         {
-            System.out.println("    >> "+stoe.getMessage()+" for "+param.href);
+            System.out.println("    >> "+stoe.getMessage()+" for "+param.HREF);
         }
         catch(FileNotFoundException fnfe)
         {
-            //System.err.println("NetUtils.dopreload :: Site or link not found: "+param.href);
+            //System.err.println("NetUtils.dopreload :: Site or link not found: "+param.HREF);
         }
         catch(Exception e)
         {
@@ -332,29 +408,23 @@ public class NetUtils
         {
             NetUtils.dositerequest(param);
 
-            //
-
-            ParseUtils.dogetbasedomainname(param.href);
-
-            //
-
             FileUtils.dofullsitepersist(param);
         }
         catch(SocketTimeoutException stoe)
         {
-            //System.out.println("    >> "+stoe.getMessage()+" for "+param.href);
+            //System.out.println("    >> "+stoe.getMessage()+" for "+param.HREF);
         }
         catch(ConnectException ce)
         {
-            //System.err.println("Resource \""+param.href+"\" could not be connected to; HTTP call fails.");
+            //System.err.println("Resource \""+param.HREF+"\" could not be connected to; HTTP call fails.");
         }
         catch(FileNotFoundException fnfe)
         {
-            //System.err.println("Resource "+param.href+" exists as a link but not actually a page reference. HTTP returned 404.");
+            //System.err.println("Resource "+param.HREF+" exists as a link but not actually a page reference. HTTP returned 404.");
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            System.err.println(e);
         }
         finally
         {
@@ -363,11 +433,11 @@ public class NetUtils
 
         //
 
-        if(param.html==null) throw new Exception("Unable to retrieve HTML for site: "+param.url);
+        if(param.HTML ==null) throw new Exception("Unable to retrieve HTML for site: "+param.URL);
 
         //
 
-        return param.html;
+        return param.HTML;
     }
 
     /**
@@ -376,15 +446,13 @@ public class NetUtils
      * @return
      * @throws Exception
      */
-    public static String dorequestandstorehtml(WebcrawlerParam param) throws Exception
+    public static String dorequestandstorepage(WebcrawlerParam param) throws Exception
     {
         try
         {
             NetUtils.dositerequest(param);
 
-            //
-
-            FileUtils.doquickpersist(param.basedomainname, param.html);
+            FileUtils.doquickpersist(param.FULL_DOMAIN_NAME, param.HTML);
 
             //
 

@@ -17,11 +17,11 @@ import java.util.Map;
  */
 public class Webcrawler implements Runnable
 {
-    public Registrar registrar = new Registrar();
+    public Registrar registrar = null;
 
-    public Preinitializer preinitializer = new Preinitializer();
+    public Preinitializer preinitializer = null;
 
-    public Initializer initializer = new Initializer();
+    public Initializer initializer = null;
     
     //
     
@@ -62,18 +62,10 @@ public class Webcrawler implements Runnable
         webcrawler.registrar.register(ModuleThree.class);
         
         //
-        
-        webcrawler.initializer.initialize();              
-        
-        //
-        
-        Webcrawler.values.put("webcrawler", webcrawler);
 
-        Webcrawler.values.put("preinitializer", webcrawler.preinitializer);
+        webcrawler.preinitializer.preinitialize();
 
-        Webcrawler.values.put("initializer", webcrawler.initializer);
-
-        Webcrawler.values.put("registrar", webcrawler.registrar);
+        webcrawler.initializer.initialize();
         
         //
         
@@ -84,7 +76,7 @@ public class Webcrawler implements Runnable
     {
         for(Class _class : registrar.classes)
         {
-            Object object=null; 
+            Object object = registrar.classes_objects.get(_class);
             
             Runnable runner=null;
             

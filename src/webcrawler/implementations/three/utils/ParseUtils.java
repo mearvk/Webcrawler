@@ -22,11 +22,11 @@ public class ParseUtils
 
         //
 
-        if(param==null || param.html ==null) throw new Exception("Site HTML was not ready for site: "+param.url);
+        if(param==null || param.HTML ==null) throw new Exception("Site HTML was not ready for site: "+param.URL);
 
         //
 
-        Matcher matcher = Pattern.compile("<a\\s+.*?>(?:.*?)</a>").matcher(param.html); //parse <a href=""></a> matches for now..
+        Matcher matcher = Pattern.compile("<a\\s+.*?>(?:.*?)</a>").matcher(param.HTML); //parse <a HREF=""></a> matches for now..
 
         //
 
@@ -52,11 +52,11 @@ public class ParseUtils
 
         //
 
-        if(param==null || param.html ==null) throw new Exception("Site HTML was not ready for site: "+param.url);
+        if(param==null || param.HTML ==null) throw new Exception("Site HTML was not ready for site: "+param.URL);
 
         //
 
-        Matcher matcher = Pattern.compile("<a\\s+.*?>(?:.*?)").matcher(param.html); //parse <a href=""></a> matches for now..
+        Matcher matcher = Pattern.compile("<a\\s+.*?>(?:.*?)</a>").matcher(param.HTML); //parse <a HREF=""></a> matches for now..
 
         //
 
@@ -74,7 +74,9 @@ public class ParseUtils
 
             anchor = anchor.startsWith("/") ? anchor.substring(1) : anchor;
 
-            anchor = anchor.startsWith("http") ? anchor : param.url + "/" + anchor;
+            anchor = anchor.startsWith("#") ? param.URL + "/" + anchor : anchor;
+
+            anchor = anchor.startsWith("http") ? anchor : "https://"+param.FULL_DOMAIN_NAME + "/" + anchor;
 
             //
 
@@ -272,7 +274,7 @@ public class ParseUtils
 
         //
 
-        Matcher matcher = Pattern.compile("<script\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.html);
+        Matcher matcher = Pattern.compile("<script\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.HTML);
 
         //
 
@@ -285,7 +287,7 @@ public class ParseUtils
 
         //
 
-        Matcher matcher_link_tags = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(param.html);
+        Matcher matcher_link_tags = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(param.HTML);
 
         //
 
@@ -476,7 +478,7 @@ public class ParseUtils
 
         if(match==null) return null;
 
-        match = match.replace("href=\"", "").replace("\"", "");
+        match = match.replace("HREF=\"", "").replace("\"", "");
 
         //
 
@@ -531,7 +533,7 @@ public class ParseUtils
 
         //
 
-        Matcher matcher = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(param.html);
+        Matcher matcher = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(param.HTML);
 
         //
 
@@ -590,7 +592,7 @@ public class ParseUtils
 
         //
 
-        Matcher matcher = Pattern.compile("<img\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.html);
+        Matcher matcher = Pattern.compile("<img\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.HTML);
 
         //
 

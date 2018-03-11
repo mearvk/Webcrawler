@@ -43,7 +43,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
     public void run()
     {
-        ArrayList<String> websites = (ArrayList<String>)((Initializer) Webcrawler.values.get("initializer")).variables.get("websites");
+        ArrayList<String> websites = (ArrayList<String>)((Initializer) Webcrawler.values.get("initializer")).variables.get("predefined");
 
         //
 
@@ -53,14 +53,14 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             //
 
-            param.url = websites.get(i);
+            param.URL = websites.get(i);
 
-            param.href = websites.get(i);
+            param.HREF = websites.get(i);
 
             //
             if(param==null)
             {
-                System.out.println(param.url +" is unsupported or such.");
+                System.out.println(param.URL +" is unsupported or such.");
             }
             else if(i%8==7)
             {
@@ -127,11 +127,11 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         //
 
-        if(param==null || param.html ==null) throw new Exception("Site HTML was not ready for site: "+param.url);
+        if(param==null || param.HTML ==null) throw new Exception("Site HTML was not ready for site: "+param.URL);
 
         //
 
-        Matcher matcher = Pattern.compile("<a\\s+.*?>(?:.*?)</a>").matcher(param.html); //parse <a href=""></a> matches for now..
+        Matcher matcher = Pattern.compile("<a\\s+.*?>(?:.*?)</a>").matcher(param.HTML); //parse <a HREF=""></a> matches for now..
 
         //
 
@@ -168,11 +168,11 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
             }
             else if(inputURL.startsWith("/"))
             {
-                inputURL = param.url + inputURL;
+                inputURL = param.URL + inputURL;
             }
             else if(inputURL.startsWith("./"))
             {
-                inputURL = param.url + inputURL;
+                inputURL = param.URL + inputURL;
             }
         }
         else if(inputURL.startsWith("http"))
@@ -181,7 +181,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
         }
         else if(!inputURL.isEmpty() && inputURL.charAt(0)!='/')
         {
-            inputURL = param.url + "/" + inputURL;
+            inputURL = param.URL + "/" + inputURL;
         }
         else throw new Exception("Neither relative nor absolute URL found for file: \""+inputURL+"\"");
 
@@ -206,7 +206,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         //
 
-        url = new URL(param.href);
+        url = new URL(param.HREF);
 
         //
 
@@ -242,7 +242,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
             {
                 if(responsecode == HttpURLConnection.HTTP_MOVED_TEMP || responsecode == HttpURLConnection.HTTP_MOVED_PERM || responsecode == HttpURLConnection.HTTP_SEE_OTHER)
                 {
-                    String newurl = param.href = connection.getHeaderField("location");
+                    String newurl = param.HREF = connection.getHeaderField("location");
 
                     String cookies = connection.getHeaderField("set-cookie");
 
@@ -258,7 +258,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                     if(responsecode!=HttpURLConnection.HTTP_OK)
                     {
-                        System.out.println("    >> Thread \""+threadname+"\" :: request for website ["+param.href+"] failed with fatal code: "+responsecode);
+                        System.out.println("    >> Thread \""+threadname+"\" :: request for website ["+param.HREF +"] failed with fatal code: "+responsecode);
                     }
                 }
             }
@@ -278,11 +278,11 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             //
 
-            param.html =builder.toString();
+            param.HTML =builder.toString();
         }
         catch(SocketTimeoutException stoe)
         {
-            System.out.println("    >> "+stoe.getMessage()+" for "+param.href);
+            System.out.println("    >> "+stoe.getMessage()+" for "+param.HREF);
         }
         catch(FileNotFoundException fnfe)
         {
@@ -320,7 +320,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         //
 
-        url = new URL(param.href);
+        url = new URL(param.HREF);
 
 
         //
@@ -359,7 +359,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
             {
                 if(responsecode == HttpURLConnection.HTTP_MOVED_TEMP || responsecode == HttpURLConnection.HTTP_MOVED_PERM || responsecode == HttpURLConnection.HTTP_SEE_OTHER)
                 {
-                    String newurl = param.href = connection.getHeaderField("location");
+                    String newurl = param.HREF = connection.getHeaderField("location");
 
                     String cookies = connection.getHeaderField("set-cookie");
 
@@ -375,7 +375,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                     if(responsecode!=HttpURLConnection.HTTP_OK)
                     {
-                        System.out.println("    >> Thread \""+threadname+"\" :: request for website ["+param.href+"] failed with fatal code: "+responsecode);
+                        System.out.println("    >> Thread \""+threadname+"\" :: request for website ["+param.HREF +"] failed with fatal code: "+responsecode);
                     }
                 }
             }
@@ -393,9 +393,9 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             //
 
-            param.html = builder.toString();
+            param.HTML = builder.toString();
 
-            param.basedomainname = ParseUtils.dogetbasedomainname(param.href);
+            param.DOMAIN_NAME = ParseUtils.dogetbasedomainname(param.HREF);
 
             //
 
@@ -407,15 +407,15 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
         }
         catch(SocketTimeoutException stoe)
         {
-            System.out.println("    >> "+stoe.getMessage()+" for "+param.href);
+            System.out.println("    >> "+stoe.getMessage()+" for "+param.HREF);
         }
         catch(ConnectException ce)
         {
-            //System.err.println("Resource \""+param.href+"\" could not be connected to; HTTP call fails.");
+            //System.err.println("Resource \""+param.HREF+"\" could not be connected to; HTTP call fails.");
         }
         catch(FileNotFoundException fnfe)
         {
-            //System.err.println("Resource "+param.href+" exists as a link but not actually a page reference. HTTP returned 404.");
+            //System.err.println("Resource "+param.HREF+" exists as a link but not actually a page reference. HTTP returned 404.");
         }
         catch(Exception e)
         {
@@ -426,7 +426,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
             System.gc();
         }
 
-        if(builder==null) throw new Exception("Unable to retrieve HTML for site: "+param.url);
+        if(builder==null) throw new Exception("Unable to retrieve HTML for site: "+param.URL);
 
         return builder.toString();
     }
@@ -452,13 +452,13 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         if(anchors==null || anchors.isEmpty())
         {
-            System.out.println("    >> Thread \""+threadname+"\" :: "+param.url +" reports no <a> links of any kind.");
+            System.out.println("    >> Thread \""+threadname+"\" :: "+param.URL +" reports no <a> links of any kind.");
 
             return null;
         }
         else
         {
-            //System.out.println("    >> Thread \""+threadname+"\" :: "+param.url+" reports "+anchors.size()+" <a> links.");
+            //System.out.println("    >> Thread \""+threadname+"\" :: "+param.URL+" reports "+anchors.size()+" <a> links.");
         }
 
         //
@@ -482,7 +482,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             //
 
-            //System.out.println("Anchor #"+i+", \""+anchor+"\", for site "+param.url+" is being run recursively.");
+            //System.out.println("Anchor #"+i+", \""+anchor+"\", for site "+param.URL+" is being run recursively.");
 
             //
 
@@ -496,7 +496,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             //
 
-            baseurl_quickref = new StringBuffer(param.url).toString();
+            baseurl_quickref = new StringBuffer(param.URL).toString();
 
             //
 
@@ -526,7 +526,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             //
 
-            if( !(href_quickref.startsWith("https://www."+baseurl_quickref) || href_quickref.startsWith("http://wwww."+baseurl_quickref) || href_quickref.startsWith("http://"+baseurl_quickref) || href_quickref.startsWith("https://"+baseurl_quickref) || href_quickref.startsWith(baseurl_quickref) || href_quickref.startsWith("/") || href_quickref.startsWith("./") || href_quickref.startsWith("//") || href_quickref.startsWith("..") || href_quickref.startsWith("#") || href_quickref.startsWith("?") || href_quickref.endsWith(".html")) )
+            if( !(href_quickref.startsWith("https://www."+baseurl_quickref) || href_quickref.startsWith("http://wwww."+baseurl_quickref) || href_quickref.startsWith("http://"+baseurl_quickref) || href_quickref.startsWith("https://"+baseurl_quickref) || href_quickref.startsWith(baseurl_quickref) || href_quickref.startsWith("/") || href_quickref.startsWith("./") || href_quickref.startsWith("//") || href_quickref.startsWith("..") || href_quickref.startsWith("#") || href_quickref.startsWith("?") || href_quickref.endsWith(".HTML")) )
             {
                 //also check xxx.yyy.root.com please before failing
 
@@ -566,7 +566,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 if(!match)
                 {
-                    System.out.println("    >> Thread \""+threadname+"\" :: anchor #" + i + ", \"" + this.parseanchorforhrefattributevalue(anchor) + "\", for " + param.url + " is being skipped for being unintelligible or not properly a member site of " + param.url);
+                    System.out.println("    >> Thread \""+threadname+"\" :: anchor #" + i + ", \"" + this.parseanchorforhrefattributevalue(anchor) + "\", for " + param.URL + " is being skipped for being unintelligible or not properly a member site of " + param.URL);
 
                     continue;
                 }
@@ -577,7 +577,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 if(Webcrawler.visitedsitelinks.get(this.parseanchorforhrefattributevalue(anchor))==null || Webcrawler.visitedsitelinks.get(this.parseanchorforhrefattributevalue(anchor)).isEmpty())
                 {
-                    //System.out.println("    >> Thread \"" + threadname + "\" :: anchor #" + i + ", \"" + this.parseanchorforhrefattributevalue(anchor) + "\", for " + param.url + " is being included for single site recursion.");
+                    //System.out.println("    >> Thread \"" + threadname + "\" :: anchor #" + i + ", \"" + this.parseanchorforhrefattributevalue(anchor) + "\", for " + param.URL + " is being included for single site recursion.");
                 }
             }
 
@@ -587,27 +587,27 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
             {
                 //
 
-                recursiveparam.url = param.url;
+                recursiveparam.URL = param.URL;
 
-                recursiveparam.href = this.parseanchorforhrefattributevalue(anchor);
+                recursiveparam.HREF = this.parseanchorforhrefattributevalue(anchor);
 
-                if(recursiveparam.href==null || recursiveparam.href.isEmpty()) continue;
+                if(recursiveparam.HREF ==null || recursiveparam.HREF.isEmpty()) continue;
 
-                recursiveparam.href = this.dodeterminefullpathforhttpreference(param, recursiveparam.href);
-
-                //
-
-                if(recursiveparam.href==null) continue;
-
-                if(!recursiveparam.href.contains("http")) continue;
+                recursiveparam.HREF = this.dodeterminefullpathforhttpreference(param, recursiveparam.HREF);
 
                 //
 
-                if(Webcrawler.visitedsitelinks.get(recursiveparam.href)==null || Webcrawler.visitedsitelinks.get(recursiveparam.href).isEmpty())
+                if(recursiveparam.HREF ==null) continue;
+
+                if(!recursiveparam.HREF.contains("http")) continue;
+
+                //
+
+                if(Webcrawler.visitedsitelinks.get(recursiveparam.HREF)==null || Webcrawler.visitedsitelinks.get(recursiveparam.HREF).isEmpty())
                 {
-                    Webcrawler.visitedsitelinks.put(recursiveparam.href, "visited");
+                    Webcrawler.visitedsitelinks.put(recursiveparam.HREF, "visited");
 
-                    //this.dopersistsiteurlasvisited(recursiveparam.href);
+                    //this.dopersistsiteurlasvisited(recursiveparam.HREF);
 
                     System.out.println("Local recursion has visited and downloaded images, css and HTML from "+ Webcrawler.visitedsitelinks.size()+" site(s) and/or link(s).");
                 }
@@ -615,15 +615,15 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 //
 
-                recursiveparam.url = param.url;
+                recursiveparam.URL = param.URL;
 
                 recursiveparam.anchor = anchor;
 
                 //
 
-                //System.out.println("ModuleOne:doglobalsiterecurse has href value: "+recursiveparam.href);
+                //System.out.println("ModuleOne:doglobalsiterecurse has HREF value: "+recursiveparam.HREF);
 
-                //System.out.println("ModuleOne:doglobalsiterecurse has url value: "+recursiveparam.url);
+                //System.out.println("ModuleOne:doglobalsiterecurse has URL value: "+recursiveparam.URL);
 
                 //
 
@@ -632,7 +632,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
                     throw new StackDepthException("Local stack depth exceeded; returning.");
                 }
 
-                recursiveparam.html = this.dorequest(recursiveparam);
+                recursiveparam.HTML = this.dorequest(recursiveparam);
 
                 recursiveparam.siteAnchors = this.doparseanchors(recursiveparam);
 
@@ -687,7 +687,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         if(anchors==null || anchors.isEmpty())
         {
-            System.out.println("Site "+param.url +" had no links of any kind!");
+            System.out.println("Site "+param.URL +" had no links of any kind!");
 
             return null;
         }
@@ -713,27 +713,27 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
             {
                 //
 
-                recursiveparam.url = param.url;
+                recursiveparam.URL = param.URL;
 
-                recursiveparam.href = this.parseanchorforhrefattributevalue(anchor);
+                recursiveparam.HREF = this.parseanchorforhrefattributevalue(anchor);
 
-                if(recursiveparam.href==null || recursiveparam.href.isEmpty()) continue;
+                if(recursiveparam.HREF ==null || recursiveparam.HREF.isEmpty()) continue;
 
-                recursiveparam.href = this.dodeterminefullpathforhttpreference(param, recursiveparam.href);
-
-                //
-
-                if(recursiveparam.href==null) continue;
-
-                if(!recursiveparam.href.contains("http")) continue;
+                recursiveparam.HREF = this.dodeterminefullpathforhttpreference(param, recursiveparam.HREF);
 
                 //
 
-                if(Webcrawler.visitedsitelinks.get(recursiveparam.href)==null || Webcrawler.visitedsitelinks.get(recursiveparam.href).isEmpty())
+                if(recursiveparam.HREF ==null) continue;
+
+                if(!recursiveparam.HREF.contains("http")) continue;
+
+                //
+
+                if(Webcrawler.visitedsitelinks.get(recursiveparam.HREF)==null || Webcrawler.visitedsitelinks.get(recursiveparam.HREF).isEmpty())
                 {
-                    Webcrawler.visitedsitelinks.put(recursiveparam.href, "visited");
+                    Webcrawler.visitedsitelinks.put(recursiveparam.HREF, "visited");
 
-                    this.dopersistsiteurlasvisited(recursiveparam.href);
+                    this.dopersistsiteurlasvisited(recursiveparam.HREF);
 
                     System.out.println("Global recursion has visited "+ Webcrawler.visitedsitelinks.size()+" site(s).");
 
@@ -742,15 +742,15 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 //
 
-                recursiveparam.url = param.url;
+                recursiveparam.URL = param.URL;
 
                 recursiveparam.anchor = anchor;
 
                 //
 
-                System.out.println("ModuleOne:dorecurse has href value: "+recursiveparam.href);
+                System.out.println("ModuleOne:dorecurse has HREF value: "+recursiveparam.HREF);
 
-                System.out.println("ModuleOne:dorecurse has url value: "+recursiveparam.url);
+                System.out.println("ModuleOne:dorecurse has URL value: "+recursiveparam.URL);
 
                 //
 
@@ -761,7 +761,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 //
 
-                recursiveparam.html = this.dorequest(recursiveparam);
+                recursiveparam.HTML = this.dorequest(recursiveparam);
 
                 recursiveparam.siteAnchors = this.doparseanchors(recursiveparam);
 
@@ -828,15 +828,15 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         //
 
-        String dirref = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.doURLnormalization(param.href);
+        String dirref = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.doURLnormalization(param.HREF);
 
-        String fileref = dirref +SLASH+ Utils.doURLnormalization(param.href) +SLASH+ "index.html";
+        String fileref = dirref +SLASH+ Utils.doURLnormalization(param.HREF) +SLASH+ "index.HTML";
 
-        String imagefileref = dirref +SLASH+ Utils.doURLnormalization(param.href) +SLASH+ "images";
+        String imagefileref = dirref +SLASH+ Utils.doURLnormalization(param.HREF) +SLASH+ "images";
 
-        String scriptfileref = dirref +SLASH+ Utils.doURLnormalization(param.href) +SLASH+ "scripts";
+        String scriptfileref = dirref +SLASH+ Utils.doURLnormalization(param.HREF) +SLASH+ "scripts";
 
-        String cssfileref = dirref +SLASH+ Utils.doURLnormalization(param.href) +SLASH+ "css";
+        String cssfileref = dirref +SLASH+ Utils.doURLnormalization(param.HREF) +SLASH+ "css";
 
         //
 
@@ -848,7 +848,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             //
 
-            File file = new File(dir.getAbsolutePath(), "index.html");
+            File file = new File(dir.getAbsolutePath(), "index.HTML");
 
             if(file.exists()) file.delete();
 
@@ -933,7 +933,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             FileWriter writer = new FileWriter(file);
 
-            writer.write(param.html);
+            writer.write(param.HTML);
 
             writer.flush();
 
@@ -968,11 +968,11 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         ArrayList<String> linklist = new ArrayList();
 
-        String originalsiteHTML = new StringBuffer(param.html).toString();
+        String originalsiteHTML = new StringBuffer(param.HTML).toString();
 
         //
 
-        Matcher matcher = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(param.html);
+        Matcher matcher = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(param.HTML);
 
         //
 
@@ -1001,30 +1001,30 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             recursiveparam = new WebcrawlerParam();
 
-            recursiveparam.href = this.parselinkforhrefattributevalue(linktag);
+            recursiveparam.HREF = this.parselinkforhrefattributevalue(linktag);
 
             //
 
-            if(recursiveparam.href.startsWith("/") || recursiveparam.href.startsWith("./"))
+            if(recursiveparam.HREF.startsWith("/") || recursiveparam.HREF.startsWith("./"))
             {
-                recursiveparam.href = param.url + recursiveparam.href;
+                recursiveparam.HREF = param.URL + recursiveparam.HREF;
             }
 
-            if(recursiveparam.href.endsWith("/"))
+            if(recursiveparam.HREF.endsWith("/"))
             {
-                recursiveparam.href = recursiveparam.href.substring(0,recursiveparam.href.length()-1);
+                recursiveparam.HREF = recursiveparam.HREF.substring(0,recursiveparam.HREF.length()-1);
             }
 
-            if(param.url.endsWith("/"))
+            if(param.URL.endsWith("/"))
             {
-                param.url = param.url.substring(0,param.url.length()-1);
+                param.URL = param.URL.substring(0,param.URL.length()-1);
             }
 
-            if( !(recursiveparam.href.trim().equals(param.url.trim()) || recursiveparam.href.replace("www.","").trim().equals(param.url.replace("www.","").trim())) && (Webcrawler.visitedresourcelinks.get(recursiveparam.href)==null || Webcrawler.visitedresourcelinks.size()==0) )
+            if( !(recursiveparam.HREF.trim().equals(param.URL.trim()) || recursiveparam.HREF.replace("www.","").trim().equals(param.URL.replace("www.","").trim())) && (Webcrawler.visitedresourcelinks.get(recursiveparam.HREF)==null || Webcrawler.visitedresourcelinks.size()==0) )
             {
                 //
 
-                Webcrawler.visitedresourcelinks.put(recursiveparam.href, "visited");
+                Webcrawler.visitedresourcelinks.put(recursiveparam.HREF, "visited");
             }
             else
             {
@@ -1035,7 +1035,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             //
 
-            if(recursiveparam.href!=null && recursiveparam.href.trim().endsWith(".css"))
+            if(recursiveparam.HREF !=null && recursiveparam.HREF.trim().endsWith(".css"))
             {
                 continue; //
             }
@@ -1047,11 +1047,11 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                     //
 
-                    if(recursiveparam.html ==null) continue;
+                    if(recursiveparam.HTML ==null) continue;
 
                     //
 
-                    matcher = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(recursiveparam.html); //parse <img src=""></img> matches for now..
+                    matcher = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(recursiveparam.HTML); //parse <img src=""></img> matches for now..
 
                     while(matcher.find())
                     {
@@ -1075,7 +1075,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         //
 
-        //System.out.println("    >> Thread \""+threadname+"\" :: "+param.href+", at two levels of recursion, had "+linklist.size()+" <link> tag(s).");
+        //System.out.println("    >> Thread \""+threadname+"\" :: "+param.HREF+", at two levels of recursion, had "+linklist.size()+" <link> tag(s).");
 
         //
 
@@ -1109,7 +1109,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         param.siteStyleSheets = linklist;
 
-        param.html = originalsiteHTML;
+        param.HTML = originalsiteHTML;
 
         //
 
@@ -1127,7 +1127,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         //
 
-        Matcher matcher = Pattern.compile("<img\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.html);
+        Matcher matcher = Pattern.compile("<img\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.HTML);
 
         //
 
@@ -1158,7 +1158,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         //
 
-        Matcher matcher = Pattern.compile("<script\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.html);
+        Matcher matcher = Pattern.compile("<script\\s+(?:.*?)(src=\".*?\")(?:.*?)>").matcher(param.HTML);
 
         //
 
@@ -1171,7 +1171,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         //
 
-        Matcher matcher_link_tags = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(param.html);
+        Matcher matcher_link_tags = Pattern.compile("<link\\s+(?:.*?)(href=\".*?\")(?:.*?)>").matcher(param.HTML);
 
         //
 
@@ -1224,7 +1224,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         if(match==null) return null;
 
-        match = match.replace("href=\"", "").replace("\"", "");
+        match = match.replace("HREF=\"", "").replace("\"", "");
 
         return match;
     }
@@ -1334,7 +1334,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
         if(match==null) return null;
 
-        match = match.replace("href=\"", "").replace("\"", "");
+        match = match.replace("HREF=\"", "").replace("\"", "");
 
         return match;
     }
@@ -1386,12 +1386,12 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             if(inputURL.startsWith("/"))
             {
-                inputURL = param.url + inputURL;
+                inputURL = param.URL + inputURL;
             }
 
             if(inputURL.startsWith("./"))
             {
-                inputURL = param.url + inputURL;
+                inputURL = param.URL + inputURL;
             }
         }
         else if(inputURL.startsWith("http"))
@@ -1400,7 +1400,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
         }
         else if(!inputURL.isEmpty() && inputURL.charAt(0)!='/')
         {
-            inputURL = param.url + "/" + inputURL;
+            inputURL = param.URL + "/" + inputURL;
         }
         else throw new Exception("Neither relative nor absolute URL found for file: \""+inputURL+"\"");
 
@@ -1477,12 +1477,12 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             if(inputURL.startsWith("/"))
             {
-                inputURL = param.url + inputURL;
+                inputURL = param.URL + inputURL;
             }
 
             if(inputURL.startsWith("./"))
             {
-                inputURL = param.url + inputURL;
+                inputURL = param.URL + inputURL;
             }
         }
         else if(inputURL.startsWith("http"))
@@ -1491,7 +1491,7 @@ class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
         }
         else if(!inputURL.isEmpty() && inputURL.charAt(0)!='/')
         {
-            inputURL = param.url + "/" + inputURL;
+            inputURL = param.URL + "/" + inputURL;
         }
         else throw new Exception("Neither relative nor absolute URL found for file: \""+inputURL+"\"");
 

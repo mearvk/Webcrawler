@@ -1,8 +1,8 @@
 package webcrawler.common;
 
-import java.util.ArrayList;
-
 import webcrawler.implementations.three.mapping.SiteSpecializationMap;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -16,12 +16,12 @@ public class WebcrawlerParam
 
     public WebcrawlerParam(WebcrawlerParam param, String href)
     {
-        this.href = href;
+        this.HREF = href;
 
-        this.url = param.url;
+        this.URL = param.URL;
     }
 
-    public String html;
+    public String HTML;
 
     public ArrayList<String> siteStyleSheets;
 
@@ -31,19 +31,23 @@ public class WebcrawlerParam
 
     public ArrayList<String> siteScripts;
 
-    public String href;
+    public String HREF;
 
     public String recurseMessage;
 
     public String persistMessage;
 
-    public String basedomainname;
+    public String DOMAIN_NAME;
 
-    public String fulldomainname;
+    public String FULL_DOMAIN_NAME;
 
-    public String url;
+    public String URL;
 
     public String anchor;
+
+    public int LDEPTH = 0;
+
+    public int GDEPTH = 0;
 
     //
 

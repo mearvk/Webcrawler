@@ -2,7 +2,6 @@ package webcrawler.implementations.three.initialization;
 
 import webcrawler.registration.Registrar;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,18 +16,18 @@ public class Initializer extends webcrawler.intialization.Initializer implements
     
     public Map<String, Object> variables = new HashMap();
 
-    public ArrayList<String> websites = new ArrayList();
-
     //
     
     public Initializer()
     {
-        this.registrar.register(WebsiteListLoader.class);
+        this.registrar.register(LocalListLoader.class);
+
+        this.registrar.register(RemoteListLoader.class);
     }
     
     public void initialize()
     {
-        variables.put("initializer", this);
+        this.variables.put("initializer", this);
     }
 
     @Override
@@ -36,13 +35,16 @@ public class Initializer extends webcrawler.intialization.Initializer implements
     {
         for(Class _class : registrar.classes)
         {
-            Object object = null;
+            Object object = registrar.classes_objects.get(_class);
 
             Runnable runner = null;
 
             try
             {
-                object = _class.newInstance();
+                if(object==null)
+                {
+                    object = _class.newInstance();
+                }
             }
             catch (Exception e)
             {

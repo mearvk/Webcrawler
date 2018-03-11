@@ -36,22 +36,22 @@ public class Initializer extends webcrawler.intialization.Initializer
         
         ArrayList<String> websites = new ArrayList();
         
-        //websites.add("https://washingtonpost.com");
+        //predefined.add("https://washingtonpost.com");
         
-        //websites.add("https://google.com");
+        //predefined.add("https://google.com");
         
-        //websites.add("https://microsoft.com");
+        //predefined.add("https://microsoft.com");
         
-        //websites.add("https://mozilla.com");
+        //predefined.add("https://mozilla.com");
         
-        //websites.add("https://oracle.com");
+        //predefined.add("https://oracle.com");
         
-        //websites.add("https://ebay.com");
+        //predefined.add("https://ebay.com");
         
-        //websites.add("https://adobe.com");
+        //predefined.add("https://adobe.com");
         
         //
         
-        variables.put("websites", websites);
+        variables.put("predefined", websites);
     }
 }

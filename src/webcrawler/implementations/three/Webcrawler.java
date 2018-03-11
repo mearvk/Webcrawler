@@ -1,6 +1,7 @@
 package webcrawler.implementations.three;
 
 import webcrawler.implementations.three.initialization.Initializer;
+import webcrawler.implementations.three.initialization.LocalListLoader;
 import webcrawler.implementations.three.initialization.Preinitializer;
 import webcrawler.implementations.three.modules.ModuleOne;
 import webcrawler.implementations.three.modules.ModuleThree;
@@ -8,6 +9,7 @@ import webcrawler.implementations.three.modules.ModuleTwo;
 import webcrawler.implementations.utils.Utils;
 import webcrawler.registration.Registrar;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -17,21 +19,27 @@ import java.util.Map;
  */
 public class Webcrawler implements Runnable
 {
-    public Registrar registrar = new Registrar();
+    public Registrar registrar = new Registrar(this);
 
-    public Preinitializer preinitializer = new Preinitializer();
+    public Preinitializer preinitializer = null;
 
-    public Initializer initializer = new Initializer();
+    public Initializer initializer = null;
+
+    public ModuleOne moduleone = null;
+
+    public ModuleTwo moduletwo = null;
+
+    public ModuleThree modulethree = null;
     
     //
     
     public static Map<String, Object> modules = new HashMap();
 
-    public static HashSet<String> readyanchorlinks = new HashSet();
+    public static ArrayList<String> readyanchorlinks = new ArrayList();
 
-    public static HashSet<String> visitedsitelinks = new HashSet();
+    public static ArrayList<String> visitedsitelinks = new ArrayList();
     
-    public static HashSet<String> visitedresourcelinks = new HashSet();
+    public static ArrayList<String> visitedresourcelinks = new ArrayList();
     
     //
     
@@ -48,35 +56,27 @@ public class Webcrawler implements Runnable
     public static void main(String[] args)
     {
         Webcrawler webcrawler = new Webcrawler();
-                
+
         //
-        
+
         webcrawler.registrar.register(Preinitializer.class);
 
         webcrawler.registrar.register(Initializer.class);
-        
+
         webcrawler.registrar.register(ModuleOne.class);
-        
+
         webcrawler.registrar.register(ModuleTwo.class);
-        
+
         webcrawler.registrar.register(ModuleThree.class);
-        
-        //
-        
-        webcrawler.initializer.initialize();              
-        
-        //
-        
-        Webcrawler.modules.put("webcrawler", webcrawler);
 
-        Webcrawler.modules.put("preinitializer", webcrawler.preinitializer);
-
-        Webcrawler.modules.put("initializer", webcrawler.initializer);
-
-        Webcrawler.modules.put("registrar", webcrawler.registrar);
-        
         //
-        
+
+        webcrawler.preinitializer.preinitialize();
+
+        webcrawler.initializer.initialize();
+
+        //
+
         webcrawler.run();
     }
     
@@ -84,13 +84,16 @@ public class Webcrawler implements Runnable
     {
         for(Class _class : registrar.classes)
         {
-            Object object=null; 
+            Object object = registrar.classes_objects.get(_class);
             
             Runnable runner=null;
             
             try
             {
-                object = _class.newInstance();
+                if(object==null)
+                {
+                    object = _class.newInstance();
+                }
             }
             catch(Exception e)
             {

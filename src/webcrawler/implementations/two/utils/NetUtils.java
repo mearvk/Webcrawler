@@ -94,11 +94,11 @@ public class NetUtils
 
                         System.out.println(threadname+" :: visiting "+anchor+".");
 
-                        recursisveparam.html = NetUtils.dorequest(recursisveparam);
+                        recursisveparam.HTML = NetUtils.dorequest(recursisveparam);
                     }
                     catch(FileNotFoundException fnfe)
                     {
-                        System.err.println("NetUtils.dorequestandstoreanchors :: Site or link not found: "+param.href);
+                        System.err.println("NetUtils.dorequestandstoreanchors :: Site or link not found: "+param.HREF);
                     }
                     catch (Exception e)
                     {
@@ -117,7 +117,7 @@ public class NetUtils
         }
         catch(FileNotFoundException fnfe)
         {
-            System.err.println("NetUtils.dorequestandstoreanchors :: Site or link not found: "+param.href);
+            System.err.println("NetUtils.dorequestandstoreanchors :: Site or link not found: "+param.HREF);
         }
         catch(Exception e)
         {
@@ -125,7 +125,7 @@ public class NetUtils
         }
         finally
         {
-            System.out.println("Precurse for site \""+param.url+"\" completed.");
+            System.out.println("Precurse for site \""+param.URL +"\" completed.");
         }
 
         return storedanchors;
@@ -151,27 +151,27 @@ public class NetUtils
 
         //
 
-        if(param.href==null || param.href.isEmpty()) return null;
+        if(param.HREF ==null || param.HREF.isEmpty()) return null;
 
         //
 
-        if( param.href.startsWith("http://tel:") || param.href.startsWith("https://tel:") ) throw new Exception("Unhandled protocol ["+param.href+"] : skipping in request.");
+        if( param.HREF.startsWith("http://tel:") || param.HREF.startsWith("https://tel:") ) throw new Exception("Unhandled protocol ["+param.HREF +"] : skipping in request.");
 
-        if( param.href.startsWith("android-app://") || param.href.startsWith("android-app") ) throw new Exception("Unhandled protocol ["+param.href+"] : skipping in request.");
+        if( param.HREF.startsWith("android-app://") || param.HREF.startsWith("android-app") ) throw new Exception("Unhandled protocol ["+param.HREF +"] : skipping in request.");
 
-        if( param.href.startsWith("#") ) throw new Exception("Unhandled protocol ["+param.href+"] : skipping in request.");
+        if( param.HREF.startsWith("#") ) throw new Exception("Unhandled protocol ["+param.HREF +"] : skipping in request.");
 
-        if( param.href.startsWith("data") ) throw new Exception("Unhandled protocol ["+param.href+"] : skipping in request.");
+        if( param.HREF.startsWith("data") ) throw new Exception("Unhandled protocol ["+param.HREF +"] : skipping in request.");
 
         //
 
         try
         {
-            url = new URL(new URI(param.href).normalize().toString());
+            url = new URL(new URI(param.HREF).normalize().toString());
         }
         catch (Exception e)
         {
-            System.err.println("NetUtils.dopreload :: unable to setup URL: \""+param.href+"\"");
+            System.err.println("NetUtils.dopreload :: unable to setup URL: \""+param.HREF +"\"");
         }
 
         //
@@ -204,7 +204,7 @@ public class NetUtils
             {
                 if(responsecode == HttpURLConnection.HTTP_MOVED_TEMP || responsecode == HttpURLConnection.HTTP_MOVED_PERM || responsecode == HttpURLConnection.HTTP_SEE_OTHER)
                 {
-                    String newurl = param.href = connection.getHeaderField("location");
+                    String newurl = param.HREF = connection.getHeaderField("location");
 
                     String cookies = connection.getHeaderField("set-cookie");
 
@@ -220,7 +220,7 @@ public class NetUtils
 
                     if(responsecode!=HttpURLConnection.HTTP_OK)
                     {
-                        System.out.println("    >> Thread \""+threadname+"\" :: request for website ["+param.href+"] failed with fatal code: "+responsecode);
+                        System.out.println("    >> Thread \""+threadname+"\" :: request for website ["+param.HREF +"] failed with fatal code: "+responsecode);
                     }
                 }
             }
@@ -240,15 +240,15 @@ public class NetUtils
 
             //
 
-            param.html = builder.toString();
+            param.HTML = builder.toString();
         }
         catch(SocketTimeoutException stoe)
         {
-            System.out.println("    >> "+stoe.getMessage()+" for "+param.href);
+            System.out.println("    >> "+stoe.getMessage()+" for "+param.HREF);
         }
         catch(FileNotFoundException fnfe)
         {
-            System.err.println("NetUtils.dopreload :: Site or link not found: "+param.href);
+            System.err.println("NetUtils.dopreload :: Site or link not found: "+param.HREF);
         }
         catch(Exception e)
         {
@@ -289,11 +289,11 @@ public class NetUtils
 
         try
         {
-            url = new URL(new URI(param.href).normalize().toString());
+            url = new URL(new URI(param.HREF).normalize().toString());
         }
         catch(Exception e)
         {
-            System.err.println("NetUtils.dorequestandstoresite :: unable to setup URL: "+param.href);
+            System.err.println("NetUtils.dorequestandstoresite :: unable to setup URL: "+param.HREF);
         }
 
         //
@@ -332,7 +332,7 @@ public class NetUtils
             {
                 if(responsecode == HttpURLConnection.HTTP_MOVED_TEMP || responsecode == HttpURLConnection.HTTP_MOVED_PERM || responsecode == HttpURLConnection.HTTP_SEE_OTHER)
                 {
-                    String newurl = param.href = connection.getHeaderField("location");
+                    String newurl = param.HREF = connection.getHeaderField("location");
 
                     String cookies = connection.getHeaderField("set-cookie");
 
@@ -348,7 +348,7 @@ public class NetUtils
 
                     if(responsecode!=HttpURLConnection.HTTP_OK)
                     {
-                        System.out.println("    >> Thread \""+threadname+"\" :: request for website ["+param.href+"] failed with fatal code: "+responsecode);
+                        System.out.println("    >> Thread \""+threadname+"\" :: request for website ["+param.HREF +"] failed with fatal code: "+responsecode);
                     }
                 }
             }
@@ -366,9 +366,9 @@ public class NetUtils
 
             //
 
-            param.html = builder.toString();
+            param.HTML = builder.toString();
 
-            //param.href = ParseUtils.dogetbaseURL(param.href);
+            //param.HREF = ParseUtils.dogetbaseURL(param.HREF);
 
             //
 
@@ -380,15 +380,15 @@ public class NetUtils
         }
         catch(SocketTimeoutException stoe)
         {
-            System.out.println("    >> "+stoe.getMessage()+" for "+param.href);
+            System.out.println("    >> "+stoe.getMessage()+" for "+param.HREF);
         }
         catch(ConnectException ce)
         {
-            //System.err.println("Resource \""+param.href+"\" could not be connected to; HTTP call fails.");
+            //System.err.println("Resource \""+param.HREF+"\" could not be connected to; HTTP call fails.");
         }
         catch(FileNotFoundException fnfe)
         {
-            //System.err.println("Resource "+param.href+" exists as a link but not actually a page reference. HTTP returned 404.");
+            //System.err.println("Resource "+param.HREF+" exists as a link but not actually a page reference. HTTP returned 404.");
         }
         catch(Exception e)
         {
@@ -401,7 +401,7 @@ public class NetUtils
 
         //
 
-        if(builder==null) throw new Exception("Unable to retrieve HTML for site: "+param.url);
+        if(builder==null) throw new Exception("Unable to retrieve HTML for site: "+param.URL);
 
         //
 

@@ -13,7 +13,7 @@ import webcrawler.registration.Registrar;
  */
 public class Preinitializer extends webcrawler.intialization.Preinitializer implements Runnable
 {
-    public Registrar registrar = new Registrar();
+    public Registrar registrar = null;
 
     //
 
@@ -35,13 +35,14 @@ public class Preinitializer extends webcrawler.intialization.Preinitializer impl
     {
         for(Class _class : registrar.classes)
         {
-            Object object=null;
+            Object object = null;
 
             Runnable runner=null;
 
             try
             {
-                object = _class.newInstance();
+                if(object==null)
+                    object = _class.newInstance();
             }
             catch(Exception e)
             {

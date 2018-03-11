@@ -12,41 +12,48 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class WebsiteListLoader implements Runnable
+public class RemoteListLoader implements Runnable
 {
+    /**
+     *
+     */
+    public RemoteListLoader()
+    {
+
+    }
+
     /**
      *
      */
     public void run()
     {
-        WebcrawlerParam param = new WebcrawlerParam();
-
-        param.url = "https://www.quantcast.com/top-sites/";
-
-        param.href = "https://www.quantcast.com/top-sites/";
-
-        //
-
         try
         {
+            WebcrawlerParam param = new WebcrawlerParam();
+
+            param.URL = "https://www.quantcast.com/top-sites/";
+
+            param.HREF = "https://www.quantcast.com/top-sites/";
+
+            //
+
             this.dopreload(param);
+
+            //
+
+            Initializer initializer = null;
+
+            initializer = (Initializer) Webcrawler.modules.get("initializer");
+
+            //
+
+            ArrayList<String> websites = (ArrayList<String>)initializer.variables.get("predefined");
+
         }
         catch(Exception e)
         {
             e.printStackTrace();
         }
-
-        //
-
-        Initializer initializer = null;
-
-        initializer = (Initializer) Webcrawler.modules.get("initializer");
-
-        //
-
-        ArrayList<String> websites = null;
-
-        websites = (ArrayList<String>)initializer.variables.get("websites");
     }
 
     /**
@@ -63,7 +70,7 @@ class WebsiteListLoader implements Runnable
 
         //
 
-        url = new URL(new URI(param.href).normalize().toString());
+        url = new URL(new URI(param.HREF).normalize().toString());
 
 
         //
@@ -105,25 +112,23 @@ class WebsiteListLoader implements Runnable
 
         //
 
-        param.html = builder.toString();
+        param.HTML = builder.toString();
 
         //
 
-        System.err.println("❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊");
+        System.err.println("❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊ ❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊");
 
-        ArrayList<String> websites = this.doparseQUANTCASTlinks(param);
+        ArrayList<String> websites = this.doparsequantcastlinks(param);
 
         System.err.println("Initialized Top 100 Websites...");
 
-        System.err.println("❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊");
+        System.err.println("❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊ ❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊");
 
         //
 
-        Initializer initializer = null;
+        Initializer initializer = (Initializer) Webcrawler.modules.get("initializer");
 
-        initializer = (Initializer) Webcrawler.modules.get("initializer");
-
-        initializer.variables.put("websites", websites);
+        initializer.variables.put("predefined", websites);
 
         //
 
@@ -135,13 +140,13 @@ class WebsiteListLoader implements Runnable
      * @param param
      * @return
      */
-    public ArrayList<String> doparseQUANTCASTlinks(WebcrawlerParam param)
+    public ArrayList<String> doparsequantcastlinks(WebcrawlerParam param)
     {
         ArrayList<String> links = new ArrayList<String>();
 
         //
 
-        Matcher matcher = Pattern.compile("(name=\".*?\").*?", Pattern.DOTALL).matcher(param.html); //parse <a href=""></a> matches for now..
+        Matcher matcher = Pattern.compile("(name=\".*?\").*?", Pattern.DOTALL).matcher(param.HTML); //parse <a HREF=""></a> matches for now..
 
         //
 
@@ -152,13 +157,9 @@ class WebsiteListLoader implements Runnable
             if(s.startsWith("name"))
             {
                 s = s.replace("name=", "https://").replace("\"", "");
-
-                //System.out.println(s);
             }
             else
             {
-                //System.out.println("Unable to load top 100 websites off Quantcast.com/top-sites.");
-
                 continue;
             }
 

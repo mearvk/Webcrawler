@@ -14,7 +14,7 @@ import webcrawler.registration.Registrar;
  */
 public class Preinitialization extends Preinitializer implements Runnable
 {
-    public Registrar registrar = new Registrar();
+    public Registrar registrar = null;
 
     public Initializer initializer = new Initializer();
 

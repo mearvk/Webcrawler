@@ -17,9 +17,9 @@ class WebsiteListLoader implements Runnable
     {
         WebcrawlerParam param = new WebcrawlerParam();
 
-        param.url = "https://www.quantcast.com/top-sites/";
+        param.URL = "https://www.quantcast.com/top-sites/";
 
-        param.href = "https://www.quantcast.com/top-sites/";
+        param.HREF = "https://www.quantcast.com/top-sites/";
 
         //
 
@@ -42,7 +42,7 @@ class WebsiteListLoader implements Runnable
 
         ArrayList<String> websites;
 
-        websites = (ArrayList<String>)initializer.variables.get("websites");
+        websites = (ArrayList<String>)initializer.variables.get("predefined");
 
         //
 
@@ -269,7 +269,7 @@ class WebsiteListLoader implements Runnable
 
         //
 
-        url = new URL(param.href);
+        url = new URL(param.HREF);
 
 
         //
@@ -311,7 +311,7 @@ class WebsiteListLoader implements Runnable
 
         //
 
-        param.html =builder.toString();
+        param.HTML =builder.toString();
 
         ArrayList<String> websites = this.doparseHTMLlinks(param);
 
@@ -321,7 +321,7 @@ class WebsiteListLoader implements Runnable
 
         initializer = (Initializer)Webcrawler.values.get("initializer");
 
-        initializer.variables.put("websites", websites);
+        initializer.variables.put("predefined", websites);
 
         //
 
@@ -334,7 +334,7 @@ class WebsiteListLoader implements Runnable
 
         //
 
-        Matcher matcher = Pattern.compile("(name=\".*?\").*?", Pattern.DOTALL).matcher(param.html); //parse <a href=""></a> matches for now..
+        Matcher matcher = Pattern.compile("(name=\".*?\").*?", Pattern.DOTALL).matcher(param.HTML); //parse <a HREF=""></a> matches for now..
 
         //
 

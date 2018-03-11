@@ -102,11 +102,11 @@ public class FileUtils
             }
             else if(inputURL.startsWith("/"))
             {
-                inputURL = param.url + inputURL;
+                inputURL = param.URL + inputURL;
             }
             else if(inputURL.startsWith("./"))
             {
-                inputURL = param.url + inputURL;
+                inputURL = param.URL + inputURL;
             }
         }
         else if(inputURL.startsWith("http"))
@@ -115,7 +115,7 @@ public class FileUtils
         }
         else if(!inputURL.isEmpty() && inputURL.charAt(0)!='/')
         {
-            inputURL = param.url + "/" + inputURL;
+            inputURL = param.URL + "/" + inputURL;
         }
         else throw new Exception("Neither relative nor absolute URL found for file: \""+inputURL+"\"");
 
@@ -152,15 +152,15 @@ public class FileUtils
 
         //
 
-        String dirref = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.doURLnormalization(param.href);
+        String dirref = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.doURLnormalization(param.HREF);
 
         //
 
-        String imagefileref = dirref +SLASH+ Utils.doURLnormalization(param.href) +SLASH+ "images";
+        String imagefileref = dirref +SLASH+ Utils.doURLnormalization(param.HREF) +SLASH+ "images";
 
-        String scriptfileref = dirref +SLASH+ Utils.doURLnormalization(param.href) +SLASH+ "script";
+        String scriptfileref = dirref +SLASH+ Utils.doURLnormalization(param.HREF) +SLASH+ "script";
 
-        String cssfileref = dirref +SLASH+ Utils.doURLnormalization(param.href) +SLASH+ "css";
+        String cssfileref = dirref +SLASH+ Utils.doURLnormalization(param.HREF) +SLASH+ "css";
 
         //
 
@@ -172,9 +172,9 @@ public class FileUtils
 
             //
 
-            File file = new File(dir.getAbsolutePath(), "index.html");
+            File file = new File(dir.getAbsolutePath(), "index.HTML");
 
-            if(file.exists()) file.delete(); //weird case where new directory is made for URL and followed by ./index.html and here we do not treat second directory creation step.
+            if(file.exists()) file.delete(); //weird case where new directory is made for URL and followed by ./index.HTML and here we do not treat second directory creation step.
 
             file = FileUtils.doclearfileurl(file);
 
@@ -259,7 +259,7 @@ public class FileUtils
 
             FileWriter writer = new FileWriter(file);
 
-            writer.write(param.html);
+            writer.write(param.HTML);
 
             writer.flush();
 
@@ -425,12 +425,12 @@ public class FileUtils
 
             if(inputURL.startsWith("/"))
             {
-                inputURL = param.url + inputURL;
+                inputURL = param.URL + inputURL;
             }
 
             if(inputURL.startsWith("./"))
             {
-                inputURL = param.url + inputURL;
+                inputURL = param.URL + inputURL;
             }
         }
         else if(inputURL.startsWith("http"))
@@ -439,7 +439,7 @@ public class FileUtils
         }
         else if(!inputURL.isEmpty() && inputURL.charAt(0)!='/')
         {
-            inputURL = param.url + "/" + inputURL;
+            inputURL = param.URL + "/" + inputURL;
         }
         else throw new Exception("Neither relative nor absolute URL found for file: \""+inputURL+"\"");
 
@@ -549,12 +549,12 @@ public class FileUtils
 
             if(inputURL.startsWith("/"))
             {
-                inputURL = param.url + inputURL;
+                inputURL = param.URL + inputURL;
             }
 
             if(inputURL.startsWith("./"))
             {
-                inputURL = param.url + inputURL;
+                inputURL = param.URL + inputURL;
             }
         }
         else if(inputURL.startsWith("http"))
@@ -563,7 +563,7 @@ public class FileUtils
         }
         else if(!inputURL.isEmpty() && inputURL.charAt(0)!='/')
         {
-            inputURL = param.url + "/" + inputURL;
+            inputURL = param.URL + "/" + inputURL;
         }
         else throw new Exception("Neither relative nor absolute URL found for file: \""+inputURL+"\"");
 

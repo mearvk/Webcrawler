@@ -74,19 +74,19 @@ public class WorkerThread extends Thread
 
                     //
 
-                    String websiteURL = param.url;
+                    String websiteURL = param.URL;
 
                     //
 
-                    System.out.println("Thread \""+this.getName()+"\" now working with \""+param.url +"\" - "+queue.size()+" out of "+this.original_size+" sites remain.");
+                    System.out.println("Thread \""+this.getName()+"\" now working with \""+param.URL +"\" - "+queue.size()+" out of "+this.original_size+" sites remain.");
 
                     //
 
-                    param.url = websiteURL;
+                    param.URL = websiteURL;
 
-                    param.href = websiteURL;
+                    param.HREF = websiteURL;
 
-                    param.html = (String)runner.functions.run(runner,"dorequestandstoresite", param.html, String.class, param);                  //dorequestandstoresite(param);
+                    param.HTML = (String)runner.functions.run(runner,"dorequestandstoresite", param.HTML, String.class, param);                  //dorequestandstoresite(param);
 
                     param.siteAnchors = (ArrayList<String>)runner.functions.run(runner,"doparseanchors", param.siteAnchors, ArrayList.class, param);    //
 
