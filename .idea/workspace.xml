@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="dcdb4ecf-11f0-403a-ab21-3ca390385c30" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/FileUtils.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/FileUtils.class" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/private.properties" afterPath="$PROJECT_DIR$/nbproject/private/private.properties" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" />
-      <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/FileUtils.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/FileUtils.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -102,8 +98,8 @@
       <file leaf-file-name="FileUtils.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/FileUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="340" column="24" lean-forward="true" selection-start-line="340" selection-start-column="24" selection-end-line="340" selection-end-column="24" />
+            <state relative-caret-position="559">
+              <caret line="359" column="23" lean-forward="false" selection-start-line="359" selection-start-column="23" selection-end-line="359" selection-end-column="23" />
               <folding>
                 <element signature="method#doguardagainstlongfilenames#0;class#FileUtils#0" expanded="false" />
                 <element signature="method#dodeterminefullpathforhttpreference#0;class#FileUtils#0" expanded="false" />
@@ -438,7 +434,7 @@
       <workItem from="1520748420147" duration="2382000" />
       <workItem from="1520751200776" duration="18822000" />
       <workItem from="1520806867436" duration="3520000" />
-      <workItem from="1521069073411" duration="421000" />
+      <workItem from="1521069073411" duration="739000" />
     </task>
     <task id="LOCAL-00001" summary="Latest Version">
       <created>1520432474240</created>
@@ -566,11 +562,18 @@
       <option name="project" value="LOCAL" />
       <updated>1520809390990</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Latest Version">
+      <created>1521069530984</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1521069530985</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85619000" />
+    <option name="totallyTimeSpent" value="85937000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1216" extended-state="6" />
@@ -1226,8 +1229,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/FileUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="340" column="24" lean-forward="true" selection-start-line="340" selection-start-column="24" selection-end-line="340" selection-end-column="24" />
+        <state relative-caret-position="559">
+          <caret line="359" column="23" lean-forward="false" selection-start-line="359" selection-start-column="23" selection-end-line="359" selection-end-column="23" />
           <folding>
             <element signature="method#doguardagainstlongfilenames#0;class#FileUtils#0" expanded="false" />
             <element signature="method#dodeterminefullpathforhttpreference#0;class#FileUtils#0" expanded="false" />
