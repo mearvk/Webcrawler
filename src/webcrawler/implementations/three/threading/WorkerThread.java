@@ -80,6 +80,8 @@ public class WorkerThread extends Thread implements ShutdownThread
 
                 if (param.LDEPTH > 0)
                 {
+
+
                     NetUtils.dorequestandstoresite(param);
 
                     NetUtils.dorequestandstoreanchors(param, new ArrayList<String>(), 0, param.LDEPTH);

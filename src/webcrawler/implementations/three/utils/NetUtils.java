@@ -300,6 +300,18 @@ public class NetUtils
 
         //
 
+        //
+
+        param.URL = url.toString();
+
+        param.HREF = url.toString();
+
+        param.FULL_DOMAIN_NAME = ParseUtils.dogetfulldomainname(param.HREF);
+
+        param.DOMAIN_NAME = ParseUtils.dogetbasedomainname(param.HREF);
+
+        //
+
         connection = (HttpURLConnection)url.openConnection();
 
         connection.setReadTimeout(10000);
