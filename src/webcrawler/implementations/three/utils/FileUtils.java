@@ -84,8 +84,6 @@ public class FileUtils
         return new File(NEWFILENAME);
     }
 
-
-
     /**
      *
      * @param param
@@ -172,7 +170,7 @@ public class FileUtils
 
             //
 
-            File file = new File(dir.getAbsolutePath(), "index.HTML");
+            File file = new File(dir.getAbsolutePath(), "index.html");
 
             if (file.exists()) return "skipping";
 
@@ -262,7 +260,7 @@ public class FileUtils
 
             //
 
-            File file = new File(dir.getAbsolutePath(), "index.HTML");
+            File file = new File(dir.getAbsolutePath(), "index.html");
 
             if(file.exists()) return "skipping";
 
@@ -302,7 +300,7 @@ public class FileUtils
                     }
                     catch(Exception e)
                     {
-                        //System.err.println("FileUtils.dofullsitepersist :: "+e.getMessage());
+                        System.err.println("FileUtils.dofullsitepersist :: "+e.getMessage());
                     }
                 }
             }
@@ -321,7 +319,7 @@ public class FileUtils
                     }
                     catch(Exception e)
                     {
-                        //System.err.println("FileUtils.dofullsitepersist :: "+e.getMessage());
+                        System.err.println("FileUtils.dofullsitepersist :: "+e.getMessage());
                     }
                 }
             }
@@ -340,7 +338,7 @@ public class FileUtils
                     }
                     catch(Exception e)
                     {
-                        //System.err.println("FileUtils.dofullsitepersist :: "+e.getMessage());
+                        System.err.println("FileUtils.dofullsitepersist :: "+e.getMessage());
                     }
                 }
             }
@@ -473,12 +471,6 @@ public class FileUtils
         //
 
         return "success";
-    }
-
-    /** */
-    public static void persistfile(String outputURL) throws Exception
-    {
-        return;
     }
 
     /**
