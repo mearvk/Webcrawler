@@ -5,7 +5,7 @@ public class SystemReadout implements Runnable
     @Override
     public void run()
     {
-        System.err.println("❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊ ❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊");
+        System.err.println("▁▂▂▁▂▂▁▂▂▁▂▂▁▂▂▁▂▂▁▂▂▁▂▂▁▂▂▁▂▂▁▂▂▁▂▂▁▁ ❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊");
 
         System.err.println("System Name:        Webcrawler");
 
