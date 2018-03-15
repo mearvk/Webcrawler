@@ -13,6 +13,8 @@ public class WorkerThread extends Thread implements ShutdownThread
 {
     public volatile Queue<WebcrawlerParam> queue = new ConcurrentLinkedQueue();
 
+    public Object lock = new Object();
+
     public Boolean running = true;
 
     public ModuleOne module = null;
@@ -116,6 +118,8 @@ public class WorkerThread extends Thread implements ShutdownThread
                 this.wait(this.wait_millis);
 
                 this.inactive(this.wait_millis);
+
+                this.notifyAll();
             }
         }
         catch(Exception e)

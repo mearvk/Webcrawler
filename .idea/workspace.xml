@@ -8,8 +8,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/modules/ModuleOne.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/modules/ModuleOne.class" />
       <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/threading/WorkerThread.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/threading/WorkerThread.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/utils/FileUtils.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/two/utils/FileUtils.class" />
       <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/three/modules/ModuleOne.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/three/modules/ModuleOne.java" />
       <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/three/threading/WorkerThread.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/three/threading/WorkerThread.java" />
+      <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/two/utils/FileUtils.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/two/utils/FileUtils.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,33 +32,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Registrar.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/webcrawler/registration/Registrar.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1564">
-              <caret line="108" column="65" lean-forward="false" selection-start-line="108" selection-start-column="65" selection-end-line="108" selection-end-column="65" />
-              <folding>
-                <element signature="e#988#989#0" expanded="true" />
-                <element signature="e#1032#1033#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ModuleOne.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/modules/ModuleOne.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+            <state relative-caret-position="213">
+              <caret line="198" column="21" lean-forward="false" selection-start-line="198" selection-start-column="21" selection-end-line="198" selection-end-column="21" />
               <folding>
                 <element signature="method#ModuleOne#0;class#ModuleOne#0" expanded="false" />
                 <element signature="method#run#0;class#ModuleOne#0" expanded="false" />
                 <element signature="method#entryexists#0;class#ModuleOne#0" expanded="false" />
-                <element signature="method#offer#0;class#ModuleOne#0" expanded="false" />
                 <element signature="method#dolocalsiterecurse#0;class#ModuleOne#0" expanded="false" />
-                <element signature="e#5681#5689#0" expanded="true" />
+                <element signature="e#11665#11673#0" expanded="true" />
                 <element signature="method#doglobalsiterecurse#0;class#ModuleOne#0" expanded="false" />
-                <element signature="e#10657#10665#0" expanded="true" />
+                <element signature="e#16641#16649#0" expanded="true" />
                 <element signature="method#dorecurse#0;class#ModuleOne#0" expanded="false" />
               </folding>
             </state>
@@ -66,7 +54,7 @@
       <file leaf-file-name="NetUtils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4403">
+            <state relative-caret-position="17">
               <caret line="312" column="0" lean-forward="false" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -80,7 +68,7 @@
       <file leaf-file-name="WebcrawlerParam.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/common/WebcrawlerParam.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
+            <state relative-caret-position="527">
               <caret line="45" column="23" lean-forward="false" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
               <folding />
             </state>
@@ -90,7 +78,7 @@
       <file leaf-file-name="FileUtils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/FileUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1632">
+            <state relative-caret-position="17">
               <caret line="262" column="0" lean-forward="false" selection-start-line="262" selection-start-column="0" selection-end-line="262" selection-end-column="0" />
               <folding>
                 <element signature="method#doguardagainstlongfilenames#0;class#FileUtils#0" expanded="false" />
@@ -107,7 +95,7 @@
       <file leaf-file-name="Utils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/utils/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
+            <state relative-caret-position="213">
               <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding />
             </state>
@@ -117,7 +105,7 @@
       <file leaf-file-name="Webcrawler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/Webcrawler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="901">
+            <state relative-caret-position="621">
               <caret line="63" column="42" lean-forward="false" selection-start-line="63" selection-start-column="42" selection-end-line="63" selection-end-column="42" />
               <folding>
                 <element signature="method#run#0;class#Webcrawler#0" expanded="false" />
@@ -129,11 +117,9 @@
       <file leaf-file-name="WorkerThread.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/threading/WorkerThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="36" column="46" lean-forward="true" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
+            <state relative-caret-position="102">
+              <caret line="15" column="38" lean-forward="false" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
               <folding>
-                <element signature="method#run#0;class#WorkerThread#0" expanded="false" />
-                <element signature="method#sleepily#0;class#WorkerThread#0" expanded="false" />
                 <element signature="method#inactive#0;class#WorkerThread#0" expanded="false" />
                 <element signature="method#shutdown#0;class#WorkerThread#0" expanded="false" />
               </folding>
@@ -154,7 +140,7 @@
       <file leaf-file-name="ParseUtils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/ParseUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
+            <state relative-caret-position="272">
               <caret line="266" column="53" lean-forward="false" selection-start-line="266" selection-start-column="48" selection-end-line="266" selection-end-column="53" />
               <folding>
                 <element signature="method#doparseanchors#0;class#ParseUtils#0" expanded="false" />
@@ -212,7 +198,6 @@
         <option value="$PROJECT_DIR$/src/webcrawler/common/SiteSpecialization.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/one/modules/ModuleOne.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/two/utils/NetUtils.java" />
-        <option value="$PROJECT_DIR$/src/webcrawler/implementations/two/utils/FileUtils.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/system/SystemReadout.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/two/Webcrawler.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/two/initialization/Preinitializer.java" />
@@ -233,6 +218,7 @@
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/ParseUtils.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/threading/WorkerThread.java" />
+        <option value="$PROJECT_DIR$/src/webcrawler/implementations/two/utils/FileUtils.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/modules/ModuleOne.java" />
       </list>
     </option>
@@ -429,7 +415,7 @@
       <workItem from="1520751200776" duration="18822000" />
       <workItem from="1520806867436" duration="3520000" />
       <workItem from="1521069073411" duration="8250000" />
-      <workItem from="1521124956582" duration="194000" />
+      <workItem from="1521124956582" duration="2355000" />
     </task>
     <task id="LOCAL-00001" summary="Latest Version">
       <created>1520432474240</created>
@@ -641,29 +627,36 @@
       <option name="project" value="LOCAL" />
       <updated>1521077451286</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Latest Version">
+      <created>1521125182536</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1521125182536</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93642000" />
+    <option name="totallyTimeSpent" value="95803000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1216" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34146342" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36224028" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4715447" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5121951" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1578125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12135417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -695,7 +688,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/webcrawler/implementations/three/modules/ModuleOne.java</url>
-          <line>262</line>
+          <line>440</line>
           <properties />
           <option name="timeStamp" value="48" />
         </line-breakpoint>
@@ -707,7 +700,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/webcrawler/implementations/three/threading/WorkerThread.java</url>
-          <line>61</line>
+          <line>63</line>
           <properties />
           <option name="timeStamp" value="87" />
         </line-breakpoint>
@@ -756,6 +749,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#679#680#0" expanded="false" />
+            <element signature="e#739#740#0" expanded="false" />
+            <element signature="e#778#779#0" expanded="false" />
+            <element signature="e#836#837#0" expanded="false" />
+            <element signature="method#run#0;class#Preinitializer#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -763,6 +764,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding>
+            <element signature="e#582#583#0" expanded="false" />
+            <element signature="e#637#638#0" expanded="false" />
+            <element signature="method#run#0;class#Initializer#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -770,6 +776,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -778,8 +785,8 @@
         <state relative-caret-position="1564">
           <caret line="108" column="65" lean-forward="false" selection-start-line="108" selection-start-column="65" selection-end-line="108" selection-end-column="65" />
           <folding>
-            <element signature="e#988#989#0" expanded="true" />
-            <element signature="e#1032#1033#0" expanded="true" />
+            <element signature="e#988#989#0" expanded="false" />
+            <element signature="e#1032#1033#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -799,11 +806,10 @@
             <element signature="method#ModuleOne#0;class#ModuleOne#0" expanded="false" />
             <element signature="method#run#0;class#ModuleOne#0" expanded="false" />
             <element signature="method#entryexists#0;class#ModuleOne#0" expanded="false" />
-            <element signature="method#offer#0;class#ModuleOne#0" expanded="false" />
             <element signature="method#dolocalsiterecurse#0;class#ModuleOne#0" expanded="false" />
-            <element signature="e#5681#5689#0" expanded="true" />
+            <element signature="e#11665#11673#0" expanded="true" />
             <element signature="method#doglobalsiterecurse#0;class#ModuleOne#0" expanded="false" />
-            <element signature="e#10657#10665#0" expanded="true" />
+            <element signature="e#16641#16649#0" expanded="true" />
             <element signature="method#dorecurse#0;class#ModuleOne#0" expanded="false" />
           </folding>
         </state>
@@ -836,8 +842,6 @@
         <state relative-caret-position="969">
           <caret line="63" column="0" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
           <folding>
-            <element signature="method#run#0;class#WorkerThread#0" expanded="false" />
-            <element signature="method#sleepily#0;class#WorkerThread#0" expanded="false" />
             <element signature="method#inactive#0;class#WorkerThread#0" expanded="false" />
             <element signature="method#shutdown#0;class#WorkerThread#0" expanded="false" />
           </folding>
@@ -860,6 +864,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#679#680#0" expanded="false" />
+            <element signature="e#739#740#0" expanded="false" />
+            <element signature="e#778#779#0" expanded="false" />
+            <element signature="e#836#837#0" expanded="false" />
+            <element signature="method#run#0;class#Preinitializer#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -867,6 +879,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding>
+            <element signature="e#582#583#0" expanded="false" />
+            <element signature="e#637#638#0" expanded="false" />
+            <element signature="method#run#0;class#Initializer#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -874,6 +891,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -892,11 +910,10 @@
             <element signature="method#ModuleOne#0;class#ModuleOne#0" expanded="false" />
             <element signature="method#run#0;class#ModuleOne#0" expanded="false" />
             <element signature="method#entryexists#0;class#ModuleOne#0" expanded="false" />
-            <element signature="method#offer#0;class#ModuleOne#0" expanded="false" />
             <element signature="method#dolocalsiterecurse#0;class#ModuleOne#0" expanded="false" />
-            <element signature="e#5681#5689#0" expanded="true" />
+            <element signature="e#11665#11673#0" expanded="true" />
             <element signature="method#doglobalsiterecurse#0;class#ModuleOne#0" expanded="false" />
-            <element signature="e#10657#10665#0" expanded="true" />
+            <element signature="e#16641#16649#0" expanded="true" />
             <element signature="method#dorecurse#0;class#ModuleOne#0" expanded="false" />
           </folding>
         </state>
@@ -929,8 +946,6 @@
         <state relative-caret-position="1343">
           <caret line="85" column="40" lean-forward="false" selection-start-line="85" selection-start-column="40" selection-end-line="85" selection-end-column="40" />
           <folding>
-            <element signature="method#run#0;class#WorkerThread#0" expanded="false" />
-            <element signature="method#sleepily#0;class#WorkerThread#0" expanded="false" />
             <element signature="method#inactive#0;class#WorkerThread#0" expanded="false" />
             <element signature="method#shutdown#0;class#WorkerThread#0" expanded="false" />
           </folding>
@@ -977,11 +992,10 @@
             <element signature="method#ModuleOne#0;class#ModuleOne#0" expanded="false" />
             <element signature="method#run#0;class#ModuleOne#0" expanded="false" />
             <element signature="method#entryexists#0;class#ModuleOne#0" expanded="false" />
-            <element signature="method#offer#0;class#ModuleOne#0" expanded="false" />
             <element signature="method#dolocalsiterecurse#0;class#ModuleOne#0" expanded="false" />
-            <element signature="e#5681#5689#0" expanded="true" />
+            <element signature="e#11665#11673#0" expanded="true" />
             <element signature="method#doglobalsiterecurse#0;class#ModuleOne#0" expanded="false" />
-            <element signature="e#10657#10665#0" expanded="true" />
+            <element signature="e#16641#16649#0" expanded="true" />
             <element signature="method#dorecurse#0;class#ModuleOne#0" expanded="false" />
           </folding>
         </state>
@@ -1058,6 +1072,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="572">
           <caret line="73" column="37" lean-forward="false" selection-start-line="73" selection-start-column="37" selection-end-line="73" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1076,13 +1091,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="370" column="14" lean-forward="false" selection-start-line="370" selection-start-column="14" selection-end-line="370" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/two/utils/FileUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="154" column="77" lean-forward="false" selection-start-line="154" selection-start-column="77" selection-end-line="154" selection-end-column="77" />
           <folding />
         </state>
       </provider>
@@ -1098,6 +1106,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="23" column="42" lean-forward="false" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1105,6 +1114,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="19" column="27" lean-forward="true" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+          <folding>
+            <element signature="e#515#516#0" expanded="false" />
+            <element signature="e#579#580#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1112,6 +1125,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="16" column="38" lean-forward="false" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1134,6 +1148,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="19" column="49" lean-forward="false" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#679#680#0" expanded="false" />
+            <element signature="e#739#740#0" expanded="false" />
+            <element signature="e#778#779#0" expanded="false" />
+            <element signature="e#836#837#0" expanded="false" />
+            <element signature="method#run#0;class#Preinitializer#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1148,6 +1170,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="212">
           <caret line="267" column="11" lean-forward="false" selection-start-line="267" selection-start-column="11" selection-end-line="267" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1155,6 +1178,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+          <folding>
+            <element signature="e#582#583#0" expanded="false" />
+            <element signature="e#637#638#0" expanded="false" />
+            <element signature="method#run#0;class#Initializer#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1162,6 +1190,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1170,17 +1199,9 @@
         <state relative-caret-position="1564">
           <caret line="108" column="65" lean-forward="false" selection-start-line="108" selection-start-column="65" selection-end-line="108" selection-end-column="65" />
           <folding>
-            <element signature="e#988#989#0" expanded="true" />
-            <element signature="e#1032#1033#0" expanded="true" />
+            <element signature="e#988#989#0" expanded="false" />
+            <element signature="e#1032#1033#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/mapping/SiteSpecializationMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="16" column="10" lean-forward="false" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1191,35 +1212,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/two/utils/FileUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="169" column="0" lean-forward="true" selection-start-line="169" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/webcrawler/common/WebcrawlerParam.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
+        <state relative-caret-position="527">
           <caret line="45" column="23" lean-forward="false" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/Webcrawler.java">
+    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="63" column="42" lean-forward="false" selection-start-line="63" selection-start-column="42" selection-end-line="63" selection-end-column="42" />
+        <state relative-caret-position="17">
+          <caret line="312" column="0" lean-forward="false" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
           <folding>
-            <element signature="method#run#0;class#Webcrawler#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#doenqueueremotesites#0;class#NetUtils#0" expanded="false" />
+            <element signature="method#exceedsmaximumdepth#0;class#NetUtils#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/utils/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/FileUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1632">
+        <state relative-caret-position="17">
           <caret line="262" column="0" lean-forward="false" selection-start-line="262" selection-start-column="0" selection-end-line="262" selection-end-column="0" />
           <folding>
             <element signature="method#doguardagainstlongfilenames#0;class#FileUtils#0" expanded="false" />
@@ -1232,21 +1255,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java">
+    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/utils/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4403">
-          <caret line="312" column="0" lean-forward="false" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
+        <state relative-caret-position="213">
+          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/Webcrawler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="63" column="42" lean-forward="false" selection-start-line="63" selection-start-column="42" selection-end-line="63" selection-end-column="42" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#doenqueueremotesites#0;class#NetUtils#0" expanded="false" />
-            <element signature="method#exceedsmaximumdepth#0;class#NetUtils#0" expanded="false" />
+            <element signature="method#run#0;class#Webcrawler#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/threading/WorkerThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="15" column="38" lean-forward="false" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
+          <folding>
+            <element signature="method#inactive#0;class#WorkerThread#0" expanded="false" />
+            <element signature="method#shutdown#0;class#WorkerThread#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/mapping/SiteSpecializationMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="16" column="10" lean-forward="false" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/ParseUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
+        <state relative-caret-position="272">
           <caret line="266" column="53" lean-forward="false" selection-start-line="266" selection-start-column="48" selection-end-line="266" selection-end-column="53" />
           <folding>
             <element signature="method#doparseanchors#0;class#ParseUtils#0" expanded="false" />
@@ -1266,32 +1314,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/threading/WorkerThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="36" column="46" lean-forward="true" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
-          <folding>
-            <element signature="method#run#0;class#WorkerThread#0" expanded="false" />
-            <element signature="method#sleepily#0;class#WorkerThread#0" expanded="false" />
-            <element signature="method#inactive#0;class#WorkerThread#0" expanded="false" />
-            <element signature="method#shutdown#0;class#WorkerThread#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/modules/ModuleOne.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+        <state relative-caret-position="213">
+          <caret line="198" column="21" lean-forward="false" selection-start-line="198" selection-start-column="21" selection-end-line="198" selection-end-column="21" />
           <folding>
             <element signature="method#ModuleOne#0;class#ModuleOne#0" expanded="false" />
             <element signature="method#run#0;class#ModuleOne#0" expanded="false" />
             <element signature="method#entryexists#0;class#ModuleOne#0" expanded="false" />
-            <element signature="method#offer#0;class#ModuleOne#0" expanded="false" />
             <element signature="method#dolocalsiterecurse#0;class#ModuleOne#0" expanded="false" />
-            <element signature="e#5681#5689#0" expanded="true" />
+            <element signature="e#11665#11673#0" expanded="true" />
             <element signature="method#doglobalsiterecurse#0;class#ModuleOne#0" expanded="false" />
-            <element signature="e#10657#10665#0" expanded="true" />
+            <element signature="e#16641#16649#0" expanded="true" />
             <element signature="method#dorecurse#0;class#ModuleOne#0" expanded="false" />
           </folding>
         </state>

@@ -133,15 +133,6 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
      */
     public void offer(WebcrawlerParam param)
     {
-        try
-        {
-            Thread.sleep(8000);
-        }
-        catch(Exception e)
-        {
-            System.err.println(e);
-        }
-
         //
 
         if( this.entryexists(param) ) return;
@@ -154,7 +145,23 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 System.err.println("URL enqueue event for : "+param.HREF);
 
-                threads.get(11).queue.offer(param);
+                if(threads.get(11).queue.size()>=10)
+                {
+                    try
+                    {
+                        Thread.sleep(1000L); //obfuse main
+
+                        if(threads.get(11).queue.size()<=1)
+                        {
+                            threads.get(11).queue.offer(param);
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        System.err.println(e);
+                    }
+                }
+                else threads.get(11).queue.offer(param);
 
                 break;
 
@@ -162,7 +169,23 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 System.err.println("URL enqueue event for : "+param.HREF);
 
-                threads.get(10).queue.offer(param);
+                if(threads.get(10).queue.size()>=10)
+                {
+                    try
+                    {
+                        Thread.sleep(1000L); //obfuse main
+
+                        if(threads.get(10).queue.size()<=1)
+                        {
+                            threads.get(10).queue.offer(param);
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        System.err.println(e);
+                    }
+                }
+                else threads.get(10).queue.offer(param);
 
                 break;
 
@@ -170,7 +193,23 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 System.err.println("URL enqueue event for : "+param.HREF);
 
-                threads.get(9).queue.offer(param);
+                if(threads.get(9).queue.size()>=10)
+                {
+                    try
+                    {
+                        Thread.sleep(1000L); //obfuse main
+
+                        if(threads.get(9).queue.size()<=1)
+                        {
+                            threads.get(9).queue.offer(param);
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        System.err.println(e);
+                    }
+                }
+                else threads.get(9).queue.offer(param);
 
                 break;
 
@@ -178,7 +217,23 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 System.err.println("URL enqueue event for : "+param.HREF);
 
-                threads.get(8).queue.offer(param);
+                if(threads.get(8).queue.size()>=10)
+                {
+                    try
+                    {
+                        Thread.sleep(1000L); //obfuse main
+
+                        if(threads.get(8).queue.size()<=1)
+                        {
+                            threads.get(8).queue.offer(param);
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        System.err.println(e);
+                    }
+                }
+                else threads.get(8).queue.offer(param);
 
                 break;
 
@@ -186,7 +241,23 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 System.err.println("URL enqueue event for : "+param.HREF);
 
-                threads.get(7).queue.offer(param);
+                if(threads.get(7).queue.size()>=10)
+                {
+                    try
+                    {
+                        Thread.sleep(1000L); //obfuse main
+
+                        if(threads.get(7).queue.size()<=1)
+                        {
+                            threads.get(7).queue.offer(param);
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        System.err.println(e);
+                    }
+                }
+                else threads.get(7).queue.offer(param);
 
                 break;
 
@@ -194,7 +265,23 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 System.err.println("URL enqueue event for : "+param.HREF);
 
-                threads.get(6).queue.offer(param);
+                if(threads.get(6).queue.size()>=10)
+                {
+                    try
+                    {
+                        Thread.sleep(1000L); //obfuse main
+
+                        if(threads.get(6).queue.size()<=1)
+                        {
+                            threads.get(6).queue.offer(param);
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        System.err.println(e);
+                    }
+                }
+                else threads.get(6).queue.offer(param);
 
                 break;
 
@@ -202,7 +289,23 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 System.err.println("URL enqueue event for : "+param.HREF);
 
-                threads.get(5).queue.offer(param);
+                if(threads.get(5).queue.size()>=10)
+                {
+                    try
+                    {
+                        Thread.sleep(1000L); //obfuse main
+
+                        if(threads.get(5).queue.size()<=1)
+                        {
+                            threads.get(5).queue.offer(param);
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        System.err.println(e);
+                    }
+                }
+                else threads.get(5).queue.offer(param);
 
                 break;
 
@@ -210,7 +313,23 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 System.err.println("URL enqueue event for : "+param.HREF);
 
-                threads.get(4).queue.offer(param);
+                if(threads.get(4).queue.size()>=10)
+                {
+                    try
+                    {
+                        Thread.sleep(1000L); //obfuse main
+
+                        if(threads.get(4).queue.size()<=1)
+                        {
+                            threads.get(4).queue.offer(param);
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        System.err.println(e);
+                    }
+                }
+                else threads.get(4).queue.offer(param);
 
                 break;
 
@@ -218,7 +337,23 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 System.err.println("URL enqueue event for : "+param.HREF);
 
-                threads.get(3).queue.offer(param);
+                if(threads.get(3).queue.size()>=10)
+                {
+                    try
+                    {
+                        Thread.sleep(1000L); //obfuse main
+
+                        if(threads.get(3).queue.size()<=1)
+                        {
+                            threads.get(3).queue.offer(param);
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        System.err.println(e);
+                    }
+                }
+                else threads.get(3).queue.offer(param);
 
                 break;
 
@@ -226,7 +361,23 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 System.err.println("URL enqueue event for : "+param.HREF);
 
-                threads.get(2).queue.offer(param);
+                if(threads.get(2).queue.size()>=10)
+                {
+                    try
+                    {
+                        Thread.sleep(1000L); //obfuse main
+
+                        if(threads.get(2).queue.size()<=1)
+                        {
+                            threads.get(2).queue.offer(param);
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        System.err.println(e);
+                    }
+                }
+                else threads.get(2).queue.offer(param);
 
                 break;
 
@@ -234,7 +385,23 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 System.err.println("URL enqueue event for : "+param.HREF);
 
-                threads.get(1).queue.offer(param);
+                if(threads.get(1).queue.size()>=10)
+                {
+                    try
+                    {
+                        Thread.sleep(1000L); //obfuse main
+
+                        if(threads.get(1).queue.size()<=1)
+                        {
+                            threads.get(1).queue.offer(param);
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        System.err.println(e);
+                    }
+                }
+                else threads.get(1).queue.offer(param);
 
                 break;
 
@@ -242,7 +409,18 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
                 System.err.println("URL enqueue event for : "+param.HREF);
 
-                threads.get(0).queue.offer(param);
+                if(threads.get(0).queue.size()>=10)
+                {
+                    try
+                    {
+                        Thread.sleep(1000L); //obfuse main
+                    }
+                    catch(Exception e)
+                    {
+                        System.err.println(e);
+                    }
+                }
+                else threads.get(0).queue.offer(param);
 
                 break;
 

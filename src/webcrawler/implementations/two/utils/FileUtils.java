@@ -172,7 +172,7 @@ public class FileUtils
 
             //
 
-            File file = new File(dir.getAbsolutePath(), "index.HTML");
+            File file = new File(dir.getAbsolutePath(), "index.html");
 
             if(file.exists()) file.delete(); //weird case where new directory is made for URL and followed by ./index.HTML and here we do not treat second directory creation step.
 
