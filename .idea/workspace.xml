@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="dcdb4ecf-11f0-403a-ab21-3ca390385c30" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/system/SystemReadout.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/system/SystemReadout.class" />
       <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/NetUtils.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/NetUtils.class" />
-      <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/three/system/SystemReadout.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/three/system/SystemReadout.java" />
       <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -34,7 +32,7 @@
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/initialization/LocalLoader.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
-              <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+              <caret line="14" column="24" lean-forward="false" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -68,16 +66,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NetUtils.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NetUtils.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="133" column="44" lean-forward="false" selection-start-line="133" selection-start-column="44" selection-end-line="133" selection-end-column="44" />
+            <state relative-caret-position="414">
+              <caret line="467" column="26" lean-forward="false" selection-start-line="467" selection-start-column="26" selection-end-line="467" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#doenqueuemanualsites#0;class#NetUtils#0" expanded="false" />
+                <element signature="method#doenqueueautomaticsites#0;class#NetUtils#0" expanded="false" />
                 <element signature="method#exceedsmaximumdepth#0;class#NetUtils#0" expanded="false" />
                 <element signature="method#dorequestandstoreanchors#0;class#NetUtils#0" expanded="false" />
-                <element signature="method#dositerequest#0;class#NetUtils#0" expanded="false" />
                 <element signature="method#dorequestandstoresite#0;class#NetUtils#0" expanded="false" />
                 <element signature="method#dorequestandstorepage#0;class#NetUtils#0" expanded="false" />
               </folding>
@@ -119,11 +118,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SystemReadout.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SystemReadout.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/system/SystemReadout.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="141" lean-forward="true" selection-start-line="23" selection-start-column="141" selection-end-line="23" selection-end-column="141" />
+            <state relative-caret-position="85">
+              <caret line="5" column="21" lean-forward="true" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -156,8 +155,8 @@
     <findStrings>
       <find>.</find>
       <find>enqueue event</find>
-      <find>❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊</find>
       <find>::</find>
+      <find>❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊</find>
     </findStrings>
     <replaceStrings>
       <replace>*</replace>
@@ -406,7 +405,7 @@
       <workItem from="1520751200776" duration="18822000" />
       <workItem from="1520806867436" duration="3520000" />
       <workItem from="1521069073411" duration="8250000" />
-      <workItem from="1521124956582" duration="19871000" />
+      <workItem from="1521124956582" duration="19992000" />
     </task>
     <task id="LOCAL-00001" summary="Latest Version">
       <created>1520432474240</created>
@@ -709,11 +708,18 @@
       <option name="project" value="LOCAL" />
       <updated>1521154590768</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Latest Version">
+      <created>1521154906799</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1521154906799</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113319000" />
+    <option name="totallyTimeSpent" value="113440000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1216" extended-state="6" />
@@ -898,9 +904,10 @@
           <caret line="146" column="0" lean-forward="false" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#doenqueuemanualsites#0;class#NetUtils#0" expanded="false" />
+            <element signature="method#doenqueueautomaticsites#0;class#NetUtils#0" expanded="false" />
             <element signature="method#exceedsmaximumdepth#0;class#NetUtils#0" expanded="false" />
             <element signature="method#dorequestandstoreanchors#0;class#NetUtils#0" expanded="false" />
-            <element signature="method#dositerequest#0;class#NetUtils#0" expanded="false" />
             <element signature="method#dorequestandstoresite#0;class#NetUtils#0" expanded="false" />
             <element signature="method#dorequestandstorepage#0;class#NetUtils#0" expanded="false" />
           </folding>
@@ -1007,9 +1014,10 @@
           <caret line="146" column="93" lean-forward="false" selection-start-line="146" selection-start-column="93" selection-end-line="146" selection-end-column="93" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#doenqueuemanualsites#0;class#NetUtils#0" expanded="false" />
+            <element signature="method#doenqueueautomaticsites#0;class#NetUtils#0" expanded="false" />
             <element signature="method#exceedsmaximumdepth#0;class#NetUtils#0" expanded="false" />
             <element signature="method#dorequestandstoreanchors#0;class#NetUtils#0" expanded="false" />
-            <element signature="method#dositerequest#0;class#NetUtils#0" expanded="false" />
             <element signature="method#dorequestandstoresite#0;class#NetUtils#0" expanded="false" />
             <element signature="method#dorequestandstorepage#0;class#NetUtils#0" expanded="false" />
           </folding>
@@ -1091,9 +1099,10 @@
           <caret line="91" column="65" lean-forward="false" selection-start-line="91" selection-start-column="65" selection-end-line="91" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#doenqueuemanualsites#0;class#NetUtils#0" expanded="false" />
+            <element signature="method#doenqueueautomaticsites#0;class#NetUtils#0" expanded="false" />
             <element signature="method#exceedsmaximumdepth#0;class#NetUtils#0" expanded="false" />
             <element signature="method#dorequestandstoreanchors#0;class#NetUtils#0" expanded="false" />
-            <element signature="method#dositerequest#0;class#NetUtils#0" expanded="false" />
             <element signature="method#dorequestandstoresite#0;class#NetUtils#0" expanded="false" />
             <element signature="method#dorequestandstorepage#0;class#NetUtils#0" expanded="false" />
           </folding>
@@ -1326,7 +1335,7 @@
     <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/initialization/LocalLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+          <caret line="14" column="24" lean-forward="false" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -1381,26 +1390,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java">
+    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/system/SystemReadout.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="133" column="44" lean-forward="false" selection-start-line="133" selection-start-column="44" selection-end-line="133" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#exceedsmaximumdepth#0;class#NetUtils#0" expanded="false" />
-            <element signature="method#dorequestandstoreanchors#0;class#NetUtils#0" expanded="false" />
-            <element signature="method#dositerequest#0;class#NetUtils#0" expanded="false" />
-            <element signature="method#dorequestandstoresite#0;class#NetUtils#0" expanded="false" />
-            <element signature="method#dorequestandstorepage#0;class#NetUtils#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="85">
+          <caret line="5" column="21" lean-forward="true" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/system/SystemReadout.java">
+    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="141" lean-forward="true" selection-start-line="23" selection-start-column="141" selection-end-line="23" selection-end-column="141" />
-          <folding />
+        <state relative-caret-position="414">
+          <caret line="467" column="26" lean-forward="false" selection-start-line="467" selection-start-column="26" selection-end-line="467" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#doenqueuemanualsites#0;class#NetUtils#0" expanded="false" />
+            <element signature="method#doenqueueautomaticsites#0;class#NetUtils#0" expanded="false" />
+            <element signature="method#exceedsmaximumdepth#0;class#NetUtils#0" expanded="false" />
+            <element signature="method#dorequestandstoreanchors#0;class#NetUtils#0" expanded="false" />
+            <element signature="method#dorequestandstoresite#0;class#NetUtils#0" expanded="false" />
+            <element signature="method#dorequestandstorepage#0;class#NetUtils#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

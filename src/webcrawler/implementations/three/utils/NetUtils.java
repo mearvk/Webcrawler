@@ -465,7 +465,7 @@ public class NetUtils
 
                         ModuleOne.percentage.put(ParseUtils.dogetfulldomainname(param.HREF), var);
 
-                        System.out.println("    >> Thread \""+threadname+"\" :: request for website ["+param.HREF +"] failed with fatal code: "+responsecode);
+                        //System.out.println("    >> Thread \""+threadname+"\" :: request for website ["+param.HREF +"] failed with fatal code: "+responsecode);
                     }
                 }
             }
