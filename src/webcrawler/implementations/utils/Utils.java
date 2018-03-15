@@ -44,8 +44,10 @@ public class Utils
      * @param rawURL
      * @return
      */
-    public static String doURLnormalization(String rawURL)
+    public static String doURLnormalization(final String rawURL)
     {
+        String base = new String(rawURL);
+
         String website_name = "";
 
         String url_portion = "";
@@ -54,26 +56,26 @@ public class Utils
 
         //
 
-        if(rawURL==null || rawURL.isEmpty()) return null;
+        if(base==null || base.isEmpty()) return null;
 
         //
 
-        if(rawURL.endsWith("/")) rawURL = rawURL.substring(0,rawURL.length()-1);
+        if(base.endsWith("/")) base = base.substring(0,base.length()-1);
 
         //
 
-        if(rawURL.startsWith("https://"))
+        if(base.startsWith("https://"))
         {
-            website_name = rawURL.substring(8);
+            website_name = base.substring(8);
         }
-        else if(rawURL.startsWith("http://"))
+        else if(base.startsWith("http://"))
         {
-            website_name = rawURL.substring(7);
+            website_name = base.substring(7);
         }
 
         //
 
-        website_name = rawURL; //?
+        website_name = base; //?
 
         //
 
@@ -83,19 +85,19 @@ public class Utils
 
         if(break_index>0)
         {
-            website_name = rawURL.substring(0, break_index);         //trim for www.google.com or google.com
+            website_name = base.substring(0, break_index);         //trim for www.google.com or google.com
         }
 
         if(break_index>0)
         {
-            url_portion = rawURL.substring(break_index);                       //trim for ?q=fantasy_football
+            url_portion = base.substring(break_index);                       //trim for ?q=fantasy_football
         }
 
         //
 
         if(break_index==-1)
         {
-            url_portion = rawURL;
+            url_portion = base;
         }
 
         //

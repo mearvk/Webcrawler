@@ -278,27 +278,27 @@ public class ParseUtils
             base = base.substring(8);
         }
 
-        if(param.endsWith("/"))                                 //remove final / ... eg. hoogle.com/
+        if(base.endsWith("/"))                                 //remove final / ... eg. hoogle.com/
         {
-            base = base.substring(0,param.length()-1);
+            base = base.substring(0, base.length()-1);
         }
 
-        if(param.startsWith("//"))                              //remove //hoogle.com --> hoogle.com
+        if(base.startsWith("//"))                              //remove //hoogle.com --> hoogle.com
         {
             base = base.substring(2);
         }
 
-        if(param.startsWith("/"))                               //remove /hoogle.com --> hoogle.com
+        if(base.startsWith("/"))                               //remove /hoogle.com --> hoogle.com
         {
             base = base.substring(1);
         }
 
-        if(param.startsWith("#"))                               //remove #hoogle.com --> hoogle.com
+        if(base.startsWith("#"))                               //remove #hoogle.com --> hoogle.com
         {
             base = base.substring(1);
         }
 
-        if(param.startsWith("./"))                              //remove ./hoogle.com --> hoogle.com
+        if(base.startsWith("./"))                              //remove ./hoogle.com --> hoogle.com
         {
             base = base.substring(2);
         }

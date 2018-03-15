@@ -225,12 +225,16 @@ public class NetUtils
                     }
                     catch (Exception e)
                     {
+                        e.printStackTrace();
+
                         System.err.println("NetUtils.dorequestandstoreanchors :: "+e);
                     }
 
                 }
                 catch(Exception e)
                 {
+                    e.printStackTrace();
+
                     System.err.println("NetUtils.dorequestandstoreanchors :: "+e.getMessage());
                 }
             }
@@ -241,6 +245,8 @@ public class NetUtils
         }
         catch(Exception e)
         {
+            e.printStackTrace();
+
             System.err.println("NetUtils.dorequestandstoreanchors :: "+e);
         }
         finally

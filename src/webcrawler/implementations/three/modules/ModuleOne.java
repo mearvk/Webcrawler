@@ -131,7 +131,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
     {
         try
         {
-            Thread.sleep(10000);
+            Thread.sleep(500);
         }
         catch(Exception e)
         {
