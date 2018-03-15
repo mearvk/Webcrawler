@@ -263,6 +263,63 @@ public class ParseUtils
         return param;
     }
 
+
+    public static String dogetpath(final String param)
+    {
+        String base = new String(param);
+
+        if(base.startsWith("http://"))
+        {
+            base = base.substring(7);
+        }
+
+        if(base.startsWith("https://"))
+        {
+            base = base.substring(8);
+        }
+
+        if(param.endsWith("/"))                                 //remove final / ... eg. hoogle.com/
+        {
+            base = param.substring(0,param.length()-1);
+        }
+
+        if(param.startsWith("//"))                              //remove //hoogle.com --> hoogle.com
+        {
+            base = param.substring(2);
+        }
+
+        if(param.startsWith("/"))                               //remove /hoogle.com --> hoogle.com
+        {
+            base = param.substring(1);
+        }
+
+        if(param.startsWith("#"))                               //remove #hoogle.com --> hoogle.com
+        {
+            base = param.substring(1);
+        }
+
+        if(param.startsWith("./"))                              //remove ./hoogle.com --> hoogle.com
+        {
+            base = param.substring(2);
+        }
+
+        //
+
+        if( !(base==null || base.isEmpty()) )
+        {
+            try
+            {
+                base = base.substring(param.indexOf("/")); //grab only PATH name eg.  hoogle.com/?serach=123 --> ?serach=123
+            }
+            catch(Exception e)
+            {
+                //
+            }
+        }
+
+        return base = base.startsWith("/") ? base.substring(1) : base;
+    }
+
     /**
      *
      * @param param

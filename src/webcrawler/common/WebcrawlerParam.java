@@ -43,6 +43,8 @@ public class WebcrawlerParam
 
     public String URL;
 
+    public String PATH;
+
     public String anchor;
 
     public int LDEPTH = 0;

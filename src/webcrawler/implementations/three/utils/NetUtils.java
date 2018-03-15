@@ -300,11 +300,11 @@ public class NetUtils
 
         //
 
-        //
-
         param.URL = url.toString();
 
         param.HREF = url.toString();
+
+        param.PATH = ParseUtils.dogetpath(param.HREF);
 
         param.FULL_DOMAIN_NAME = ParseUtils.dogetfulldomainname(param.HREF);
 

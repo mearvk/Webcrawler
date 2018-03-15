@@ -6,8 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="dcdb4ecf-11f0-403a-ab21-3ca390385c30" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/modules/ModuleOne.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/modules/ModuleOne.class" />
-      <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/three/modules/ModuleOne.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/three/modules/ModuleOne.java" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/WebcrawlerParam.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/common/WebcrawlerParam.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/FileUtils.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/FileUtils.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/NetUtils.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/NetUtils.class" />
+      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/ParseUtils.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/ParseUtils.class" />
+      <change beforePath="$PROJECT_DIR$/src/webcrawler/common/WebcrawlerParam.java" afterPath="$PROJECT_DIR$/src/webcrawler/common/WebcrawlerParam.java" />
+      <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/FileUtils.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/FileUtils.java" />
+      <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java" />
+      <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/ParseUtils.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/ParseUtils.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,20 +34,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Initializer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/initialization/Initializer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-              <folding>
-                <element signature="e#582#583#0" expanded="true" />
-                <element signature="e#637#638#0" expanded="true" />
-                <element signature="method#run#0;class#Initializer#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="LocalLoader.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/initialization/LocalLoader.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -65,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ModuleOne.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ModuleOne.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/modules/ModuleOne.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="133" column="30" lean-forward="false" selection-start-line="133" selection-start-column="30" selection-end-line="133" selection-end-column="30" />
+            <state relative-caret-position="629">
+              <caret line="149" column="0" lean-forward="false" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
               <folding>
                 <element signature="method#run#0;class#ModuleOne#0" expanded="false" />
                 <element signature="method#entryexists#0;class#ModuleOne#0" expanded="false" />
@@ -84,8 +76,8 @@
       <file leaf-file-name="NetUtils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="314" column="0" lean-forward="false" selection-start-line="314" selection-start-column="0" selection-end-line="314" selection-end-column="0" />
+            <state relative-caret-position="417">
+              <caret line="306" column="37" lean-forward="false" selection-start-line="306" selection-start-column="37" selection-end-line="306" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#doenqueueremotesites#0;class#NetUtils#0" expanded="false" />
@@ -95,11 +87,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="WebcrawlerParam.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/webcrawler/common/WebcrawlerParam.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="45" column="23" lean-forward="false" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="FileUtils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/FileUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="264" column="76" lean-forward="false" selection-start-line="264" selection-start-column="76" selection-end-line="264" selection-end-column="76" />
+            <state relative-caret-position="417">
+              <caret line="242" column="153" lean-forward="false" selection-start-line="242" selection-start-column="153" selection-end-line="242" selection-end-column="153" />
               <folding>
                 <element signature="method#doguardagainstlongfilenames#0;class#FileUtils#0" expanded="false" />
                 <element signature="method#dodeterminefullpathforhttpreference#0;class#FileUtils#0" expanded="false" />
@@ -127,8 +129,8 @@
       <file leaf-file-name="WorkerThread.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/threading/WorkerThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="27" column="12" lean-forward="false" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
+            <state relative-caret-position="391">
+              <caret line="80" column="40" lean-forward="true" selection-start-line="80" selection-start-column="40" selection-end-line="80" selection-end-column="40" />
               <folding>
                 <element signature="method#run#0;class#WorkerThread#0" expanded="false" />
                 <element signature="method#sleepily#0;class#WorkerThread#0" expanded="false" />
@@ -149,11 +151,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ParseUtils.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ParseUtils.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/ParseUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4335">
-              <caret line="604" column="0" lean-forward="false" selection-start-line="604" selection-start-column="0" selection-end-line="604" selection-end-column="0" />
+            <state relative-caret-position="606">
+              <caret line="319" column="65" lean-forward="false" selection-start-line="319" selection-start-column="65" selection-end-line="319" selection-end-column="65" />
               <folding>
                 <element signature="method#doparseanchors#0;class#ParseUtils#0" expanded="false" />
                 <element signature="method#doparseandsortanchors#0;class#ParseUtils#0" expanded="false" />
@@ -163,6 +165,11 @@
                 <element signature="method#parselinkforhrefattributevalue#0;class#ParseUtils#0" expanded="false" />
                 <element signature="method#parseimageforsrcattributevalue#0;class#ParseUtils#0" expanded="false" />
                 <element signature="method#parselinkforrelattributevalue#0;class#ParseUtils#0" expanded="false" />
+                <element signature="method#parselinkfortypeattributevalue#0;class#ParseUtils#0" expanded="false" />
+                <element signature="method#parseanchorforhrefattributevalue#0;class#ParseUtils#0" expanded="false" />
+                <element signature="method#parsescriptforsrcattributevalue#0;class#ParseUtils#0" expanded="false" />
+                <element signature="method#parsesitecss#0;class#ParseUtils#0" expanded="false" />
+                <element signature="method#parsesiteimages#0;class#ParseUtils#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -210,22 +217,22 @@
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/two/Webcrawler.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/two/initialization/Preinitializer.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/one/initialization/Preinitialization.java" />
-        <option value="$PROJECT_DIR$/src/webcrawler/common/WebcrawlerParam.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/initialization/ManualEntriesLoader.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/initialization/WebsiteListLoader.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/initialization/LocalListLoader.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/registration/Registrar.java" />
-        <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/ParseUtils.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/initialization/RemoteListLoader.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/one/Webcrawler.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/initialization/Preinitializer.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/Webcrawler.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/initialization/Initializer.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/mapping/SiteSpecializationMap.java" />
-        <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/FileUtils.java" />
-        <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/threading/WorkerThread.java" />
         <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/modules/ModuleOne.java" />
+        <option value="$PROJECT_DIR$/src/webcrawler/common/WebcrawlerParam.java" />
+        <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java" />
+        <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/FileUtils.java" />
+        <option value="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/ParseUtils.java" />
       </list>
     </option>
   </component>
@@ -420,7 +427,7 @@
       <workItem from="1520748420147" duration="2382000" />
       <workItem from="1520751200776" duration="18822000" />
       <workItem from="1520806867436" duration="3520000" />
-      <workItem from="1521069073411" duration="3153000" />
+      <workItem from="1521069073411" duration="4352000" />
     </task>
     <task id="LOCAL-00001" summary="Latest Version">
       <created>1520432474240</created>
@@ -590,18 +597,25 @@
       <option name="project" value="LOCAL" />
       <updated>1521072207996</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Latest Version">
+      <created>1521072359083</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1521072359083</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88351000" />
+    <option name="totallyTimeSpent" value="89550000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1216" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2728094" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3215899" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -674,7 +688,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java</url>
-          <line>304</line>
+          <line>302</line>
           <properties />
           <option name="timeStamp" value="93" />
         </line-breakpoint>
@@ -684,8 +698,14 @@
           <properties />
           <option name="timeStamp" value="94" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/FileUtils.java</url>
+          <line>242</line>
+          <properties />
+          <option name="timeStamp" value="95" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="95" />
+      <option name="time" value="96" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -729,8 +749,8 @@
         <state relative-caret-position="119">
           <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
           <folding>
-            <element signature="e#582#583#0" expanded="true" />
-            <element signature="e#637#638#0" expanded="true" />
+            <element signature="e#582#583#0" expanded="false" />
+            <element signature="e#637#638#0" expanded="false" />
             <element signature="method#run#0;class#Initializer#0" expanded="false" />
           </folding>
         </state>
@@ -759,6 +779,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2006">
           <caret line="130" column="45" lean-forward="false" selection-start-line="130" selection-start-column="35" selection-end-line="130" selection-end-column="45" />
+          <folding>
+            <element signature="method#RemoteLoader#0;class#RemoteLoader#0" expanded="false" />
+            <element signature="method#run#0;class#RemoteLoader#0" expanded="false" />
+            <element signature="method#dopreload#0;class#RemoteLoader#0" expanded="false" />
+            <element signature="method#doparsequantcastlinks#0;class#RemoteLoader#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -789,6 +815,11 @@
             <element signature="method#parselinkforhrefattributevalue#0;class#ParseUtils#0" expanded="false" />
             <element signature="method#parseimageforsrcattributevalue#0;class#ParseUtils#0" expanded="false" />
             <element signature="method#parselinkforrelattributevalue#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parselinkfortypeattributevalue#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parseanchorforhrefattributevalue#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parsescriptforsrcattributevalue#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parsesitecss#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parsesiteimages#0;class#ParseUtils#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -838,8 +869,8 @@
         <state relative-caret-position="119">
           <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
           <folding>
-            <element signature="e#582#583#0" expanded="true" />
-            <element signature="e#637#638#0" expanded="true" />
+            <element signature="e#582#583#0" expanded="false" />
+            <element signature="e#637#638#0" expanded="false" />
             <element signature="method#run#0;class#Initializer#0" expanded="false" />
           </folding>
         </state>
@@ -857,6 +888,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2006">
           <caret line="130" column="45" lean-forward="false" selection-start-line="130" selection-start-column="35" selection-end-line="130" selection-end-column="45" />
+          <folding>
+            <element signature="method#RemoteLoader#0;class#RemoteLoader#0" expanded="false" />
+            <element signature="method#run#0;class#RemoteLoader#0" expanded="false" />
+            <element signature="method#dopreload#0;class#RemoteLoader#0" expanded="false" />
+            <element signature="method#doparsequantcastlinks#0;class#RemoteLoader#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -887,6 +924,11 @@
             <element signature="method#parselinkforhrefattributevalue#0;class#ParseUtils#0" expanded="false" />
             <element signature="method#parseimageforsrcattributevalue#0;class#ParseUtils#0" expanded="false" />
             <element signature="method#parselinkforrelattributevalue#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parselinkfortypeattributevalue#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parseanchorforhrefattributevalue#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parsescriptforsrcattributevalue#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parsesitecss#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parsesiteimages#0;class#ParseUtils#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1086,14 +1128,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/webcrawler/common/WebcrawlerParam.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/one/Webcrawler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
@@ -1128,6 +1162,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="28" column="4" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
+          <folding>
+            <element signature="method#RemoteLoader#0;class#RemoteLoader#0" expanded="false" />
+            <element signature="method#run#0;class#RemoteLoader#0" expanded="false" />
+            <element signature="method#dopreload#0;class#RemoteLoader#0" expanded="false" />
+            <element signature="method#doparsequantcastlinks#0;class#RemoteLoader#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1144,8 +1184,8 @@
         <state relative-caret-position="0">
           <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
           <folding>
-            <element signature="e#582#583#0" expanded="true" />
-            <element signature="e#637#638#0" expanded="true" />
+            <element signature="e#582#583#0" expanded="false" />
+            <element signature="e#637#638#0" expanded="false" />
             <element signature="method#run#0;class#Initializer#0" expanded="false" />
           </folding>
         </state>
@@ -1166,23 +1206,6 @@
           <folding>
             <element signature="e#988#989#0" expanded="true" />
             <element signature="e#1032#1033#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/ParseUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4335">
-          <caret line="604" column="0" lean-forward="false" selection-start-line="604" selection-start-column="0" selection-end-line="604" selection-end-column="0" />
-          <folding>
-            <element signature="method#doparseanchors#0;class#ParseUtils#0" expanded="false" />
-            <element signature="method#doparseandsortanchors#0;class#ParseUtils#0" expanded="false" />
-            <element signature="method#dogetbasedomainname#0;class#ParseUtils#0" expanded="false" />
-            <element signature="method#dogetfulldomainname#0;class#ParseUtils#0" expanded="false" />
-            <element signature="method#parsesitescripts#0;class#ParseUtils#0" expanded="false" />
-            <element signature="method#parselinkforhrefattributevalue#0;class#ParseUtils#0" expanded="false" />
-            <element signature="method#parseimageforsrcattributevalue#0;class#ParseUtils#0" expanded="false" />
-            <element signature="method#parselinkforrelattributevalue#0;class#ParseUtils#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1215,22 +1238,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java">
+    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/modules/ModuleOne.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="314" column="0" lean-forward="false" selection-start-line="314" selection-start-column="0" selection-end-line="314" selection-end-column="0" />
+        <state relative-caret-position="629">
+          <caret line="149" column="0" lean-forward="false" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#doenqueueremotesites#0;class#NetUtils#0" expanded="false" />
-            <element signature="method#exceedsmaximumdepth#0;class#NetUtils#0" expanded="false" />
+            <element signature="method#run#0;class#ModuleOne#0" expanded="false" />
+            <element signature="method#entryexists#0;class#ModuleOne#0" expanded="false" />
+            <element signature="method#dolocalsiterecurse#0;class#ModuleOne#0" expanded="false" />
+            <element signature="method#doglobalsiterecurse#0;class#ModuleOne#0" expanded="false" />
+            <element signature="method#dorecurse#0;class#ModuleOne#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webcrawler/common/WebcrawlerParam.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="45" column="23" lean-forward="false" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/threading/WorkerThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="80" column="40" lean-forward="true" selection-start-line="80" selection-start-column="40" selection-end-line="80" selection-end-column="40" />
+          <folding>
+            <element signature="method#run#0;class#WorkerThread#0" expanded="false" />
+            <element signature="method#sleepily#0;class#WorkerThread#0" expanded="false" />
+            <element signature="method#inactive#0;class#WorkerThread#0" expanded="false" />
+            <element signature="method#shutdown#0;class#WorkerThread#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/FileUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="264" column="76" lean-forward="false" selection-start-line="264" selection-start-column="76" selection-end-line="264" selection-end-column="76" />
+        <state relative-caret-position="417">
+          <caret line="242" column="153" lean-forward="false" selection-start-line="242" selection-start-column="153" selection-end-line="242" selection-end-column="153" />
           <folding>
             <element signature="method#doguardagainstlongfilenames#0;class#FileUtils#0" expanded="false" />
             <element signature="method#dodeterminefullpathforhttpreference#0;class#FileUtils#0" expanded="false" />
@@ -1242,29 +1288,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/threading/WorkerThread.java">
+    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="27" column="12" lean-forward="false" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
+        <state relative-caret-position="417">
+          <caret line="306" column="37" lean-forward="false" selection-start-line="306" selection-start-column="37" selection-end-line="306" selection-end-column="37" />
           <folding>
-            <element signature="method#run#0;class#WorkerThread#0" expanded="false" />
-            <element signature="method#sleepily#0;class#WorkerThread#0" expanded="false" />
-            <element signature="method#inactive#0;class#WorkerThread#0" expanded="false" />
-            <element signature="method#shutdown#0;class#WorkerThread#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#doenqueueremotesites#0;class#NetUtils#0" expanded="false" />
+            <element signature="method#exceedsmaximumdepth#0;class#NetUtils#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/modules/ModuleOne.java">
+    <entry file="file://$PROJECT_DIR$/src/webcrawler/implementations/three/utils/ParseUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="133" column="30" lean-forward="false" selection-start-line="133" selection-start-column="30" selection-end-line="133" selection-end-column="30" />
+        <state relative-caret-position="606">
+          <caret line="319" column="65" lean-forward="false" selection-start-line="319" selection-start-column="65" selection-end-line="319" selection-end-column="65" />
           <folding>
-            <element signature="method#run#0;class#ModuleOne#0" expanded="false" />
-            <element signature="method#entryexists#0;class#ModuleOne#0" expanded="false" />
-            <element signature="method#dolocalsiterecurse#0;class#ModuleOne#0" expanded="false" />
-            <element signature="method#doglobalsiterecurse#0;class#ModuleOne#0" expanded="false" />
-            <element signature="method#dorecurse#0;class#ModuleOne#0" expanded="false" />
+            <element signature="method#doparseanchors#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#doparseandsortanchors#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#dogetbasedomainname#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#dogetfulldomainname#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parsesitescripts#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parselinkforhrefattributevalue#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parseimageforsrcattributevalue#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parselinkforrelattributevalue#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parselinkfortypeattributevalue#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parseanchorforhrefattributevalue#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parsescriptforsrcattributevalue#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parsesitecss#0;class#ParseUtils#0" expanded="false" />
+            <element signature="method#parsesiteimages#0;class#ParseUtils#0" expanded="false" />
           </folding>
         </state>
       </provider>

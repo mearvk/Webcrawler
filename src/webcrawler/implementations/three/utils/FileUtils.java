@@ -240,7 +240,7 @@ public class FileUtils
 
         //
 
-        String basedir = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.dofileseparatornormalization(Utils.doURLnormalization(param.FULL_DOMAIN_NAME));
+        String basedir = Webcrawler.BASEDIR +SLASH+ smonth+"-"+sday+"-"+syear +SLASH+ Utils.doURLnormalization(param.FULL_DOMAIN_NAME) +SLASH+ param.PATH;
 
         //
 
