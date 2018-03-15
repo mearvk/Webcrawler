@@ -143,7 +143,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
         {
             case 11:
 
-                System.err.println("URL enqueue event for : "+param.HREF);
+                //System.err.println("URL enqueue event for : "+param.HREF);
 
                 if(threads.get(11).queue.size()<10) //9 --> 10, 10 skips
                 {
@@ -176,7 +176,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 10:
 
-                System.err.println("URL enqueue event for : "+param.HREF);
+                //System.err.println("URL enqueue event for : "+param.HREF);
 
                 if(threads.get(10).queue.size()<10) //9 --> 10, 10 skips
                 {
@@ -209,7 +209,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 9:
 
-                System.err.println("URL enqueue event for : "+param.HREF);
+                //System.err.println("URL enqueue event for : "+param.HREF);
 
                 if(threads.get(9).queue.size()<10) //9 --> 10, 10 skips
                 {
@@ -242,7 +242,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 8:
 
-                System.err.println("URL enqueue event for : "+param.HREF);
+                //System.err.println("URL enqueue event for : "+param.HREF);
 
                 if(threads.get(8).queue.size()<10) //9 --> 10, 10 skips
                 {
@@ -275,7 +275,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 7:
 
-                System.err.println("URL enqueue event for : "+param.HREF);
+                //System.err.println("URL enqueue event for : "+param.HREF);
 
                 if(threads.get(7).queue.size()<10) //9 --> 10, 10 skips
                 {
@@ -308,7 +308,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 6:
 
-                System.err.println("URL enqueue event for : "+param.HREF);
+                //System.err.println("URL enqueue event for : "+param.HREF);
 
                 if(threads.get(6).queue.size()<10) //9 --> 10, 10 skips
                 {
@@ -341,7 +341,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 5:
 
-                System.err.println("URL enqueue event for : "+param.HREF);
+                //System.err.println("URL enqueue event for : "+param.HREF);
 
                 if(threads.get(5).queue.size()<10) //9 --> 10, 10 skips
                 {
@@ -374,7 +374,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 4:
 
-                System.err.println("URL enqueue event for : "+param.HREF);
+                //System.err.println("URL enqueue event for : "+param.HREF);
 
                 if(threads.get(4).queue.size()<10) //9 --> 10, 10 skips
                 {
@@ -407,7 +407,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 3:
 
-                System.err.println("URL enqueue event for : "+param.HREF);
+                //System.err.println("URL enqueue event for : "+param.HREF);
 
                 if(threads.get(3).queue.size()<10) //9 --> 10, 10 skips
                 {
@@ -440,7 +440,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 2:
 
-                System.err.println("URL enqueue event for : "+param.HREF);
+                //System.err.println("URL enqueue event for : "+param.HREF);
 
                 if(threads.get(2).queue.size()<10) //9 --> 10, 10 skips
                 {
@@ -473,7 +473,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 1:
 
-                System.err.println("URL enqueue event for : "+param.HREF);
+                //System.err.println("URL enqueue event for : "+param.HREF);
 
                 if(threads.get(1).queue.size()<10) //9 --> 10, 10 skips
                 {
@@ -506,7 +506,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
             case 0:
 
-                System.err.println("URL enqueue event for : "+param.HREF);
+                //System.err.println("URL enqueue event for : "+param.HREF);
 
                 if(threads.get(0).queue.size()<10) //9 --> 10, 10 skips
                 {

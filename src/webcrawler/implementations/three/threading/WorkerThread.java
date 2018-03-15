@@ -76,7 +76,7 @@ public class WorkerThread extends Thread implements ShutdownThread
 
             //
 
-            System.err.println("URL dequeue event for : " + param.HREF);
+            //System.err.println("URL dequeue event for : " + param.HREF);
 
             //
 

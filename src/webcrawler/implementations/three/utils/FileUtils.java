@@ -262,9 +262,14 @@ public class FileUtils
 
             File file = new File(dir.getAbsolutePath(), "index.html");
 
-            System.out.println("File persist event for : "+file.getAbsolutePath());
+            if(file.exists())
+            {
+                System.out.println("Skipped persist event for : "+file.getAbsolutePath());
 
-            if(file.exists()) return "skipping";
+                return "skipping";
+            }
+
+            System.out.println("File persist event for : "+file.getAbsolutePath());
 
             file = FileUtils.doguardagainstlongfilenames(file);
 
