@@ -5,7 +5,7 @@ public class SystemReadout implements Runnable
     @Override
     public void run()
     {
-        System.err.println("▁▂▂▁▂▂▁▂▂▁▂▂▁▂▂▁▂▂▁▂▂▁▂▂▁▂▂▁▂▂▁▂▂▁▂▂▁▁ ❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊");
+        System.err.println("ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ΞΞΞΞΞ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ");
 
         System.err.println("System Name:        Webcrawler");
 
@@ -21,6 +21,6 @@ public class SystemReadout implements Runnable
 
         System.err.println("Github:             http://github.com/mearvk/Webcrawler.git");
 
-        System.err.println("❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊ ❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊");
+        System.err.println("ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ΞΞΞΞΞ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ ŤŤŤ");
     }
 }
