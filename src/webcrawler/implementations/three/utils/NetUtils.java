@@ -221,21 +221,24 @@ public class NetUtils
 
                         recursiveparam.HTML = null;
 
-                        //System.out.println(">> "+param.URL+" branch "+anchor+" precursed.");
+                        anchor = null;
                     }
                     catch (Exception e)
                     {
-                        e.printStackTrace();
-
                         System.err.println("NetUtils.dorequestandstoreanchors :: "+e);
                     }
-
+                    finally
+                    {
+                        System.gc();
+                    }
                 }
                 catch(Exception e)
                 {
-                    e.printStackTrace();
-
                     System.err.println("NetUtils.dorequestandstoreanchors :: "+e.getMessage());
+                }
+                finally
+                {
+                    System.gc();
                 }
             }
         }
@@ -245,8 +248,6 @@ public class NetUtils
         }
         catch(Exception e)
         {
-            e.printStackTrace();
-
             System.err.println("NetUtils.dorequestandstoreanchors :: "+e);
         }
         finally

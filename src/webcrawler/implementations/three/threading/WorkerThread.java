@@ -74,12 +74,6 @@ public class WorkerThread extends Thread implements ShutdownThread
         {
             WebcrawlerParam param = queue.poll();
 
-            //
-
-            //System.err.println("URL dequeue event for : " + param.HREF);
-
-            //
-
             if (param.LDEPTH > 0)
             {
                 NetUtils.dorequestandstoresite(param);
@@ -91,13 +85,15 @@ public class WorkerThread extends Thread implements ShutdownThread
                     NetUtils.dorequestandstoresite(param);
             }
 
-            //
-
             param = null;
         }
         catch (Exception e)
         {
             System.err.println(e.getMessage());
+        }
+        finally
+        {
+            System.gc();
         }
     }
 
