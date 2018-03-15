@@ -1,6 +1,6 @@
 package webcrawler.implementations.three.threading;
 
-import webcrawler.common.ModuleOne;
+import webcrawler.implementations.three.modules.ModuleOne;
 import webcrawler.common.WebcrawlerParam;
 import webcrawler.implementations.three.utils.NetUtils;
 
@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 //
 public class WorkerThread extends Thread implements ShutdownThread
 {
-    public volatile Queue<WebcrawlerParam> queue = new ConcurrentLinkedQueue();
+    public volatile Queue<WebcrawlerParam> site_queue = new ConcurrentLinkedQueue();
 
     public Object lock = new Object();
 
@@ -35,8 +35,6 @@ public class WorkerThread extends Thread implements ShutdownThread
         this.module = runner;
 
         this.setName(threadname);
-
-        this.setPriority(Thread.MAX_PRIORITY);
     }
 
     /**
@@ -62,38 +60,76 @@ public class WorkerThread extends Thread implements ShutdownThread
      */
     public void processqueue()
     {
-        if (this.queue == null || this.queue.isEmpty()) return;
-
-        //
-
-        this.time_accrued = 0L;
-
-        //
-
-        try
+        if (this.site_queue != null && !this.site_queue.isEmpty())
         {
-            WebcrawlerParam param = queue.poll();
+            this.time_accrued = 0L;
 
-            if (param.LDEPTH > 0)
-            {
-                NetUtils.dorequestandstoresite(param);
+            //
 
-                NetUtils.dorequestandstoreanchors(param, new ArrayList<String>(), 0, param.LDEPTH);
-            }
-            else
+            try
             {
+                WebcrawlerParam param = site_queue.poll();
+
+                if (param.LDEPTH > 0)
+                {
                     NetUtils.dorequestandstoresite(param);
+
+                    NetUtils.dorequestandstoreanchors(param, new ArrayList<String>(), 0, param.LDEPTH);
+                }
+                else
+                {
+                    NetUtils.dorequestandstoresite(param);
+                }
+
+                param = null;
+            }
+            catch (Exception e)
+            {
+                System.err.println(e.getMessage());
+            }
+            finally
+            {
+                System.gc();
             }
 
-            param = null;
+            return;
         }
-        catch (Exception e)
+
+        //
+
+        if( ModuleOne.recursiveparams!=null && !ModuleOne.recursiveparams.isEmpty() )
         {
-            System.err.println(e.getMessage());
-        }
-        finally
-        {
-            System.gc();
+            this.time_accrued = 0L;
+
+            //
+
+            try
+            {
+                WebcrawlerParam param = ModuleOne.recursiveparams.poll();
+
+                if (param.LDEPTH > 0)
+                {
+                    NetUtils.dorequestandstoresite(param);
+
+                    NetUtils.dorequestandstoreanchors(param, new ArrayList<String>(), 0, param.LDEPTH);
+                }
+                else
+                {
+                    NetUtils.dorequestandstoresite(param);
+                }
+
+                param = null;
+            }
+            catch (Exception e)
+            {
+                System.err.println(e.getMessage());
+            }
+            finally
+            {
+                System.gc();
+            }
+
+            return;
         }
     }
 
@@ -103,7 +139,7 @@ public class WorkerThread extends Thread implements ShutdownThread
      */
     protected WorkerThread sleepily()
     {
-        if( this.queue!=null && !this.queue.isEmpty()) return this;
+        if( this.site_queue !=null && !this.site_queue.isEmpty()) return this;
 
         //
 

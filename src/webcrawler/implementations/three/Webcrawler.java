@@ -37,8 +37,6 @@ public class Webcrawler implements Runnable
 
     public static ArrayList<String> visitedsitelinks = new ArrayList();
     
-    public static ArrayList<String> visitedresourcelinks = new ArrayList();
-    
     //
     
     public static final Integer LOCAL_RECURSE_DEPTH = 1;

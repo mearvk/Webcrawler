@@ -20,7 +20,7 @@ public class Initializer extends webcrawler.intialization.Initializer implements
     {
         this.registrar.register(LocalLoader.class);
 
-        //this.registrar.register(RemoteLoader.class);
+        this.registrar.register(RemoteLoader.class);
     }
     
     public void initialize()

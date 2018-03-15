@@ -12,6 +12,6 @@ public class LocalLoader implements Runnable
     @Override
     public void run()
     {
-        NetUtils.doenqueuelocalsites();
+        NetUtils.doenqueuemanualsites();
     }
 }

@@ -133,17 +133,17 @@ class ModuleOne implements Runnable
         ArrayList<String> websites = (ArrayList<String>)((Initializer)Webcrawler.values.get("initializer")).variables.get("predefined");
 
         //
-                      
+
         for(int i=0; i<websites.size(); i++)
         {
             WebcrawlerParam param = new WebcrawlerParam();
-            
+
             //
-            
-            param.baseURL = websites.get(i);                 
-            
+
+            param.baseURL = websites.get(i);
+
             param.href = websites.get(i);
-            
+
             //
             if(param==null)
             {
@@ -182,7 +182,7 @@ class ModuleOne implements Runnable
                 wthread_000.queue.offer(param);
             }
         }
-        
+
         //
 
         wthread_000.start();

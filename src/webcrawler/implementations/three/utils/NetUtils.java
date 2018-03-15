@@ -3,6 +3,7 @@ package webcrawler.implementations.three.utils;
 import webcrawler.common.SiteSpecialization;
 import webcrawler.common.WebcrawlerParam;
 import webcrawler.implementations.three.Webcrawler;
+import webcrawler.implementations.three.initialization.Initializer;
 import webcrawler.implementations.three.modules.ModuleOne;
 
 import java.io.BufferedReader;
@@ -12,6 +13,8 @@ import java.net.*;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class NetUtils
 {
@@ -19,9 +22,9 @@ public class NetUtils
      *
      * @return
      */
-    public static ArrayList<String> doenqueuelocalsites()
+    public static ArrayList<String> doenqueuemanualsites()
     {
-        ArrayList<String> storedanchors = new ArrayList<String>();
+        ArrayList<String> manually_entered_sites = new ArrayList<String>();
 
         //
 
@@ -49,10 +52,7 @@ public class NetUtils
 
                 moduleone = (ModuleOne) Webcrawler.modules.get("moduleone");
 
-                moduleone.offer(param);
-
-
-                Thread.sleep(20000);
+                moduleone.preoffer(param);
             }
             catch(Exception e)
             {
@@ -64,56 +64,132 @@ public class NetUtils
             }
         }
 
-        return storedanchors;
+        return manually_entered_sites;
     }
 
     /**
      *
      * @return
      */
-    public static ArrayList<String> doenqueueremotesites()
+    public static ArrayList<String> doenqueueautomaticsites()
     {
-        ArrayList<String> storedanchors = new ArrayList<String>();
+        ArrayList<String> auto_loaded_sites = new ArrayList<String>();
 
         //
 
-        for(SiteSpecialization site : WebcrawlerParam.sites.predefined)
+        WebcrawlerParam param = new WebcrawlerParam();
+
+        param.HREF = "https://quantcast.com/top-sites";
+
+        //
+
+        try
         {
-            WebcrawlerParam param = new WebcrawlerParam();
+            URL url = new URL(new URI(param.HREF).normalize().toString());
 
-            try
+            if (url == null) return null;
+
+            //
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            if (connection == null) return null;
+
+            //
+
+            connection.setRequestMethod("GET");
+
+            connection.setReadTimeout(5000);
+
+            connection.setConnectTimeout(5000);
+
+            connection.setInstanceFollowRedirects(true);
+
+            connection.setDoOutput(true);
+
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36");
+
+            //
+
+            int responsecode = connection.getResponseCode();
+
+            //
+
+            StringBuilder builder = new StringBuilder();
+
+            String string = null;
+
+            //
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+            while ((string = reader.readLine()) != null)
             {
-                param.HREF = new URI(site.SITENAME).normalize().toString();
-
-                param.URL = new URI(site.SITENAME).normalize().toString();
-
-                param.DOMAIN_NAME = ParseUtils.dogetbasedomainname(site.SITENAME);
-
-                param.FULL_DOMAIN_NAME = ParseUtils.dogetfulldomainname(site.SITENAME);
-
-                param.LDEPTH = site.LOCAL_DEPTH;
-
-                param.GDEPTH = site.GLOBAL_DEPTH;
-
-                //
-
-                ModuleOne moduleone;
-
-                moduleone = (ModuleOne) Webcrawler.modules.get("moduleone");
-
-                moduleone.offer(param);
+                builder.append(string);
             }
-            catch(Exception e)
+
+            //
+
+            param.HTML = builder.toString();
+
+            //
+
+            System.err.println("❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊ ❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊");
+
+            //
+
+            Matcher matcher = Pattern.compile("(name=\".*?\").*?", Pattern.DOTALL).matcher(param.HTML); //parse <a HREF=""></a> matches for now..
+
+            //
+
+            while(matcher.find())
             {
-                e.printStackTrace();
+                String s = matcher.group();
+
+                if(s.startsWith("name"))
+                {
+                    s = s.replace("name=", "https://").replace("\"", "");
+                }
+                else
+                {
+                    continue;
+                }
+
+                auto_loaded_sites.add(s);
+
+                s = null;
             }
-            finally
-            {
-                System.gc();
-            }
+
+            //
+
+            System.err.println("❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊ ❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊❊");
+
+            //
+
+            Initializer initializer = (Initializer) Webcrawler.modules.get("initializer");
+
+            initializer.variables.put("predefined", auto_loaded_sites);
+
+            //
+
+            reader = null;
+
+            builder = null;
+
+            string = null;
+
+            matcher = null;
+
+            param = null;
+
+            connection = null;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
         }
 
-        return storedanchors;
+        return auto_loaded_sites;
     }
 
     /**
@@ -194,9 +270,9 @@ public class NetUtils
 
                         recursiveparam.HTML = NetUtils.dositerequest(recursiveparam);
 
-                        recursiveparam.LDEPTH = 4;
+                        recursiveparam.LDEPTH = 2;
 
-                        recursiveparam.GDEPTH = 4;
+                        recursiveparam.GDEPTH = 2;
 
                         //
 
@@ -207,7 +283,7 @@ public class NetUtils
 
                         ModuleOne moduleone = (ModuleOne)Webcrawler.modules.get("moduleone");
 
-                        moduleone.offer(recursiveparam);
+                        moduleone.recursiveoffer(recursiveparam);
 
                         //
 
@@ -222,6 +298,8 @@ public class NetUtils
                         recursiveparam.HTML = null;
 
                         anchor = null;
+
+                        moduleone = null;
                     }
                     catch (Exception e)
                     {
@@ -298,7 +376,7 @@ public class NetUtils
         }
         catch (Exception e)
         {
-            //System.err.println("NetUtils.dopreload :: unable to setup URL: \""+param.HREF+"\"");
+            //
         }
 
         //
@@ -389,11 +467,11 @@ public class NetUtils
         }
         catch(SocketTimeoutException stoe)
         {
-            System.out.println("    >> "+stoe.getMessage()+" for "+param.HREF);
+            //
         }
         catch(FileNotFoundException fnfe)
         {
-            //System.err.println("NetUtils.dopreload :: Site or link not found: "+param.HREF);
+            //
         }
         catch(Exception e)
         {
@@ -421,7 +499,6 @@ public class NetUtils
      * @return
      * @throws Exception
      */
-    //@Description("Extension Safe")
     public static String dorequestandstoresite(WebcrawlerParam param) throws Exception
     {
         String threadname = Thread.currentThread().getName();
@@ -436,15 +513,15 @@ public class NetUtils
         }
         catch(SocketTimeoutException stoe)
         {
-            //System.out.println("    >> "+stoe.getMessage()+" for "+param.HREF);
+            //
         }
         catch(ConnectException ce)
         {
-            //System.err.println("Resource \""+param.HREF+"\" could not be connected to; HTTP call fails.");
+            //
         }
         catch(FileNotFoundException fnfe)
         {
-            //System.err.println("Resource "+param.HREF+" exists as a link but not actually a page reference. HTTP returned 404.");
+            //
         }
         catch(Exception e)
         {

@@ -264,6 +264,11 @@ public class ParseUtils
     }
 
 
+    /**
+     *
+     * @param param
+     * @return
+     */
     public static String dogetpath(final String param)
     {
         String base = new String(param);
