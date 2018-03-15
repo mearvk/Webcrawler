@@ -74,7 +74,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
      *
      * @param param
      */
-    public void recursiveoffer(WebcrawlerParam param)
+    public void offer(WebcrawlerParam param)
     {
         ModuleOne.recursiveparams.add(param);
     }
@@ -93,373 +93,73 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
         {
             case 11:
 
-                if(threads.get(11).site_queue.size()<10) //9 --> 10, 10 skips
-                {
-                    threads.get(11).site_queue.offer(param);
-
-                    return;
-                }
-
-                while(threads.get(11).site_queue.size()>=10)
-                {
-                    try
-                    {
-                        while(threads.get(11).site_queue.size()>1)
-                        {
-                            threads.get(11).processqueue();
-                        }
-
-                        if(threads.get(11).site_queue.size()<=1)
-                        {
-                            threads.get(11).site_queue.offer(param);
-                        }
-                    }
-                    catch(Exception e)
-                    {
-                        System.err.println(e);
-                    }
-                }
+                threads.get(11).site_queue.offer(param);
 
                 break;
 
             case 10:
 
-                if(threads.get(10).site_queue.size()<10) //9 --> 10, 10 skips
-                {
-                    threads.get(10).site_queue.offer(param);
-
-                    return;
-                }
-
-                while(threads.get(10).site_queue.size()>=10)
-                {
-                    try
-                    {
-                        while(threads.get(10).site_queue.size()>1)
-                        {
-                            threads.get(10).processqueue();
-                        }
-
-                        if(threads.get(10).site_queue.size()<=1)
-                        {
-                            threads.get(10).site_queue.offer(param);
-                        }
-                    }
-                    catch(Exception e)
-                    {
-                        System.err.println(e);
-                    }
-                }
+                threads.get(10).site_queue.offer(param);
 
                 break;
 
             case 9:
 
-                if(threads.get(9).site_queue.size()<10) //9 --> 10, 10 skips
-                {
-                    threads.get(9).site_queue.offer(param);
-
-                    return;
-                }
-
-                while(threads.get(9).site_queue.size()>=10)
-                {
-                    try
-                    {
-                        while(threads.get(9).site_queue.size()>1)
-                        {
-                            threads.get(9).processqueue();
-                        }
-
-                        if(threads.get(9).site_queue.size()<=1)
-                        {
-                            threads.get(9).site_queue.offer(param);
-                        }
-                    }
-                    catch(Exception e)
-                    {
-                        System.err.println(e);
-                    }
-                }
+                threads.get(9).site_queue.offer(param);
 
                 break;
 
             case 8:
 
-                if(threads.get(8).site_queue.size()<10) //9 --> 10, 10 skips
-                {
-                    threads.get(8).site_queue.offer(param);
-
-                    return;
-                }
-
-                while(threads.get(8).site_queue.size()>=10)
-                {
-                    try
-                    {
-                        while(threads.get(8).site_queue.size()>1)
-                        {
-                            threads.get(8).processqueue();
-                        }
-
-                        if(threads.get(8).site_queue.size()<=1)
-                        {
-                            threads.get(8).site_queue.offer(param);
-                        }
-                    }
-                    catch(Exception e)
-                    {
-                        System.err.println(e);
-                    }
-                }
+                threads.get(8).site_queue.offer(param);
 
                 break;
 
             case 7:
 
-                if(threads.get(7).site_queue.size()<10) //9 --> 10, 10 skips
-                {
-                    threads.get(7).site_queue.offer(param);
-
-                    return;
-                }
-
-                while(threads.get(7).site_queue.size()>=10)
-                {
-                    try
-                    {
-                        while(threads.get(7).site_queue.size()>1)
-                        {
-                            threads.get(7).processqueue();
-                        }
-
-                        if(threads.get(7).site_queue.size()<=1)
-                        {
-                            threads.get(7).site_queue.offer(param);
-                        }
-                    }
-                    catch(Exception e)
-                    {
-                        System.err.println(e);
-                    }
-                }
+                threads.get(7).site_queue.offer(param);
 
                 break;
 
             case 6:
 
-                if(threads.get(6).site_queue.size()<10) //9 --> 10, 10 skips
-                {
-                    threads.get(6).site_queue.offer(param);
-
-                    return;
-                }
-
-                while(threads.get(6).site_queue.size()>=10)
-                {
-                    try
-                    {
-                        while(threads.get(6).site_queue.size()>1)
-                        {
-                            threads.get(6).processqueue();
-                        }
-
-                        if(threads.get(6).site_queue.size()<=1)
-                        {
-                            threads.get(6).site_queue.offer(param);
-                        }
-                    }
-                    catch(Exception e)
-                    {
-                        System.err.println(e);
-                    }
-                }
+                threads.get(6).site_queue.offer(param);
 
                 break;
 
             case 5:
 
-                if(threads.get(5).site_queue.size()<10) //9 --> 10, 10 skips
-                {
-                    threads.get(5).site_queue.offer(param);
-
-                    return;
-                }
-
-                while(threads.get(5).site_queue.size()>=10)
-                {
-                    try
-                    {
-                        while(threads.get(5).site_queue.size()>1)
-                        {
-                            threads.get(5).processqueue();
-                        }
-
-                        if(threads.get(5).site_queue.size()<=1)
-                        {
-                            threads.get(5).site_queue.offer(param);
-                        }
-                    }
-                    catch(Exception e)
-                    {
-                        System.err.println(e);
-                    }
-                }
+                threads.get(5).site_queue.offer(param);
 
                 break;
 
             case 4:
 
-                if(threads.get(4).site_queue.size()<10) //9 --> 10, 10 skips
-                {
-                    threads.get(4).site_queue.offer(param);
-
-                    return;
-                }
-
-                while(threads.get(4).site_queue.size()>=10)
-                {
-                    try
-                    {
-                        while(threads.get(4).site_queue.size()>1)
-                        {
-                            threads.get(4).processqueue();
-                        }
-
-                        if(threads.get(4).site_queue.size()<=1)
-                        {
-                            threads.get(4).site_queue.offer(param);
-                        }
-                    }
-                    catch(Exception e)
-                    {
-                        System.err.println(e);
-                    }
-                }
+                threads.get(4).site_queue.offer(param);
 
                 break;
 
             case 3:
 
-                if(threads.get(3).site_queue.size()<10) //9 --> 10, 10 skips
-                {
-                    threads.get(3).site_queue.offer(param);
-
-                    return;
-                }
-
-                while(threads.get(3).site_queue.size()>=10)
-                {
-                    try
-                    {
-                        while(threads.get(3).site_queue.size()>1)
-                        {
-                            threads.get(3).processqueue();
-                        }
-
-                        if(threads.get(3).site_queue.size()<=1)
-                        {
-                            threads.get(3).site_queue.offer(param);
-                        }
-                    }
-                    catch(Exception e)
-                    {
-                        System.err.println(e);
-                    }
-                }
+                threads.get(3).site_queue.offer(param);
 
                 break;
 
             case 2:
 
-                if(threads.get(2).site_queue.size()<10) //9 --> 10, 10 skips
-                {
-                    threads.get(2).site_queue.offer(param);
-
-                    return;
-                }
-
-                while(threads.get(2).site_queue.size()>=10)
-                {
-                    try
-                    {
-                        while(threads.get(2).site_queue.size()>1)
-                        {
-                            threads.get(2).processqueue();
-                        }
-
-                        if(threads.get(2).site_queue.size()<=1)
-                        {
-                            threads.get(2).site_queue.offer(param);
-                        }
-                    }
-                    catch(Exception e)
-                    {
-                        System.err.println(e);
-                    }
-                }
+                threads.get(2).site_queue.offer(param);
 
                 break;
 
             case 1:
 
-                if(threads.get(1).site_queue.size()<10) //9 --> 10, 10 skips
-                {
-                    threads.get(1).site_queue.offer(param);
-
-                    return;
-                }
-
-                while(threads.get(1).site_queue.size()>=10)
-                {
-                    try
-                    {
-                        while(threads.get(1).site_queue.size()>1)
-                        {
-                            threads.get(1).processqueue();
-                        }
-
-                        if(threads.get(1).site_queue.size()<=1)
-                        {
-                            threads.get(1).site_queue.offer(param);
-                        }
-                    }
-                    catch(Exception e)
-                    {
-                        System.err.println(e);
-                    }
-                }
+                threads.get(1).site_queue.offer(param);
 
                 break;
 
             case 0:
 
-                if(threads.get(0).site_queue.size()<10) //9 --> 10, 10 skips
-                {
-                    threads.get(0).site_queue.offer(param);
-
-                    return;
-                }
-
-                while(threads.get(0).site_queue.size()>=10)
-                {
-                    try
-                    {
-                        while(threads.get(0).site_queue.size()>1)
-                        {
-                            threads.get(0).processqueue();
-                        }
-
-                        if(threads.get(0).site_queue.size()<=1)
-                        {
-                            threads.get(0).site_queue.offer(param);
-                        }
-                    }
-                    catch(Exception e)
-                    {
-                        System.err.println(e);
-                    }
-                }
+                threads.get(0).site_queue.offer(param);
 
                 break;
 

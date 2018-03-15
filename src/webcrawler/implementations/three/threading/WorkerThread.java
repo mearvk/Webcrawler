@@ -23,7 +23,7 @@ public class WorkerThread extends Thread implements ShutdownThread
 
     public Long time_accrued = 0L;
 
-    public Long wait_millis = 1000L;
+    public Long wait_millis = 200L;
 
     /**
      *
@@ -70,22 +70,18 @@ public class WorkerThread extends Thread implements ShutdownThread
             {
                 WebcrawlerParam param = site_queue.poll();
 
+                NetUtils.dorequestandstoresite(param);
+
                 if (param.LDEPTH > 0)
                 {
-                    NetUtils.dorequestandstoresite(param);
-
                     NetUtils.dorequestandstoreanchors(param, new ArrayList<String>(), 0, param.LDEPTH);
-                }
-                else
-                {
-                    NetUtils.dorequestandstoresite(param);
                 }
 
                 param = null;
             }
             catch (Exception e)
             {
-                System.err.println(e.getMessage());
+                //System.err.println(e.getMessage());
             }
             finally
             {
@@ -107,22 +103,18 @@ public class WorkerThread extends Thread implements ShutdownThread
             {
                 WebcrawlerParam param = ModuleOne.recursiveparams.poll();
 
+                NetUtils.dorequestandstoresite(param);
+
                 if (param.LDEPTH > 0)
                 {
-                    NetUtils.dorequestandstoresite(param);
-
                     NetUtils.dorequestandstoreanchors(param, new ArrayList<String>(), 0, param.LDEPTH);
-                }
-                else
-                {
-                    NetUtils.dorequestandstoresite(param);
                 }
 
                 param = null;
             }
             catch (Exception e)
             {
-                System.err.println(e.getMessage());
+                //System.err.println(e.getMessage());
             }
             finally
             {
@@ -156,7 +148,7 @@ public class WorkerThread extends Thread implements ShutdownThread
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         return this;

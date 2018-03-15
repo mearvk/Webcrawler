@@ -56,7 +56,7 @@ public class NetUtils
             }
             catch(Exception e)
             {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
             finally
             {
@@ -73,7 +73,7 @@ public class NetUtils
      */
     public static ArrayList<String> doenqueueautomaticsites()
     {
-        ArrayList<String> auto_loaded_sites = new ArrayList<String>();
+        ArrayList<String> topsites = new ArrayList<>();
 
         //
 
@@ -99,9 +99,9 @@ public class NetUtils
 
             connection.setRequestMethod("GET");
 
-            connection.setReadTimeout(5000);
+            connection.setReadTimeout(600);
 
-            connection.setConnectTimeout(5000);
+            connection.setConnectTimeout(600);
 
             connection.setInstanceFollowRedirects(true);
 
@@ -155,9 +155,7 @@ public class NetUtils
                     continue;
                 }
 
-                auto_loaded_sites.add(s);
-
-                s = null;
+                topsites.add(s);
             }
 
             //
@@ -168,7 +166,7 @@ public class NetUtils
 
             Initializer initializer = (Initializer) Webcrawler.modules.get("initializer");
 
-            initializer.variables.put("predefined", auto_loaded_sites);
+            initializer.variables.put("predefined", topsites);
 
             //
 
@@ -186,10 +184,10 @@ public class NetUtils
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
-        return auto_loaded_sites;
+        return topsites;
     }
 
     /**
@@ -283,7 +281,7 @@ public class NetUtils
 
                         ModuleOne moduleone = (ModuleOne)Webcrawler.modules.get("moduleone");
 
-                        moduleone.recursiveoffer(recursiveparam);
+                        moduleone.offer(recursiveparam);
 
                         //
 
@@ -399,9 +397,17 @@ public class NetUtils
 
         connection = (HttpURLConnection)url.openConnection();
 
-        connection.setReadTimeout(10000);
+        //connection.setInstanceFollowRedirects(true);
 
-        connection.setConnectTimeout(10000);
+        connection.setChunkedStreamingMode(8192);
+
+        connection.setDoOutput(true);
+
+        connection.setRequestProperty("keep-alive", "false");
+
+        connection.setReadTimeout(600);
+
+        connection.setConnectTimeout(600);
 
         connection.setRequestProperty("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36");
 
@@ -467,15 +473,15 @@ public class NetUtils
         }
         catch(SocketTimeoutException stoe)
         {
-            //
+            //stoe.printStackTrace();
         }
         catch(FileNotFoundException fnfe)
         {
-            //
+            //fnfe.printStackTrace();
         }
         catch(Exception e)
         {
-            //
+            //e.printStackTrace();
         }
         finally
         {
