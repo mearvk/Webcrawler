@@ -5,6 +5,7 @@ import webcrawler.common.WebcrawlerParam;
 import webcrawler.implementations.three.Webcrawler;
 import webcrawler.implementations.three.initialization.Initializer;
 import webcrawler.implementations.three.modules.ModuleOne;
+import webcrawler.implementations.three.utils.data.HTTPRequestFailurePercentage;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -344,6 +345,19 @@ public class NetUtils
     {
         String threadname = Thread.currentThread().getName();
 
+        if(ModuleOne.percentage.get(ParseUtils.dogetfulldomainname(param.HREF))==null)
+        {
+            ModuleOne.percentage.put(ParseUtils.dogetfulldomainname(param.HREF), new HTTPRequestFailurePercentage());
+        }
+
+        if(ModuleOne.percentage.get(ParseUtils.dogetfulldomainname(param.HREF)).tries > 10)
+        if(ModuleOne.percentage.get(ParseUtils.dogetfulldomainname(param.HREF)).percentage > 0.50)
+        {
+            System.err.println("Closing connection; site deemed unreliable.");
+
+            return "Closing connection; site deemed unreliable.";
+        }
+
         //
 
         URL url=null;
@@ -397,13 +411,13 @@ public class NetUtils
 
         connection = (HttpURLConnection)url.openConnection();
 
-        //connection.setInstanceFollowRedirects(true);
+        connection.setInstanceFollowRedirects(true);
 
         connection.setChunkedStreamingMode(8192);
 
         connection.setDoOutput(true);
 
-        connection.setRequestProperty("keep-alive", "false");
+        connection.setRequestProperty("Keep-Alive", "false");
 
         connection.setReadTimeout(600);
 
@@ -445,10 +459,36 @@ public class NetUtils
 
                     if(responsecode!=HttpURLConnection.HTTP_OK)
                     {
+                        HTTPRequestFailurePercentage var = ModuleOne.percentage.get(ParseUtils.dogetfulldomainname(param.HREF));
+
+                        //
+
+                        var.tries++;
+
+                        var.failures++;
+
+                        //
+
+                        var.percentage = (var.failures)/(var.tries);
+
+                        ModuleOne.percentage.put(ParseUtils.dogetfulldomainname(param.HREF), var);
+
                         System.out.println("    >> Thread \""+threadname+"\" :: request for website ["+param.HREF +"] failed with fatal code: "+responsecode);
                     }
                 }
             }
+
+            //
+
+            HTTPRequestFailurePercentage var;
+
+            var = ModuleOne.percentage.get(ParseUtils.dogetfulldomainname(param.HREF));
+
+            var.successes++;
+
+            var.tries++;
+
+            ModuleOne.percentage.put(ParseUtils.dogetfulldomainname(param.HREF), var);
 
             //
 
@@ -466,6 +506,8 @@ public class NetUtils
             reader.close();
 
             reader = null;
+
+            var = null;
 
             //
 

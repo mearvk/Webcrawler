@@ -2,8 +2,10 @@ package webcrawler.implementations.three.modules;
 
 import webcrawler.common.WebcrawlerParam;
 import webcrawler.implementations.three.threading.WorkerThread;
+import webcrawler.implementations.three.utils.data.HTTPRequestFailurePercentage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -16,6 +18,8 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
     public ArrayList<WorkerThread> threads = new ArrayList<>(threadcount);
 
     public static Queue<WebcrawlerParam> recursiveparams = new ConcurrentLinkedQueue<>();
+
+    public static HashMap<String, HTTPRequestFailurePercentage> percentage = new HashMap<>();
 
     /**
      *
