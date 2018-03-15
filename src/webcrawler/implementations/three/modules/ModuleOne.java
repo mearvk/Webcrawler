@@ -129,6 +129,17 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
      */
     public void offer(WebcrawlerParam param)
     {
+        try
+        {
+            Thread.currentThread().wait(10000L);
+        }
+        catch(Exception e)
+        {
+            System.err.println(e);
+        }
+
+        //
+
         if( this.entryexists(param) ) return;
 
         //

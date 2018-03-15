@@ -58,51 +58,42 @@ public class WorkerThread extends Thread implements ShutdownThread
      */
     protected void processqueue()
     {
-        synchronized (this.queue)
+        if (this.queue == null || this.queue.isEmpty()) return;
+
+        //
+
+        this.time_accrued = 0L;
+
+        //
+
+        try
         {
-            if (this.queue == null || this.queue.isEmpty()) return;
+            WebcrawlerParam param = queue.poll();
 
             //
 
-            this.time_accrued = 0L;
+            System.err.println("URL dequeue event for : " + param.HREF);
 
             //
 
-            try
+            if (param.LDEPTH > 0)
             {
-                WebcrawlerParam param = queue.poll();
+                NetUtils.dorequestandstoresite(param);
 
-                //
-
-                System.err.println("URL dequeue event for : " + param.HREF);
-
-                //
-
-                if (param.LDEPTH > 0)
-                {
-
-
-                    NetUtils.dorequestandstoresite(param);
-
-                    NetUtils.dorequestandstoreanchors(param, new ArrayList<String>(), 0, param.LDEPTH);
-                }
-                else
-                {
-                    NetUtils.dorequestandstoresite(param);
-                }
-
-                //
-
-                param = null;
+                NetUtils.dorequestandstoreanchors(param, new ArrayList<String>(), 0, param.LDEPTH);
             }
-            catch (Exception e)
+            else
             {
-                System.err.println(e.getMessage());
+                    NetUtils.dorequestandstoresite(param);
             }
 
             //
 
-            this.queue.notify();
+            param = null;
+        }
+        catch (Exception e)
+        {
+            System.err.println(e.getMessage());
         }
     }
 
