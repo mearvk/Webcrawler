@@ -60,7 +60,7 @@ public class WorkerThread extends Thread implements ShutdownThread
     /**
      *
      */
-    protected void processqueue()
+    public void processqueue()
     {
         if (this.queue == null || this.queue.isEmpty()) return;
 

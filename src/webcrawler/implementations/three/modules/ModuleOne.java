@@ -156,7 +156,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
                 {
                     try
                     {
-                        Thread.sleep(1000L); //obfuse main
+                        threads.get(11).processqueue();
 
                         if(threads.get(11).queue.size()<=1)
                         {
@@ -186,7 +186,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
                 {
                     try
                     {
-                        Thread.sleep(1000L); //obfuse main
+                        threads.get(10).processqueue();
 
                         if(threads.get(10).queue.size()<=1)
                         {
@@ -216,7 +216,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
                 {
                     try
                     {
-                        Thread.sleep(1000L); //obfuse main
+                        threads.get(9).processqueue();
 
                         if(threads.get(9).queue.size()<=1)
                         {
@@ -246,7 +246,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
                 {
                     try
                     {
-                        Thread.sleep(1000L); //obfuse main
+                        threads.get(8).processqueue();
 
                         if(threads.get(8).queue.size()<=1)
                         {
@@ -276,7 +276,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
                 {
                     try
                     {
-                        Thread.sleep(1000L); //obfuse main
+                        threads.get(7).processqueue();
 
                         if(threads.get(7).queue.size()<=1)
                         {
@@ -306,7 +306,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
                 {
                     try
                     {
-                        Thread.sleep(1000L); //obfuse main
+                        threads.get(6).processqueue();
 
                         if(threads.get(6).queue.size()<=1)
                         {
@@ -336,7 +336,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
                 {
                     try
                     {
-                        Thread.sleep(1000L); //obfuse main
+                        threads.get(5).processqueue();
 
                         if(threads.get(5).queue.size()<=1)
                         {
@@ -366,7 +366,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
                 {
                     try
                     {
-                        Thread.sleep(1000L); //obfuse main
+                        threads.get(4).processqueue();
 
                         if(threads.get(4).queue.size()<=1)
                         {
@@ -396,7 +396,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
                 {
                     try
                     {
-                        Thread.sleep(1000L); //obfuse main
+                        threads.get(3).processqueue();
 
                         if(threads.get(3).queue.size()<=1)
                         {
@@ -426,7 +426,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
                 {
                     try
                     {
-                        Thread.sleep(1000L); //obfuse main
+                        threads.get(2).processqueue();
 
                         if(threads.get(2).queue.size()<=1)
                         {
@@ -456,7 +456,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
                 {
                     try
                     {
-                        Thread.sleep(1000L); //obfuse main
+                        threads.get(1).processqueue();
 
                         if(threads.get(1).queue.size()<=1)
                         {
@@ -486,7 +486,12 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
                 {
                     try
                     {
-                        Thread.sleep(1000L); //obfuse main
+                        threads.get(0).processqueue();
+
+                        if(threads.get(0).queue.size()<=1)
+                        {
+                            threads.get(0).queue.offer(param);
+                        }
                     }
                     catch(Exception e)
                     {
