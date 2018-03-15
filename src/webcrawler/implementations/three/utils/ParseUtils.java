@@ -280,36 +280,45 @@ public class ParseUtils
 
         if(param.endsWith("/"))                                 //remove final / ... eg. hoogle.com/
         {
-            base = param.substring(0,param.length()-1);
+            base = base.substring(0,param.length()-1);
         }
 
         if(param.startsWith("//"))                              //remove //hoogle.com --> hoogle.com
         {
-            base = param.substring(2);
+            base = base.substring(2);
         }
 
         if(param.startsWith("/"))                               //remove /hoogle.com --> hoogle.com
         {
-            base = param.substring(1);
+            base = base.substring(1);
         }
 
         if(param.startsWith("#"))                               //remove #hoogle.com --> hoogle.com
         {
-            base = param.substring(1);
+            base = base.substring(1);
         }
 
         if(param.startsWith("./"))                              //remove ./hoogle.com --> hoogle.com
         {
-            base = param.substring(2);
+            base = base.substring(2);
         }
 
         //
 
-        if( !(base==null || base.isEmpty()) )
+        if( !(base==null || base.isEmpty()) ) //grab only PATH name eg.  hoogle.com/?serach=123 --> ?serach=123
         {
             try
             {
-                base = base.substring(param.indexOf("/")); //grab only PATH name eg.  hoogle.com/?serach=123 --> ?serach=123
+                int index = base.indexOf("/");
+
+                if(index==-1)
+                {
+                    base = "";
+                }
+                else
+                {
+                    base = base.substring(index);
+                }
             }
             catch(Exception e)
             {
@@ -317,7 +326,15 @@ public class ParseUtils
             }
         }
 
-        return base = base.startsWith("/") ? base.substring(1) : base;
+        base = (base.startsWith("/") ? base.substring(1) : base);
+
+        //
+
+        String debug = (base);
+
+        //
+
+        return (base);
     }
 
     /**
