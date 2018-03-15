@@ -26,6 +26,10 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
      */
     public ModuleOne()
     {
+        Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+
+        //
+
         for(int i = 0; i< threadcount; i++)
         {
             WorkerThread worker = new WorkerThread(this,"Thread "+i);

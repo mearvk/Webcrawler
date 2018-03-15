@@ -33,6 +33,8 @@ public class WorkerThread extends Thread implements ShutdownThread
         this.module = runner;
 
         this.setName(threadname);
+
+        this.setPriority(Thread.MAX_PRIORITY);
     }
 
     /**
