@@ -5,25 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dcdb4ecf-11f0-403a-ab21-3ca390385c30" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/httpasyncclient_4_1_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/httpasyncclient_cache_4_1_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/httpclient_4_5_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/httpclient_cache_4_5_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/httpcore_4_4_6.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/httpcore_nio_4_4_6.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/httpmime_4_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/org_apache_commons_logging.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/unirest_java_1_4_9.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/libs/httpasyncclient-4.1.3.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/libs/httpasyncclient-cache-4.1.3.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/libs/httpclient-4.5.3.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/libs/httpclient-cache-4.5.3.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/libs/httpcore-4.4.6.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/libs/httpcore-nio-4.4.6.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/libs/httpmime-4.3.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/libs/org-apache-commons-logging.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/libs/unirest-java-1.4.9.jar" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Webcrawler.iml" afterPath="$PROJECT_DIR$/Webcrawler.iml" />
-      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/modules/ModuleOne.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/modules/ModuleOne.class" />
-      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/system/SystemReadout.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/system/SystemReadout.class" />
-      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/threading/WorkerThread.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/threading/WorkerThread.class" />
-      <change beforePath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/NetUtils.class" afterPath="$PROJECT_DIR$/build/production/Webcrawler/webcrawler/implementations/three/utils/NetUtils.class" />
-      <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/three/modules/ModuleOne.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/three/modules/ModuleOne.java" />
-      <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/three/system/SystemReadout.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/three/system/SystemReadout.java" />
-      <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/three/threading/WorkerThread.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/three/threading/WorkerThread.java" />
-      <change beforePath="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java" afterPath="$PROJECT_DIR$/src/webcrawler/implementations/three/utils/NetUtils.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -250,6 +241,11 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/mearv/Projects/Webcrawler/src/webcrawler/implementations/three/utils/NetUtils.java" />
     <property name="last_opened_file_path" value="$USER_HOME$/OneDrive/Desktop/Java Related/org-apache-commons-logging.jar!/" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mearv\Projects\Webcrawler\libs" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -390,7 +386,7 @@
       <workItem from="1520806867436" duration="3520000" />
       <workItem from="1521069073411" duration="8250000" />
       <workItem from="1521124956582" duration="20248000" />
-      <workItem from="1521164233819" duration="3912000" />
+      <workItem from="1521164233819" duration="4108000" />
     </task>
     <task id="LOCAL-00001" summary="Latest Version">
       <created>1520432474240</created>
@@ -707,25 +703,32 @@
       <option name="project" value="LOCAL" />
       <updated>1521155030111</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Latest Version">
+      <created>1521168176201</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1521168176202</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117608000" />
+    <option name="totallyTimeSpent" value="117804000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1216" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36224028" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36224028" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45528457" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45528457" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
