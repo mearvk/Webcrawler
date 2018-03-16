@@ -1,5 +1,14 @@
 package webcrawler.implementations.three.utils;
 
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.request.GetRequest;
+import com.mashape.unirest.request.HttpRequestWithBody;
+import jdk.nashorn.internal.runtime.regexp.joni.ast.StringNode;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.impl.client.HttpClients;
 import webcrawler.common.SiteSpecialization;
 import webcrawler.common.WebcrawlerParam;
 import webcrawler.implementations.three.Webcrawler;
@@ -16,6 +25,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.mashape.unirest.*;
+import com.mashape.unirest.http.Unirest;
 
 public class NetUtils
 {
@@ -401,25 +413,23 @@ public class NetUtils
 
         //
 
-        connection = (HttpURLConnection)url.openConnection();
+        RequestConfig unirest_config = RequestConfig.custom().setCookieSpec(CookieSpecs.IGNORE_COOKIES).build();
 
-        connection.setInstanceFollowRedirects(true);
+        HttpClient custom_unirest_client = HttpClients.custom().setDefaultRequestConfig(unirest_config).build();
 
-        connection.setChunkedStreamingMode(8192);
-
-        connection.setDoOutput(true);
-
-        connection.setRequestProperty("Keep-Alive", "false");
-
-        connection.setReadTimeout(600);
-
-        connection.setConnectTimeout(600);
-
-        connection.setRequestProperty("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36");
+        Unirest.setHttpClient(custom_unirest_client);
 
         //
 
-        if(connection==null) return null;
+        HttpResponse<String> response;
+
+        response = Unirest.get(param.URL).header("accept", "text/html").header("keep-alive" , "false").header("user-agent","Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0").asString();
+
+        param.HTML = response.getBody();
+
+        //
+
+        //if(connection==null) return null;
 
         //
 
@@ -427,48 +437,6 @@ public class NetUtils
 
         try
         {
-            int responsecode = connection.getResponseCode();
-
-            //
-
-            if(responsecode!=HttpURLConnection.HTTP_OK)
-            {
-                if(responsecode == HttpURLConnection.HTTP_MOVED_TEMP || responsecode == HttpURLConnection.HTTP_MOVED_PERM || responsecode == HttpURLConnection.HTTP_SEE_OTHER)
-                {
-                    String newurl = param.HREF = connection.getHeaderField("location");
-
-                    String cookies = connection.getHeaderField("set-cookie");
-
-                    //
-
-                    connection = (HttpURLConnection) new URL(newurl).openConnection();
-
-                    connection.setRequestProperty("cookies", cookies);
-
-                    responsecode = connection.getResponseCode();
-
-                    //
-
-                    if(responsecode!=HttpURLConnection.HTTP_OK)
-                    {
-                        HTTPRequestFailurePercentage var = ModuleOne.percentage.get(ParseUtils.dogetfulldomainname(param.HREF));
-
-                        //
-
-                        var.tries++;
-
-                        var.failures++;
-
-                        //
-
-                        var.percentage = (var.failures)/(var.tries);
-
-                        ModuleOne.percentage.put(ParseUtils.dogetfulldomainname(param.HREF), var);
-
-                        //System.out.println("    >> Thread \""+threadname+"\" :: request for website ["+param.HREF +"] failed with fatal code: "+responsecode);
-                    }
-                }
-            }
 
             //
 
@@ -488,7 +456,7 @@ public class NetUtils
 
             //
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(response.getRawBody()));
 
             while((string=reader.readLine())!=null)
             {

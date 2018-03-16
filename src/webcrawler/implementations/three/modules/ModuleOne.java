@@ -19,7 +19,7 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
 
     public static Queue<WebcrawlerParam> recursiveparams = new ConcurrentLinkedQueue<>();
 
-    public static HashMap<String, HTTPRequestFailurePercentage> percentage = new HashMap<>();
+    public static volatile HashMap<String, HTTPRequestFailurePercentage> percentage = new HashMap<>();
 
     /**
      *
@@ -80,7 +80,10 @@ public class ModuleOne extends webcrawler.common.ModuleOne implements Runnable
      */
     public void offer(WebcrawlerParam param)
     {
-        ModuleOne.recursiveparams.add(param);
+        synchronized (ModuleOne.recursiveparams)
+        {
+            ModuleOne.recursiveparams.add(param);
+        }
     }
 
     /**

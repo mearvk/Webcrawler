@@ -62,30 +62,33 @@ public class WorkerThread extends Thread implements ShutdownThread
     {
         if (this.site_queue != null && !this.site_queue.isEmpty())
         {
-            this.time_accrued = 0L;
-
-            //
-
-            try
+            synchronized (this.site_queue)
             {
-                WebcrawlerParam param = site_queue.poll();
+                this.time_accrued = 0L;
 
-                NetUtils.dorequestandstoresite(param);
+                //
 
-                if (param.LDEPTH > 0)
+                try
                 {
-                    NetUtils.dorequestandstoreanchors(param, new ArrayList<String>(), 0, param.LDEPTH);
-                }
+                    WebcrawlerParam param = site_queue.poll();
 
-                param = null;
-            }
-            catch (Exception e)
-            {
-                //System.err.println(e.getMessage());
-            }
-            finally
-            {
-                System.gc();
+                    NetUtils.dorequestandstoresite(param);
+
+                    if (param.LDEPTH > 0)
+                    {
+                        NetUtils.dorequestandstoreanchors(param, new ArrayList<String>(), 0, param.LDEPTH);
+                    }
+
+                    param = null;
+                }
+                catch (Exception e)
+                {
+                    //System.err.println(e.getMessage());
+                }
+                finally
+                {
+                    System.gc();
+                }
             }
 
             return;
@@ -95,30 +98,33 @@ public class WorkerThread extends Thread implements ShutdownThread
 
         if( ModuleOne.recursiveparams!=null && !ModuleOne.recursiveparams.isEmpty() )
         {
-            this.time_accrued = 0L;
-
-            //
-
-            try
+            synchronized (ModuleOne.recursiveparams)
             {
-                WebcrawlerParam param = ModuleOne.recursiveparams.poll();
+                this.time_accrued = 0L;
 
-                NetUtils.dorequestandstoresite(param);
+                //
 
-                if (param.LDEPTH > 0)
+                try
                 {
-                    NetUtils.dorequestandstoreanchors(param, new ArrayList<String>(), 0, param.LDEPTH);
-                }
+                    WebcrawlerParam param = ModuleOne.recursiveparams.poll();
 
-                param = null;
-            }
-            catch (Exception e)
-            {
-                //System.err.println(e.getMessage());
-            }
-            finally
-            {
-                System.gc();
+                    NetUtils.dorequestandstoresite(param);
+
+                    if (param.LDEPTH > 0)
+                    {
+                        NetUtils.dorequestandstoreanchors(param, new ArrayList<String>(), 0, param.LDEPTH);
+                    }
+
+                    param = null;
+                }
+                catch (Exception e)
+                {
+                    //System.err.println(e.getMessage());
+                }
+                finally
+                {
+                    System.gc();
+                }
             }
 
             return;
